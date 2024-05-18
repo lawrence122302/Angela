@@ -1,6 +1,66 @@
 <?php
 include('authentication.php');
 
+if(isset($_POST['post_add']))
+{
+    $category_id = $_POST['category_id'];
+
+    $name = $_POST['name'];
+    $slug = $_POST['slug'];
+    $description = $_POST['description'];
+
+    $meta_title = $_POST['meta_title'];
+    $meta_description = $_POST['meta_description'];
+    $meta_keyword = $_POST['meta_keyword'];
+
+    $image = $_FILES['image']['name'];
+    // Rename this image
+    $image_extension = pathinfo($image, PATHINFO_EXTENSION);
+    $filename = time().'.'.$image_extension;
+    
+    $status = $_POST['status'] == true ? '1':'0';
+
+    $query = "INSERT INTO posts(category_id,name,slug,description,image,meta_title,meta_description,meta_keyword,status) 
+                VALUES('$category_id','$name','$slug','$description','$filename','$meta_title','$meta_description','$meta_keyword','$status')";
+    $query_run = mysqli_query($con, $query);
+
+    if($query_run)
+    {
+        move_uploaded_file($_FILES['image']['tmp_name'], '../uploads/posts/'.$filename);
+        $_SESSION['message'] = "Post Created Sucessfully";
+        header('Location: post-add.php');
+        exit(0);
+    }
+    else
+    {
+        $_SESSION['message'] = "Something Went Wrong";
+        header('Location: post-add.php');
+        exit(0);
+    }
+}
+
+if(isset($_POST['category_delete']))
+{
+    $category_id = $_POST['category_delete'];
+
+    // 2 = delete
+    $query = "UPDATE categories SET status='2' WHERE id='$category_id' LIMIT 1 ";
+    $query_run = mysqli_query($con, $query);
+
+    if($query_run)
+    {
+        $_SESSION['message'] = "Category Deleted Sucessfully";
+        header('Location: category-view.php');
+        exit(0);
+    }
+    else
+    {
+        $_SESSION['message'] = "Something Went Wrong";
+        header('Location: category-view.php');
+        exit(0);
+    }
+}
+
 if(isset($_POST['category_update']))
 {
     $category_id = $_POST['category_id'];
