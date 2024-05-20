@@ -1,0 +1,21 @@
+.logo-image {
+    width: 60px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.logo-image img {
+    width: 100%; /* Makes sure the image fills the circle */
+    height: 100%; /* Makes sure the image fills the circle */
+    object-fit: cover; /* Ensures the image fills the circle without stretching */
+    object-position: center center; /* Centers the image within the circular container */
+ }
+
+@media (max-width: 576px) {
+    .logo-image {
+        width: 80px; /* Adjust this size for even smaller screens */
+        height: 80px; /* Adjust this size for even smaller screens */
+    }
+}

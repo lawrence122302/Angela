@@ -54,7 +54,9 @@ include('includes/header.php');
                                                     <a href="post-edit.php?id=<?= $post['id'] ?>" class="btn btn-success">Edit</a>
                                                 </td>
                                                 <td>
-                                                    <a href="" class="btn btn-danger">Delete</a>
+                                                    <form action="code.php" method="POST">
+                                                        <button type="submit" name="post_delete_btn" value="<?= $post['id'] ?>" class="btn btn-danger">Delete</button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                             <?php
