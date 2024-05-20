@@ -19,7 +19,7 @@ include('includes/header.php');
                 <div class="card-body">
 
                     <div class="table-responsive">
-                        <table class="table table-bordered table-stripe">
+                        <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>ID</th>

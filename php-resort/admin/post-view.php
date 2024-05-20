@@ -66,14 +66,11 @@ include('includes/header.php');
                                     {
                                         ?>
                                         <tr>
-                                            <td colspan="6">No Records Found</td>
+                                            <td colspan="7">No Records Found</td>
                                         </tr>
                                         <?php
                                     }
                                 ?>
-                                <tr>
-                                    <td></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
