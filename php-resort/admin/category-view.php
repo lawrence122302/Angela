@@ -12,7 +12,7 @@ include('includes/header.php');
 
             <div class="card">
                 <div class="card-header">
-                    <h4>View Category
+                    <h4>View Angela
                         <a href="category-add.php" class="btn btn-primary float-end">Add Category</a>
                     </h4>
                 </div>

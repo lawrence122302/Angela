@@ -13,7 +13,7 @@ include('includes/header.php');
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        Add Post
+                        Add Guest
                         <a href="post-view.php" class="btn btn-danger float-end">Back</a>
                     </h4>
                 </div>
@@ -23,7 +23,7 @@ include('includes/header.php');
                         
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <label for="">Category List</label>
+                                <label for="">Angela Venues</label>
                                 <?php
                                     $category = "SELECT * FROM categories WHERE status='0' ";
                                     $category_run = mysqli_query($con, $category);
@@ -32,7 +32,7 @@ include('includes/header.php');
                                     {
                                         ?>
                                         <select name="category_id" required class="form-control">
-                                            <option value="">-- Select Category --</option>
+                                            <option value="">-- Select Angela --</option>
                                             <?php
                                             foreach($category_run as $categoryitem)
                                             {
@@ -90,7 +90,7 @@ include('includes/header.php');
                             </div>
 
                             <div class="col-md-12 mb-3">
-                                <button type="submit" name="post_add" class="btn btn-primary">Save Post</button>
+                                <button type="submit" name="post_add" class="btn btn-primary">Save Guest</button>
                             </div>
 
                         </div>

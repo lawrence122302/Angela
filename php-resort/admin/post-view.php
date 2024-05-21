@@ -12,8 +12,8 @@ include('includes/header.php');
 
             <div class="card">
                 <div class="card-header">
-                    <h4>View Post
-                        <a href="post-add.php" class="btn btn-primary float-end">Add Post</a>
+                    <h4>View Guest
+                        <a href="post-add.php" class="btn btn-primary float-end">Add Guest</a>
                     </h4>
                 </div>
                 <div class="card-body">

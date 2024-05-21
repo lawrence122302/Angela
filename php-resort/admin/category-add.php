@@ -12,7 +12,7 @@ include('includes/header.php');
 
             <div class="card">
                 <div class="card-header">
-                    <h4>Add Category</h4>
+                    <h4>Add Angela</h4>
                 </div>
                 <div class="card-body">
 
