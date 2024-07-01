@@ -1,3 +1,8 @@
+<?php
+session_start();
+include('admin/config/dbcon.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

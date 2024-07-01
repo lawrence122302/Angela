@@ -63,7 +63,7 @@ include('includes/header.php');
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label for="">Description</label>
-                                <textarea name="description"required  class="form-control" rows="4"></textarea>
+                                <textarea name="description" id="summernote" equired  class="form-control" rows="4"></textarea>
                             </div>
 
                             <div class="col-md-12 mb-3">
@@ -72,7 +72,7 @@ include('includes/header.php');
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="">Meta Description</label>
-                                <textarea name="meta_description"required  class="form-control" rows="4"></textarea>
+                                <textarea name="meta_description" required  class="form-control" rows="4"></textarea>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="">Meta Keyword</label>

@@ -1,5 +1,5 @@
 <?php
-session_start();
+include('includes/header.php');
 
 if(isset($_SESSION['auth']))
 {
@@ -11,7 +11,6 @@ if(isset($_SESSION['auth']))
     exit(0);
 }
 
-include('includes/header.php');
 include('includes/navbar.php');
 ?>
 
