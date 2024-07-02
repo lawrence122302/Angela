@@ -1,10 +1,10 @@
 .logo-image {
-    width: 60px;
-    height: 50px;
+    width: 50px;
+    height: 40px;
     border-radius: 50%;
     overflow: hidden;
     margin: 10px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .logo-image img {
@@ -19,4 +19,13 @@
         width: 80px; /* Adjust this size for even smaller screens */
         height: 80px; /* Adjust this size for even smaller screens */
     }
+}
+
+.navbar{
+    padding: 0px;
+}
+
+.nav-link{
+    border-right: 1px solid #fff;
+    padding: 8px 20px !important;
 }

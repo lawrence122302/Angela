@@ -19,3 +19,12 @@
         height: 80px; /* Adjust this size for even smaller screens */
     }
 }
+
+.navbar{
+    padding: 0px;
+}
+
+.nav-link{
+    border-right: 1px solid #fff;
+    padding: 8px 20px !important;
+}
