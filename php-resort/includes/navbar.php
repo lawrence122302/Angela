@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top">
   <div class="container">
     <div class="logo-image">
         <img src="assets/images/logo-angela.jpg" alt="Angela's Logo" />
