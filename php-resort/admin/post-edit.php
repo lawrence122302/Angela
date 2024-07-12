@@ -101,8 +101,9 @@ include('includes/header.php');
                                         </div>
 
                                         <div class="col-md-6 mb-3">
-                                            <label for="">Status</label>
+                                            <label for="">Status</label> <br/>
                                             <input type="checkbox" name="status" <?= $post_row['status'] == '1' ? 'checked':'' ?> width="70px" height="70px" />
+                                            Checked = Hidden, UnChecked = Visible
                                         </div>
 
                                         <div class="col-md-12 mb-3">

@@ -1,4 +1,10 @@
 <?php
+include('includes/config.php');
+
+$page_title = "Register Page";
+$meta_description = "Register page description resort website";
+$meta_keywords = "resort, swimming pools, serenity, luxury, retreat, wellness, relaxation, celebration";
+
 include('includes/header.php');
 
 if(isset($_SESSION['auth']))

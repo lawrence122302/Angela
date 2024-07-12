@@ -1,4 +1,35 @@
 <?php
+include('includes/config.php');
+
+if(isset($_GET['title']))
+{
+    $slug = mysqli_real_escape_string($con, $_GET['title']);
+
+    $meta_posts = "SELECT slug,meta_title,meta_description,meta_keyword FROM posts WHERE slug='$slug' LIMIT 1";
+    $meta_posts_run = mysqli_query($con, $meta_posts);
+
+    if(mysqli_num_rows($meta_posts_run) > 0)
+    {
+        $metaPostItem = mysqli_fetch_array($meta_posts_run);
+
+        $page_title = $metaPostItem['meta_title'];
+        $meta_description = $metaPostItem['meta_description'];
+        $meta_keywords = $metaPostItem['meta_keyword'];
+    }
+    else
+    {
+        $page_title = "Post Page";
+        $meta_description = "Post Page description resort website";
+        $meta_keywords = "resort, swimming pools, serenity, luxury, retreat, wellness, relaxation, celebration";
+    }
+}
+else
+{
+    $page_title = "Post Page";
+    $meta_description = "Post Page description resort website";
+    $meta_keywords = "resort, swimming pools, serenity, luxury, retreat, wellness, relaxation, celebration";
+}
+
 include('includes/header.php');
 include('includes/navbar.php');
 ?>

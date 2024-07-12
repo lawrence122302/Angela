@@ -1,4 +1,10 @@
 <?php
+include('includes/config.php');
+
+$page_title = "Home Page";
+$meta_description = "Home page description resort website";
+$meta_keywords = "resort, swimming pools, serenity, luxury, retreat, wellness, relaxation, celebration";
+
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
