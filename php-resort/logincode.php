@@ -22,7 +22,7 @@ if(isset($_POST['login_btn']))
 
 
         $_SESSION['auth'] = true;
-        $_SESSION['auth_role'] = "$role_as"; // 2=super-admin, 1=admin, 0=user
+        $_SESSION['auth_role'] = "$role_as"; // 2=superadmin, 1=admin, 0=user
         $_SESSION['auth_user'] = [
             'user_id'=>$user_id,
             'fname'=>$fname,
@@ -36,7 +36,19 @@ if(isset($_POST['login_btn']))
             header("Location: admin/index.php");
             exit(0);
         }
+        elseif($_SESSION['auth_role'] == '2') // 2=superadmin
+        {
+            $_SESSION['message'] = "Welcome to dashboard.";
+            header("Location: admin/index.php");
+            exit(0);
+        }
         elseif($_SESSION['auth_role'] == '0') // 0=user
+        {
+            $_SESSION['message'] = "You have Logged In.";
+            header("Location: index.php");
+            exit(0);
+        }
+        else
         {
             $_SESSION['message'] = "You have Logged In.";
             header("Location: index.php");

@@ -26,7 +26,9 @@ include('includes/header.php');
                                     <th>Name</th>
                                     <th>Status</th>
                                     <th>Edit</th>
+                                    <?php if($_SESSION['auth_role'] == '2') : ?>
                                     <th>Delete</th>
+                                    <?php endif; ?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,13 +48,15 @@ include('includes/header.php');
                                                     <?= $item['status'] == '1' ? 'hidden':'visible' ?>
                                                 </td>
                                                 <td>
-                                                    <a href="category-edit.php?id=<?= $item['id'] ?>" class="btn btn-success">Edit</a>
+                                                    <a href="category-edit.php?id=<?= $item['id'] ?>" class="btn btn-info">Edit</a>
                                                 </td>
+                                                <?php if($_SESSION['auth_role'] == '2') : ?>
                                                 <td>
-                                                    <form action="code.php" method="POST">
+                                                    <form action="code-superadmin.php" method="POST">
                                                         <button type="submit" name="category_delete" value="<?= $item['id'] ?>" class="btn btn-danger">Delete</button>
                                                     </form>
                                                 </td>
+                                                <?php endif; ?>
                                             </tr>
                                             <?php
                                         }
