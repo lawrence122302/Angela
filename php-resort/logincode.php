@@ -15,6 +15,7 @@ if(isset($_POST['login_btn']))
         foreach($login_query_run as $data){
             $user_id = $data['id'];
             $fname = $data['fname'];
+            $lname = $data['lname'];
             $user_name = $data['fname'].' '.$data['lname'];
             $user_email = $data['email'];
             $role_as = $data['role_as'];
@@ -26,6 +27,7 @@ if(isset($_POST['login_btn']))
         $_SESSION['auth_user'] = [
             'user_id'=>$user_id,
             'fname'=>$fname,
+            'lname'=>$lname,
             'user_name'=>$user_name,
             'user_email'=>$user_email,
         ];

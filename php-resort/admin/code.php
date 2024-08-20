@@ -38,7 +38,11 @@ if(isset($_POST['post_update']))
 
     $category_id = $_POST['category_id'];
     $name = $_POST['name'];
-    $slug = $_POST['slug'];
+
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['slug']); // Remove all special characters
+    $final_string = preg_replace('/-+/', '-', $string);
+    $slug = $final_string;
+    
     $description = $_POST['description'];
 
     $meta_title = $_POST['meta_title'];
@@ -96,7 +100,11 @@ if(isset($_POST['post_add']))
     $category_id = $_POST['category_id'];
 
     $name = $_POST['name'];
-    $slug = $_POST['slug'];
+    
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['slug']); // Remove all special characters
+    $final_string = preg_replace('/-+/', '-', $string);
+    $slug = $final_string;
+
     $description = $_POST['description'];
 
     $meta_title = $_POST['meta_title'];
@@ -134,7 +142,11 @@ if(isset($_POST['category_update']))
     $category_id = $_POST['category_id'];
 
     $name = $_POST['name'];
-    $slug = $_POST['slug'];
+    
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['slug']); // Remove all special characters
+    $final_string = preg_replace('/-+/', '-', $string);
+    $slug = $final_string;
+
     $description = $_POST['description'];
 
     $meta_title = $_POST['meta_title'];
@@ -166,7 +178,11 @@ if(isset($_POST['category_update']))
 if(isset($_POST['category_add']))
 {
     $name = $_POST['name'];
-    $slug = $_POST['slug'];
+    
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['slug']); // Remove all special characters
+    $final_string = preg_replace('/-+/', '-', $string);
+    $slug = $final_string;
+
     $description = $_POST['description'];
 
     $meta_title = $_POST['meta_title'];
@@ -264,18 +280,6 @@ if(isset($_POST['update_user']))
         exit(0);
     }
 
-}
-
-if(isset($_POST['logout_btn']))
-{
-    // session_destroy();
-    unset($_SESSION['auth']);
-    unset($_SESSION['auth_role']);
-    unset($_SESSION['auth_user']);
-
-    $_SESSION['message'] = "Logged Out Successfully";
-    header("Location: ../login.php");
-    exit(0);
 }
 
 ?>

@@ -84,7 +84,9 @@
         </div>
         <div class="sb-sidenav-footer">
             <div class="small">Logged in as: <?= $_SESSION['auth_role'] == '2' ? ' (Super Admin)' : ' (Admin)' ?></div>
-            <?= $_SESSION['auth_user']['fname'] ?>
+            <?php if(isset($_SESSION['auth_user'])) : ?>
+                <?= $_SESSION['auth_user']['fname'] ?>
+            <?php endif; ?>
         </div>
     </nav>
 </div>
