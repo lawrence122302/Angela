@@ -62,7 +62,7 @@ include('includes/navbar.php');
                             foreach($posts_run as $postItems)
                             {
                                 ?>
-                                    <a href="post.php?title=<?=$postItems['slug'];?>" class="text-decoration-none">
+                                    <a href="<?= base_url('post/'.$postItems['slug']) ?>" class="text-decoration-none">
                                         <div class="card card-body shadow-sm mb-4">
                                             <h5><?=$postItems['name'];?></h5>
                                             <div>
