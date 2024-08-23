@@ -12,7 +12,7 @@
     <meta name="keywords" content="<?php if(isset($meta_keywords)) { echo "$meta_keywords"; } ?>" />
     <meta name="author" content="Angela's Private Pool" />
 
-    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap5.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/custom-styles.css') ?>">
 </head>
 <body>
