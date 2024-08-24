@@ -72,6 +72,7 @@
   </div>
 </nav> -->
 
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-0 shadow-sm sticky-top">
   <div class="container-fluid">
     <a class="logo-image" href="<?= base_url('index.php') ?>">
@@ -84,9 +85,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <!-- Home navbar -->
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="<?= base_url('index.php') ?>">Home</a>
         </li>
+
+        <!-- Navbar items from admin -->
         <?php
           $navbarCategory = "SELECT * FROM categories WHERE navbar_status='0' AND status='0' ";
           $navbarCategory_run = mysqli_query($con, $navbarCategory);
@@ -128,6 +133,7 @@
 
       </ul>
 
+      <!-- Home page login and registration buttons -->
       <div class="d-flex">
         <button type="button" class="btn btn-outline-dark shadow-none me-lg-3 me-2 mb-2" data-bs-toggle="modal" data-bs-target="#loginModal">
           Login
@@ -136,6 +142,7 @@
           Register
         </button>
       </div>
+
     </div>
   </div>
 </nav>
