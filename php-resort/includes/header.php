@@ -12,14 +12,8 @@
     <meta name="keywords" content="<?php if(isset($meta_keywords)) { echo "$meta_keywords"; } ?>" />
     <meta name="author" content="Angela's Private Pool" />
 
-    <link rel="stylesheet" href="<?= base_url('assets/css/custom-styles.css') ?>">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-
-    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="assets/css/common.css">
+    <?php require('includes/links.php'); ?>
     <style>
         .navbar-brand-me-5 {
             text-decoration: none; /* Remove underline */
@@ -80,6 +74,16 @@
                 margin-top: 25px;
                 padding: 0 35px;
             }
+        }
+
+        .pop:hover {
+            border-top-color: var(--teal) !important;
+            transform: scale(1.03);
+            transition: all 0.3s;
+        }
+
+        .box {
+            border-top-color: var(--teal) !important;
         }
     </style>
 </head>

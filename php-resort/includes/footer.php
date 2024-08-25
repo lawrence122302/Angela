@@ -59,13 +59,12 @@
         </div>
     </div>
 
-    <h6 class="text-center bg-dark text-white p-3 m-0">Designed and Developed by Anon</h6>
+    <h6 class="text-center bg-dark text-white p-3 m-0">Designed and Developed by Roblox Developer</h6>
 
-    <script src="assets/js/scripts.js" defer></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    
+    <script src="assets/js/scripts.js" defer></script>
     <script>
         var swiper = new Swiper(".swiper-container", {
             spaceBetween: 30,
@@ -109,6 +108,27 @@
                 },
             }
             });
+
+        var swiper = new Swiper(".mySwiper", {
+            spaceBetween: 40,
+            pagination: {
+                el: ".swiper-pagination",
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                },
+                640: {
+                    slidesPerView: 1,
+                },
+                768: {
+                    slidesPerView: 3,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            }
+        });
     </script>
 </body>
 </html>

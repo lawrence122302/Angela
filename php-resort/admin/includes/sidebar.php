@@ -8,7 +8,12 @@
 
                 <a class="nav-link <?= $page == 'index.php' ? 'active':'' ?>" href="index.php">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Dashboard
+                    Admin Dashboard
+                </a>
+
+                <a class="nav-link" href="../index.php">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-pager"></i></i></div>
+                    Home Page
                 </a>
 
                 <?php if($_SESSION['auth_role'] == '2') : ?>
