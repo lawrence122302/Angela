@@ -1,9 +1,9 @@
 <?php
-include('includes/config.php');
+// include('includes/config.php');
 
-$page_title = "Angela's Private Pool - Home";
-$meta_description = "Home page description resort website";
-$meta_keywords = "resort, swimming pools, serenity, luxury, retreat, wellness, relaxation, celebration";
+// $page_title = "Angela's Private Pool - Home";
+// $meta_description = "Home page description resort website";
+// $meta_keywords = "resort, swimming pools, serenity, luxury, retreat, wellness, relaxation, celebration";
 
 include('includes/header.php');
 include('includes/navbar.php');

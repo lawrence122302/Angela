@@ -1,9 +1,9 @@
 <?php
-include('includes/config.php');
+// include('includes/config.php');
 
-$page_title = "Angela's Private Pool - Home";
-$meta_description = "Home page description resort website";
-$meta_keywords = "resort, swimming pools, serenity, luxury, retreat, wellness, relaxation, celebration";
+// $page_title = "Angela's Private Pool - Home";
+// $meta_description = "Home page description resort website";
+// $meta_keywords = "resort, swimming pools, serenity, luxury, retreat, wellness, relaxation, celebration";
 
 include('includes/header.php');
 include('includes/navbar.php');
@@ -369,6 +369,13 @@ include('includes/navbar.php');
 </div>
 
 <!-- Reach Us -->
+<?php
+    $contact_q = "SELECT * FROM contact_details WHERE sr_no=?";
+    $values = [1];
+    $contact_r = mysqli_fetch_assoc(select($contact_q,$values,'i'));
+    print($contact_r);
+?>
+
 <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Reach Us</h2>
 <div class="container">
     <div class="row">
@@ -411,7 +418,7 @@ include('includes/navbar.php');
 </div>
 
 <!-- Popular navbar items -->
-<div class="py-5 bg-dark">
+<!-- <div class="py-5 bg-dark">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -441,9 +448,9 @@ include('includes/navbar.php');
             ?>
         </div>
     </div>
-</div>
+</div> -->
 
-<div class="py-5 bg-light">
+<!-- <div class="py-5 bg-light">
     <div class="container">
         <div class="row">
             <div class="col-md-9">
@@ -455,9 +462,9 @@ include('includes/navbar.php');
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
-<div class="py-5 bg-white">
+<!-- <div class="py-5 bg-white">
     <div class="container">
         <div class="row">
             <div class="col-md-9">
@@ -500,7 +507,7 @@ include('includes/navbar.php');
             
         </div>
     </div>
-</div>
+</div> -->
 
 <?php
 include('includes/footer.php');
