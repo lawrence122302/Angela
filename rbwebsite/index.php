@@ -30,28 +30,22 @@
 
     <!-- Carousel -->
     <div class="container-fluid px-lg-4 mt-4">
-    <div class="swiper swiper-container">
-        <div class="swiper-wrapper">
-        <div class="swiper-slide">
-            <img src="admin/assets/images/IMG_15372.png" class="w-100 d-block'" />
+        <div class="swiper swiper-container">
+            <div class="swiper-wrapper">
+                <?php
+                    $res = selectAll('carousel');
+                    while($row = mysqli_fetch_assoc($res))
+                    {
+                        $path = CAROUSEL_IMG_PATH;
+                        echo <<<data
+                            <div class="swiper-slide">
+                                <img src="$path$row[image]" class="w-100 d-block'" />
+                            </div>
+                        data;
+                    }
+                ?>
+            </div>
         </div>
-        <div class="swiper-slide">
-            <img src="admin/assets/images/carousel/IMG_55677.png" class="w-100 d-block" />
-        </div>
-        <div class="swiper-slide">
-            <img src="admin/assets/images/carousel/IMG_40905.png" class="w-100 d-block" />
-        </div>
-        <div class="swiper-slide">
-            <img src="admin/assets/images/carousel/IMG_62045.png" class="w-100 d-block" />
-        </div>
-        <div class="swiper-slide">
-            <img src="admin/assets/images/carousel/IMG_93127.png" class="w-100 d-block" />
-        </div>
-        <div class="swiper-slide">
-            <img src="admin/assets/images/carousel/IMG_99736.png" class="w-100 d-block" />
-        </div>
-        </div>
-    </div>
     </div>
 
     <!-- Check availability form -->
