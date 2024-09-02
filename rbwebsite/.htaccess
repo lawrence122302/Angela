@@ -5,12 +5,13 @@ RewriteEngine On
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    #Remove the .php extension
+    # If the requested URL is not a directory and the file exists with a .php extension
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME}\.php -f
-    RewriteRule ^(.*)$ $1.php
+    RewriteRule ^(.*)$ $1.php [NC,L]
 
-    RewriteRule ^category/([a-z-A-Z0-9-]+) category.php?title=$1
-    RewriteRule ^post/([a-z-A-Z0-9-]+) post.php?title=$1
+    # Redirect requests with .php extension to the URL without the extension
+    RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]
+    RewriteRule ^ /%1 [NC,L,R=301]
 
-    ErrorDocument 404 http://localhost/Angela/rbwesbite/404.php
+    ErrorDocument 404 http://localhost/Angela/rbwebsite/404.php
