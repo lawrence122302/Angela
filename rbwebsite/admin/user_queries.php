@@ -98,7 +98,7 @@
 
                     <div class="table-responsive-md" style="height: 450px; overflow-y: scroll;">
                         <table class="table table-hover border">
-                            <thead class="sticky-top" style="z-index: 1;">
+                            <thead>
                                 <tr class="bg-dark text-light">
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>

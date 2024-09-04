@@ -248,7 +248,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label fw-bold">Picture</label>
-                                        <input type="file" name="member_picture" id="member_picture_inp" accept="[.jpg,.png,.webp,.jpeg]" class="form-control shadow-none" required>
+                                        <input type="file" name="member_picture" id="member_picture_inp" accept=".jpg,.png,.webp,.jpeg" class="form-control shadow-none" required>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
