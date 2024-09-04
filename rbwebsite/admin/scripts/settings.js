@@ -115,7 +115,6 @@ function get_contacts()
     {
         contacts_data = JSON.parse(this.responseText);
         contacts_data = Object.values(contacts_data);
-
         
         for(i=0;i<contacts_p_id.length;i++)
         {
