@@ -5,12 +5,14 @@
     define('ABOUT_IMG_PATH',SITE_URL.'admin/assets/images/about/');
     define('CAROUSEL_IMG_PATH',SITE_URL.'admin/assets/images/carousel/');
     define('FACILITIES_IMG_PATH',SITE_URL.'admin/assets/images/facilities/');
+    define('ROOMS_IMG_PATH',SITE_URL.'admin/assets/images/rooms/');
 
     // backend upload process needs this data
     define('UPLOAD_IMAGE_PATH',$_SERVER['DOCUMENT_ROOT'].'/Angela/rbwebsite/admin/assets/images/');
     define('ABOUT_FOLDER','about/');
     define('CAROUSEL_FOLDER','carousel/');
     define('FACILITIES_FOLDER','facilities/');
+    define('ROOMS_FOLDER','rooms/');
 
     function adminLogin()
     {
