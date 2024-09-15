@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Angela's Private Pool - About</title>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <?php require('inc/links.php'); ?>
+    <title><?php echo $settings_r['site_title'] ?> - About</title>
     <style>
         .box {
             border-top-color: var(--teal) !important;
