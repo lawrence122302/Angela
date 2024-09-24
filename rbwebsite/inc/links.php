@@ -4,6 +4,9 @@
 <link rel="stylesheet" href="assets/css/common.css">
 
 <?php
+  session_start();
+  date_default_timezone_set("Asia/Manila");
+
   require('admin/inc/db_config.php');
   require('admin/inc/essentials.php');
 

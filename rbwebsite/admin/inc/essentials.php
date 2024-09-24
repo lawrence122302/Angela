@@ -6,6 +6,7 @@
     define('CAROUSEL_IMG_PATH',SITE_URL.'admin/assets/images/carousel/');
     define('FACILITIES_IMG_PATH',SITE_URL.'admin/assets/images/facilities/');
     define('ROOMS_IMG_PATH',SITE_URL.'admin/assets/images/rooms/');
+    define('USERS_IMG_PATH',SITE_URL.'admin/assets/images/users/');
 
     // backend upload process needs this data
     define('UPLOAD_IMAGE_PATH',$_SERVER['DOCUMENT_ROOT'].'/Angela/rbwebsite/admin/assets/images/');
@@ -17,6 +18,8 @@
 
     // sendgrid api key
     define('SENDGRID_API_KEY', "PASTE_API_KEY_HERE");
+    define('SENDGRID_EMAIL', "angelasprivatepool@gmail.com");
+    define('SENDGRID_NAME', "Angela's Private Pool");
 
     function adminLogin()
     {

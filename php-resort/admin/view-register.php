@@ -21,7 +21,7 @@ include('includes/header.php');
                 </div>
                 <div class="card-body">
 
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>ID</th>

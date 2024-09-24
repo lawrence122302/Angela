@@ -1,65 +1,33 @@
 <?php
 include('authentication.php');
 
-if(isset($_POST['booking_record_update']))
+if(isset($_POST['post_delete_btn']))
 {
-    $booking_record_id = $_POST['booking_record_id'];
-    $fname = $_POST['fname'];
-    $mname = $_POST['mname'];
-    $lname = $_POST['lname'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
-    $status = $_POST['status'] == true ? '1':'0';
+    $post_id = $_POST['post_delete_btn'];
 
-    $query = "UPDATE booking_records SET fname='$fname', mname='$mname', lname='$lname', phone='$phone', email='$email', 
-                status='$status' WHERE id='$booking_record_id'";
+    $check_img_query = "SELECT * FROM posts WHERE id='$post_id' LIMIT 1";
+    $img_res = mysqli_query($con, $check_img_query);
+    $res_data = mysqli_fetch_array($img_res);
+    $image = $res_data['image'];
+
+    $query = "DELETE FROM posts WHERE id='$post_id' LIMIT 1";
     $query_run = mysqli_query($con, $query);
-
-    if($query_run)
-    {
-        $_SESSION['message'] = "Record Updated Sucessfully";
-        header('Location: booking-record-edit.php?id='.$booking_record_id);
-        exit(0);
-    }
-    else
-    {
-        $_SESSION['message'] = "Something Went Wrong";
-        header('Location: booking-record-edit.php?id='.$booking_record_id);
-        exit(0);
-    }
-}
-
-if(isset($_POST['bookedrecord_add']))
-{
-    $name = $_POST['name'];
     
-    $string = preg_replace('/[^A-Za-z0-9\-]/', '-', $_POST['slug']); // Remove all special characters
-    $final_string = preg_replace('/-+/', '-', $string);
-    $slug = $final_string;
-
-    $description = $_POST['description'];
-
-    $meta_title = $_POST['meta_title'];
-    $meta_description = $_POST['meta_description'];
-    $meta_keyword = $_POST['meta_keyword'];
-
-    $navbar_status = $_POST['navbar_status'] == true ? '1':'0';
-    $status = $_POST['status'] == true ? '1':'0';
-
-    $query = "INSERT INTO categories(name,slug,description,meta_title,meta_description,meta_keyword,navbar_status,status) 
-                VALUES('$name','$slug','$description','$meta_title','$meta_description','$meta_keyword','$navbar_status','$status')";
-    $query_run = mysqli_query($con, $query);
-
     if($query_run)
     {
-        $_SESSION['message'] = "Category Added Sucessfully";
-        header('Location: category-add.php');
+        if(file_exists('../uploads/posts/'.$image))
+        {
+            unlink("../uploads/posts/".$image);
+        }
+
+        $_SESSION['message'] = "Post Deleted Sucessfully";
+        header('Location: post-view.php');
         exit(0);
     }
     else
     {
         $_SESSION['message'] = "Something Went Wrong";
-        header('Location: category-add.php');
+        header('Location: post-view.php');
         exit(0);
     }
 }
@@ -238,6 +206,27 @@ if(isset($_POST['category_add']))
     {
         $_SESSION['message'] = "Something Went Wrong";
         header('Location: category-add.php');
+        exit(0);
+    }
+}
+
+if(isset($_POST['user_delete']))
+{
+    $user_id = $_POST['user_delete'];
+
+    $query = "DELETE FROM users WHERE id='$user_id' ";
+    $query_run = mysqli_query($con, $query);
+
+    if($query_run)
+    {
+        $_SESSION['message'] = "User Record Deleted Sucessfully";
+        header('Location: view-register.php');
+        exit(0);
+    }
+    else
+    {
+        $_SESSION['message'] = "Something Went Wrong";
+        header('Location: view-register.php');
         exit(0);
     }
 }

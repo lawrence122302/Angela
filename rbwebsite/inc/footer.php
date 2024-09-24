@@ -37,7 +37,7 @@
     </div>
 </div>
 
-<h6 class="text-center bg-dark text-white p-3 m-0">Designed and Developed by Roblox Developer</h6>
+<h6 class="text-center bg-dark text-white p-3 m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h6>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
@@ -150,6 +150,98 @@
         }
         xhr.send(data);
     });
-    
+
+    let login_form = document.getElementById('login-form');
+
+    login_form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+
+        let data = new FormData();
+
+        data.append('email_mob',login_form.elements['email_mob'].value);
+        data.append('pass',login_form.elements['pass'].value);
+        data.append('login','');
+
+        var myModal = document.getElementById('loginModal');
+        var modal = bootstrap.Modal.getInstance(myModal);
+        modal.hide();
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST","ajax/login_register.php",true);
+
+        xhr.onload = function()
+        {
+            if(this.responseText == 'inv_email_mob')
+            {
+                alert('error',"Invalid Email or Mobile Number!")
+            }
+            else if(this.responseText == 'not_verified')
+            {
+                alert('error',"Email is not verified!");
+            }
+            else if(this.responseText == 'inactive')
+            {
+                alert('error',"Account Suspended! Please contact Admin.");
+            }
+            else if(this.responseText == 'invalid_pass')
+            {
+                alert('error',"Incorrect Password!");
+            }
+            else
+            {
+                window.location = window.location.pathname;
+            }
+        }
+        xhr.send(data);
+    });
+
+    let forgot_form = document.getElementById('forgot-form');
+
+    forgot_form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+
+        let data = new FormData();
+
+        data.append('email',forgot_form.elements['email'].value);
+        data.append('forgot_pass','');
+
+        var myModal = document.getElementById('forgotModal');
+        var modal = bootstrap.Modal.getInstance(myModal);
+        modal.hide();
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST","ajax/login_register.php",true);
+
+        xhr.onload = function()
+        {
+            if(this.responseText == 'inv_email')
+            {
+                alert('error',"Invalid Email!")
+            }
+            else if(this.responseText == 'not_verified')
+            {
+                alert('error',"Email is not verified! Please contact Admin.");
+            }
+            else if(this.responseText == 'inactive')
+            {
+                alert('error',"Account Suspended! Please contact Admin.");
+            }
+            else if(this.responseText == 'mail_failed')
+            {
+                alert('error',"Cannot send email. Server Down!");
+            }
+            else if(this.responseText == 'upd_failed')
+            {
+                alert('error',"Password reset failed. Server Down!");
+            }
+            else
+            {
+                alert('success',"Reset link sent to email!");
+                forgot_form.reset();
+            }
+        }
+        xhr.send(data);
+    });
+
     setActive();
 </script>
