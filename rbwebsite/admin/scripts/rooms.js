@@ -1,43 +1,43 @@
 let add_room_form = document.getElementById('add_room_form');
 
-        add_room_form.addEventListener('submit',function(e){
-            e.preventDefault();
-            add_room();
-        });
+add_room_form.addEventListener('submit',function(e){
+    e.preventDefault();
+    add_room();
+});
 
-        function add_room()
+function add_room()
+{
+    let data = new FormData();
+    data.append('add_room','');
+    data.append('name',add_room_form.elements['name'].value);
+    data.append('area',add_room_form.elements['area'].value);
+    data.append('price',add_room_form.elements['price'].value);
+    data.append('quantity',add_room_form.elements['quantity'].value);
+    data.append('adult',add_room_form.elements['adult'].value);
+    data.append('children',add_room_form.elements['children'].value);
+    data.append('desc',add_room_form.elements['desc'].value);
+
+    let features = [];
+    add_room_form.elements['features'].forEach(el =>{
+        if(el.checked)
         {
-            let data = new FormData();
-            data.append('add_room','');
-            data.append('name',add_room_form.elements['name'].value);
-            data.append('area',add_room_form.elements['area'].value);
-            data.append('price',add_room_form.elements['price'].value);
-            data.append('quantity',add_room_form.elements['quantity'].value);
-            data.append('adult',add_room_form.elements['adult'].value);
-            data.append('children',add_room_form.elements['children'].value);
-            data.append('desc',add_room_form.elements['desc'].value);
+            features.push(el.value);
+        }
+    
+    });
+    let facilities = [];
+    add_room_form.elements['facilities'].forEach(el =>{
+        if(el.checked)
+        {
+            facilities.push(el.value);
+        }
+    });
 
-            let features = [];
-            add_room_form.elements['features'].forEach(el =>{
-                if(el.checked)
-                {
-                    features.push(el.value);
-                }
-            
-            });
-            let facilities = [];
-            add_room_form.elements['facilities'].forEach(el =>{
-                if(el.checked)
-                {
-                    facilities.push(el.value);
-                }
-            });
+    data.append('features',JSON.stringify(features));
+    data.append('facilities',JSON.stringify(facilities));
 
-            data.append('features',JSON.stringify(features));
-            data.append('facilities',JSON.stringify(facilities));
-
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST","ajax/rooms.php",true);
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","ajax/rooms.php",true);
 
     xhr.onload = function()
     {
