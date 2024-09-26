@@ -18,8 +18,11 @@
 
     // sendgrid api key
     define('SENDGRID_API_KEY', "PASTE_API_KEY_HERE");
+    
     define('SENDGRID_EMAIL', "angelasprivatepool@gmail.com");
     define('SENDGRID_NAME', "Angela's Private Pool");
+
+    // possible "booking status" values in db = pending, booked, payment failed, cancelled
 
     function adminLogin()
     {
