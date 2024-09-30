@@ -277,9 +277,10 @@
                         <i class="bi bi-star-fill text-warning"></i>
                     </div>
                 </div>
-
             </div>
+        </div>
         <div class="swiper-pagination"></div>
+    
     </div>
     <div class="col-lg-12 text-center mt-5">
         <a href="about.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">Know More >>></a>

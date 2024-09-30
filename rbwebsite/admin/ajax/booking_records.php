@@ -81,7 +81,7 @@
                         <span class='badge $status_bg'>$data[booking_status]</span>
                     </td>
                     <td>
-                        <button type='button' onclick='download($data[booking_id])' class='btn btn-success btn-sm fw-bold shadow-none'>
+                        <button type='button' onclick='download($data[booking_id])' class='btn btn-outline-success btn-sm fw-bold shadow-none'>
                             <i class='bi bi-file-earmark-arrow-down'></i>
                         </button>
                     </td>

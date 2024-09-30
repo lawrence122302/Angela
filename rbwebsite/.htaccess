@@ -13,4 +13,4 @@ RewriteEngine On
     # RewriteRule ^category/([a-z-A-Z0-9-]+) category.php?title=$1
     # RewriteRule ^post/([a-z-A-Z0-9-]+) post.php?title=$1
 
-    ErrorDocument 404 http://localhost/Angela/rbwesbite/404.php
+    ErrorDocument 404 http://localhost/Angela/rbwebsite/404.php
