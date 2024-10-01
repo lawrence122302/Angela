@@ -25,7 +25,7 @@
             $status = 'check_out_earlier';
             $result = json_encode(["status"=>$status]);
         }
-        else if($checkout_date < $today_date)
+        else if($checkin_date < $today_date)
         {
             $status = 'check_in_earlier';
             $result = json_encode(["status"=>$status]);
