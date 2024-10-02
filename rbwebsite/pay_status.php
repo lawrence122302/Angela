@@ -19,7 +19,27 @@
             </div>
             
             <?php
-                if(false)
+                $frm_data = filteration($_GET);
+
+                if(!(isset($_SESSION['login']) && $_SESSION['login']==true))
+                {
+                    redirect('index.php');
+                }
+
+                $booking_q = "SELECT bo.*, bd.* FROM booking_order bo
+                    INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
+                    WHERE bo.order_id=? AND bo.user_id=? AND bo.booking_status!=?";
+
+                $booking_res = select($booking_q,[$frm_data['order'],$_SESSION['uId'],'pending'],'sis');
+
+                if(mysqli_num_rows($booking_res)==0)
+                {
+                    redirect('index.php');
+                }
+
+                $booking_fetch = mysqli_fetch_assoc($booking_res);
+
+                if($booking_fetch['trans_status']=="TXN_SUCCESS")
                 {
                     echo<<<data
                         <div clas="col-12 px-4">
@@ -32,13 +52,26 @@
                         </div>
                     data;
                 }
-                else
+                else if($booking_fetch['trans_status']=="TXN_PENDING")
                 {
                     echo<<<data
                         <div clas="col-12 px-4">
                             <p class="fw-bold alert alert-warning">
                                 <i class="bi bi-exclamation-triangle-fill"></i>
                                 Payment pending.
+                                <br><br>
+                                <a href='bookings.php'>Go to Bookings<a/>
+                            </p>
+                        </div>
+                    data;
+                }
+                else if($booking_fetch['trans_status']=="TXN_FAILED")
+                {
+                    echo<<<data
+                        <div clas="col-12 px-4">
+                            <p class="fw-bold alert alert-danger">
+                                <i class="bi bi-exclamation-triangle-fill"></i>
+                                Payment failed.
                                 <br><br>
                                 <a href='bookings.php'>Go to Bookings<a/>
                             </p>

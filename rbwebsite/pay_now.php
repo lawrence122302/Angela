@@ -16,6 +16,7 @@
     if(isset($_POST['pay_now']))
     {
         $ORDER_ID = 'ORD_'.$_SESSION['uId'].random_int(11111,9999999);
+        $CUST_ID = $_SESSION['uId'];
         $TXN_AMOUNT = $_SESSION['room']['payment'];
 
         // Insert payment into database
@@ -24,8 +25,8 @@
         $query1 = "INSERT INTO booking order(user_id,room_id,check_in,check_out,order_id) 
             VALUES(?,?,?,?,?)";
         
-        insert($query1,[$_SESSION['uId'],$_SESSION['room']['id'],$frm_data['checkin'],
-        $frm_data['checkout'],$ORDER_ID],'issss');
+        insert($query1,[$CUST_ID,$_SESSION['room']['id'],$frm_data['checkin'],
+            $frm_data['checkout'],$ORDER_ID],'issss');
 
         $booking_id = mysqli_insert_id($con);
 
