@@ -44,6 +44,7 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse flex-column align-items-stretch mt-2" id="filterDropdown">
+
                             <!-- Check availability -->
                             <div class="border bg-light p-3 rounded mb-3">
                                 <h5 class="d-flex align-items-center justfiy-content-between mb-3" style="font-size: 18px;">
@@ -99,7 +100,9 @@
                 </nav>
             </div>
 
-            <div class="col-lg-9 col-md-12 px-4" id="rooms-data"></div>
+            <div class="col-lg-9 col-md-12 px-4" id="rooms-data">
+                <!-- Rooms -->
+            </div>
 
         </div>
     </div>

@@ -129,7 +129,9 @@
                                         <span class="visually-hidden">Loading...</span>
                                     </div>
 
-                                    <h6 class="mb-3 text-danger" id="pay_info">Provide check-in & check-out date !</h6>
+                                    <div id="pay_info" class='alert alert-warning text-center' role='alert'>
+                                        <strong>Notice:</strong> Provide check-in & check-out date to proceed.
+                                    </div>
 
                                     <button name="pay_now" class="btn w-100 text-white custom-bg shadow-none mb-1" disabled>Pay Now</button>
                                 </div>
@@ -138,8 +140,6 @@
                     </div>
                 </div>
             </div>
-
-            
 
         </div>
     </div>
@@ -178,24 +178,24 @@
 
                     if(data.status == 'check_in_out_equal')
                     {
-                        pay_info.innerText = "You cannot check-out on the same day!";
+                        pay_info.innerHTML = "<strong>Notice:</strong> You cannot check-out on the same day.";
                     }
                     else if(data.status == 'check_out_earlier')
                     {
-                        pay_info.innerText = "Check-out date is earlier than the check-in date!";
+                        pay_info.innerHTML = "<strong>Notice:</strong> Check-out date is earlier than the check-in date.";
                     }
                     else if(data.status == 'check_in_earlier')
                     {
-                        pay_info.innerText = "Check-in date is earlier than today's date!";
+                        pay_info.innerHTML = "<strong>Notice:</strong> Check-in date is earlier than today's date.";
                     }
                     else if(data.status == 'unavailable')
                     {
-                        pay_info.innerText = "Room available for this check-in date!";
+                        pay_info.innerHTML = "<strong>Notice:</strong> Room unavailable for this date.";
                     }
                     else
                     {
-                        pay_info.innerHTML = "No. of Days: "+data.days+"<br>Total Amount to Pay: ₱"+data.payment;
-                        pay_info.classList.replace('text-danger','text-dark');
+                        pay_info.innerHTML = "No. of Days: <strong>"+data.days+"</strong><br>Total Amount to Pay: <strong>₱"+data.payment+"</strong>";
+                        pay_info.classList.replace('alert-warning','alert-success');
                         booking_form.elements['pay_now'].removeAttribute('disabled');
                     }
 

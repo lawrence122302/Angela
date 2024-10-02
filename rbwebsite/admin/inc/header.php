@@ -1,12 +1,14 @@
 <div class="container-fluid bg-dark text-light p-3 d-flex align-items-center justify-content-between sticky-top">
-    <h3 class="mb-0 h-font">Angela's Private Pool</h3>
+    <div>
+        <h3 class="mb-0 text-center text-uppercase font-weight-bold">Admin Panel</h3>
+        <small class="text-muted">Angela's Private Pool</small>
+    </div>
     <a href="logout.php" class="btn btn-light btn-sm">Log Out</a>
 </div>
 
 <div class="col-lg-2 bg-dark border-top border-3 border-secondary" id="dashboard-menu">
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid flex-lg-column align-items-stretch">
-            <h4 class="mt-2 text-light">Admin Panel</h4>
             <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#adminDropdown" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -24,6 +26,9 @@
                         <ul class="nav nav-pills flex-column rounded border border-secondary">
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="new_bookings.php">New Bookings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="confirmed_bookings.php">Confirmed Bookings</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="refund_bookings.php">Refund Bookings</a>

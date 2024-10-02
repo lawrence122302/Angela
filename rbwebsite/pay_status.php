@@ -28,21 +28,16 @@
 
                 $booking_q = "SELECT bo.*, bd.* FROM booking_order bo
                     INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
-                    WHERE bo.order_id=? AND bo.user_id=? AND bo.booking_status!=?";
+                    WHERE bo.order_id=? AND bo.user_id=?";
 
-                $booking_res = select($booking_q,[$frm_data['order'],$_SESSION['uId'],'pending'],'sis');
-
-                if(mysqli_num_rows($booking_res)==0)
-                {
-                    redirect('index.php');
-                }
+                $booking_res = select($booking_q,[$frm_data['order'],$_SESSION['uId']],'si');
 
                 $booking_fetch = mysqli_fetch_assoc($booking_res);
 
-                if($booking_fetch['trans_status']=="TXN_SUCCESS")
+                if($booking_fetch['trans_status']=="booked")
                 {
                     echo<<<data
-                        <div clas="col-12 px-4">
+                        <div class="col-12 px-4">
                             <p class="fw-bold alert alert-success">
                                 <i class="bi bi-check-circle-fill"></i>
                                 Payment done! Booking successful.
@@ -52,10 +47,10 @@
                         </div>
                     data;
                 }
-                else if($booking_fetch['trans_status']=="TXN_PENDING")
+                else if($booking_fetch['trans_status']=="pending")
                 {
                     echo<<<data
-                        <div clas="col-12 px-4">
+                        <div class="col-12 px-4">
                             <p class="fw-bold alert alert-warning">
                                 <i class="bi bi-exclamation-triangle-fill"></i>
                                 Payment pending.
@@ -65,10 +60,10 @@
                         </div>
                     data;
                 }
-                else if($booking_fetch['trans_status']=="TXN_FAILED")
+                else if($booking_fetch['trans_status']=="payment failed")
                 {
                     echo<<<data
-                        <div clas="col-12 px-4">
+                        <div class="col-12 px-4">
                             <p class="fw-bold alert alert-danger">
                                 <i class="bi bi-exclamation-triangle-fill"></i>
                                 Payment failed.

@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - New Bookings</title>
+    <title>Admin Panel - Confirmed Bookings</title>
     <?php require('inc/links.php'); ?>
 </head>
 <body class="bg-light">
@@ -19,7 +19,7 @@
     <div class="container-fluid" id="main-content">
         <div class="row">
             <div class="col-lg-10 ms-auto p-4 overflow-hidden">
-                <h3 class="mb-4">New Bookings</h3>
+                <h3 class="mb-4">Confirmed Bookings</h3>
 
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
@@ -51,9 +51,36 @@
         </div>
     </div>
 
+    <!-- Assign Room Number Modal -->
+    <div class="modal fade" id="assign-room" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="assign_room_form">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirm Booking</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Room Number</label>
+                            <input type="text" name="room_no" class="form-control shadow-none" required>
+                        </div>
+                        <span class="badge rounded-pill bg-light text-dark mb-3 text-wrap lh-base">
+                            Note: Assign Room Number only when user has arrived!
+                        </span>
+                        <input type="hidden" name="booking_id">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn custom-bg text-white shadow-none">Assign</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <?php require('inc/scripts.php'); ?>
 
-    <script src="scripts/new_bookings.js"></script>
+    <script src="scripts/confirmed_bookings.js"></script>
 
 </body>
 </html>

@@ -22,7 +22,7 @@
         // Insert payment into database
         $frm_data = filteration($_POST);
 
-        $query1 = "INSERT INTO booking order(user_id,room_id,check_in,check_out,order_id) 
+        $query1 = "INSERT INTO booking_order(user_id,room_id,check_in,check_out,order_id) 
             VALUES(?,?,?,?,?)";
         
         insert($query1,[$CUST_ID,$_SESSION['room']['id'],$frm_data['checkin'],
@@ -35,17 +35,8 @@
 
         insert($query2,[$booking_id,$_SESSION['room']['name'],$_SESSION['room']['price'],
             $TXN_AMOUNT,$frm_data['name'],$frm_data['phonenum'],$frm_data['address']],'issssss');
+
+        redirect('pay_status.php?order='.$ORDER_ID);
     }
 
 ?>
-
-<html>
-    <head>
-        <title>Processing</title>
-    </head>
-    <body>
-        <?php
-            // paste here 
-        ?>
-    </body>
-</html>
