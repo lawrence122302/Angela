@@ -97,7 +97,7 @@
                     </div>
 
                     <div class="table-responsive-md">
-                        <table class="table table-hover border">
+                        <table class="table table-hover border text-center">
                             <thead>
                                 <tr class="bg-dark text-light">
                                     <th scope="col">#</th>
@@ -125,9 +125,9 @@
                                         $seen='';
                                         if($row['seen']!=1)
                                         {
-                                            $seen = "<a href='?seen=$row[sr_no]' class='btn btn-sm rounded-pill btn-primary mb-2'>Mark as read</a> <br>";
+                                            $seen = "<a href='?seen=$row[sr_no]' class='btn btn-sm rounded-pill btn-primary mb-2'><i class='bi bi-check'></i> Mark as read</a><br>";
                                         }
-                                        $seen.="<a href='?del=$row[sr_no]' class='btn btn-sm rounded-pill btn-danger'>Delete</a>";
+                                        $seen.="<a href='?del=$row[sr_no]' class='btn btn-sm rounded-pill btn-danger'><i class='bi bi-trash'></i> Delete</a>";
 
                                         echo<<<query
                                             <tr>
