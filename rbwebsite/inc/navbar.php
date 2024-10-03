@@ -91,8 +91,8 @@
               <button type="button" class="btn text-secondary text-decoration-none shadow-none p-0 me-2" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">
                 Login | 
               </button>
-              <button type="button" class="btn text-secondary text-decoration-none shadow-none p-0" data-bs-toggle="modal" data-bs-target="#forgotModal" data-bs-dismiss="modal">
-                  Forgot Password
+              <button type="button" class="btn text-secondary text-decoration-none shadow-none p-0" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">
+                  Register
               </button>
             </div>
           </div>
