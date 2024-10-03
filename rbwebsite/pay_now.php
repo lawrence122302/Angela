@@ -22,11 +22,11 @@
         // Insert payment into database
         $frm_data = filteration($_POST);
 
-        $query1 = "INSERT INTO booking_order(user_id,room_id,check_in,check_out,order_id) 
-            VALUES(?,?,?,?,?)";
+        $query1 = "INSERT INTO booking_order(user_id,room_id,check_in,check_out,order_id,trans_amt) 
+            VALUES(?,?,?,?,?,?)";
         
         insert($query1,[$CUST_ID,$_SESSION['room']['id'],$frm_data['checkin'],
-            $frm_data['checkout'],$ORDER_ID],'issss');
+            $frm_data['checkout'],$ORDER_ID,$frm_data['paidamount']],'issssi');
 
         $booking_id = mysqli_insert_id($con);
 
@@ -36,7 +36,8 @@
         insert($query2,[$booking_id,$_SESSION['room']['name'],$_SESSION['room']['price'],
             $TXN_AMOUNT,$frm_data['name'],$frm_data['phonenum'],$frm_data['address']],'issssss');
 
-        redirect('pay_status.php?order='.$ORDER_ID);
+        $result = json_encode(["orderid"=>$ORDER_ID]);
+        echo $result;
     }
 
 ?>

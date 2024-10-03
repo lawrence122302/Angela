@@ -1,5 +1,6 @@
 <?php
 
+    // modify when deployed
     $hname = 'localhost';
     $uname = 'root';
     $pass = '';

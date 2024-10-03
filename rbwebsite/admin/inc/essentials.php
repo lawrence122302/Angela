@@ -1,15 +1,18 @@
 <?php
 
-    //frontend purpose data
+    // frontend purpose data
+    // modify site url when deployed
     define('SITE_URL','http://127.0.0.1/Angela/rbwebsite/');
-    define('ABOUT_IMG_PATH',SITE_URL.'admin/assets/images/about/');
-    define('CAROUSEL_IMG_PATH',SITE_URL.'admin/assets/images/carousel/');
-    define('FACILITIES_IMG_PATH',SITE_URL.'admin/assets/images/facilities/');
-    define('ROOMS_IMG_PATH',SITE_URL.'admin/assets/images/rooms/');
-    define('USERS_IMG_PATH',SITE_URL.'admin/assets/images/users/');
+
+    define('ABOUT_IMG_PATH',SITE_URL.'images/about/');
+    define('CAROUSEL_IMG_PATH',SITE_URL.'images/carousel/');
+    define('FACILITIES_IMG_PATH',SITE_URL.'images/facilities/');
+    define('ROOMS_IMG_PATH',SITE_URL.'images/rooms/');
+    define('USERS_IMG_PATH',SITE_URL.'images/users/');
 
     // backend upload process needs this data
-    define('UPLOAD_IMAGE_PATH',$_SERVER['DOCUMENT_ROOT'].'/Angela/rbwebsite/admin/assets/images/');
+    // modify upload image path when deployed
+    define('UPLOAD_IMAGE_PATH',$_SERVER['DOCUMENT_ROOT'].'/Angela/rbwebsite/images/');
     define('ABOUT_FOLDER','about/');
     define('CAROUSEL_FOLDER','carousel/');
     define('FACILITIES_FOLDER','facilities/');

@@ -93,7 +93,7 @@
             <div class="col-lg-5 col-md-12 px-4">
                 <div class="card mb-4 border-0 shadow-sm rounded-3">
                     <div class="card-body">
-                        <form action="pay_now.php" method="POST" id="booking_form">
+                        <form id="booking_form">
                             <h6 class="mb-3">Booking Details</h6>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
@@ -133,7 +133,7 @@
                                         <strong>Notice:</strong> Provide check-in & check-out date to proceed.
                                     </div>
 
-                                    <button name="pay_now" class="btn w-100 text-white custom-bg shadow-none mb-1" disabled>Pay Now</button>
+                                    <button type="button" name="pay_now" class="btn w-100 text-white custom-bg shadow-none mb-1" onclick="openModal()" disabled>Pay Now</button>
                                 </div>
                             </div>
                         </form>
@@ -144,9 +144,37 @@
         </div>
     </div>
 
+   <!-- Pay Now Modal -->
+    <div class="modal fade" id="pay-now" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="pay_now_form">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirm Payment</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3 text-center">
+                            <img src="images/settings/asd.jpeg" class="img-fluid mb-2">
+                            <label class="form-label fw-bold badge bg-primary text-white rounded-pill px-3 py-2">GCash: 0912-345-6789</label>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Paid Amount</label>
+                            <input type="number" name="paid_amount" class="form-control shadow-none" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn custom-bg text-white shadow-none">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <?php require('inc/footer.php'); ?>
     <script>
         let booking_form = document.getElementById('booking_form');
+        let pay_now_form = document.getElementById('pay_now_form');
         let info_loader = document.getElementById('info_loader');
         let pay_info = document.getElementById('pay_info');
 
@@ -204,6 +232,49 @@
                 }
                 xhr.send(data);
             }
+        }
+
+        function openModal()
+        {
+            let name_val = booking_form.elements['name'].value;
+            let phonenum_val = booking_form.elements['phonenum'].value;
+            let address_val = booking_form.elements['address'].value;
+            let checkin_val = booking_form.elements['checkin'].value;
+            let checkout_val = booking_form.elements['checkout'].value;
+
+            let modal = new bootstrap.Modal(document.getElementById('pay-now'));
+            modal.show();
+
+            document.getElementById('pay_now_form').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                let paidamount_val = pay_now_form.elements['paid_amount'].value;
+
+                let data = new FormData();
+                data.append('pay_now','');
+                data.append('name',name_val);
+                data.append('phonenum',phonenum_val);
+                data.append('address',address_val);
+                data.append('checkin',checkin_val);
+                data.append('checkout',checkout_val);
+                data.append('paidamount',paidamount_val);
+
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "pay_now.php", true);
+
+                xhr.onload = function()
+                {
+                    let data = JSON.parse(this.responseText);
+
+                    if (data.orderid!='') {
+                        window.location.href = 'pay_status.php?order=' + data.orderid;
+                    }
+                };
+                    xhr.send(data);
+
+                let modalInstance = bootstrap.Modal.getInstance(document.getElementById('pay-now'));
+                modalInstance.hide();
+            });
         }
     </script>
 </body>
