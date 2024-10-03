@@ -1,7 +1,7 @@
 <?php
 
     // frontend purpose data
-    // modify site url when deployed
+    // modify site url when deployed "https://angelasprivatepool.com/"
     define('SITE_URL','http://127.0.0.1/Angela/rbwebsite/');
 
     define('ABOUT_IMG_PATH',SITE_URL.'images/about/');
@@ -11,7 +11,7 @@
     define('USERS_IMG_PATH',SITE_URL.'images/users/');
 
     // backend upload process needs this data
-    // modify upload image path when deployed
+    // modify upload image path when deployed "/images/"
     define('UPLOAD_IMAGE_PATH',$_SERVER['DOCUMENT_ROOT'].'/Angela/rbwebsite/images/');
     define('ABOUT_FOLDER','about/');
     define('CAROUSEL_FOLDER','carousel/');

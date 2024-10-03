@@ -46,7 +46,21 @@
                     $checkin = date("d-m-Y",strtotime($data['check_in']));
                     $checkout = date("d-m-Y",strtotime($data['check_out']));
 
+                    if($data['trans_id']!='')
+                    {
+                        $gcash = "<span class='badge bg-primary'>
+                            GCash: $data[trans_id]
+                        </span>";
+                    }
+                    else
+                    {
+                        $gcash = "<span class='badge bg-success'>
+                            Walk-In
+                        </span>";
+                    }
+
                     $status_bg = "";
+
                     $btn = "";
 
                     if($data['booking_status']=='booked')
@@ -101,6 +115,7 @@
                                     <b>Date: </b> $date
                                 </p>
                                 <p>
+                                    $gcash
                                     <span class='badge $status_bg'>$data[booking_status]</span>
                                 </p>
                                 $btn
