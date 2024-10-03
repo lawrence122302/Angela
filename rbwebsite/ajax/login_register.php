@@ -48,6 +48,14 @@
         }
     }
 
+    if(isset($_POST['track_booking']))
+    {
+        $frm_data = filteration($_POST);
+
+        $result = json_encode(["email_mob"=>$frm_data['email_mob'], "gcash_ref"=>$frm_data['gcash_ref']]);
+        echo $result;
+    }
+
     if(isset($_POST['register']))
     {
         $data = filteration($_POST);

@@ -52,12 +52,9 @@
           else
           {
             echo<<<data
-              <button type="button" class="btn btn-outline-dark shadow-none me-lg-3 me-2 mb-2" data-bs-toggle="modal" data-bs-target="#loginModal">
-                Login
-              </button>
-              <button type="button" class="btn btn-outline-dark shadow-none mb-2" data-bs-toggle="modal" data-bs-target="#registerModal">
-                Register
-              </button>
+            <button type="button" class="btn me-lg-3 me-2 mb-2 track-booking" data-bs-toggle="modal" data-bs-target="#trackBookingModal">
+              <i class="bi bi-search"></i><span class="btn-text">Search Booking</span>
+            </button>
             data;
           }
         ?>
@@ -67,7 +64,46 @@
   </div>
 </nav>
 
-<!-- Navbar login modal -->
+<!-- Track Booking modal -->
+<div class="modal fade" id="trackBookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="track-booking-form">
+        <div class="modal-header">
+          <h5 class="modal-title d-flex align-items-center">
+            <i class="bi bi-person-circle fs-3 me-2"></i> User Login
+          </h5>
+          <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Email / Mobile</label>
+            <input type="text" name="email_mob" required class="form-control shadow-none">
+          </div>
+          <div class="mb-4">
+            <label class="form-label">GCash Reference</label>
+            <input type="text" name="gcash_ref" required class="form-control shadow-none">
+          </div>
+          <div class="d-flex align-items-center justify-content-between flex-wrap">
+            <div>
+              <button type="submit" class="btn btn-dark shadow-none">Search</button>
+            </div>
+            <div class="d-flex align-items-center mt-2">
+              <button type="button" class="btn text-secondary text-decoration-none shadow-none p-0 me-2" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">
+                Login | 
+              </button>
+              <button type="button" class="btn text-secondary text-decoration-none shadow-none p-0" data-bs-toggle="modal" data-bs-target="#forgotModal" data-bs-dismiss="modal">
+                  Forgot Password
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Login Modal -->
 <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -99,7 +135,7 @@
   </div>
 </div>
 
-<!-- Navbar registration modal -->
+<!-- Registration Modal -->
 <div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">

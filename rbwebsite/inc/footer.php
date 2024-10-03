@@ -151,6 +151,36 @@
         xhr.send(data);
     });
 
+    let track_booking_form = document.getElementById('track-booking-form');
+
+    track_booking_form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+
+        let data = new FormData();
+
+        data.append('email_mob',track_booking_form.elements['email_mob'].value);
+        data.append('gcash_ref',track_booking_form.elements['gcash_ref'].value);
+        data.append('track_booking','');
+
+        var myModal = document.getElementById('trackBookingModal');
+        var modal = bootstrap.Modal.getInstance(myModal);
+        modal.hide();
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST","ajax/login_register.php",true);
+
+        xhr.onload = function()
+        {
+            let data = JSON.parse(this.responseText);
+
+            if (data.email_mob!='' && data.gcash_ref!='') {
+                window.location.href = 'pay_status.php?email_mob='+data.email_mob+"&gcash_ref="+data.gcash_ref;
+            }
+        }
+
+        xhr.send(data);
+    });
+
     let login_form = document.getElementById('login-form');
 
     login_form.addEventListener('submit', (e)=>{
@@ -260,6 +290,14 @@
         else
         {
             alert('error','Please login to book room!');
+        }
+    }
+
+    function checkLogin(status)
+    {
+        if(!status)
+        {
+            alert('error','Please login.');
         }
     }
 

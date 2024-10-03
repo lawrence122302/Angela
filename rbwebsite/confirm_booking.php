@@ -270,7 +270,8 @@
                         window.location.href = 'pay_status.php?order=' + data.orderid;
                     }
                 };
-                    xhr.send(data);
+                
+                xhr.send(data);
 
                 let modalInstance = bootstrap.Modal.getInstance(document.getElementById('pay-now'));
                 modalInstance.hide();

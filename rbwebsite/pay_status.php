@@ -23,55 +23,148 @@
 
                 if(!(isset($_SESSION['login']) && $_SESSION['login']==true))
                 {
-                    redirect('index.php');
+                    $query = "SELECT bo.*,bd.*,uc.* 
+                        FROM booking_order bo INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
+                        INNER JOIN user_cred uc ON bo.user_id = uc.id
+                        WHERE (uc.email=? OR uc.phonenum=?)
+                        AND ((bo.booking_status='booked') 
+                        OR (bo.booking_status='pending')
+                        OR (bo.booking_status='cancelled')
+                        OR (bo.booking_status='payment failed')) 
+                        ORDER BY bo.booking_id DESC
+                    ";
+
+                    $result = select($query,[$frm_data['email_mob'],$frm_data['gcash_ref']],'ss');
+
+                    while($data = mysqli_fetch_assoc($result))
+                    {
+                        $date = date("d-m-Y",strtotime($data['datentime']));
+                        $checkin = date("d-m-Y",strtotime($data['check_in']));
+                        $checkout = date("d-m-Y",strtotime($data['check_out']));
+
+                        $status_bg = "";
+                        
+                        $login = 0;
+                        if(isset($_SESSION['login']) && $_SESSION['login']==true)
+                        {
+                            $login = 1;
+                        }
+                        
+                        $btn = "";
+
+                        if($data['booking_status']=='booked')
+                        {
+                            $status_bg = "bg-success";
+
+                            if($data['arrival']==1)
+                            {
+                                $btn="<a onclick='checkLogin($login)' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
+
+                                if($data['rate_review']==0)
+                                {
+                                    $btn.="<button type='button' onclick='checkLogin($login)' data-bs-toggle='modal' data-bs-target='#reviewModal' class='btn btn-dark btn-sm shadow-none ms-2'>Rate & Review</button>";
+                                }
+                            }
+                            else
+                            {
+                                $btn="<button onclick='checkLogin($login)' type='button' class='btn btn-danger btn-sm shadow-none'>Cancel</button>";
+                            }
+                        }
+                        else if($data['booking_status']=='cancelled')
+                        {
+                            $status_bg = "bg-danger";
+
+                            if($data['refund']==0)
+                            {
+                                $btn="<span class='badge bg-primary'>Refund in process!</span>";
+                            }
+                            else
+                            {
+                                $btn="<a onclick='checkLogin($login)' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
+                            }
+                        }
+                        else
+                        {
+                            $status_bg = "bg-info";
+                            $btn="<a onclick='checkLogin($login)' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
+                        }
+
+                        echo<<<bookings
+                            <div class='col-md-4 px-4 mb-4'>
+                                <div class='bg-white p-3 rounded shadow-sm'>
+                                    <h5 class='fw-bold'>$data[room_name]</h5>
+                                    <p>₱$data[price] per night</p>
+                                    <p>
+                                        <b>Check in: </b> $checkin <br>
+                                        <b>Check out: </b> $checkout
+                                    </p>
+                                    <p>
+                                        <b>Amount: </b> ₱$data[price] <br>
+                                        <b>Order ID: </b> $data[order_id] <br>
+                                        <b>Date: </b> $date
+                                    </p>
+                                    <p>
+                                        <span class='badge $status_bg'>$data[booking_status]</span>
+                                    </p>
+                                    $btn
+                                </div>
+                            </div>
+                        bookings;
+                    }
                 }
-
-                $booking_q = "SELECT bo.*, bd.* FROM booking_order bo
-                    INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
-                    WHERE bo.order_id=? AND bo.user_id=?";
-
-                $booking_res = select($booking_q,[$frm_data['order'],$_SESSION['uId']],'si');
-
-                $booking_fetch = mysqli_fetch_assoc($booking_res);
-
-                if($booking_fetch['trans_status']=="booked")
+                else if(isset($_SESSION['login']) && $_SESSION['login']==true)
                 {
-                    echo<<<data
-                        <div class="col-12 px-4">
-                            <p class="fw-bold alert alert-success">
-                                <i class="bi bi-check-circle-fill"></i>
-                                Payment done! Booking successful.
-                                <br><br>
-                                <a href='bookings.php'>Go to Bookings<a/>
-                            </p>
-                        </div>
-                    data;
+                    redirect('bookings.php');
                 }
-                else if($booking_fetch['trans_status']=="pending")
+                else
                 {
-                    echo<<<data
-                        <div class="col-12 px-4">
-                            <p class="fw-bold alert alert-warning">
-                                <i class="bi bi-exclamation-triangle-fill"></i>
-                                Payment pending.
-                                <br><br>
-                                <a href='bookings.php'>Go to Bookings<a/>
-                            </p>
-                        </div>
-                    data;
-                }
-                else if($booking_fetch['trans_status']=="payment failed")
-                {
-                    echo<<<data
-                        <div class="col-12 px-4">
-                            <p class="fw-bold alert alert-danger">
-                                <i class="bi bi-exclamation-triangle-fill"></i>
-                                Payment failed.
-                                <br><br>
-                                <a href='bookings.php'>Go to Bookings<a/>
-                            </p>
-                        </div>
-                    data;
+                    $booking_q = "SELECT bo.*, bd.* FROM booking_order bo
+                        INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
+                        WHERE bo.order_id=? AND bo.user_id=?";
+
+                    $booking_res = select($booking_q,[$frm_data['order'],$_SESSION['uId']],'si');
+
+                    $booking_fetch = mysqli_fetch_assoc($booking_res);
+
+                    if($booking_fetch['trans_status']=="booked")
+                    {
+                        echo<<<data
+                            <div class="col-12 px-4">
+                                <p class="fw-bold alert alert-success">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    Payment done! Booking successful.
+                                    <br><br>
+                                    <a href='bookings.php'>Go to Bookings<a/>
+                                </p>
+                            </div>
+                        data;
+                    }
+                    else if($booking_fetch['trans_status']=="pending")
+                    {
+                        echo<<<data
+                            <div class="col-12 px-4">
+                                <p class="fw-bold alert alert-warning">
+                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                    Payment pending.
+                                    <br><br>
+                                    <a href='bookings.php'>Go to Bookings<a/>
+                                </p>
+                            </div>
+                        data;
+                    }
+                    else if($booking_fetch['trans_status']=="payment failed")
+                    {
+                        echo<<<data
+                            <div class="col-12 px-4">
+                                <p class="fw-bold alert alert-danger">
+                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                    Payment failed.
+                                    <br><br>
+                                    <a href='bookings.php'>Go to Bookings<a/>
+                                </p>
+                            </div>
+                        data;
+                    }
                 }
             ?>
         </div>
