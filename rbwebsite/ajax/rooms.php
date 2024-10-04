@@ -45,7 +45,6 @@
         // guests data decode
         $guests = json_decode($_GET['guests'],true);
         $adults = ($guests['adults']!='') ? $guests['adults'] : 0;
-        $children = ($guests['children']!='') ? $guests['children'] : 0;
 
         // facilities data decode
         $facility_list = json_decode($_GET['facility_list'],true);
@@ -59,7 +58,7 @@
         $settings_r = mysqli_fetch_assoc(mysqli_query($con,$settings_q));
 
         // query for rooms card with guests filter
-        $room_res = select("SELECT * FROM rooms WHERE adult>=? AND children>=? AND status=? AND removed=? ORDER BY id DESC", [$adults,$children,1,0],'iiii');
+        $room_res = select("SELECT * FROM rooms WHERE adult>=? AND status=? AND removed=? ORDER BY id DESC", [$adults,1,0],'iii');
 
         while($room_data = mysqli_fetch_assoc($room_res))
         {
@@ -150,20 +149,17 @@
                         <div class='col-md-5 px-lg-3 px-md-3 px-0'>
                             <h5 class='mb-3'>$room_data[name]</h5>
                             <div class='features mb-3'>
-                                <h6 class='mb-1'>Features</h6>
+                                <h6 class='mb-1'>Amenities</h6>
                                 $features_data
                             </div>
                             <div class='facilities mb-3'>
-                                <h6 class='mb-1'>Facilities</h6>
+                                <h6 class='mb-1'>Inclusions</h6>
                                 $facilities_data
                             </div>
                             <div class='guest'>
                                 <h6 class='mb-1'>Guests</h6>
                                 <span class='badge rounded-pill bg-light text-dark text-wrap'>
-                                    $room_data[adult] Adults
-                                </span>
-                                <span class='badge rounded-pill bg-light text-dark text-wrap'>
-                                    $room_data[children] Children
+                                    $room_data[adult] Pax
                                 </span>
                             </div>
                         </div>

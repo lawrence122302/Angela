@@ -15,9 +15,7 @@
         <h2 class="fw-bold h-font text-center">Contact Us</h2>
         <div class="h-line bg-dark"></div>
         <p class="text-center mt-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Rem dolor deleniti id est <br> doloremque incidunt 
-            temporibus neque nostrum aliquam suscipit.
+        We’re here to assist you with any questions or inquiries you may have about Angela’s Private Pool. <br>Contact us through the form below, or reach us via phone or email for prompt assistance.
         </p>
     </div>
 
@@ -35,7 +33,7 @@
                     
                     <h5 class="mt-4">Call Us</h5>
                     <a href="#tel: +<?php echo $contact_r['pn1'] ?>" class="d-inline-block mb-2 text-decoration-none text-dark">
-                        <i class="bi bi-telephone-fill"></i> +<?php echo $contact_r['pn1'] ?>
+                        <i class="bi bi-telephone-fill"></i> <?php echo $contact_r['pn1'] ?>
                     </a>
                     <br>
                     <?php
@@ -43,7 +41,7 @@
                         {
                             echo<<<data
                                 <a href="#tel: +$contact_r[pn2]" class="d-inline-block text-decoration-none text-dark">
-                                    <i class="bi bi-telephone-fill"></i> +$contact_r[pn2]
+                                    <i class="bi bi-telephone-fill"></i> $contact_r[pn2]
                                 </a>
                             data;
                         }
@@ -55,23 +53,27 @@
                     </a>
 
                     <h5 class="mt-4">Follow Us</h5>
+                    <a href="<?php echo $contact_r['fb'] ?>" class="d-inline-block text-dark fs-5">
+                        <i class="bi bi-facebook me-1"></i>
+                    </a>
                     <?php
                         if($contact_r['tw']!='')
                         {
                             echo<<<data
-                                <a href="$contact_r[tw]" class="d-inline-block text-dark fs-5 me-2">
+                                <a href="$contact_r[tw]" class="d-inline-block text-dark fs-5">
                                     <i class="bi bi-twitter me-1"></i>
                                 </a>
                             data;
                         }
+                        if($contact_r['insta']!='')
+                        {
+                            echo<<<data
+                                <a href="$contact_r[insta]" class="d-inline-block text-dark fs-5">
+                                    <i class="bi bi-instagram me-1"></i>
+                                </a>
+                            data;
+                        }
                     ?>
-                    
-                    <a href="<?php echo $contact_r['fb'] ?>" class="d-inline-block text-dark fs-5 me-2">
-                        <i class="bi bi-facebook me-1"></i>
-                    </a>
-                    <a href="<?php echo $contact_r['insta'] ?>" class="d-inline-block text-dark fs-5">
-                        <i class="bi bi-instagram me-1"></i>
-                    </a>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 px-4">

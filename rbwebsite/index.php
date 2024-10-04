@@ -54,34 +54,22 @@
                 <h5 class="mb-4">Check Booking Availability</h5>
                 <form action="rooms.php">
                     <div class="row align-items-end">
-                        <div class="col-lg-3 mb-3">
+                        <div class="col mb-3">
                             <label class="form-label" style="font-weight: 500;">Check-in</label>
                             <input type="date" class="form-control shadow-none" name="checkin" required>
                         </div>
-                        <div class="col-lg-3 mb-3">
+                        <div class="col mb-3">
                             <label class="form-label" style="font-weight: 500;">Check-out</label>
                             <input type="date" class="form-control shadow-none" name="checkout" required>
                         </div>
-                        <div class="col-lg-3 mb-3">
-                            <label class="form-label" style="font-weight: 500;">Adult</label>
+                        <div class="col mb-3">
+                            <label class="form-label" style="font-weight: 500;">Pax</label>
                             <select class="form-select shadow-none" name="adult">
                                 <?php
-                                    $guests_q = mysqli_query($con,"SELECT MAX(adult) AS max_adult, MAX(children) AS max_children 
-                                        FROM rooms WHERE status='1' AND removed='0'");
+                                    $guests_q = mysqli_query($con,"SELECT MAX(adult) AS max_adult FROM rooms WHERE status='1' AND removed='0'");
                                     $guests_res = mysqli_fetch_assoc($guests_q);
 
                                     for($i=1; $i<=$guests_res['max_adult']; $i++)
-                                    {
-                                        echo"<option value='$i'>$i</option>";
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="col-lg-2 mb-3">
-                            <label class="form-label" style="font-weight: 500;">Children</label>
-                            <select class="form-select shadow-none" name="children">
-                                <?php
-                                    for($i=1; $i<=$guests_res['max_children']; $i++)
                                     {
                                         echo"<option value='$i'>$i</option>";
                                     }
@@ -200,10 +188,7 @@
                                     <div class="guest mb-4">
                                         <h6 class="mb-1">Guests</h6>
                                         <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                            $room_data[adult] Adults
-                                        </span>
-                                        <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                            $room_data[children] Children
+                                            $room_data[adult] Pax
                                         </span>
                                     </div>
                                     $rating_data

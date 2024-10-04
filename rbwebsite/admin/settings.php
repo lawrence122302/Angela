@@ -166,14 +166,14 @@
                                                     <input type="text" name="gmap" id="gmap_inp" class="form-control shadow-none" required>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label fw-bold">Phone Numbers (with +63)</label>
+                                                    <label class="form-label fw-bold">Phone Numbers</label>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
-                                                        <input type="number" name="pn1" id="pn1_inp" class="form-control shadow-none" required>
+                                                        <input type="text" name="pn1" id="pn1_inp" class="form-control shadow-none" required>
                                                     </div>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
-                                                        <input type="number" name="pn2" id="pn2_inp" class="form-control shadow-none">
+                                                        <input type="text" name="pn2" id="pn2_inp" class="form-control shadow-none">
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
@@ -190,11 +190,11 @@
                                                     </div>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text"><i class="bi bi-instagram"></i></span>
-                                                        <input type="text" name="insta" id="insta_inp" class="form-control shadow-none" required>
+                                                        <input type="text" name="insta" id="insta_inp" class="form-control shadow-none">
                                                     </div>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text"><i class="bi bi-twitter"></i></span>
-                                                        <input type="text" name="tw" id="tw_inp" class="form-control shadow-none" required>
+                                                        <input type="text" name="tw" id="tw_inp" class="form-control shadow-none">
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">

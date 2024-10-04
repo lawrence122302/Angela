@@ -145,20 +145,20 @@ contacts_s_form.addEventListener('submit',function(e)
 
 function upd_contacts()
 {
-    let index = ['address','gmap','pn1','pn2','email','fb','insta','tw', 'iframe']
-    let contacts_inp_id = ['address_inp','gmap_inp','pn1_inp','pn2_inp','email_inp','fb_inp','insta_inp','tw_inp', 'iframe_inp']
+    let index = ['address', 'gmap', 'pn1', 'pn2', 'email', 'fb', 'insta', 'tw', 'iframe'];
+    let contacts_inp_id = ['address_inp', 'gmap_inp', 'pn1_inp', 'pn2_inp', 'email_inp', 'fb_inp', 'insta_inp', 'tw_inp', 'iframe_inp'];
 
     let data_str = "";
 
-    for(i=0;i<index.length;i++)
-    {
-        data_str += index[i] + "=" + document.getElementById(contacts_inp_id[i]).value + '&';
+    for (let i = 0; i < index.length; i++) {
+        let value = encodeURIComponent(document.getElementById(contacts_inp_id[i]).value); // Encode data
+        data_str += index[i] + "=" + value + '&';
     }
     data_str += "upd_contacts";
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST","ajax/settings_crud.php",true);
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    xhr.open("POST", "ajax/settings_crud.php", true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     xhr.onload = function()
     {
@@ -166,17 +166,17 @@ function upd_contacts()
         var modal = bootstrap.Modal.getInstance(myModal);
         modal.hide();
 
-        if(this.responseText == 1)
+        if (this.responseText == 1)
         {
-            alert('success','Changes saved!');
+            alert('success', 'Changes saved!');
             get_contacts();
         }
         else
         {
-            alert('error','No changes made!');
+            alert('error', 'No changes made!');
         }
     }
-    
+
     xhr.send(data_str);
 }
 

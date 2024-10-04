@@ -110,19 +110,19 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Check-in</label>
-                                    <input name="checkin" onchange="check_availability()" type="date" class="form-control shadow-none" required>
+                                    <input name="checkin" onchange="check_availability()" type="date" class="form-control shadow-none mb-2" required>
                                     <input type="radio" id="checkin_time_12" name="checkin_time" value="12:00">
-                                    <label for="checkin_time_12">12:00</label>
+                                    <label for="checkin_time_12">08:00am</label>
                                     <input type="radio" id="checkin_time_24" name="checkin_time" value="24:00">
-                                    <label for="checkin_time_24">24:00</label>
+                                    <label for="checkin_time_24">06:00pm</label>
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <label class="form-label">Check-out</label>
-                                    <input name="checkout" onchange="check_availability()" type="date" class="form-control shadow-none" required>
+                                    <input name="checkout" onchange="check_availability()" type="date" class="form-control shadow-none mb-2" required>
                                     <input type="radio" id="checkout_time_12" name="checkout_time" value="12:00">
-                                    <label for="checkout_time_12">12:00</label>
+                                    <label for="checkout_time_12">08:00am</label>
                                     <input type="radio" id="checkout_time_24" name="checkout_time" value="24:00">
-                                    <label for="checkout_time_24">24:00</label>
+                                    <label for="checkout_time_24">06:00pm</label>
                                 </div>
                                 <div class="col-12">
                                     <div class="spinner-border text-info mb-3 d-none" id="info_loader" role="status">

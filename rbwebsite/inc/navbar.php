@@ -16,10 +16,10 @@
           <a class="nav-link me-2" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-2" href="rooms.php">Rooms</a>
+          <a class="nav-link me-2" href="rooms.php">Accomodations</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-2" href="facilities.php">Facilities</a>
+          <a class="nav-link me-2" href="facilities.php">Inclusions</a>
         </li>
         <li class="nav-item">
           <a class="nav-link me-2" href="contact.php">Contact Us</a>
