@@ -19,11 +19,14 @@
     define('ROOMS_FOLDER','rooms/');
     define('USERS_FOLDER','users/');
 
-    // sendgrid api key
-    define('SENDGRID_API_KEY', "PASTE_API_KEY_HERE");
-    
-    define('SENDGRID_EMAIL', "angelasprivatepool@gmail.com");
-    define('SENDGRID_NAME', "Angela's Private Pool");
+    // phpmail
+    define('MAILHOST','smtp.gmail.com');
+    define('USERNAME','angelasprivatepool@gmail.com');
+    define('PASSWORD','miqd izdk uogm bczt');
+    define('SEND_FROM','angelasprivatepool@gmail.com');
+    define('SEND_FROM_NAME',"Angela's Private Pool");
+    define('REPLY_TO','angelasprivatepool@gmail.com');
+    define('REPLY_TO_NAME',"Angela's Private Pool");
 
     // possible "booking status" values in db = pending, booked, payment failed, cancelled
 

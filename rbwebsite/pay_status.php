@@ -26,7 +26,7 @@
                     $query = "SELECT bo.*,bd.*,uc.* 
                         FROM booking_order bo INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
                         INNER JOIN user_cred uc ON bo.user_id = uc.id
-                        WHERE (uc.email=? OR uc.phonenum=?)
+                        WHERE (uc.email=? AND uc.phonenum=?)
                         AND ((bo.booking_status='booked') 
                         OR (bo.booking_status='pending')
                         OR (bo.booking_status='cancelled')
@@ -36,94 +36,110 @@
 
                     $result = select($query,[$frm_data['email_mob'],$frm_data['gcash_ref']],'ss');
 
-                    while($data = mysqli_fetch_assoc($result))
+                    if(mysqli_num_rows($result) > 0)
                     {
-                        $date = date("d-m-Y",strtotime($data['datentime']));
-                        $checkin = date("d-m-Y",strtotime($data['check_in']));
-                        $checkout = date("d-m-Y",strtotime($data['check_out']));
-
-                        $status_bg = "";
-                        
-                        $login = 0;
-                        if(isset($_SESSION['login']) && $_SESSION['login']==true)
+                        while($data = mysqli_fetch_assoc($result))
                         {
-                            $login = 1;
-                        }
+                            $date = date("d-m-Y",strtotime($data['datentime']));
+                            $checkin = date("d-m-Y",strtotime($data['check_in']));
+                            $checkout = date("d-m-Y",strtotime($data['check_out']));
 
-                        if($data['trans_id']!='')
-                        {
-                            $gcash = "<span class='badge bg-primary'>
-                                GCash: $data[trans_id]
-                            </span>";
-                        }
-                        else
-                        {
-                            $gcash = "<span class='badge bg-success'>
-                                Walk-In
-                            </span>";
-                        }
-                        
-                        $btn = "";
-
-                        if($data['booking_status']=='booked')
-                        {
-                            $status_bg = "bg-success";
-
-                            if($data['arrival']==1)
+                            $status_bg = "";
+                            
+                            $login = 0;
+                            if(isset($_SESSION['login']) && $_SESSION['login']==true)
                             {
-                                $btn="<a onclick='checkLogin($login)' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
+                                $login = 1;
+                            }
 
-                                if($data['rate_review']==0)
+                            if($data['trans_id']!='')
+                            {
+                                $gcash = "<span class='badge bg-primary'>
+                                    GCash: $data[trans_id]
+                                </span>";
+                            }
+                            else
+                            {
+                                $gcash = "<span class='badge bg-success'>
+                                    Walk-In
+                                </span>";
+                            }
+                            
+                            $btn = "";
+
+                            if($data['booking_status']=='booked')
+                            {
+                                $status_bg = "bg-success";
+
+                                if($data['arrival']==1)
                                 {
-                                    $btn.="<button type='button' onclick='checkLogin($login)' data-bs-toggle='modal' data-bs-target='#reviewModal' class='btn btn-dark btn-sm shadow-none ms-2'>Rate & Review</button>";
+                                    $btn="<a onclick='checkLogin($login)' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
+
+                                    if($data['rate_review']==0)
+                                    {
+                                        $btn.="<button type='button' onclick='checkLogin($login)' data-bs-toggle='modal' data-bs-target='#reviewModal' class='btn btn-dark btn-sm shadow-none ms-2'>Rate & Review</button>";
+                                    }
+                                }
+                                else
+                                {
+                                    $btn="<button onclick='checkLogin($login)' type='button' class='btn btn-danger btn-sm shadow-none'>Cancel</button>";
+                                }
+                            }
+                            else if($data['booking_status']=='cancelled')
+                            {
+                                $status_bg = "bg-danger";
+
+                                if($data['refund']==0)
+                                {
+                                    $btn="<span class='badge bg-primary'>Refund in process!</span>";
+                                }
+                                else
+                                {
+                                    $btn="<a onclick='checkLogin($login)' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
                                 }
                             }
                             else
                             {
-                                $btn="<button onclick='checkLogin($login)' type='button' class='btn btn-danger btn-sm shadow-none'>Cancel</button>";
-                            }
-                        }
-                        else if($data['booking_status']=='cancelled')
-                        {
-                            $status_bg = "bg-danger";
-
-                            if($data['refund']==0)
-                            {
-                                $btn="<span class='badge bg-primary'>Refund in process!</span>";
-                            }
-                            else
-                            {
+                                $status_bg = "bg-info";
                                 $btn="<a onclick='checkLogin($login)' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
                             }
-                        }
-                        else
-                        {
-                            $status_bg = "bg-info";
-                            $btn="<a onclick='checkLogin($login)' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
-                        }
 
-                        echo<<<bookings
-                            <div class='col-md-4 px-4 mb-4'>
-                                <div class='bg-white p-3 rounded shadow-sm'>
-                                    <h5 class='fw-bold'>$data[room_name]</h5>
-                                    <p>₱$data[price] per night</p>
-                                    <p>
-                                        <b>Check in: </b> $checkin <br>
-                                        <b>Check out: </b> $checkout
-                                    </p>
-                                    <p>
-                                        <b>Amount: </b> ₱$data[price] <br>
-                                        <b>Order ID: </b> $data[order_id] <br>
-                                        <b>Date: </b> $date
-                                    </p>
-                                    <p>
-                                        $gcash
-                                        <span class='badge $status_bg'>$data[booking_status]</span>
-                                    </p>
-                                    $btn
+                            echo<<<bookings
+                                <div class='col-md-4 px-4 mb-4'>
+                                    <div class='bg-white p-3 rounded shadow-sm'>
+                                        <h5 class='fw-bold'>$data[room_name]</h5>
+                                        <p>₱$data[price] per night</p>
+                                        <p>
+                                            <b>Check in: </b> $checkin <br>
+                                            <b>Check out: </b> $checkout
+                                        </p>
+                                        <p>
+                                            <b>Amount: </b> ₱$data[price] <br>
+                                            <b>Order ID: </b> $data[order_id] <br>
+                                            <b>Date: </b> $date
+                                        </p>
+                                        <p>
+                                            $gcash
+                                            <span class='badge $status_bg'>$data[booking_status]</span>
+                                        </p>
+                                        $btn
+                                    </div>
                                 </div>
+                            bookings;
+                        }
+                    }
+                    else
+                    {
+                        echo<<<data
+                            <div class="col-12 px-4">
+                                <p class="fw-bold alert alert-warning">
+                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                    No Bookings Found.
+                                    <br><br>
+                                    <a href='bookings.php'>Go to Bookings<a/>
+                                </p>
                             </div>
-                        bookings;
+                        data;
                     }
                 }
                 else if(isset($_SESSION['login']) && $_SESSION['login']==true)

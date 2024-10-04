@@ -67,25 +67,3 @@ input[type=number] {
     right: 25px;
     z-index: 1111;
 }
-
-.track-booking .btn-text {
-    max-width: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    transition: max-width 0.4s ease-in-out, margin-left 0.4s ease-in-out;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 0;
-}
-
-.track-booking:hover .btn-text {
-    max-width: 150px;
-    margin-left: 0.5rem; 
-}
-
-.track-booking:hover {
-    border: 1px solid #343a40;
-    color: #343a40;
-    background-color: transparent;
-    box-shadow: none;
-}

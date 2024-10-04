@@ -1,7 +1,15 @@
 <?php
     require('../admin/inc/db_config.php');
     require('../admin/inc/essentials.php');
-    require("../inc/sendgrid/sendgrid-php.php");
+
+    // PHP Mailer
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+    
+    require '../inc/PHPMailer/src/Exception.php';
+    require '../inc/PHPMailer/src/PHPMailer.php';
+    require '../inc/PHPMailer/src/SMTP.php';
 
     date_default_timezone_set("Asia/Manila");
 
@@ -20,32 +28,53 @@
             $content = "reset your account";
         }
 
-        $email = new \SendGrid\Mail\Mail();
-        $email->setFrom(SENDGRID_EMAIL, SENDGRID_NAME);
-        $email->setSubject("$subject");
+        $mail = new PHPMailer(true);
+        
+        //Server settings
+        $mail->isSMTP();
+        $mail->Host       = MAILHOST;
+        $mail->SMTPAuth   = true;
+        $mail->Username   = USERNAME;
+        $mail->Password   = PASSWORD;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
 
-        $email->addTo($uemail);
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
+            ),
+        );
 
-        $email->addContent(
-            "text/html", 
-            "
+        //Recipients
+        $mail->setFrom(SEND_FROM, SEND_FROM_NAME);
+        $mail->addAddress($uemail);
+        $mail->addReplyTo(REPLY_TO, REPLY_TO_NAME);
+
+        //Content
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body = "
                 Click the link to $content: <br>
                 <a href='".SITE_URL."$page?$type&email=$uemail&token=$token"."'>
                     Click Me
                 </a>
-            "
-        );
-        $sendgrid = new \SendGrid(SENDGRID_API_KEY);
+            ";
+        $mail->AltBody = "
+                Click the link to $content: \n
+                ".SITE_URL."$page?$type&email=$uemail&token=$token
+            ";
 
-        try
-        {
-            $sendgrid->send($email);
-            return 1;
-        }
-        catch(Exception $e)
+        if(!$mail->send())
         {
             return 0;
         }
+        else
+        {
+            return 1;
+        }
+
     }
 
     if(isset($_POST['track_booking']))

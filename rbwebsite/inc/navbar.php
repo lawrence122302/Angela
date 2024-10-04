@@ -51,8 +51,14 @@
           else
           {
             echo<<<data
-            <button type="button" class="btn me-lg-3 me-2 mb-2 track-booking" data-bs-toggle="modal" data-bs-target="#trackBookingModal">
-              <i class="bi bi-search"></i><span class="btn-text">Search Booking</span>
+            <button type="button" class="btn btn-outline-dark shadow-none me-lg-3 me-2 mb-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+              Login
+            </button>
+            <button type="button" class="btn btn-outline-dark shadow-none me-lg-3 me-2 mb-2" data-bs-toggle="modal" data-bs-target="#registerModal">
+              Register
+            </button>
+            <button type="button" class="btn btn-outline-dark shadow-none me-lg-3 me-2 mb-2" data-bs-toggle="modal" data-bs-target="#trackBookingModal">
+              <i class="bi bi-search"></i>
             </button>
             data;
           }
@@ -70,7 +76,7 @@
       <form id="track-booking-form">
         <div class="modal-header">
           <h5 class="modal-title d-flex align-items-center">
-            <i class="bi bi-person-circle fs-3 me-2"></i> User Login
+            <i class="bi bi-book fs-3 me-2"></i> Track Booking
           </h5>
           <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -88,12 +94,7 @@
               <button type="submit" class="btn btn-dark shadow-none">Search</button>
             </div>
             <div class="d-flex align-items-center mt-2">
-              <button type="button" class="btn text-secondary text-decoration-none shadow-none p-0 me-2" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">
-                Login | 
-              </button>
-              <button type="button" class="btn text-secondary text-decoration-none shadow-none p-0" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">
-                  Register
-              </button>
+              
             </div>
           </div>
         </div>
