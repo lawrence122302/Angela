@@ -115,34 +115,24 @@
                                 <div class="col-md-6 mb-4">
                                     <label class="form-label">Check-out</label>
                                     <select id="checkout_time" name="checkout_time" class="form-select shadow-none">
-                                        <option value="10:00">Day Tour</option>
-                                        <option value="10:00">Night Tour</option>
-                                        <option value="22:00">Day Tour (22 Hours)</option>
-                                        <option value="22:00">Night Tour (22 Hours)</option>
-                                        <option value="33:00">Day Tour (1 and 1/2 Day)</option>
-                                        <option value="33:00">Night Tour (1 and 1/2 Day)</option>
-                                        <option value="44:00">Day Tour (2 Days)</option>
-                                        <option value="44:00">Night Tour (2 Days)</option>
-                                        <option value="55:00">Day Tour (2 and 1/2 Days)</option>
-                                        <option value="55:00">Night Tour (2 and 1/2 Days)</option>
-                                        <option value="66:00">Day Tour (3 Days)</option>
-                                        <option value="66:00">Night Tour (3 Days)</option>
-                                        <option value="77:00">Day Tour (3 and 1/2 Days)</option>
-                                        <option value="77:00">Night Tour (3 and 1/2 Days)</option>
-                                        <option value="88:00">Day Tour (4 Days)</option>
-                                        <option value="88:00">Night Tour (4 Days)</option>
-                                        <option value="99:00">Day Tour (4 and 1/2 Days)</option>
-                                        <option value="99:00">Night Tour (4 and 1/2 Days)</option>
-                                        <option value="110:00">Day Tour (5 Days)</option>
-                                        <option value="110:00">Night Tour (5 Days)</option>
-                                        <option value="121:00">Day Tour (5 and 1/2 Days)</option>
-                                        <option value="121:00">Night Tour (5 and 1/2 Days)</option>
-                                        <option value="132:00">Day Tour (6 Days)</option>
-                                        <option value="132:00">Night Tour (6 Days)</option>
-                                        <option value="143:00">Day Tour (6 and 1/2 Days)</option>
-                                        <option value="143:00">Night Tour (6 and 1/2 Days)</option>
-                                        <option value="154:00">Day Tour (7 Days)</option>
-                                        <option value="154:00">Night Tour (7 Days)</option>
+                                        <option value="10:00">Day Tour (08:00am - 06:00pm)</option>
+                                        <option value="10:00">Night Tour (08:00pm - 06:00am)</option>
+                                        <option value="22:00">22 Hours Day Tour (08:00am - 06:00am)</option>
+                                        <option value="22:00">22 Hours Night Tour (08:00pm - 06:00pm)</option>
+                                        <option value="34:00">1 and 1/2 Day Tour (08:00am - 06:00pm)</option>
+                                        <option value="34:00">1 and 1/2 Night Tour (08:00pm - 06:00pm)</option>
+                                        <option value="46:00">2 Days Tour (08:00am - 06:00pm)</option>
+                                        <option value="46:00">2 Nights Tour (08:00pm - 06:00am)</option>
+                                        <option value="58:00">3 Days Tour (08:00am - 06:00pm)</option>
+                                        <option value="58:00">3 Nights Tour (08:00pm - 06:00am)</option>
+                                        <option value="70:00">4 Days Tour (08:00am - 06:00pm)</option>
+                                        <option value="70:00">4 Nights Tour (08:00pm - 06:00am)</option>
+                                        <option value="82:00">5 Days Tour (08:00am - 06:00pm)</option>
+                                        <option value="82:00">5 Nights Tour (08:00pm - 06:00am)</option>
+                                        <option value="94:00">6 Days Tour (08:00am - 06:00pm)</option>
+                                        <option value="94:00">6 Nights Tour (08:00pm - 06:00am)</option>
+                                        <option value="106:00">7 Days Tour (08:00am - 06:00pm)</option>
+                                        <option value="106:00">7 Nights Tour (08:00pm - 06:00am)</option>
                                     </select>
 
                                 </div>
