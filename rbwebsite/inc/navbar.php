@@ -94,7 +94,6 @@
               <button type="submit" class="btn btn-dark shadow-none">Search</button>
             </div>
             <div class="d-flex align-items-center mt-2">
-              
             </div>
           </div>
         </div>

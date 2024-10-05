@@ -12,6 +12,9 @@ function add_room()
     data.append('name',add_room_form.elements['name'].value);
     data.append('area',add_room_form.elements['area'].value);
     data.append('price',add_room_form.elements['price'].value);
+    data.append('price2',add_room_form.elements['price2'].value);
+    data.append('price3',add_room_form.elements['price3'].value);
+    data.append('price4',add_room_form.elements['price4'].value);
     data.append('quantity',add_room_form.elements['quantity'].value);
     data.append('adult',add_room_form.elements['adult'].value);
     data.append('children',add_room_form.elements['children'].value);
@@ -85,11 +88,12 @@ function edit_details(id)
         let data  = JSON.parse(this.responseText);
 
         edit_room_form.elements['name'].value = data.roomdata.name;
-        edit_room_form.elements['area'].value = data.roomdata.area;
         edit_room_form.elements['price'].value = data.roomdata.price;
+        edit_room_form.elements['price2'].value = data.roomdata.price2;
+        edit_room_form.elements['price3'].value = data.roomdata.price3;
+        edit_room_form.elements['price4'].value = data.roomdata.price4;
         edit_room_form.elements['quantity'].value = data.roomdata.quantity;
         edit_room_form.elements['adult'].value = data.roomdata.adult;
-        edit_room_form.elements['children'].value = data.roomdata.children;
         edit_room_form.elements['desc'].value = data.roomdata.description;
         edit_room_form.elements['room_id'].value = data.roomdata.id;
 
@@ -121,11 +125,12 @@ function submit_edit_room()
     data.append('edit_room','');
     data.append('room_id',edit_room_form['room_id'].value);
     data.append('name',edit_room_form.elements['name'].value);
-    data.append('area',edit_room_form.elements['area'].value);
     data.append('price',edit_room_form.elements['price'].value);
+    data.append('price2',edit_room_form.elements['price2'].value);
+    data.append('price3',edit_room_form.elements['price3'].value);
+    data.append('price4',edit_room_form.elements['price4'].value);
     data.append('quantity',edit_room_form.elements['quantity'].value);
     data.append('adult',edit_room_form.elements['adult'].value);
-    data.append('children',edit_room_form.elements['children'].value);
     data.append('desc',edit_room_form.elements['desc'].value);
 
     let features = [];
@@ -301,7 +306,7 @@ function thumb_image(img_id,room_id)
 
 function remove_room(room_id)
 {
-    if(confirm("Are you sure you want to delete this room?"))
+    if(confirm("Delete this room?"))
     {
         let data = new FormData();
         data.append('room_id',room_id);

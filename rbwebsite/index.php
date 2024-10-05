@@ -175,8 +175,31 @@
                             <div class="card border-0 shadow" style="max-width: 350px; margin: auto;"> 
                                 <img src="$room_thumb" class="card-img-top">
                                 <div class="card-body">
-                                    <h5>$room_data[name]</h5>
-                                    <h6 class="mb-4">₱$room_data[price] per night</h6>
+                                    <h5 class="mb-4">$room_data[name]</h5>
+                                    <div class="mb-4">
+                                        <h6 class="mb-1">Monday - Thursday</h6>
+                                        ₱$room_data[price]
+                                        <span class="badge rounded-pill bg-light text-dark text-wrap">
+                                            Day/Night Swim
+                                        </span>
+                                        <br>
+                                        ₱$room_data[price2]
+                                        <span class="badge rounded-pill bg-light text-dark text-wrap">
+                                            22 Hours
+                                        </span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <h6 class="mb-1">Friday - Sunday</h6>
+                                        ₱$room_data[price3]
+                                        <span class="badge rounded-pill bg-light text-dark text-wrap">
+                                            Day/Night Swim
+                                        </span>
+                                        <br>
+                                        ₱$room_data[price4]
+                                        <span class="badge rounded-pill bg-light text-dark text-wrap">
+                                            22 Hours
+                                        </span>
+                                    </div>
                                     <div class="features mb-4">
                                         <h6 class="mb-1">Amenities</h6>
                                         $features_data

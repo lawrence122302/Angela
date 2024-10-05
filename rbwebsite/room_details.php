@@ -89,10 +89,6 @@
                 <div class="card mb-4 border-0 shadow-sm rounded-3">
                     <div class="card-body">
                         <?php
-                            echo<<<price
-                                <h4>₱$room_data[price] per night</h4>
-                            price;
-
                             $rating_q = "SELECT AVG(rating) AS avg_rating FROM rating_review
                                 WHERE room_id='$room_data[id]' ORDER BY sr_no DESC LIMIT 20";
 
@@ -110,10 +106,37 @@
                             }
 
                             echo<<<rating
-                                <div class="mb-3">
+                                <div class="mb-4">
                                     $rating_data
                                 </div>
                             rating;
+
+                            echo<<<price
+                                <div class="mb-3">
+                                    <h6 class="mb-1">Monday - Thursday</h6>
+                                    ₱$room_data[price]
+                                    <span class="badge rounded-pill bg-light text-dark text-wrap">
+                                        Day/Night Swim
+                                    </span>
+                                    <br>
+                                    ₱$room_data[price2]
+                                    <span class="badge rounded-pill bg-light text-dark text-wrap">
+                                        22 Hours
+                                    </span>
+                                </div>
+                                <div class="mb-3">
+                                    <h6 class="mb-1">Friday - Sunday</h6>
+                                    ₱$room_data[price3]
+                                    <span class="badge rounded-pill bg-light text-dark text-wrap">
+                                        Day/Night Swim
+                                    </span>
+                                    <br>
+                                    ₱$room_data[price4]
+                                    <span class="badge rounded-pill bg-light text-dark text-wrap">
+                                        22 Hours
+                                    </span>
+                                </div>
+                            price;
 
                             $fea_q = mysqli_query($con,"SELECT f.name FROM features f 
                                 INNER JOIN room_features rfea ON f.id = rfea.features_id 

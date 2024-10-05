@@ -20,6 +20,7 @@
         $is_shutdown = mysqli_fetch_assoc(mysqli_query($con,"SELECT shutdown FROM settings"));
 
         $current_bookings = mysqli_fetch_assoc(mysqli_query($con,"SELECT 
+            COUNT(CASE WHEN booking_status='pending' AND arrival=0 THEN 1 END) AS confirm_down_payment,
             COUNT(CASE WHEN booking_status='booked' AND arrival=0 THEN 1 END) AS new_bookings,
             COUNT(CASE WHEN booking_status='cancelled' AND refund=0 THEN 1 END) AS refund_bookings
             FROM booking_order"));
@@ -57,16 +58,16 @@
                 <div class="row mb-4">
                     <div class="col mb-4">
                         <a href="new_bookings.php" class="text-decoration-none">
-                            <div class="card text-center text-success p-3">
-                                <h6>New Bookings</h6>
-                                <h1 class="mt-2 mb-0"><?php echo $current_bookings['new_bookings'] ?></h1>
+                            <div class="card text-center text-warning p-3">
+                                <h6>Confirm Down Payment</h6>
+                                <h1 class="mt-2 mb-0"><?php echo $current_bookings['confirm_down_payment'] ?></h1>
                             </div>
                         </a>
                     </div>
                     <div class="col mb-4">
-                        <a href="new_bookings.php" class="text-decoration-none">
+                        <a href="confirmed_bookings.php" class="text-decoration-none">
                             <div class="card text-center text-success p-3">
-                                <h6>New Bookings</h6>
+                                <h6>Confirm Full Payment</h6>
                                 <h1 class="mt-2 mb-0"><?php echo $current_bookings['new_bookings'] ?></h1>
                             </div>
                         </a>

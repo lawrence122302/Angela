@@ -70,7 +70,27 @@
             }
 
             $count_days = $frm_data['count'];
-            $payment = $_SESSION['room']['price'] * $count_days;
+            if($frm_data['time_of_day'] == "Day Tour")
+            {
+                if(!$frm_data['isWeekend'])
+                {
+                    $payment = $_SESSION['room']['price'] * $count_days;
+                }
+                else if($frm_data['isWeekend'])
+                {
+                    $payment = $_SESSION['room']['price2'] * $count_days;
+                }
+            } else if($frm_data['time_of_day'] == "Night Tour")
+            {
+                if(!$frm_data['isWeekend'])
+                {
+                    $payment = $_SESSION['room']['price3'] * $count_days;
+                }
+                else if($frm_data['isWeekend'])
+                {
+                    $payment = $_SESSION['room']['price4'] * $count_days;
+                }
+            }
 
             error_log("Count Days: " . $count_days);
             error_log("Room Price: " . $_SESSION['room']['price']);

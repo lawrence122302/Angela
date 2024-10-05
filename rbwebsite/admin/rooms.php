@@ -38,7 +38,6 @@
                                     <tr class="bg-dark text-light">
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col">Area</th>
                                         <th scope="col">Guests</th>
                                         <th scope="col">Price</th>
                                         <th scope="col">Quantity</th>
@@ -73,27 +72,37 @@
                                 <input type="text" name="name" class="form-control shadow-none" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Area</label>
-                                <input type="number" min="1" name="area" class="form-control shadow-none" required>
+                                <label class="form-label fw-bold">PAX (Max.)</label>
+                                <input type="number" min="1" name="adult" class="form-control shadow-none" required>
+                            </div>
+                            <span class='col-md-12 mb-3 badge rounded-pill bg-light text-dark'>
+                                <h6>Monday - Thursday</h6>
+                            </span>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Day/Night Swim Price</label>
+                                <input type="number" min="1" name="price" class="form-control shadow-none" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Price</label>
-                                <input type="number" min="1" name="price" class="form-control shadow-none" required>
+                                <label class="form-label fw-bold">22 Hours</label>
+                                <input type="number" min="1" name="price2" class="form-control shadow-none" required>
+                            </div>
+                            <span class='col-md-12 mb-3 badge rounded-pill bg-light text-dark'>
+                                <h6>Friday - Sunday</h6>
+                            </span>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Day/Night Swim Price</label>
+                                <input type="number" min="1" name="price3" class="form-control shadow-none" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">22 Hours</label>
+                                <input type="number" min="1" name="price4" class="form-control shadow-none" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Quantity</label>
                                 <input type="number" min="1" name="quantity" class="form-control shadow-none" required>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Adult (Max.)</label>
-                                <input type="number" min="1" name="adult" class="form-control shadow-none" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Children (Max.)</label>
-                                <input type="number" min="1" name="children" class="form-control shadow-none" required>
-                            </div>
                             <div class="col-12 mb-3">
-                                <label class="form-label fw-bold">Features</label>
+                                <label class="form-label fw-bold">Amenities</label>
                                 <div class="row">
                                     <?php
                                         $res = selectAll('features');
@@ -160,20 +169,34 @@
                                 <input type="text" name="name" class="form-control shadow-none" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Area</label>
-                                <input type="number" min="1" name="area" class="form-control shadow-none" required>
+                                <label class="form-label fw-bold">PAX (Max.)</label>
+                                <input type="number" min="1" name="adult" class="form-control shadow-none" required>
+                            </div>
+                            <span class='col-md-12 mb-3 badge rounded-pill bg-light text-dark'>
+                                <h6>Monday - Thursday</h6>
+                            </span>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Day/Night Swim Price</label>
+                                <input type="number" min="1" name="price" class="form-control shadow-none" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Price</label>
-                                <input type="number" min="1" name="price" class="form-control shadow-none" required>
+                                <label class="form-label fw-bold">22 Hours</label>
+                                <input type="number" min="1" name="price2" class="form-control shadow-none" required>
+                            </div>
+                            <span class='col-md-12 mb-3 badge rounded-pill bg-light text-dark'>
+                                <h6>Friday - Sunday</h6>
+                            </span>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Day/Night Swim Price</label>
+                                <input type="number" min="1" name="price3" class="form-control shadow-none" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">22 Hours</label>
+                                <input type="number" min="1" name="price4" class="form-control shadow-none" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Quantity</label>
                                 <input type="number" min="1" name="quantity" class="form-control shadow-none" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">PAX (Max.)</label>
-                                <input type="number" min="1" name="adult" class="form-control shadow-none" required>
                             </div>
                             <div class="col-12 mb-3">
                                 <label class="form-label fw-bold">Amenities</label>

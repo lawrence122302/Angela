@@ -42,6 +42,9 @@
             "id" => $room_data['id'],
             "name" => $room_data['name'],
             "price" => $room_data['price'],
+            "price2" => $room_data['price2'],
+            "price3" => $room_data['price3'],
+            "price4" => $room_data['price4'],
             "payment" => null,
             "available" => false,
         ];
@@ -293,6 +296,8 @@
                 data.append('datetimeLocal_checkin',datetimeLocal_checkin);
                 data.append('datetimeLocal_checkout',datetimeLocal_checkout);
                 data.append('count',count);
+                data.append('isWeekend',isWeekend);
+                data.append('time_of_day',time_of_day);
 
                 let xhr = new XMLHttpRequest();
                 xhr.open("POST","ajax/confirm_booking.php",true);

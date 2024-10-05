@@ -11,10 +11,10 @@
         $frm_data = filteration($_POST);
         $flag = 0;
 
-        $q1 = "INSERT INTO rooms(name,area,price,quantity,adult,children,description) VALUES(?,?,?,?,?,?,?)";
-        $values = [$frm_data['name'],$frm_data['area'],$frm_data['price'],$frm_data['quantity'],$frm_data['adult'],$frm_data['children'],$frm_data['desc']];
+        $q1 = "INSERT INTO rooms(name,price,price2,price3,price4,quantity,adult,description) VALUES(?,?,?,?,?,?,?,?)";
+        $values = [$frm_data['name'],$frm_data['price'],$frm_data['price2'],$frm_data['price3'],$frm_data['price4'],$frm_data['quantity'],$frm_data['adult'],$frm_data['desc']];
 
-        if(insert($q1,$values,'siiiiis'))
+        if(insert($q1,$values,'siiiiiis'))
         {
             $flag = 1;
         }
@@ -89,16 +89,39 @@
                 <tr class='align-middle'>
                     <td>$i</td>
                     <td>$row[name]</td>
-                    <td>$row[area] sq. ft.</td>
                     <td>
                         <span class='badge rounded-pill bg-light text-dark'>
-                            Adult: $row[adult]
+                            PAX: $row[adult]
                         </span><br>
-                        <span class='badge rounded-pill bg-light text-dark'>
-                            Children: $row[children]
-                        </span>
                     </td>
-                    <td>₱$row[price]</td>
+                    <td>
+                        <span class='badge rounded-pill bg-light text-dark'>
+                            Weekdays
+                        </span>
+                        <br>
+                        <span class='badge rounded-pill bg-light text-dark'>
+                            Day/Night Swim: ₱$row[price]
+                        </span>
+                        <br>
+                        <span class='badge rounded-pill bg-light text-dark'>
+                            22 Hours: ₱$row[price2]
+                        </span>
+                        <br>
+                        <br>
+                        <span class='badge rounded-pill bg-light text-dark'>
+                            (Weekends)
+                        </span>
+                        <br>
+                        <span class='badge rounded-pill bg-light text-dark'>
+                            Day/Night Swim: ₱$row[price3]
+                        </span>
+                        <br>
+                        <span class='badge rounded-pill bg-light text-dark'>
+                            22 Hours: ₱$row[price4]
+                        </span>
+                        <br>
+                    </td>
+                        
                     <td>$row[quantity]</td>
                     <td>$status</td>
                     <td>
@@ -162,10 +185,10 @@
         $frm_data = filteration($_POST);
         $flag = 0;
 
-        $q1 = "UPDATE rooms SET name=?,area=?,price=?,quantity=?,adult=?,children=?,description=? WHERE id=?";
-        $values = [$frm_data['name'],$frm_data['area'],$frm_data['price'],$frm_data['quantity'],$frm_data['adult'],$frm_data['children'],$frm_data['desc'],$frm_data['room_id']];
+        $q1 = "UPDATE rooms SET name=?,price=?,price2=?,price3=?,price4=?,quantity=?,adult=?,description=? WHERE id=?";
+        $values = [$frm_data['name'],$frm_data['price'],$frm_data['price2'],$frm_data['price3'],$frm_data['price4'],$frm_data['quantity'],$frm_data['adult'],$frm_data['desc'],$frm_data['room_id']];
 
-        if(update($q1,$values,'siiiiisi'))
+        if(update($q1,$values,'siiiiiisi'))
         {
             $flag = 1;
         }
