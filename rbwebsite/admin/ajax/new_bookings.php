@@ -33,18 +33,10 @@
             $date2 = new DateTime($checkout);
             $package_type = "";
 
-            $get_time = new DateTime();
+            $get_time = new DateTime($checkin);
             $hour = $get_time->format('H');
             $time_of_day = "";
-
-            if($hour>=8 && $hour<20)
-            {
-                $time_of_day = "Day Tour";
-            }
-            else
-            {
-                $time_of_day = "Night Tour";
-            }
+            $time_of_day = ($hour >= 8 && $hour < 20) ? "Check In Day" : "Check In Night";
 
             $interval = $date1->diff($date2);
             $total_hours = ($interval->days * 24) + $interval->h;
@@ -98,7 +90,7 @@
                         <br>
                         <b>Check in:</b> $checkin
                         <br>
-                        <b>Check in:</b> $checkout
+                        <b>Check out:</b> $checkout
                         <br>
                         <br>
                         <b>Paid:</b> ₱$data[trans_amt]

@@ -157,22 +157,10 @@
                                 <div class="mb-3">
                                     <h6 class="mb-1">Guests</h6>
                                     <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                        $room_data[adult] Adults
-                                    </span>
-                                    <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                        $room_data[children] Children
+                                        $room_data[adult] PAX
                                     </span>
                                 </div>
                             guests;
-
-                            echo<<<area
-                                <div class="mb-3">
-                                    <h6 class="mb-1">Area</h6>
-                                    <span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
-                                        $room_data[area] sq. ft.
-                                    </span>
-                                </div>
-                            area;
 
                             if(!$settings_r['shutdown'])
                             {

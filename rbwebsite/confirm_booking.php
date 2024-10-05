@@ -114,35 +114,35 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <label class="form-label">Check-out</label>
-                                    <select id="checkout_time" name="checkout_time" class="form-select shadow-none">
-                                        <option value="12">Day Tour (08:00am - 06:00pm)</option>
-                                        <option value="12">Night Tour (08:00pm - 06:00am)</option>
-                                        <option value="24">22 Hours Day Tour (08:00am - 06:00am)</option>
-                                        <option value="24">22 Hours Night Tour (08:00pm - 06:00pm)</option>
-                                        <option value="36">1 and 1/2 Day Tour</option>
-                                        <option value="36">1 and 1/2 Night Tour</option>
-                                        <option value="48">2 Days Tour</option>
-                                        <option value="48">2 Nights Tour</option>
-                                        <option value="60">2 and 1/2 Day Tour</option>
-                                        <option value="60">2 and 1/2 Night Tour</option>
-                                        <option value="72">3 Days Tour</option>
-                                        <option value="72">3 Nights Tour</option>
-                                        <option value="84">3 and 1/2 Day Tour</option>
-                                        <option value="84">3 and 1/2 Night Tour</option>
-                                        <option value="96">4 Days Tour</option>
-                                        <option value="96">4 Nights Tour</option>
-                                        <option value="108">4 and 1/2 Days Tour</option>
-                                        <option value="108">4 and 1/2 Nights Tour</option>
-                                        <option value="120">5 Days Tour</option>
-                                        <option value="120">5 Nights Tour</option>
-                                        <option value="132">5 and 1/2 Days Tour</option>
-                                        <option value="132">5 and 1/2 Nights Tour</option>
-                                        <option value="144">6 Days Tour</option>
-                                        <option value="144">6 Nights Tour</option>
-                                        <option value="156">6 and 1/2 Days Tour</option>
-                                        <option value="156">6 and 1/2 Nights Tour</option>
-                                        <option value="168">7 Days Tour</option>
-                                        <option value="168">7 Nights Tour</option>
+                                    <select name="checkout" onchange="check_availability()" class="form-select shadow-none">
+                                        <option value="1">Day Tour (08:00am - 06:00pm)</option>
+                                        <option value="2">Night Tour (08:00pm - 06:00am)</option>
+                                        <option value="3">22 Hours Day Tour (08:00am - 06:00am)</option>
+                                        <option value="4">22 Hours Night Tour (08:00pm - 06:00pm)</option>
+                                        <option value="5">1 and 1/2 Day Tour</option>
+                                        <option value="6">1 and 1/2 Night Tour</option>
+                                        <option value="7">2 Days Tour</option>
+                                        <option value="8">2 Nights Tour</option>
+                                        <option value="9">2 and 1/2 Day Tour</option>
+                                        <option value="10">2 and 1/2 Night Tour</option>
+                                        <option value="11">3 Days Tour</option>
+                                        <option value="12">3 Nights Tour</option>
+                                        <option value="13">3 and 1/2 Day Tour</option>
+                                        <option value="14">3 and 1/2 Night Tour</option>
+                                        <option value="15">4 Days Tour</option>
+                                        <option value="16">4 Nights Tour</option>
+                                        <option value="17">4 and 1/2 Days Tour</option>
+                                        <option value="18">4 and 1/2 Nights Tour</option>
+                                        <option value="19">5 Days Tour</option>
+                                        <option value="20">5 Nights Tour</option>
+                                        <option value="21">5 and 1/2 Days Tour</option>
+                                        <option value="22">5 and 1/2 Nights Tour</option>
+                                        <option value="23">6 Days Tour</option>
+                                        <option value="24">6 Nights Tour</option>
+                                        <option value="25">6 and 1/2 Days Tour</option>
+                                        <option value="26">6 and 1/2 Nights Tour</option>
+                                        <option value="27">7 Days Tour</option>
+                                        <option value="28">7 Nights Tour</option>
                                     </select>
 
                                 </div>
@@ -205,9 +205,76 @@
             let checkin_val = booking_form.elements['checkin'].value;
             let checkout_val = booking_form.elements['checkout'].value;
 
+            // Convert check-in date
+            let checkin_date1 = new Date(checkin_val + "T00:00:00");
+            let checkin_date2 = new Date(checkin_val + "T00:00:00");
+
+            // Check if weekend
+            let dayOfWeek = checkin_date1.getDay();
+            let isWeekend = (dayOfWeek === 0 || dayOfWeek === 5 || dayOfWeek === 6); // 0 is Sunday, 5 is Friday, 6 is Saturday
+
+            // Check if day or night and create new check-in value
+            let time_of_day = "";
+            let new_checkin_val;
+            if ((checkout_val % 2) == 0) {
+                time_of_day = "Night Tour";
+                new_checkin_val = new Date(checkin_date2.getTime() + 20 * 60 * 60 * 1000); // Add 20 hours
+            } else {
+                time_of_day = "Day Tour";
+                new_checkin_val = new Date(checkin_date2.getTime() + 8 * 60 * 60 * 1000); // Add 8 hours
+            }
+
+            // Further Check-out Value Adjustments (if needed)
+            let new_checkout_val;
+            if (checkout_val == 1 || checkout_val == 2) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 10 * 60 * 60 * 1000); // 10
+            }
+            else if (checkout_val == 3 || checkout_val == 4) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 22 * 60 * 60 * 1000); // 22
+            }
+            else if (checkout_val == 5 || checkout_val == 6) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 34 * 60 * 60 * 1000); // 34
+            }
+            else if (checkout_val == 7 || checkout_val == 8) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 46 * 60 * 60 * 1000); // 46
+            }
+            else if (checkout_val == 9 || checkout_val == 10) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 58 * 60 * 60 * 1000); // 58
+            }
+            else if (checkout_val == 11 || checkout_val == 12) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 70 * 60 * 60 * 1000); // 70
+            }
+            else if (checkout_val == 13 || checkout_val == 14) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 82 * 60 * 60 * 1000); // 82
+            }
+            else if (checkout_val == 15 || checkout_val == 16) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 94 * 60 * 60 * 1000); // 94
+            }
+            else if (checkout_val == 17 || checkout_val == 18) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 106 * 60 * 60 * 1000); // 106
+            }
+            else if (checkout_val == 19 || checkout_val == 20) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 118 * 60 * 60 * 1000); // 118
+            }
+            else if (checkout_val == 21 || checkout_val == 22) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 118 * 60 * 60 * 1000); // 130
+            }
+            else if (checkout_val == 23 || checkout_val == 24) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 142 * 60 * 60 * 1000); // 142
+            }
+            else if (checkout_val == 25 || checkout_val == 26) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 154 * 60 * 60 * 1000); // 154
+            }
+            else if (checkout_val == 27 || checkout_val == 28) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 166 * 60 * 60 * 1000); // 166
+            }
+
+            console.log(new_checkout_val);
+            console.log(new_checkin_val);
+
             booking_form.elements['pay_now'].setAttribute('disabled',true);
 
-            if(checkin_val!='' && checkout_val!='')
+            if(new_checkin_val!='' && new_checkout_val!='')
             {
                 pay_info.classList.add('d-none');
                 pay_info.classList.replace('text-dark','text-danger');
@@ -216,8 +283,8 @@
                 let data = new FormData();
 
                 data.append('check_availability','');
-                data.append('check_in',checkin_val);
-                data.append('check_out',checkout_val);
+                data.append('new_checkin_val',checkin_val);
+                data.append('new_checkout_val',checkout_val);
 
                 let xhr = new XMLHttpRequest();
                 xhr.open("POST","ajax/confirm_booking.php",true);
