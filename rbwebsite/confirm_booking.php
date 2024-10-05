@@ -122,7 +122,7 @@
                                         <option value="2">Night Tour (08:00pm - 06:00am)</option>
                                         <option value="3">22 Hours Day Tour (08:00am - 06:00am)</option>
                                         <option value="4">22 Hours Night Tour (08:00pm - 06:00pm)</option>
-                                        <option value="5">1 and 1/2 Day Tour</option>
+                                        <!-- <option value="5">1 and 1/2 Day Tour</option>
                                         <option value="6">1 and 1/2 Night Tour</option>
                                         <option value="7">2 Days Tour</option>
                                         <option value="8">2 Nights Tour</option>
@@ -145,7 +145,7 @@
                                         <option value="25">6 and 1/2 Days Tour</option>
                                         <option value="26">6 and 1/2 Nights Tour</option>
                                         <option value="27">7 Days Tour</option>
-                                        <option value="28">7 Nights Tour</option>
+                                        <option value="28">7 Nights Tour</option> -->
                                     </select>
 
                                 </div>
@@ -208,15 +208,21 @@
             let checkin_val = booking_form.elements['checkin'].value;
             let checkout_val = booking_form.elements['checkout'].value;
 
-            let count = checkout_val;
-
             // Convert check-in date
             let checkin_date1 = new Date(checkin_val + "T00:00:00");
             let checkin_date2 = new Date(checkin_val + "T00:00:00");
 
+            // Debug check-in dates
+            console.log("Check-in Date 1: " + checkin_date1);
+            console.log("Check-in Date 2: " + checkin_date2);
+
             // Check if weekend
             let dayOfWeek = checkin_date1.getDay();
             let isWeekend = (dayOfWeek === 0 || dayOfWeek === 5 || dayOfWeek === 6); // 0 is Sunday, 5 is Friday, 6 is Saturday
+
+            // Debug day of the week
+            console.log("Day of Week: " + dayOfWeek);
+            console.log("Is Weekend: " + isWeekend);
 
             // Check if day or night and create new check-in value
             let time_of_day = "";
@@ -229,6 +235,24 @@
                 new_checkin_val = new Date(checkin_date2.getTime() + 8 * 60 * 60 * 1000); // Add 8 hours
             }
 
+            // Debug new check-in value and time of day
+            console.log("Time of Day: " + time_of_day);
+            console.log("New Check-in Value: " + new_checkin_val);
+
+            let is_22hrs;
+            if (checkout_val == 3 || checkout_val == 4)
+            {
+                is_22hrs = true;
+            }
+            else if (checkout_val == 1 || checkout_val == 2)
+            {
+                is_22hrs = false;
+            }
+
+            // Debugging the value
+            console.log("Checkout Value: " + checkout_val);
+            console.log("Is 22 hours: " + is_22hrs);
+
             // Further Check-out Value Adjustments (if needed)
             let new_checkout_val;
             if (checkout_val == 1 || checkout_val == 2) {
@@ -237,50 +261,57 @@
             else if (checkout_val == 3 || checkout_val == 4) {
                 new_checkout_val = new Date(new_checkin_val.getTime() + 22 * 60 * 60 * 1000); // 22
             }
-            else if (checkout_val == 5 || checkout_val == 6) {
-                new_checkout_val = new Date(new_checkin_val.getTime() + 34 * 60 * 60 * 1000); // 34
-            }
-            else if (checkout_val == 7 || checkout_val == 8) {
-                new_checkout_val = new Date(new_checkin_val.getTime() + 46 * 60 * 60 * 1000); // 46
-            }
-            else if (checkout_val == 9 || checkout_val == 10) {
-                new_checkout_val = new Date(new_checkin_val.getTime() + 58 * 60 * 60 * 1000); // 58
-            }
-            else if (checkout_val == 11 || checkout_val == 12) {
-                new_checkout_val = new Date(new_checkin_val.getTime() + 70 * 60 * 60 * 1000); // 70
-            }
-            else if (checkout_val == 13 || checkout_val == 14) {
-                new_checkout_val = new Date(new_checkin_val.getTime() + 82 * 60 * 60 * 1000); // 82
-            }
-            else if (checkout_val == 15 || checkout_val == 16) {
-                new_checkout_val = new Date(new_checkin_val.getTime() + 94 * 60 * 60 * 1000); // 94
-            }
-            else if (checkout_val == 17 || checkout_val == 18) {
-                new_checkout_val = new Date(new_checkin_val.getTime() + 106 * 60 * 60 * 1000); // 106
-            }
-            else if (checkout_val == 19 || checkout_val == 20) {
-                new_checkout_val = new Date(new_checkin_val.getTime() + 118 * 60 * 60 * 1000); // 118
-            }
-            else if (checkout_val == 21 || checkout_val == 22) {
-                new_checkout_val = new Date(new_checkin_val.getTime() + 118 * 60 * 60 * 1000); // 130
-            }
-            else if (checkout_val == 23 || checkout_val == 24) {
-                new_checkout_val = new Date(new_checkin_val.getTime() + 142 * 60 * 60 * 1000); // 142
-            }
-            else if (checkout_val == 25 || checkout_val == 26) {
-                new_checkout_val = new Date(new_checkin_val.getTime() + 154 * 60 * 60 * 1000); // 154
-            }
-            else if (checkout_val == 27 || checkout_val == 28) {
-                new_checkout_val = new Date(new_checkin_val.getTime() + 166 * 60 * 60 * 1000); // 166
-            }
+            // else if (checkout_val == 5 || checkout_val == 6) {
+            //     new_checkout_val = new Date(new_checkin_val.getTime() + 34 * 60 * 60 * 1000); // 34
+            // }
+            // else if (checkout_val == 7 || checkout_val == 8) {
+            //     new_checkout_val = new Date(new_checkin_val.getTime() + 46 * 60 * 60 * 1000); // 46
+            // }
+            // else if (checkout_val == 9 || checkout_val == 10) {
+            //     new_checkout_val = new Date(new_checkin_val.getTime() + 58 * 60 * 60 * 1000); // 58
+            // }
+            // else if (checkout_val == 11 || checkout_val == 12) {
+            //     new_checkout_val = new Date(new_checkin_val.getTime() + 70 * 60 * 60 * 1000); // 70
+            // }
+            // else if (checkout_val == 13 || checkout_val == 14) {
+            //     new_checkout_val = new Date(new_checkin_val.getTime() + 82 * 60 * 60 * 1000); // 82
+            // }
+            // else if (checkout_val == 15 || checkout_val == 16) {
+            //     new_checkout_val = new Date(new_checkin_val.getTime() + 94 * 60 * 60 * 1000); // 94
+            // }
+            // else if (checkout_val == 17 || checkout_val == 18) {
+            //     new_checkout_val = new Date(new_checkin_val.getTime() + 106 * 60 * 60 * 1000); // 106
+            // }
+            // else if (checkout_val == 19 || checkout_val == 20) {
+            //     new_checkout_val = new Date(new_checkin_val.getTime() + 118 * 60 * 60 * 1000); // 118
+            // }
+            // else if (checkout_val == 21 || checkout_val == 22) {
+            //     new_checkout_val = new Date(new_checkin_val.getTime() + 118 * 60 * 60 * 1000); // 130
+            // }
+            // else if (checkout_val == 23 || checkout_val == 24) {
+            //     new_checkout_val = new Date(new_checkin_val.getTime() + 142 * 60 * 60 * 1000); // 142
+            // }
+            // else if (checkout_val == 25 || checkout_val == 26) {
+            //     new_checkout_val = new Date(new_checkin_val.getTime() + 154 * 60 * 60 * 1000); // 154
+            // }
+            // else if (checkout_val == 27 || checkout_val == 28) {
+            //     new_checkout_val = new Date(new_checkin_val.getTime() + 166 * 60 * 60 * 1000); // 166
+            // }
 
-            let final_checkin_val = new Date(new_checkin_val);
+            // Debug new check-out value
+            console.log("New Check-out Value: " + new_checkout_val);
+
+            let final_checkin_val = new Date(new_checkin_val.getTime() - new_checkin_val.getTimezoneOffset() * 60000);
             let isoStr1 = final_checkin_val.toISOString();
             let datetimeLocal_checkin = isoStr1.slice(0, 16);
 
-            let final_checkout_val = new Date(new_checkout_val);
+            let final_checkout_val = new Date(new_checkout_val.getTime() - new_checkin_val.getTimezoneOffset() * 60000);
             let isoStr2 = final_checkout_val.toISOString();
             let datetimeLocal_checkout = isoStr2.slice(0, 16);
+
+            // Debug final ISO string values
+            console.log("Final Check-in ISO String: " + datetimeLocal_checkin);
+            console.log("Final Check-out ISO String: " + datetimeLocal_checkout);
 
             booking_form.elements['pay_now'].setAttribute('disabled',true);
 
@@ -295,9 +326,9 @@
                 data.append('check_availability','');
                 data.append('datetimeLocal_checkin',datetimeLocal_checkin);
                 data.append('datetimeLocal_checkout',datetimeLocal_checkout);
-                data.append('count',count);
                 data.append('isWeekend',isWeekend);
                 data.append('time_of_day',time_of_day);
+                data.append('is_22hrs',is_22hrs);
 
                 let xhr = new XMLHttpRequest();
                 xhr.open("POST","ajax/confirm_booking.php",true);
