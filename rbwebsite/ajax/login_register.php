@@ -178,6 +178,7 @@
                 }
                 else
                 {
+                    session_name('user_session');
                     session_start();
                     $_SESSION['login'] = true;
                     $_SESSION['uId'] = $u_fetch['id'];

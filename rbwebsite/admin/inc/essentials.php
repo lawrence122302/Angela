@@ -32,6 +32,7 @@
 
     function adminLogin()
     {
+        session_name('admin_session');
         session_start();
         if(!(isset($_SESSION['adminLogin']) && $_SESSION['adminLogin']==true))
         {

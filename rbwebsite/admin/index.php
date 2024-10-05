@@ -2,6 +2,7 @@
     require('inc/essentials.php');
     require('inc/db_config.php');
 
+    session_name('admin_session');
     session_start();
     if((isset($_SESSION['adminLogin']) && $_SESSION['adminLogin']==true))
     {
@@ -49,7 +50,7 @@
         {
             $frm_data = filteration($_POST);
             
-            $query = "SELECT * FROM admin_cred WHERE admin_name=? AND admin_pass=?";
+            $query = "SELECT * FROM admin_cred WHERE admin_name=? AND BINARY admin_pass=?";
             $values = [$frm_data['admin_name'],$frm_data['admin_pass']];
 
             $res = select($query,$values,"ss");

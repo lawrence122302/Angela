@@ -5,6 +5,7 @@
 <link rel="icon" href="images/settings/logo-angela.jpg" type="image/png">
 
 <?php
+  session_name('user_session');
   session_start();
   date_default_timezone_set("Asia/Manila");
 
