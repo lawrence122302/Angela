@@ -205,6 +205,8 @@
             let checkin_val = booking_form.elements['checkin'].value;
             let checkout_val = booking_form.elements['checkout'].value;
 
+            let count = checkout_val;
+
             // Convert check-in date
             let checkin_date1 = new Date(checkin_val + "T00:00:00");
             let checkin_date2 = new Date(checkin_val + "T00:00:00");
@@ -269,12 +271,17 @@
                 new_checkout_val = new Date(new_checkin_val.getTime() + 166 * 60 * 60 * 1000); // 166
             }
 
-            console.log(new_checkout_val);
-            console.log(new_checkin_val);
+            let final_checkin_val = new Date(new_checkin_val);
+            let isoStr1 = final_checkin_val.toISOString();
+            let datetimeLocal_checkin = isoStr1.slice(0, 16);
+
+            let final_checkout_val = new Date(new_checkout_val);
+            let isoStr2 = final_checkout_val.toISOString();
+            let datetimeLocal_checkout = isoStr2.slice(0, 16);
 
             booking_form.elements['pay_now'].setAttribute('disabled',true);
 
-            if(new_checkin_val!='' && new_checkout_val!='')
+            if(datetimeLocal_checkin!='' && datetimeLocal_checkout!='')
             {
                 pay_info.classList.add('d-none');
                 pay_info.classList.replace('text-dark','text-danger');
@@ -283,15 +290,18 @@
                 let data = new FormData();
 
                 data.append('check_availability','');
-                data.append('new_checkin_val',checkin_val);
-                data.append('new_checkout_val',checkout_val);
+                data.append('datetimeLocal_checkin',datetimeLocal_checkin);
+                data.append('datetimeLocal_checkout',datetimeLocal_checkout);
+                data.append('count',count);
 
                 let xhr = new XMLHttpRequest();
                 xhr.open("POST","ajax/confirm_booking.php",true);
 
                 xhr.onload = function()
                 {
+                    console.log("XHR onload triggered");
                     let data = JSON.parse(this.responseText);
+                    console.log("Response data:", data);
 
                     if(data.status == 'check_in_out_equal')
                     {
@@ -318,8 +328,14 @@
 
                     pay_info.classList.remove('d-none');
                     info_loader.classList.add('d-none');
+                    console.log("Completed updating UI");
                 }
+                xhr.onerror = function () {
+                    console.error("XHR error occurred");
+                };
+                console.log("Sending request...");
                 xhr.send(data);
+                console.log("Request sent");
             }
         }
 

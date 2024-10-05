@@ -11,9 +11,14 @@
         $result = "";        
 
         // check in and out validations
-        $today_date = new DateTime(date("Y-m-d"));
-        $checkin_date = new DateTime($frm_data['check_in']);
-        $checkout_date = new DateTime($frm_data['check_out']);
+        $today_date = new DateTime(date("Y-m-d H:i:s"));
+        $checkin_date = new DateTime($frm_data['datetimeLocal_checkin']);
+        $checkout_date = new DateTime($frm_data['datetimeLocal_checkout']);
+
+        // Debug dates
+        error_log("Today's Date: " . $today_date->format('Y-m-d H:i:s'));
+        error_log("Check-in Date: " . $checkin_date->format('Y-m-d H:i:s'));
+        error_log("Check-out Date: " . $checkout_date->format('Y-m-d H:i:s'));
 
         if($checkin_date == $checkout_date)
         {
@@ -31,13 +36,18 @@
             $result = json_encode(["status"=>$status]);
         }
 
+        header('Content-Type: application/json');
+
         // check booking availability if status is blank else return the error
         if($status!='')
         {
+            header('Content-Type: application/json');
             echo $result;
+            exit;
         }
         else
         {
+            session_name('user_session');
             session_start();
 
             // run query to check room is available or not
@@ -45,7 +55,7 @@
                 WHERE booking_status=? AND room_id=?
                 AND check_out > ? AND check_in < ?";
 
-            $values = ['booked',$_SESSION['room']['id'],$frm_data['check_in'],$frm_data['check_out']];
+            $values = ['booked',$_SESSION['room']['id'],$frm_data['datetimeLocal_checkin'],$frm_data['datetimeLocal_checkout']];
             $tb_fetch = mysqli_fetch_assoc(select($tb_query,$values,'siss'));
 
             $rq_result = select("SELECT quantity FROM rooms WHERE id=?",[$_SESSION['room']['id']],'i');
@@ -59,8 +69,12 @@
                 exit;
             }
 
-            $count_days = date_diff($checkin_date,$checkout_date)->days;
+            $count_days = $frm_data['count'];
             $payment = $_SESSION['room']['price'] * $count_days;
+
+            error_log("Count Days: " . $count_days);
+            error_log("Room Price: " . $_SESSION['room']['price']);
+            error_log("Payment: " . $payment);
 
             $_SESSION['room']['payment'] = $payment;
             $_SESSION['room']['available'] = true;
@@ -68,5 +82,8 @@
             $result = json_encode(["status"=>'available', "days"=>$count_days, "payment"=>$payment]);
             echo $result;
         }
+    } else {
+        // Handle unexpected access or errors
+        echo json_encode(['status' => 'error', 'message' => 'Invalid request']);
     }
 ?>
