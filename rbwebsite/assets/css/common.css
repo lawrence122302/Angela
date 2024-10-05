@@ -67,3 +67,12 @@ input[type=number] {
     right: 25px;
     z-index: 1111;
 }
+
+.no-reviews-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Adjust the height as needed */
+    width: 100%;
+    text-align: center;
+}

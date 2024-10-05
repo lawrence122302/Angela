@@ -13,7 +13,7 @@ function get_bookings(search='')
 
 function confirm_booking(id,down_payment)
 {
-    if(confirm("Are you sure you want to confirm this booking?"))
+    if(confirm("Confirm Down Payment?"))
         {
             let data = new FormData();
             data.append('booking_id',id);
@@ -41,7 +41,7 @@ function confirm_booking(id,down_payment)
 
 function cancel_booking(id)
 {
-    if(confirm("Are you sure you want to cancel this booking?"))
+    if(confirm("Cancel Booking?"))
         {
             let data = new FormData();
             data.append('booking_id',id);

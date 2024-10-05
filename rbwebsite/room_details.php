@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php require('inc/links.php'); ?>
-    <title><?php echo $settings_r['site_title'] ?> - Room Details</title>
+    <title><?php echo $settings_r['site_title'] ?> - Accomodation Details</title>
 </head>
 <body class="bg-light">
 
@@ -39,7 +39,7 @@
                 <div style="font-size: 14px;">
                     <a href="index.php" class="text-secondary text-decoration-none">Home</a>
                     <span class="text-secondary"> > </span>
-                    <a href="rooms.php" class="text-secondary text-decoration-none">Rooms</a>
+                    <a href="rooms.php" class="text-secondary text-decoration-none">Accomodations</a>
                 </div>
             </div>
 
@@ -129,7 +129,7 @@
 
                             echo<<<features
                                 <div class="mb-3">
-                                    <h6 class="mb-1">Features</h6>
+                                    <h6 class="mb-1">Amenities</h6>
                                     $features_data
                                 </div>
                             features;
@@ -148,7 +148,7 @@
 
                             echo<<<facilities
                                 <div class="mb-3">
-                                    <h6 class="mb-1">Facilities</h6>
+                                    <h6 class="mb-1">Inclusions</h6>
                                     $facilities_data
                                 </div>
                             facilities;
@@ -199,7 +199,7 @@
                 </div>
 
                 <div>
-                    <h5 class="mb-3">Reviews & Ratings</h5>
+                    <h5 class="mb-3">Ratings & Reviews</h5>
                     <?php
                         $review_q = "SELECT rr.*,uc.name AS uname, uc.profile, r.name AS rname FROM rating_review rr 
                             INNER JOIN user_cred uc ON rr.user_id = uc.id

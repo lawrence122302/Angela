@@ -63,7 +63,7 @@
                             <input type="date" class="form-control shadow-none" name="checkout" required>
                         </div>
                         <div class="col mb-3">
-                            <label class="form-label" style="font-weight: 500;">Pax</label>
+                            <label class="form-label" style="font-weight: 500;">Number of PAX</label>
                             <select class="form-select shadow-none" name="adult">
                                 <?php
                                     $guests_q = mysqli_query($con,"SELECT MAX(adult) AS max_adult FROM rooms WHERE status='1' AND removed='0'");
@@ -87,7 +87,7 @@
     </div>
 
     <!-- Our rooms -->
-    <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Our Rooms</h2>
+    <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Our Accomodations</h2>
     <div class="container">
         <div class="row">
             <?php
@@ -178,11 +178,11 @@
                                     <h5>$room_data[name]</h5>
                                     <h6 class="mb-4">₱$room_data[price] per night</h6>
                                     <div class="features mb-4">
-                                        <h6 class="mb-1">Features</h6>
+                                        <h6 class="mb-1">Amenities</h6>
                                         $features_data
                                     </div>
                                     <div class="facilities mb-4">
-                                        <h6 class="mb-1">Facilities</h6>
+                                        <h6 class="mb-1">Inclusions</h6>
                                         $facilities_data
                                     </div>
                                     <div class="guest mb-4">
@@ -204,13 +204,13 @@
             ?>
 
             <div class="col-lg-12 text-center mt-5">
-                <a href="rooms.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">More Rooms >>></a>
+                <a href="rooms.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">More Accomodations >>></a>
             </div>
         </div>
     </div>
 
     <!-- Our Facilities -->
-    <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Our Facilities</h2>
+    <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Our Inclusions</h2>
     <div class="container">
         <div class="row justify-content-evenly px-lg-0 px-md-0 px-5">
             <?php
@@ -228,13 +228,13 @@
                 }
             ?>
             <div class="col-lg-12 text-center mt-5">
-                <a href="facilities.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">More Facilities >>></a>
+                <a href="facilities.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">More Inclusions >>></a>
             </div>
         </div>
     </div>
 
     <!-- Testimonials -->
-    <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Testimonials</h2>
+    <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Ratings & Reviews</h2>
     <div class="container mt-5">
         <div class="swiper swiper-testimonials">
             <div class="swiper-wrapper mb-5">
@@ -249,7 +249,11 @@
 
                     if(mysqli_num_rows($review_res)==0)
                     {
-                        echo 'No reviews yet!';
+                        echo<<<data
+                            <div class="no-reviews-container">
+                                <h6 class="m-0 ms-2">No reviews yet!</h6>
+                            </div>
+                        data;
                     }
                     else
                     {
@@ -314,12 +318,14 @@
                 </div>
                 <div class="bg-white p-4 rounded mb-4">
                     <h5>Follow Us</h5>
+                    <a href="<?php echo $contact_r['fb'] ?>" class="d-inline-block text-dark text-decoration-none mb-2">
+                        <i class="bi bi-facebook me-1"></i> Facebook
+                    </a><br>
                     <?php
                         if($contact_r['tw']!='')
                         {
                             echo<<<data
-                                <a href="$contact_r[tw]" class="d-inline-block mb-3">
-                                    <span class="badge bg-light text-dark fs-6 p-2">
+                                <a href="$contact_r[tw]" class="d-inline-block text-dark text-decoration-none mb-2">
                                     <i class="bi bi-twitter me-1"></i> Twitter
                                     </span>
                                 </a>
@@ -327,18 +333,17 @@
                             data;
 
                         }
+                        if($contact_r['insta']!='')
+                        {
+                            echo<<<data
+                                <a href="$contact_r[insta]" class="d-inline-block text-dark text-decoration-none mb-2">
+                                    <i class="bi bi-instagram me-1"></i> Instagram
+                                    </span>
+                                </a>
+                            data;
+                        }
                     ?>
-                    <a href="<?php echo $contact_r['fb'] ?>" class="d-inline-block mb-3">
-                        <span class="badge bg-light text-dark fs-6 p-2">
-                        <i class="bi bi-facebook me-1"></i> Facebook
-                        </span>
-                    </a>
-                    <br>
-                    <a href="<?php echo $contact_r['insta'] ?>" class="d-inline-block">
-                        <span class="badge bg-light text-dark fs-6 p-2">
-                        <i class="bi bi-instagram me-1"></i> Instagram
-                        </span>
-                    </a>
+                    
                 </div>
             </div>
         </div>

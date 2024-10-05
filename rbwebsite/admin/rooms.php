@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Rooms</title>
+    <title>Admin Panel - Accomodations</title>
     <?php require('inc/links.php'); ?>
 </head>
 <body class="bg-light">
@@ -19,7 +19,7 @@
     <div class="container-fluid" id="main-content">
         <div class="row">
             <div class="col-lg-10 ms-auto p-4 overflow-hidden">
-                <h3 class="mb-4">Rooms</h3>
+                <h3 class="mb-4">Accomodations</h3>
 
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
@@ -112,7 +112,7 @@
                                 </div>
                             </div>
                             <div class="col-12 mb-3">
-                                <label class="form-label fw-bold">Facilities</label>
+                                <label class="form-label fw-bold">Inclusions</label>
                                 <div class="row">
                                     <?php
                                         $res = selectAll('facilities');
@@ -151,7 +151,7 @@
             <form id="edit_room_form" autocomplete="off">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Edit Room</h5>
+                        <h5 class="modal-title">Edit Accomodation</h5>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -172,15 +172,11 @@
                                 <input type="number" min="1" name="quantity" class="form-control shadow-none" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Adult (Max.)</label>
+                                <label class="form-label fw-bold">PAX (Max.)</label>
                                 <input type="number" min="1" name="adult" class="form-control shadow-none" required>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Children (Max.)</label>
-                                <input type="number" min="1" name="children" class="form-control shadow-none" required>
-                            </div>
                             <div class="col-12 mb-3">
-                                <label class="form-label fw-bold">Features</label>
+                                <label class="form-label fw-bold">Amenities</label>
                                 <div class="row">
                                     <?php
                                         $res = selectAll('features');
@@ -199,7 +195,7 @@
                                 </div>
                             </div>
                             <div class="col-12 mb-3">
-                                <label class="form-label fw-bold">Facilities</label>
+                                <label class="form-label fw-bold">Inclusions</label>
                                 <div class="row">
                                     <?php
                                         $res = selectAll('facilities');
@@ -238,7 +234,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Room Name</h5>
+                    <h5 class="modal-title">Accomodation Name</h5>
                     <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

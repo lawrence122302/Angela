@@ -26,8 +26,33 @@
         while($data = mysqli_fetch_assoc($res))
         {
             $date = date("d-m-Y",strtotime($data['datentime']));
-            $checkin = date("d-m-Y",strtotime($data['check_in']));
-            $checkout = date("d-m-Y",strtotime($data['check_out']));
+            $checkin = date("d-m-Y H:i:s",strtotime($data['check_in']));
+            $checkout = date("d-m-Y H:i:s",strtotime($data['check_out']));
+
+            $date1 = new DateTime($checkin);
+            $date2 = new DateTime($checkout);
+            $package_type = "";
+
+            $get_time = new DateTime();
+            $hour = $get_time->format('H');
+            $time_of_day = "";
+
+            if($hour>=8 && $hour<20)
+            {
+                $time_of_day = "Day Tour";
+            }
+            else
+            {
+                $time_of_day = "Night Tour";
+            }
+
+            $interval = $date1->diff($date2);
+            $total_hours = ($interval->days * 24) + $interval->h;
+
+            if($total_hours>=12)
+            {
+                $package_type = "12 Hours";
+            }
 
             $down_payment = $data['total_pay'] * 0.5;
 
@@ -59,7 +84,9 @@
                         <b>Phone No:</b> $data[phonenum]
                     </td>
                     <td>
-                        <b>Room:</b> $data[room_name]
+                        <b>Accomodation:</b> $data[room_name]
+                        <br>
+                        <b>Package Type:</b> $data[room_name]
                         <br>
                         <b>Total Pay:</b> ₱$data[total_pay]
                         <br>
@@ -67,6 +94,8 @@
                         <b>Down Payment:</b> ₱$down_payment
                     </td>
                     <td>
+                        <b>Date:</b> $date
+                        <br>
                         <b>Check in:</b> $checkin
                         <br>
                         <b>Check in:</b> $checkout
@@ -75,7 +104,6 @@
                         <b>Paid:</b> ₱$data[trans_amt]
                         <br>
                         <br>
-                        <b>Date:</b> $date
                     </td>
                     <td>
                         <button type='button' onclick='confirm_booking({$data['booking_id']}, {$down_payment})' class='btn text-white btn-sm fw-bold custom-bg shadow-none'>

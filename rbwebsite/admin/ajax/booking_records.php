@@ -16,13 +16,13 @@
             WHERE ((bo.booking_status='booked' AND bo.arrival=1) 
             OR (bo.booking_status='cancelled' AND bo.refund=1)
             OR (bo.booking_status='payment failed')) 
-            AND (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ?) 
+            AND (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.booking_status LIKE ?)
             ORDER BY bo.booking_id DESC";
 
-        $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%"],'sss');
+        $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%"],'ssss');
 
         $limit_query = $query ." LIMIT $start,$limit";
-        $limit_res = select($limit_query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%"],'sss');
+        $limit_res = select($limit_query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%"],'ssss');
 
         $total_rows = mysqli_num_rows($res);
         

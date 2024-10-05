@@ -32,6 +32,7 @@
     function setActive()
     {
         let navbar = document.getElementById('dashboard-menu');
+        bookingLinks = document.getElementById('bookingLinks');
         let a_tags = navbar.getElementsByTagName('a');
 
         for(i=0;i<a_tags.length;i++)
@@ -42,6 +43,10 @@
             if(document.location.href.indexOf(file_name)>=0)
             {
                 a_tags[i].classList.add('active');
+                if (bookingLinks.contains(a_tags[i]))
+                {
+                    bookingLinks.classList.add('show');
+                }
             }
         }
     }

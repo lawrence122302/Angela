@@ -22,10 +22,10 @@
                         <span>Bookings</span>
                         <span><i class="bi bi-caret-down-fill"></i></span>
                     </button>
-                    <div class="collapse show px-3 small mb-1" id="bookingLinks">
+                    <div class="collapse px-3 small mb-1" id="bookingLinks">
                         <ul class="nav nav-pills flex-column rounded border border-secondary">
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="new_bookings.php">New Bookings</a>
+                                <a class="nav-link text-white" href="new_bookings.php">Confirm Down Payment</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="confirmed_bookings.php">Confirmed Bookings</a>
@@ -49,10 +49,10 @@
                         <a class="nav-link text-white" href="rate_review.php">Ratings & Review</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="rooms.php">Rooms</a>
+                        <a class="nav-link text-white" href="rooms.php">Accomodations</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="features_facilities.php">Features & Facilities</a>
+                        <a class="nav-link text-white" href="features_facilities.php">Amenities & Inclusions</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="carousel.php">Carousel</a>

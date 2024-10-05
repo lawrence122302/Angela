@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Features & Facilities</title>
+    <title>Admin Panel - Amenities & Inclusions</title>
     <?php require('inc/links.php'); ?>
 </head>
 <body class="bg-light">
@@ -19,13 +19,13 @@
     <div class="container-fluid" id="main-content">
         <div class="row">
             <div class="col-lg-10 ms-auto p-4 overflow-hidden">
-                <h3 class="mb-4">Features & Facilities</h3>
+                <h3 class="mb-4">Amenities & Inclusions</h3>
 
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
 
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h5 class="card-title m-0">Features</h5>
+                            <h5 class="card-title m-0">Amenities</h5>
 
                             <!-- Button general-s -->
                             <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#feature-s">
@@ -54,7 +54,7 @@
                     <div class="card-body">
 
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h5 class="card-title m-0">Facilities</h5>
+                            <h5 class="card-title m-0">Inclusions</h5>
 
                             <!-- Button general-s -->
                             <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#facility-s">
@@ -91,7 +91,7 @@
             <form id="feature_s_form">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add Feature Member</h5>
+                        <h5 class="modal-title">Add Amenity Member</h5>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
@@ -114,7 +114,7 @@
             <form id="facility_s_form">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add Facility</h5>
+                        <h5 class="modal-title">Add Inclusion</h5>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
