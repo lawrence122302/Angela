@@ -256,7 +256,7 @@
         </div>
     </div>
 
-    <!-- Testimonials -->
+    <!-- Ratings & Reviews -->
     <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Ratings & Reviews</h2>
     <div class="container mt-5">
         <div class="swiper swiper-testimonials">

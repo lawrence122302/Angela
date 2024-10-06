@@ -40,7 +40,7 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Guests</th>
                                         <th scope="col">Price</th>
-                                        <th scope="col">Quantity</th>
+                                        <!-- <th scope="col">Quantity</th> -->
                                         <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -97,10 +97,10 @@
                                 <label class="form-label fw-bold">22 Hours</label>
                                 <input type="number" min="1" name="price4" class="form-control shadow-none" required>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <!-- <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Quantity</label>
                                 <input type="number" min="1" name="quantity" class="form-control shadow-none" required>
-                            </div>
+                            </div> -->
                             <div class="col-12 mb-3">
                                 <label class="form-label fw-bold">Amenities</label>
                                 <div class="row">

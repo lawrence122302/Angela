@@ -118,6 +118,7 @@
                                 <div class="col-md-6 mb-4">
                                     <label class="form-label">Check-out</label>
                                     <select name="checkout" onchange="check_availability()" class="form-select shadow-none">
+                                        <option value="">-</option>
                                         <option value="1">Day Tour (08:00am - 06:00pm)</option>
                                         <option value="2">Night Tour (08:00pm - 06:00am)</option>
                                         <option value="3">22 Hours Day Tour (08:00am - 06:00am)</option>
@@ -178,13 +179,33 @@
                         <h5 class="modal-title">Confirm Payment</h5>
                     </div>
                     <div class="modal-body">
-                        <div class="mb-3 text-center">
-                            <img src="images/settings/asd.jpeg" class="img-fluid mb-2">
-                            <label class="form-label fw-bold badge bg-primary text-white rounded-pill px-3 py-2">GCash: 0912-345-6789</label>
+                        <div class="row">
+                            <div class="mb-3 text-center">
+                                <img src="images/settings/asd.jpeg" class="img-fluid mb-2">
+                                <span class="badge rounded-pill bg-info text-white text-wrap">
+                                    Gcash: 123456778
+                                </span>
+                            </div>
                         </div>
+                       <div class="row">
+                            <div class="d-flex justify-content-center mb-4 col-lg-6">
+                                <span class="badge rounded-pill bg-primary text-white text-wrap">
+                                    Down Payment: 123
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-center mb-4 col-lg-6">
+                                <span class="badge rounded-pill bg-primary text-white text-wrap">
+                                    Full Payment: 123
+                                </span>
+                            </div>
+                       </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Paid Amount</label>
                             <input type="number" name="paid_amount" class="form-control shadow-none" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">GCash Reference</label>
+                            <input type="text" name="g_reference" class="form-control shadow-none" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -208,7 +229,7 @@
             let checkin_val = booking_form.elements['checkin'].value;
             let checkout_val = booking_form.elements['checkout'].value;
 
-            // Convert check-in date
+            // Needed to convert check-in and checkout date
             let checkin_date1 = new Date(checkin_val + "T00:00:00");
             let checkin_date2 = new Date(checkin_val + "T00:00:00");
 
@@ -219,18 +240,29 @@
             // Check if weekend
             let dayOfWeek = checkin_date1.getDay();
             let isWeekend = (dayOfWeek === 0 || dayOfWeek === 5 || dayOfWeek === 6); // 0 is Sunday, 5 is Friday, 6 is Saturday
+            if(isWeekend)
+            {
+                isWeekend = "true";
+            }
+            else if(!isWeekend)
+            {
+                isWeekend = "false";
+            }
 
             // Debug day of the week
             console.log("Day of Week: " + dayOfWeek);
             console.log("Is Weekend: " + isWeekend);
 
-            // Check if day or night and create new check-in value
+            // Create new check-in value
+            // Check if day or night
             let time_of_day = "";
             let new_checkin_val;
             if ((checkout_val % 2) == 0) {
                 time_of_day = "Night Tour";
                 new_checkin_val = new Date(checkin_date2.getTime() + 20 * 60 * 60 * 1000); // Add 20 hours
-            } else {
+            }
+            else
+            {
                 time_of_day = "Day Tour";
                 new_checkin_val = new Date(checkin_date2.getTime() + 8 * 60 * 60 * 1000); // Add 8 hours
             }
@@ -239,14 +271,15 @@
             console.log("Time of Day: " + time_of_day);
             console.log("New Check-in Value: " + new_checkin_val);
 
+            // Check if 22 hours
             let is_22hrs;
             if (checkout_val == 3 || checkout_val == 4)
             {
-                is_22hrs = true;
+                is_22hrs = "true";
             }
             else if (checkout_val == 1 || checkout_val == 2)
             {
-                is_22hrs = false;
+                is_22hrs = "false";
             }
 
             // Debugging the value
@@ -254,6 +287,7 @@
             console.log("Is 22 hours: " + is_22hrs);
 
             // Further Check-out Value Adjustments (if needed)
+            // Creting new check-out value
             let new_checkout_val;
             if (checkout_val == 1 || checkout_val == 2) {
                 new_checkout_val = new Date(new_checkin_val.getTime() + 10 * 60 * 60 * 1000); // 10
@@ -301,6 +335,7 @@
             // Debug new check-out value
             console.log("New Check-out Value: " + new_checkout_val);
 
+            // Formating check-in and check-out values
             let final_checkin_val = new Date(new_checkin_val.getTime() - new_checkin_val.getTimezoneOffset() * 60000);
             let isoStr1 = final_checkin_val.toISOString();
             let datetimeLocal_checkin = isoStr1.slice(0, 16);
@@ -357,7 +392,7 @@
                     }
                     else
                     {
-                        pay_info.innerHTML = "No. of Days: <strong>"+data.days+"</strong><br>Total Amount to Pay: <strong>₱"+data.payment+"</strong>";
+                        pay_info.innerHTML = "Package Type:<br><strong>"+data.package_type+"</strong><br><br>Hours:<br><strong>"+data.hour1+" - "+data.hour2+"</strong><br><br>Total Amount to Pay:<br><strong>₱"+data.payment+"</strong>";
                         pay_info.classList.replace('alert-warning','alert-success');
                         booking_form.elements['pay_now'].removeAttribute('disabled');
                     }
@@ -366,6 +401,8 @@
                     info_loader.classList.add('d-none');
                     console.log("Completed updating UI");
                 }
+                console.log("Request sent with data: ", data);
+                
                 xhr.onerror = function () {
                     console.error("XHR error occurred");
                 };
@@ -383,6 +420,55 @@
             let checkin_val = booking_form.elements['checkin'].value;
             let checkout_val = booking_form.elements['checkout'].value;
 
+            // Needed to convert checkout date
+            let checkin_date2 = new Date(checkin_val + "T00:00:00");
+
+            // Debug check-in date conversion
+            console.log("Check-in Date 2: ", checkin_date2);
+
+            // Create new check-in value
+            // Check if day or night
+            let time_of_day = "";
+            let new_checkin_val;
+            if ((checkout_val % 2) == 0) {
+                time_of_day = "Night Tour";
+                new_checkin_val = new Date(checkin_date2.getTime() + 20 * 60 * 60 * 1000); // Add 20 hours
+            }
+            else
+            {
+                time_of_day = "Day Tour";
+                new_checkin_val = new Date(checkin_date2.getTime() + 8 * 60 * 60 * 1000); // Add 8 hours
+            }
+
+            // Debug new check-in value and time of day
+            console.log("Time of Day: ", time_of_day);
+            console.log("New Check-in Value: ", new_checkin_val);
+
+            // Create new check-out value
+            let new_checkout_val;
+            if (checkout_val == 1 || checkout_val == 2) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 10 * 60 * 60 * 1000); // 10
+            }
+            else if (checkout_val == 3 || checkout_val == 4) {
+                new_checkout_val = new Date(new_checkin_val.getTime() + 22 * 60 * 60 * 1000); // 22
+            }
+
+            // Debug new check-out value
+            console.log("New Check-out Value: ", new_checkout_val);
+
+            // Formating check-in and check-out values
+            let final_checkin_val = new Date(new_checkin_val.getTime() - new_checkin_val.getTimezoneOffset() * 60000);
+            let isoStr1 = final_checkin_val.toISOString();
+            let datetimeLocal_checkin = isoStr1.slice(0, 16);
+
+            let final_checkout_val = new Date(new_checkout_val.getTime() - new_checkin_val.getTimezoneOffset() * 60000);
+            let isoStr2 = final_checkout_val.toISOString();
+            let datetimeLocal_checkout = isoStr2.slice(0, 16);
+
+            // Debug final formatted values
+            console.log("Final Check-in ISO String: ", datetimeLocal_checkin);
+            console.log("Final Check-out ISO String: ", datetimeLocal_checkout);
+
             let modal = new bootstrap.Modal(document.getElementById('pay-now'));
             modal.show();
 
@@ -390,29 +476,42 @@
                 event.preventDefault();
 
                 let paidamount_val = pay_now_form.elements['paid_amount'].value;
+                let g_reference_val = pay_now_form.elements['g_reference'].value;
 
                 let data = new FormData();
                 data.append('pay_now','');
                 data.append('name',name_val);
                 data.append('phonenum',phonenum_val);
                 data.append('address',address_val);
-                data.append('checkin',checkin_val);
-                data.append('checkout',checkout_val);
+                data.append('datetimeLocal_checkin',datetimeLocal_checkin);
+                data.append('datetimeLocal_checkout',datetimeLocal_checkout);
                 data.append('paidamount',paidamount_val);
+                data.append('g_reference',g_reference_val);
 
                 let xhr = new XMLHttpRequest();
                 xhr.open("POST", "pay_now.php", true);
 
                 xhr.onload = function()
                 {
-                    let data = JSON.parse(this.responseText);
+                    console.log("XHR onload triggered");
+                    console.log("Raw Response Text:", this.responseText);
 
-                    if (data.orderid!='') {
-                        window.location.href = 'pay_status.php?order=' + data.orderid;
+                    try {
+                        let data = JSON.parse(this.responseText);
+                        console.log("Response data:", data);
+
+                        if (data.orderid != '') {
+                            window.location.href = 'pay_status.php?order=' + data.orderid;
+                        }
+                    } catch (e) {
+                        console.error("Error parsing JSON:", e);
+                        console.log("Response Text:", this.responseText); // Log entire response
                     }
                 };
                 
+                console.log("Sending request...");
                 xhr.send(data);
+                console.log("Request sent");
 
                 let modalInstance = bootstrap.Modal.getInstance(document.getElementById('pay-now'));
                 modalInstance.hide();

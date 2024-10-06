@@ -12,7 +12,7 @@
         $flag = 0;
 
         $q1 = "INSERT INTO rooms(name,price,price2,price3,price4,quantity,adult,description) VALUES(?,?,?,?,?,?,?,?)";
-        $values = [$frm_data['name'],$frm_data['price'],$frm_data['price2'],$frm_data['price3'],$frm_data['price4'],$frm_data['quantity'],$frm_data['adult'],$frm_data['desc']];
+        $values = [$frm_data['name'],$frm_data['price'],$frm_data['price2'],$frm_data['price3'],$frm_data['price4'],1,$frm_data['adult'],$frm_data['desc']];
 
         if(insert($q1,$values,'siiiiiis'))
         {
@@ -82,9 +82,7 @@
                 $status = "<button onclick='toggle_status($row[id],1)' class='btn btn-warning btn-sm shadow-none'>inactive</button>";
             }
 
-
-
-
+            // removed <td>$row[quantity]</td>
             $data.="
                 <tr class='align-middle'>
                     <td>$i</td>
@@ -122,7 +120,6 @@
                         <br>
                     </td>
                         
-                    <td>$row[quantity]</td>
                     <td>$status</td>
                     <td>
                         <button type='button' onclick='edit_details($row[id])' class='btn btn-primary shadow-none btn-sm' data-bs-toggle='modal' data-bs-target='#edit-room'>
@@ -186,7 +183,7 @@
         $flag = 0;
 
         $q1 = "UPDATE rooms SET name=?,price=?,price2=?,price3=?,price4=?,quantity=?,adult=?,description=? WHERE id=?";
-        $values = [$frm_data['name'],$frm_data['price'],$frm_data['price2'],$frm_data['price3'],$frm_data['price4'],$frm_data['quantity'],$frm_data['adult'],$frm_data['desc'],$frm_data['room_id']];
+        $values = [$frm_data['name'],$frm_data['price'],$frm_data['price2'],$frm_data['price3'],$frm_data['price4'],1,$frm_data['adult'],$frm_data['desc'],$frm_data['room_id']];
 
         if(update($q1,$values,'siiiiiisi'))
         {

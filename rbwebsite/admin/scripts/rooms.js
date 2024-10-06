@@ -10,14 +10,11 @@ function add_room()
     let data = new FormData();
     data.append('add_room','');
     data.append('name',add_room_form.elements['name'].value);
-    data.append('area',add_room_form.elements['area'].value);
     data.append('price',add_room_form.elements['price'].value);
     data.append('price2',add_room_form.elements['price2'].value);
     data.append('price3',add_room_form.elements['price3'].value);
     data.append('price4',add_room_form.elements['price4'].value);
-    data.append('quantity',add_room_form.elements['quantity'].value);
     data.append('adult',add_room_form.elements['adult'].value);
-    data.append('children',add_room_form.elements['children'].value);
     data.append('desc',add_room_form.elements['desc'].value);
 
     let features = [];
