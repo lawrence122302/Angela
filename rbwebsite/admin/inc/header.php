@@ -1,4 +1,7 @@
-<div class="container-fluid bg-dark text-light p-3 d-flex align-items-center justify-content-between sticky-top">
+<div class="container-fluid bg-dark text-light px-3 d-flex align-items-center justify-content-between sticky-top">
+    <a class="logo-image" href="index.php">
+      <img src="../images/settings/logo-angela.jpg" alt="Angela's Logo" />
+    </a>
     <div>
         <h3 class="mb-0 text-center text-uppercase font-weight-bold">Admin Panel</h3>
         <small class="text-muted">Angela's Private Pool</small>

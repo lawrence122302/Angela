@@ -25,12 +25,23 @@
 
     if(isset($_POST['upd_shutdown']))
     {
-        $frm_data = ($_POST['upd_shutdown']==0) ? 1 : 0;
+        $query2 = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
+        $res2 = mysqli_fetch_assoc($query2);
 
-        $q = "UPDATE settings SET shutdown=? WHERE sr_no=?";
-        $values = [$frm_data,1];
-        $res = update($q,$values,'ii');
-        echo $res;
+        if($res2['is_super_admin']==1)
+        {
+            $frm_data = ($_POST['upd_shutdown']==0) ? 1 : 0;
+
+            $q = "UPDATE settings SET shutdown=? WHERE sr_no=?";
+            $values = [$frm_data,1];
+            $res = update($q,$values,'ii');
+            echo $res;
+        }
+        else if($res2['is_super_admin']==0)
+        {
+            echo 0;
+        }
+        
     }
 
     if(isset($_POST['get_contacts']))
@@ -87,14 +98,24 @@
         while($row = mysqli_fetch_assoc($res))
         {
             $path = ABOUT_IMG_PATH;
+            
+            $query2 = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
+            $res2 = mysqli_fetch_assoc($query2);
+
+            $button = "";
+            if($res2['is_super_admin']==1)
+            {
+                $button = "<button type='button' onclick='rem_member($row[sr_no])' class='btn btn-danger btn-sm shadow-none'>
+                    <i class='bi bi-trash'></i> Delete
+                </button>";
+            }
+
             echo <<<data
                 <div class="col-md-2 mb-3">
                     <div class="card bg-dark text-white">
                     <img src="$path$row[picture]" class="card-img">
                         <div class="card-img-overlay text-end">
-                            <button type="button" onclick="rem_member($row[sr_no])" class="btn btn-danger btn-sm shadow-none">
-                                <i class="bi bi-trash"></i> Delete
-                            </button>
+                            $button
                         </div>
                         <p class="card-text text-center px-3 py-2">$row[name]</p>
                     </div>

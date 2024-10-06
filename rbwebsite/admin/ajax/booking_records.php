@@ -16,13 +16,13 @@
             WHERE ((bo.booking_status='booked' AND bo.arrival=1) 
             OR (bo.booking_status='cancelled' AND bo.refund=1)
             OR (bo.booking_status='payment failed')) 
-            AND (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.booking_status LIKE ?)
+            AND (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.booking_status LIKE ? OR bo.trans_id LIKE ?)
             ORDER BY bo.booking_id DESC";
 
-        $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%"],'ssss');
+        $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%"],'sssss');
 
         $limit_query = $query ." LIMIT $start,$limit";
-        $limit_res = select($limit_query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%"],'ssss');
+        $limit_res = select($limit_query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%"],'sssss');
 
         $total_rows = mysqli_num_rows($res);
         
@@ -42,6 +42,7 @@
             $checkin = date("d-m-Y",strtotime($data['check_in']));
             $checkout = date("d-m-Y",strtotime($data['check_out']));
 
+            $refunded_status = "";
             if($data['booking_status']=='booked')
             {
                 $status_bg = 'bg-success';
@@ -49,10 +50,24 @@
             else if($data['booking_status']=='cancelled')
             {
                 $status_bg = 'bg-danger';
+                $refunded_status = "<span class='badge bg-warning'>refunded</span><br>";
             }
             else
             {
                 $status_bg = 'bg-warning text-dark';
+            }
+
+            if($data['trans_id']!='')
+            {
+                $gcash = "<span class='badge bg-primary'>
+                    GCash: $data[trans_id]
+                </span>";
+            }
+            else
+            {
+                $gcash = "<span class='badge bg-success'>
+                    Walk-In
+                </span>";
             }
 
             $table_data.="
@@ -62,6 +77,8 @@
                         <span class='badge bg-primary'>
                             Order ID: $data[order_id]
                         </span>
+                        <br>
+                        $gcash
                         <br>
                         <b>Name:</b> $data[user_name]
                         <br>
@@ -78,7 +95,7 @@
                         <b>Date:</b> $date
                     </td>
                     <td>
-                        <span class='badge $status_bg'>$data[booking_status]</span>
+                        $refunded_status<span class='badge $status_bg'>$data[booking_status]</span>
                     </td>
                     <td>
                         <button type='button' onclick='download($data[booking_id])' class='btn btn-outline-success btn-sm fw-bold shadow-none'>

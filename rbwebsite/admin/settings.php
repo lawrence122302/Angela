@@ -1,4 +1,5 @@
 <?php
+    require('inc/db_config.php');
     require('inc/essentials.php');
     adminLogin();
 ?>
@@ -18,18 +19,34 @@
     <div class="container-fluid" id="main-content">
         <div class="row">
             <div class="col-lg-10 ms-auto p-4 overflow-hidden">
-                <h3 class="mb-4">Settings</h3>
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <div>
+                        <h3>Settings</h3>
+                    </div>
+                    <div>
+                        <button class="btn btn-dark rounded" onclick="backupDatabase()">Backup <i class="bi bi-database-fill-add"></i></button>
+                        <button class="btn btn-dark rounded" onclick="backupDatabase()">Restore <i class="bi bi-database-fill-down"></i></button>
+                    </div>
+                </div>
 
                 <!-- General Settings -->
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h5 class="card-title m-0">General Settings</h5>
+                            <?php
+                                $query = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
+                                $res = mysqli_fetch_assoc($query);
 
-                            <!-- Button general-s -->
-                            <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#general-s">
-                                <i class="bi bi-pencil-square"></i> Edit
-                            </button>
+                                if($res['is_super_admin']==1)
+                                {
+                                    echo<<<data
+                                        <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#general-s">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </button>
+                                    data;
+                                }
+                            ?>
                         </div>
                         <h6 class="card-subtitle mb-1 fw-bold">Site Title</h6>
                         <p class="card-text" id="site_title"></p>
@@ -87,11 +104,19 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h5 class="card-title m-0">Contacts Settings</h5>
+                            <?php
+                                $query = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
+                                $res = mysqli_fetch_assoc($query);
 
-                            <!-- Button general-s -->
-                            <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#contacts-s">
-                                <i class="bi bi-pencil-square"></i> Edit
-                            </button>
+                                if($res['is_super_admin']==1)
+                                {
+                                    echo<<<data
+                                        <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#contacts-s">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </button>
+                                    data;
+                                }
+                            ?>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
@@ -219,11 +244,19 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h5 class="card-title m-0">Management Team</h5>
+                            <?php
+                                $query = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
+                                $res = mysqli_fetch_assoc($query);
 
-                            <!-- Button general-s -->
-                            <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#team-s">
-                                <i class="bi bi-plus-square"></i> Add
-                            </button>
+                                if($res['is_super_admin']==1)
+                                {
+                                    echo<<<data
+                                        <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#team-s">
+                                            <i class="bi bi-plus-square"></i> Add
+                                        </button>
+                                    data;
+                                }
+                            ?>
                         </div>
 
                         <div class="row" id="team-data">

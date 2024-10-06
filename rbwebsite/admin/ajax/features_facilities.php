@@ -20,14 +20,23 @@
 
         while($row = mysqli_fetch_assoc($res))
         {
+            $query2 = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
+            $res1 = mysqli_fetch_assoc($query2);
+
+            $btn = "";
+            if($res1['is_super_admin']==1)
+            {
+                $btn = "<button type='button' onclick='rem_feature($row[id])' class='btn btn-danger btn-sm shadow-none'>
+                    <i class='bi bi-trash'></i> Delete
+                </button>";
+            }
+
             echo <<<data
                 <tr>
                     <td>$i</td>
                     <td>$row[name]</td>
                     <td>
-                        <button type="button" onclick="rem_feature($row[id])" class="btn btn-danger btn-sm shadow-none">
-                            <i class="bi bi-trash"></i> Delete
-                        </button>
+                        $btn
                     </td>
                 </tr>
             data;
@@ -89,6 +98,17 @@
 
         while($row = mysqli_fetch_assoc($res))
         {
+            $query2 = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
+            $res1 = mysqli_fetch_assoc($query2);
+
+            $btn = "";
+            if($res1['is_super_admin']==1)
+            {
+                $btn = "<button type='button' onclick='rem_facility($row[id])' class='btn btn-danger btn-sm shadow-none'>
+                    <i class='bi bi-trash'></i> Delete
+                </button>";
+            }
+
             echo <<<data
                 <tr class="align-middle">
                     <td>$i</td>
@@ -96,9 +116,7 @@
                     <td>$row[name]</td>
                     <td>$row[description]</td>
                     <td>
-                        <button type="button" onclick="rem_facility($row[id])" class="btn btn-danger btn-sm shadow-none">
-                            <i class="bi bi-trash"></i> Delete
-                        </button>
+                        $btn
                     </td>
                 </tr>
             data;

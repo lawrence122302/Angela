@@ -73,14 +73,36 @@
 
         while($row = mysqli_fetch_assoc($res))
         {
-            if($row['status']==1)
+            $query2 = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
+            $res2 = mysqli_fetch_assoc($query2);
+
+            $btn1 = "";
+            $btn2 = "";
+            $btn3 = "";
+            $status = "";
+            if($res2['is_super_admin']==1)
             {
-                $status = "<button onclick='toggle_status($row[id],0)' class='btn btn-dark btn-sm shadow-none'>active</button>";
+                $btn1 = "<button type='button' onclick='edit_details($row[id])' class='btn btn-primary shadow-none btn-sm' data-bs-toggle='modal' data-bs-target='#edit-room'>
+                    <i class='bi bi-pencil-square'></i>
+                </button>";
+                $btn2 = "<button type='button' onclick=\"room_images($row[id],'$row[name]')\" class='btn btn-info shadow-none btn-sm' data-bs-toggle='modal' data-bs-target='#room-images'>
+                    <i class='bi bi-images'></i>
+                </button>";
+                $btn3 = "<button type='button' onclick='remove_room($row[id])' class='btn btn-danger shadow-none btn-sm'>
+                    <i class='bi bi-trash'></i>
+                </button>";
+
+                if($row['status']==1)
+                {
+                    $status = "<button onclick='toggle_status($row[id],0)' class='btn btn-dark btn-sm shadow-none'>active</button>";
+                }
+                else
+                {
+                    $status = "<button onclick='toggle_status($row[id],1)' class='btn btn-warning btn-sm shadow-none'>inactive</button>";
+                }
             }
-            else
-            {
-                $status = "<button onclick='toggle_status($row[id],1)' class='btn btn-warning btn-sm shadow-none'>inactive</button>";
-            }
+
+            
 
             // removed <td>$row[quantity]</td>
             $data.="
@@ -122,15 +144,9 @@
                         
                     <td>$status</td>
                     <td>
-                        <button type='button' onclick='edit_details($row[id])' class='btn btn-primary shadow-none btn-sm' data-bs-toggle='modal' data-bs-target='#edit-room'>
-                            <i class='bi bi-pencil-square'></i>
-                        </button>
-                        <button type='button' onclick=\"room_images($row[id],'$row[name]')\" class='btn btn-info shadow-none btn-sm' data-bs-toggle='modal' data-bs-target='#room-images'>
-                            <i class='bi bi-images'></i>
-                        </button>
-                        <button type='button' onclick='remove_room($row[id])' class='btn btn-danger shadow-none btn-sm'>
-                            <i class='bi bi-trash'></i>
-                        </button>
+                        $btn1
+                        $btn2
+                        $btn3
                     </td>
                 </tr>
             ";

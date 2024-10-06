@@ -1,4 +1,5 @@
 <?php
+    require('inc/db_config.php');
     require('inc/essentials.php');
     adminLogin();
 ?>
@@ -25,11 +26,19 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h5 class="card-title m-0">Images</h5>
+                            <?php
+                                $query = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
+                                $res = mysqli_fetch_assoc($query);
 
-                            <!-- Button general-s -->
-                            <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#carousel-s">
-                                <i class="bi bi-plus-square"></i> Add
-                            </button>
+                                if($res['is_super_admin']==1)
+                                {
+                                    echo<<<data
+                                        <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#carousel-s">
+                                            <i class="bi bi-plus-square"></i> Add
+                                        </button>
+                                    data;
+                                }
+                            ?>
                         </div>
 
                         <div class="row" id="carousel-data">

@@ -91,9 +91,17 @@ function upd_shutdown(val)
         {
             alert('danger','Site has been shutdown!');
         }
-        else
+        else if(this.responseText == 1 && general_data.shutdown==1)
         {
             alert('success','Shutdown mode off!');
+        }
+        else if(this.responseText == 0 && general_data.shutdown==0)
+        {
+            alert('danger','No Super Admin Privileges.');
+        }
+        else if(this.responseText == 0 && general_data.shutdown==1)
+        {
+            alert('danger','No Super Admin Privileges.');
         }
         get_general();
 

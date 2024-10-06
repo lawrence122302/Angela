@@ -1,4 +1,7 @@
 <?php
+    require('inc/essentials.php');
+    adminLogin();
+    
     // Output file
     $backup_file = 'backup_' . date('Ymd_His') . '.sql';
 

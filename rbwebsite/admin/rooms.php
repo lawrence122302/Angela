@@ -25,11 +25,19 @@
                     <div class="card-body">
 
                         <div class="text-end mb-4">
+                            <?php
+                                $query = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
+                                $res = mysqli_fetch_assoc($query);
 
-                            <!-- Button general-s -->
-                            <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#add-room">
-                                <i class="bi bi-plus-square"></i> Add
-                            </button>
+                                if($res['is_super_admin']==1)
+                                {
+                                    echo<<<data
+                                        <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#add-room">
+                                            <i class="bi bi-plus-square"></i> Add
+                                        </button>
+                                    data;
+                                }
+                            ?>
                         </div>
 
                         <div class="table-responsive-lg" style="height: 450px; overflow-y: scroll;">

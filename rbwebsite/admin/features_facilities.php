@@ -26,11 +26,19 @@
 
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h5 class="card-title m-0">Amenities</h5>
+                            <?php
+                                $query = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
+                                $res = mysqli_fetch_assoc($query);
 
-                            <!-- Button general-s -->
-                            <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#feature-s">
-                                <i class="bi bi-plus-square"></i> Add
-                            </button>
+                                if($res['is_super_admin']==1)
+                                {
+                                    echo<<<data
+                                        <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#feature-s">
+                                            <i class="bi bi-plus-square"></i> Add
+                                        </button>
+                                    data;
+                                }
+                            ?>
                         </div>
 
                         <div class="table-responsive-md" style="height: 350px; overflow-y: scroll;">
@@ -55,11 +63,19 @@
 
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h5 class="card-title m-0">Inclusions</h5>
+                            <?php
+                                $query = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
+                                $res = mysqli_fetch_assoc($query);
 
-                            <!-- Button general-s -->
-                            <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#facility-s">
-                                <i class="bi bi-plus-square"></i> Add
-                            </button>
+                                if($res['is_super_admin']==1)
+                                {
+                                    echo<<<data
+                                        <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#facility-s">
+                                            <i class="bi bi-plus-square"></i> Add
+                                        </button>
+                                    data;
+                                }
+                            ?>
                         </div>
 
                         <div class="table-responsive-md" style="height: 350px; overflow-y: scroll;">

@@ -88,10 +88,10 @@
                     <div class="card-body">
 
                         <div class="text-end mb-4">
-                            <a href="?seen=all" class="btn btn-dark rounded-pill shadow-none btn-sm">
+                            <a href="?seen=all" class="btn btn-dark rounded-pill shadow-none btn-sm" onclick="return confirm('Mark all as read?')">
                                 <i class="bi bi-check-all"></i> Mark all read
                             </a>
-                            <a href="?del=all" class="btn btn-danger rounded-pill shadow-none btn-sm">
+                            <a href="?del=all" class="btn btn-danger rounded-pill shadow-none btn-sm" onclick="return confirm('Are you sure you want to delete all?')">
                                 <i class="bi bi-trash"></i> Delete all
                             </a>
                         </div>
@@ -121,9 +121,9 @@
                                             $seen='';
                                             if($row['seen']!=1)
                                             {
-                                                $seen = "<a href='?seen=$row[sr_no]' class='btn btn-sm rounded-pill btn-primary'><i class='bi bi-check'></i> Mark as read</a><br>";
+                                                $seen = "<a href='?seen=$row[sr_no]' class='btn btn-sm rounded-pill btn-primary' onclick=\"return confirm('Mark as read?')\"><i class='bi bi-check'></i> Mark as read</a><br>";
                                             }
-                                            $seen.="<a href='?del=$row[sr_no]' class='btn btn-sm rounded-pill btn-danger mt-2'><i class='bi bi-trash'></i> Delete</a>";
+                                            $seen .= "<a href='?del=$row[sr_no]' class='btn btn-sm rounded-pill btn-danger mt-2' onclick=\"return confirm('Are you sure you want to delete this?')\"><i class='bi bi-trash'></i> Delete</a>";
 
                                             echo<<<query
                                                 <tr>

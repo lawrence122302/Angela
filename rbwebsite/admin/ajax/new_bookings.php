@@ -9,10 +9,10 @@
         
         $query = "SELECT bo.*, bd.* FROM booking_order bo 
             INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
-            WHERE (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ?) 
+            WHERE (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.trans_id LIKE ?) 
             AND (bo.booking_status=? AND bo.arrival=?) ORDER BY bo.booking_id ASC";
 
-        $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","pending",0],'sssss');
+        $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","pending",0],'ssssss');
         $i=1;
         $table_data = "";
         $down_payment = "";
@@ -80,15 +80,15 @@
                 </span>";
             }
 
-            // removed
-            // <span class='badge bg-primary'>
-            //     Order ID: $data[order_id]
-            // </span>
             $table_data.="
                 <tr>
                     <td>$i</td>
                     <td>
-                            $gcash
+                        <span class='badge bg-primary'>
+                            Booking ID: $data[order_id]
+                        </span>
+                        <br>
+                        $gcash
                         <br>
                         <b>Name:</b> $data[user_name]
                         <br>
