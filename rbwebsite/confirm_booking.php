@@ -204,8 +204,8 @@
                             <input type="number" name="paid_amount" class="form-control shadow-none" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-bold">GCash Reference</label>
-                            <input type="text" name="g_reference" class="form-control shadow-none" required>
+                            <label class="form-label fw-bold">GCash Reference (Leave empty for walk-ins)</label>
+                            <input type="text" name="g_reference" class="form-control shadow-none">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -353,7 +353,7 @@
             if(datetimeLocal_checkin!='' && datetimeLocal_checkout!='')
             {
                 pay_info.classList.add('d-none');
-                pay_info.classList.replace('text-dark','text-danger');
+                pay_info.classList.replace('alert-warning','alert-success');
                 info_loader.classList.remove('d-none');
                 
                 let data = new FormData();
@@ -376,18 +376,22 @@
 
                     if(data.status == 'check_in_out_equal')
                     {
+                        pay_info.classList.replace('alert-success','alert-warning');
                         pay_info.innerHTML = "<strong>Notice:</strong> You cannot check-out on the same day.";
                     }
                     else if(data.status == 'check_out_earlier')
                     {
+                        pay_info.classList.replace('alert-success','alert-warning');
                         pay_info.innerHTML = "<strong>Notice:</strong> Check-out date is earlier than the check-in date.";
                     }
                     else if(data.status == 'check_in_earlier')
                     {
+                        pay_info.classList.replace('alert-success','alert-warning');
                         pay_info.innerHTML = "<strong>Notice:</strong> Check-in date is earlier than today's date.";
                     }
                     else if(data.status == 'unavailable')
                     {
+                        pay_info.classList.replace('alert-success','alert-warning');
                         pay_info.innerHTML = "<strong>Notice:</strong> Room unavailable for this date.";
                     }
                     else

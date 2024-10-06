@@ -25,12 +25,13 @@
 
         while($data = mysqli_fetch_assoc($res))
         {
-            $date = date("d-m-Y",strtotime($data['datentime']));
+            $date = date("d-m-Y H:i:s",strtotime($data['datentime']));
             $checkin = date("d-m-Y H:i:s",strtotime($data['check_in']));
             $checkout = date("d-m-Y H:i:s",strtotime($data['check_out']));
 
             $date1 = new DateTime($checkin);
             $date2 = new DateTime($checkout);
+
             $package_type = "";
 
             $get_time = new DateTime($checkin);
@@ -41,9 +42,27 @@
             $interval = $date1->diff($date2);
             $total_hours = ($interval->days * 24) + $interval->h;
 
-            if($total_hours>=12)
+            if($total_hours>=22)
             {
-                $package_type = "12 Hours";
+                if($time_of_day == "Check In Day")
+                {
+                    $package_type = "22 Hours Day Tour";
+                }
+                else if($time_of_day == "Check In Night")
+                {
+                    $package_type = "22 Hours Night Tour";
+                }
+            }
+            else if($total_hours<=12)
+            {
+                if($time_of_day == "Check In Day")
+                {
+                    $package_type = "Day Tour";
+                }
+                else if($time_of_day == "Check In Night")
+                {
+                    $package_type = "Night Tour";
+                }
             }
 
             $down_payment = $data['total_pay'] * 0.5;
@@ -61,14 +80,14 @@
                 </span>";
             }
 
+            // removed
+            // <span class='badge bg-primary'>
+            //     Order ID: $data[order_id]
+            // </span>
             $table_data.="
                 <tr>
                     <td>$i</td>
                     <td>
-                        <span class='badge bg-primary'>
-                            Order ID: $data[order_id]
-                        </span>
-                        <br>
                             $gcash
                         <br>
                         <b>Name:</b> $data[user_name]
@@ -78,7 +97,7 @@
                     <td>
                         <b>Accomodation:</b> $data[room_name]
                         <br>
-                        <b>Package Type:</b> $data[room_name]
+                        <b>Package Type:</b> $package_type
                         <br>
                         <b>Total Pay:</b> ₱$data[total_pay]
                         <br>
