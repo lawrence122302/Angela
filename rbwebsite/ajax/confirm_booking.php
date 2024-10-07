@@ -15,6 +15,14 @@
             $checkin_date = new DateTime($frm_data['datetimeLocal_checkin']);
             $checkout_date = new DateTime($frm_data['datetimeLocal_checkout']);
 
+            // Format dates correctly for SQL
+            $formatted_checkin = $checkin_date->format('Y-m-d H:i:s');
+            $formatted_checkout = $checkout_date->format('Y-m-d H:i:s');
+
+            // Log formatted dates to ensure correct transformation
+            error_log("Formatted Check-in Date: " . $formatted_checkin);
+            error_log("Formatted Check-out Date: " . $formatted_checkout);
+
             // Debug the value of isWeekend
             error_log("isWeekend: " . $frm_data['isWeekend']);
 
@@ -55,11 +63,11 @@
 
                 // run query to check room is available or not
                 $tb_query = "SELECT COUNT(*) AS total_bookings FROM booking_order
-                    WHERE (booking_status=? OR booking_status=?) AND room_id=?
+                    WHERE (booking_status=? OR booking_status=? OR booking_status=?) AND room_id=?
                     AND check_out > ? AND check_in < ?";
 
-                $values = ['booked','reserved',$_SESSION['room']['id'],$frm_data['datetimeLocal_checkin'],$frm_data['datetimeLocal_checkout']];
-                $tb_fetch = mysqli_fetch_assoc(select($tb_query,$values,'ssiss'));
+                $values = ['pending','reserved','pending',$_SESSION['room']['id'],$formatted_checkin,$formatted_checkout];
+                $tb_fetch = mysqli_fetch_assoc(select($tb_query,$values,'sssiss'));
 
                 $rq_result = select("SELECT quantity FROM rooms WHERE id=?",[$_SESSION['room']['id']],'i');
                 $rq_fetch = mysqli_fetch_assoc($rq_result);
