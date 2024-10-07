@@ -67,13 +67,13 @@
             if($chk_avail['checkin']!='' && $chk_avail['checkout']!='')
             {
                 $tb_query = "SELECT COUNT(*) AS total_bookings FROM booking_order
-                    WHERE booking_status=? AND room_id=?
+                    WHERE (booking_status=? OR booking_status=? OR booking_status=?) AND room_id=?
                     AND check_out > ? AND check_in < ?";
 
-                $values = ['booked',$room_data['id'],$chk_avail['checkin'],$chk_avail['checkout']];
-                $tb_fetch = mysqli_fetch_assoc(select($tb_query,$values,'siss'));
+                $values = ['booked','reserved','pending',$room_data['id'],$chk_avail['checkin'],$chk_avail['checkout']];
+                $tb_fetch = mysqli_fetch_assoc(select($tb_query,$values,'sssiss'));
 
-                if(($room_data['quantity']-$tb_fetch['total_bookings'])==0)
+                if(($room_data['quantity']-$tb_fetch['total_bookings'])<=0)
                 {
                     continue;
                 }

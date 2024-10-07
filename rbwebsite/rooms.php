@@ -52,7 +52,13 @@
                                 <label class="form-label">Check-in</label>
                                 <input type="date" class="form-control shadow-none mb-3" value="<?php echo $checkin_default ?>" id="checkin" onchange="chk_avail_filter()">
                                 <label class="form-label">Check-out</label>
-                                <input type="date" class="form-control shadow-none" value="<?php echo $checkout_default ?>" id="checkout" onchange="chk_avail_filter()">
+                                <select id="checkout" onchange="chk_avail_filter()" class="form-select shadow-none">
+                                    <option value="">Select Package Type</option>
+                                    <option value="1" <?php if ($checkout_default == 1) echo 'selected'; ?>>Day Tour (08:00am - 06:00pm)</option>
+                                    <option value="2" <?php if ($checkout_default == 2) echo 'selected'; ?>>Night Tour (08:00pm - 06:00am)</option>
+                                    <option value="3" <?php if ($checkout_default == 3) echo 'selected'; ?>>22 Hours Day Tour (08:00am - 06:00am)</option>
+                                    <option value="4" <?php if ($checkout_default == 4) echo 'selected'; ?>>22 Hours Night Tour (08:00pm - 06:00pm)</option>
+                                </select>
                             </div>
 
                             <!-- Facilities -->
@@ -106,6 +112,8 @@
 
         let checkin = document.getElementById('checkin');
         let checkout = document.getElementById('checkout');
+        console.log("Check-in Value:", checkin.value);
+        console.log("Check-out Value:", checkout.value);
         let chk_avail_btn = document.getElementById('chk_avail_btn');
 
         let adults = document.getElementById('adults');
@@ -115,9 +123,103 @@
 
         function fetch_rooms()
         {
+            let datetimeLocal_checkin = "";
+            let datetimeLocal_checkout = "";
+
+            if(checkin.value!='' && checkout.value!='')
+            {
+                let checkin_val = checkin.value;
+                let checkout_val = checkout.value;
+
+                // Needed to convert check-in and checkout date
+                let checkin_date1 = new Date(checkin_val + "T00:00:00");
+                let checkin_date2 = new Date(checkin_val + "T00:00:00");
+
+                // Debug check-in dates
+                console.log("Check-in Date 1: " + checkin_date1);
+                console.log("Check-in Date 2: " + checkin_date2);
+
+                // Check if weekend
+                let dayOfWeek = checkin_date1.getDay();
+                let isWeekend = (dayOfWeek === 0 || dayOfWeek === 5 || dayOfWeek === 6); // 0 is Sunday, 5 is Friday, 6 is Saturday
+                if(isWeekend)
+                {
+                    isWeekend = "true";
+                }
+                else if(!isWeekend)
+                {
+                    isWeekend = "false";
+                }
+
+                // Debug day of the week
+                console.log("Day of Week: " + dayOfWeek);
+                console.log("Is Weekend: " + isWeekend);
+
+                // Create new check-in value
+                // Check if day or night
+                let time_of_day = "";
+                let new_checkin_val;
+                if ((checkout_val % 2) == 0) {
+                    time_of_day = "Night Tour";
+                    new_checkin_val = new Date(checkin_date2.getTime() + 20 * 60 * 60 * 1000); // Add 20 hours
+                }
+                else
+                {
+                    time_of_day = "Day Tour";
+                    new_checkin_val = new Date(checkin_date2.getTime() + 8 * 60 * 60 * 1000); // Add 8 hours
+                }
+
+                // Debug new check-in value and time of day
+                console.log("Time of Day: " + time_of_day);
+                console.log("New Check-in Value: " + new_checkin_val);
+
+                // Check if 22 hours
+                let is_22hrs;
+                if (checkout_val == 3 || checkout_val == 4)
+                {
+                    is_22hrs = "true";
+                }
+                else if (checkout_val == 1 || checkout_val == 2)
+                {
+                    is_22hrs = "false";
+                }
+
+                // Debugging the value
+                console.log("Checkout Value: " + checkout_val);
+                console.log("Is 22 hours: " + is_22hrs);
+
+                // Further Check-out Value Adjustments (if needed)
+                // Creting new check-out value
+                let new_checkout_val;
+                if (checkout_val == 1 || checkout_val == 2) {
+                    new_checkout_val = new Date(new_checkin_val.getTime() + 10 * 60 * 60 * 1000); // 10
+                }
+                else if (checkout_val == 3 || checkout_val == 4) {
+                    new_checkout_val = new Date(new_checkin_val.getTime() + 22 * 60 * 60 * 1000); // 22
+                }
+
+                // Debug new check-out value
+                console.log("New Check-out Value: " + new_checkout_val);
+
+                // Formating check-in and check-out values
+                let final_checkin_val = new Date(new_checkin_val.getTime() - new_checkin_val.getTimezoneOffset() * 60000);
+                let isoStr1 = final_checkin_val.toISOString();
+                datetimeLocal_checkin = isoStr1.slice(0, 16);
+
+                let final_checkout_val = new Date(new_checkout_val.getTime() - new_checkin_val.getTimezoneOffset() * 60000);
+                let isoStr2 = final_checkout_val.toISOString();
+                datetimeLocal_checkout = isoStr2.slice(0, 16);
+
+                // Debug final ISO string values
+                console.log("Final Check-in ISO String: " + datetimeLocal_checkin);
+                console.log("Final Check-out ISO String: " + datetimeLocal_checkout);
+            }
+
+            console.log("Check-in:", datetimeLocal_checkin, "Check-out:", datetimeLocal_checkout);
+
             let chk_avail = JSON.stringify({
-                checkin: checkin.value,
-                checkout: checkout.value
+                checkin: datetimeLocal_checkin,
+                checkout: datetimeLocal_checkout
             });
 
             let guests = JSON.stringify({

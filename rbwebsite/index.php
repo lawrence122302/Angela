@@ -60,7 +60,13 @@
                         </div>
                         <div class="col mb-3">
                             <label class="form-label" style="font-weight: 500;">Check-out</label>
-                            <input type="date" class="form-control shadow-none" name="checkout" required>
+                            <select name="checkout" class="form-select shadow-none">
+                                <option value="">Select Package Type</option>
+                                <option value="1">Day Tour (08:00am - 06:00pm)</option>
+                                <option value="2">Night Tour (08:00pm - 06:00am)</option>
+                                <option value="3">22 Hours Day Tour (08:00am - 06:00am)</option>
+                                <option value="4">22 Hours Night Tour (08:00pm - 06:00pm)</option>
+                            </select>
                         </div>
                         <div class="col mb-3">
                             <label class="form-label" style="font-weight: 500;">Number of PAX</label>
