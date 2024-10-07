@@ -1,28 +1,31 @@
 <!-- Navbar -->
-<nav id="nav-bar" class="navbar navbar-expand-lg navbar-light bg-white px-lg-3 py-lg-0 shadow-sm sticky-top">
+<nav id="nav-bar" class="navbar navbar-expand-lg navbar-light bg-white px-lg-auto py-lg-1 shadow-sm sticky-top">
   <div class="container-fluid">
     <a class="logo-image" href="index.php">
       <img src="images/settings/logo-angela.jpg" alt="Angela's Logo" />
     </a>
-    <a class="navbar-brand me-5 fw-bold fs-3 h-font" href="index.php"><?php echo $settings_r['site_title'] ?></a>
+    <a class="navbar-brand me-4 fw-bold fs-4 h-font" href="index.php"><?php echo $settings_r['site_title'] ?></a>
     <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-auto mb-lg-auto">
         <!-- Home navbar -->
         <li class="nav-item">
-          <a class="nav-link me-2" href="index.php">Home</a>
+          <a class="nav-link me-auto" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-2" href="rooms.php">Accomodations</a>
+          <a class="nav-link me-auto" href="rooms.php">Accomodations</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-2" href="facilities.php">Inclusions</a>
+          <a class="nav-link me-auto" href="virtual_tour.php">Virtual Tour</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-2" href="contact.php">Contact Us</a>
+          <a class="nav-link me-auto" href="facilities.php">Inclusions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link me-auto" href="contact.php">Contact Us</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="about.php">About</a>

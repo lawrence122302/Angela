@@ -24,9 +24,8 @@
         <h2 class="fw-bold h-font text-center">Our Facilities</h2>
         <div class="h-line bg-dark"></div>
         <p class="text-center mt-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Rem dolor deleniti id est <br> doloremque incidunt 
-            temporibus neque nostrum aliquam suscipit.
+            At Angela’s Private Pool, we offer a range of inclusions to ensure your stay is comfortable and enjoyable.<br><br>
+            Each accommodation may include:
         </p>
     </div>
 

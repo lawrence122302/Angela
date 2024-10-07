@@ -265,10 +265,10 @@
                     $review_q = "SELECT rr.*,uc.name AS uname, uc.profile, r.name AS rname FROM rating_review rr 
                         INNER JOIN user_cred uc ON rr.user_id = uc.id
                         INNER JOIN rooms r ON rr.room_id = r.id
+                        WHERE rr.seen = 1
                         ORDER BY sr_no DESC LIMIT 6";
 
                     $review_res = mysqli_query($con,$review_q);
-                    $img_path = USERS_IMG_PATH;
 
                     if(mysqli_num_rows($review_res)==0)
                     {
@@ -291,8 +291,7 @@
                             echo<<<slides
                                 <div class="swiper-slide bg-white p-4">
                                     <div class="profile d-flex align-items-center mb-3">
-                                        <img src="$img_path$row[profile]" class="rounded-circle" loading="lazy" width="30px">
-                                        <h6 class="m-0 ms-2">$row[uname]</h6>
+                                        <i class="bi bi-chat-right-text-fill"></i> <h6 class="m-0 ms-2">$row[uname]</h6>
                                     </div>
                                     <p>
                                         $row[review]
