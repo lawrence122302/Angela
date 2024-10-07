@@ -123,32 +123,7 @@
                                         <option value="2">Night Tour (08:00pm - 06:00am)</option>
                                         <option value="3">22 Hours Day Tour (08:00am - 06:00am)</option>
                                         <option value="4">22 Hours Night Tour (08:00pm - 06:00pm)</option>
-                                        <!-- <option value="5">1 and 1/2 Day Tour</option>
-                                        <option value="6">1 and 1/2 Night Tour</option>
-                                        <option value="7">2 Days Tour</option>
-                                        <option value="8">2 Nights Tour</option>
-                                        <option value="9">2 and 1/2 Day Tour</option>
-                                        <option value="10">2 and 1/2 Night Tour</option>
-                                        <option value="11">3 Days Tour</option>
-                                        <option value="12">3 Nights Tour</option>
-                                        <option value="13">3 and 1/2 Day Tour</option>
-                                        <option value="14">3 and 1/2 Night Tour</option>
-                                        <option value="15">4 Days Tour</option>
-                                        <option value="16">4 Nights Tour</option>
-                                        <option value="17">4 and 1/2 Days Tour</option>
-                                        <option value="18">4 and 1/2 Nights Tour</option>
-                                        <option value="19">5 Days Tour</option>
-                                        <option value="20">5 Nights Tour</option>
-                                        <option value="21">5 and 1/2 Days Tour</option>
-                                        <option value="22">5 and 1/2 Nights Tour</option>
-                                        <option value="23">6 Days Tour</option>
-                                        <option value="24">6 Nights Tour</option>
-                                        <option value="25">6 and 1/2 Days Tour</option>
-                                        <option value="26">6 and 1/2 Nights Tour</option>
-                                        <option value="27">7 Days Tour</option>
-                                        <option value="28">7 Nights Tour</option> -->
                                     </select>
-
                                 </div>
                                 <div class="col-12">
                                     <div class="spinner-border text-info mb-3 d-none" id="info_loader" role="status">

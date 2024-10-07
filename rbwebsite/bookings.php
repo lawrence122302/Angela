@@ -33,6 +33,7 @@
                 $query = "SELECT bo.*, bd.* FROM booking_order bo 
                     INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
                     WHERE ((bo.booking_status='booked') 
+                    OR (bo.booking_status='pending')
                     OR (bo.booking_status='cancelled')
                     OR (bo.booking_status='payment failed')) 
                     AND (bo.user_id=?)

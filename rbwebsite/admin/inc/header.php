@@ -31,7 +31,10 @@
                                 <a class="nav-link text-white" href="new_bookings.php">Confirm Down Payment</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="confirmed_bookings.php">Confirmed Bookings</a>
+                                <a class="nav-link text-white" href="confirm_full_payment.php">Confirm Full Payment</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="confirmed_bookings.php">Confirm Arrival</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="refund_bookings.php">Refund Bookings</a>

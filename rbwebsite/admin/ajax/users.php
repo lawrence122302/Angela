@@ -45,7 +45,9 @@
                 <tr>
                     <td>$i</td>
                     <td>
-                        <img src='$path$row[profile]' width='55px'>
+                        <a href='$path$row[profile]' target='_blank'>
+                            <img src='$path$row[profile]' width='55px'>
+                        </a>
                         <br>
                         $row[name]
                     </td>

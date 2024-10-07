@@ -10,13 +10,13 @@
         $query = "SELECT bo.*, bd.* FROM booking_order bo 
             INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
             WHERE (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.trans_id LIKE ?) 
-            AND (bo.trans_amt < bd.total_pay)
+            AND (bo.trans_amt >= bd.total_pay)
             AND (bo.booking_status=? AND bo.arrival=?) ORDER BY bo.booking_id ASC";
 
         $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","pending",0],'ssssss');
         $i=1;
         $table_data = "";
-        $down_payment = "";
+        $full_payment = "";
 
         if(mysqli_num_rows($res)==0)
         {
@@ -66,7 +66,7 @@
                 }
             }
 
-            $down_payment = $data['total_pay'] * 0.5;
+            $full_payment = $data['total_pay'];
 
             if((strcasecmp($data['trans_id'], 'walk-in') != 0) && $data['trans_id']!='')
             {
@@ -109,7 +109,7 @@
                         <b>Total Pay:</b> ₱$data[total_pay]
                         <br>
                         <br>
-                        <b>Down Payment:</b> ₱$down_payment
+                        <b>Down Payment:</b> ₱$full_payment
                     </td>
                     <td>
                         <b>Date:</b> $date
@@ -124,7 +124,7 @@
                         <br>
                     </td>
                     <td>
-                        <button type='button' onclick='confirm_booking({$data['booking_id']}, {$down_payment})' class='btn text-white btn-sm fw-bold custom-bg shadow-none'>
+                        <button type='button' onclick='confirm_booking({$data['booking_id']}, {$full_payment})' class='btn text-white btn-sm fw-bold custom-bg shadow-none'>
                             <i class='bi bi-check'></i> Confirm Booking
                         </button>
                         <br>
@@ -146,7 +146,7 @@
         $frm_data = filteration($_POST);
 
         $query = "UPDATE booking_order SET booking_status=?, trans_amt=?, trans_status=? WHERE booking_id=?";
-        $values = ['booked',$frm_data['down_payment'],'booked',$frm_data['booking_id']];
+        $values = ['booked',$frm_data['full_payment'],'booked',$frm_data['booking_id']];
         $res = update($query,$values,'sssi');
 
         echo $res;
