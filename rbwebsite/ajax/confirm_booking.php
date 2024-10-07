@@ -58,13 +58,13 @@
                     WHERE (booking_status=? OR booking_status=?) AND room_id=?
                     AND check_out > ? AND check_in < ?";
 
-                $values = ['booked','pending',$_SESSION['room']['id'],$frm_data['datetimeLocal_checkin'],$frm_data['datetimeLocal_checkout']];
+                $values = ['booked','reserved',$_SESSION['room']['id'],$frm_data['datetimeLocal_checkin'],$frm_data['datetimeLocal_checkout']];
                 $tb_fetch = mysqli_fetch_assoc(select($tb_query,$values,'ssiss'));
 
                 $rq_result = select("SELECT quantity FROM rooms WHERE id=?",[$_SESSION['room']['id']],'i');
                 $rq_fetch = mysqli_fetch_assoc($rq_result);
 
-                if(($rq_fetch['quantity']-$tb_fetch['total_bookings'])==0)
+                if(($rq_fetch['quantity']-$tb_fetch['total_bookings'])<=0)
                 {
                     $status = 'unavailable';
                     $result = json_encode(['status'=>$status]);
@@ -72,6 +72,7 @@
                     exit;
                 }
 
+                // Assign correct room price
                 if($frm_data['isWeekend'] == "false")
                 {
                     if($frm_data['time_of_day'] == "Day Tour" && $frm_data['is_22hrs'] = "false")

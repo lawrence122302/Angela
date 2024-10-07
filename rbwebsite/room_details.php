@@ -114,27 +114,15 @@
                             echo<<<price
                                 <div class="mb-3">
                                     <h6 class="mb-1">Monday - Thursday</h6>
-                                    ₱$room_data[price]
-                                    <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                        Day/Night Swim
-                                    </span>
+                                    ₱$room_data[price] - Day/Night Swim
                                     <br>
-                                    ₱$room_data[price2]
-                                    <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                        22 Hours
-                                    </span>
+                                    ₱$room_data[price2] - 22 Hours
                                 </div>
                                 <div class="mb-3">
                                     <h6 class="mb-1">Friday - Sunday</h6>
-                                    ₱$room_data[price3]
-                                    <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                        Day/Night Swim
-                                    </span>
+                                    ₱$room_data[price3] - Day/Night Swim
                                     <br>
-                                    ₱$room_data[price4]
-                                    <span class="badge rounded-pill bg-light text-dark text-wrap">
-                                        22 Hours
-                                    </span>
+                                    ₱$room_data[price4] - 22 Hours
                                 </div>
                             price;
 

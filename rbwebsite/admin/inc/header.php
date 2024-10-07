@@ -2,9 +2,9 @@
     <a class="logo-image" href="index.php">
       <img src="../images/settings/logo-angela.jpg" alt="Angela's Logo" />
     </a>
-    <div>
-        <h3 class="mb-0 text-center text-uppercase font-weight-bold">Admin Panel</h3>
-        <small class="text-muted">Angela's Private Pool</small>
+    <div class="d-flex flex-column align-items-center">
+        <div><h5 class="mb-0 text-center text-uppercase font-weight-bold">Admin Panel</h5></div>
+        <div><small class="text-muted">Angela's Private Pool</small></div>
     </div>
     <a href="logout.php" class="btn btn-light btn-sm">Log Out</a>
 </div>
@@ -34,7 +34,7 @@
                                 <a class="nav-link text-white" href="confirm_full_payment.php">Confirm Full Payment</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="confirmed_bookings.php">Confirm Arrival</a>
+                                <a class="nav-link text-white" href="confirmed_bookings.php">Reserved Bookings</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="refund_bookings.php">Refund Bookings</a>

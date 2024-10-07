@@ -144,10 +144,10 @@
             $output.="
                 <div class='card mb-4 border-0 shadow'>
                     <div class='row g-0 p-3 align-items-center'>
-                        <div class='col-md-5 mb-lg-0 mb-md-0 mb-3'>
-                            <img src='$room_thumb' class='img-fluid rounded'>
+                        <div class='col-md-4 mb-lg-0 mb-md-0 mb-3'>
+                            <img src='$room_thumb' class='img-fluid rounded' style='max-height: 50vh'>
                         </div>
-                        <div class='col-md-5 px-lg-3 px-md-3 px-0'>
+                        <div class='col-md-4 px-lg-3 px-md-3 px-0'>
                             <h5 class='mb-3'>$room_data[name]</h5>
                             <div class='features mb-3'>
                                 <h6 class='mb-1'>Amenities</h6>
@@ -157,17 +157,30 @@
                                 <h6 class='mb-1'>Inclusions</h6>
                                 $facilities_data
                             </div>
-                            <div class='guest'>
+                            <div class='guest mb-3'>
                                 <h6 class='mb-1'>Guests</h6>
                                 <span class='badge rounded-pill bg-light text-dark text-wrap'>
                                     $room_data[adult] Pax
                                 </span>
                             </div>
                         </div>
-                        <div class='col-md-2 mt-lg-0 mt-md-0 mt-4 text-center'>
-                            <h6 class='mb-4'>₱$room_data[price] per night</h6>
-                            $book_btn
-                            <a href='room_details.php?id=$room_data[id]' class='btn btn-sm w-100 btn-outline-dark shadow-none'>More details</a>
+                        <div class='col-md-4 mt-lg-0 mt-md-0'>
+                            <div class='mb-3'>
+                                <h6 class='mb-1'>Monday - Thursday</h6>
+                                ₱$room_data[price] - Day/Night Swim
+                                <br>
+                                ₱$room_data[price2] - 22 Hours
+                            </div>
+                            <div class='mb-3'>
+                                <h6 class='mb-1'>Friday - Sunday</h6>
+                                ₱$room_data[price3] - Day/Night Swim
+                                <br>
+                                ₱$room_data[price4] - 22 Hours
+                            </div>
+                            <div class='w-50'>
+                                $book_btn
+                                <a href='room_details.php?id=$room_data[id]' class='btn btn-sm w-100 btn-outline-dark shadow-none'>More details</a>
+                            </div>
                         </div>
                     </div>
                 </div>

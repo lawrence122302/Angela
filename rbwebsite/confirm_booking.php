@@ -86,8 +86,18 @@
                     echo<<<data
                         <div class="card p-3 shadow-sm rounded">
                             <img src="$room_thumb" class="img-fluid rounded mb-3">
-                            <h5>$room_data[name]</h5>
-                            <h6>₱$room_data[price] per night</h6>
+                            <div class="mb-4">
+                                <h6 class="mb-1">Monday - Thursday</h6>
+                                ₱$room_data[price] - Day/Night Swim
+                                <br>
+                                ₱$room_data[price2] - 22 Hours
+                            </div>
+                            <div class="mb-4">
+                                <h6 class="mb-1">Friday - Sunday</h6>
+                                ₱$room_data[price3] - Day/Night Swim
+                                <br>
+                                ₱$room_data[price4] - 22 Hours
+                            </div>
                         </div>
                     data;
                 ?>
@@ -118,7 +128,7 @@
                                 <div class="col-md-6 mb-4">
                                     <label class="form-label">Check-out</label>
                                     <select name="checkout" onchange="check_availability()" class="form-select shadow-none">
-                                        <option value="">-</option>
+                                        <option value="">Select Package Type</option>
                                         <option value="1">Day Tour (08:00am - 06:00pm)</option>
                                         <option value="2">Night Tour (08:00pm - 06:00am)</option>
                                         <option value="3">22 Hours Day Tour (08:00am - 06:00am)</option>
@@ -154,34 +164,34 @@
                         <h5 class="modal-title">Confirm Payment</h5>
                     </div>
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="mb-3 text-center">
-                                <img src="images/settings/asd.jpeg" class="img-fluid mb-2">
-                                <span class="badge rounded-pill bg-info text-white text-wrap">
-                                    Gcash: 123456778
-                                </span>
-                            </div>
+
+                    <div class="row">
+                        <div class="col text-center mb-3">
+                            <img src="images/settings/gcash.jpeg" class="img-fluid mb-2" style="max-height: 80vh;">
                         </div>
-                       <div class="row">
-                            <div class="d-flex justify-content-center mb-4 col-lg-6">
-                                <span class="badge rounded-pill bg-primary text-white text-wrap">
-                                    Down Payment: 123
-                                </span>
-                            </div>
-                            <div class="d-flex justify-content-center mb-4 col-lg-6">
-                                <span class="badge rounded-pill bg-primary text-white text-wrap">
-                                    Full Payment: 123
-                                </span>
-                            </div>
-                       </div>
-                        <div class="mb-3">
+                    </div>
+                    <div class="row">
+                        <div class="col text-center mb-3">
+                            <span class="badge rounded-pill bg-dark text-white text-wrap">Gcash: 123456778</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">
                             <label class="form-label fw-bold">Paid Amount</label>
-                            <input type="number" name="paid_amount" class="form-control shadow-none" required>
+                            <select name="paid_amount" class="form-control shadow-none" required>
+                                <option value="">Select Payment</option>
+                                <option value="1">50% Down Payment</option>
+                                <option value="2">Full Payment</option>
+                            </select>
                         </div>
-                        <div class="mb-3">
+                    </div>
+                    <div class="row">
+                        <div class="col mb-3">
                             <label class="form-label fw-bold">GCash Reference (Leave empty for walk-ins)</label>
                             <input type="text" name="g_reference" class="form-control shadow-none">
                         </div>
+                    </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="reset" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
@@ -399,11 +409,29 @@
             let checkin_val = booking_form.elements['checkin'].value;
             let checkout_val = booking_form.elements['checkout'].value;
 
-            // Needed to convert checkout date
+            // Needed to convert check-in and checkout date
+            let checkin_date1 = new Date(checkin_val + "T00:00:00");
             let checkin_date2 = new Date(checkin_val + "T00:00:00");
 
-            // Debug check-in date conversion
-            console.log("Check-in Date 2: ", checkin_date2);
+            // Debug check-in dates
+            console.log("Check-in Date 1: " + checkin_date1);
+            console.log("Check-in Date 2: " + checkin_date2);
+
+            // Check if weekend
+            let dayOfWeek = checkin_date1.getDay();
+            let isWeekend = (dayOfWeek === 0 || dayOfWeek === 5 || dayOfWeek === 6); // 0 is Sunday, 5 is Friday, 6 is Saturday
+            if(isWeekend)
+            {
+                isWeekend = "true";
+            }
+            else if(!isWeekend)
+            {
+                isWeekend = "false";
+            }
+
+            // Debug day of the week
+            console.log("Day of Week: " + dayOfWeek);
+            console.log("Is Weekend: " + isWeekend);
 
             // Create new check-in value
             // Check if day or night
@@ -420,10 +448,26 @@
             }
 
             // Debug new check-in value and time of day
-            console.log("Time of Day: ", time_of_day);
-            console.log("New Check-in Value: ", new_checkin_val);
+            console.log("Time of Day: " + time_of_day);
+            console.log("New Check-in Value: " + new_checkin_val);
 
-            // Create new check-out value
+            // Check if 22 hours
+            let is_22hrs;
+            if (checkout_val == 3 || checkout_val == 4)
+            {
+                is_22hrs = "true";
+            }
+            else if (checkout_val == 1 || checkout_val == 2)
+            {
+                is_22hrs = "false";
+            }
+
+            // Debugging the value
+            console.log("Checkout Value: " + checkout_val);
+            console.log("Is 22 hours: " + is_22hrs);
+
+            // Further Check-out Value Adjustments (if needed)
+            // Creting new check-out value
             let new_checkout_val;
             if (checkout_val == 1 || checkout_val == 2) {
                 new_checkout_val = new Date(new_checkin_val.getTime() + 10 * 60 * 60 * 1000); // 10
@@ -433,7 +477,7 @@
             }
 
             // Debug new check-out value
-            console.log("New Check-out Value: ", new_checkout_val);
+            console.log("New Check-out Value: " + new_checkout_val);
 
             // Formating check-in and check-out values
             let final_checkin_val = new Date(new_checkin_val.getTime() - new_checkin_val.getTimezoneOffset() * 60000);
@@ -443,10 +487,6 @@
             let final_checkout_val = new Date(new_checkout_val.getTime() - new_checkin_val.getTimezoneOffset() * 60000);
             let isoStr2 = final_checkout_val.toISOString();
             let datetimeLocal_checkout = isoStr2.slice(0, 16);
-
-            // Debug final formatted values
-            console.log("Final Check-in ISO String: ", datetimeLocal_checkin);
-            console.log("Final Check-out ISO String: ", datetimeLocal_checkout);
 
             let modal = new bootstrap.Modal(document.getElementById('pay-now'));
             modal.show();
@@ -464,6 +504,9 @@
                 data.append('address',address_val);
                 data.append('datetimeLocal_checkin',datetimeLocal_checkin);
                 data.append('datetimeLocal_checkout',datetimeLocal_checkout);
+                data.append('isWeekend',isWeekend);
+                data.append('time_of_day',time_of_day);
+                data.append('is_22hrs',is_22hrs);
                 data.append('paidamount',paidamount_val);
                 data.append('g_reference',g_reference_val);
 
