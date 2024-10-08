@@ -69,7 +69,7 @@
                             else
                             {
                                 echo"<div class='carousel-item active'>
-                                    <img src='$room_img' class='d-block w-100'>
+                                    <img src='$room_img' class='img-fluid rounded' style='max-height: 50vh;'>
                                 </div>";
                             }
                         ?>

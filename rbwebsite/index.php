@@ -38,7 +38,7 @@
                         $path = CAROUSEL_IMG_PATH;
                         echo <<<data
                             <div class="swiper-slide">
-                                <img src="$path$row[image]" class="w-100 d-block'" />
+                                <img src="$path$row[image]" class="img-fluid rounded" style="max-height: 80vh;" />
                             </div>
                         data;
                     }
@@ -179,7 +179,7 @@
                     echo <<<data
                         <div class="col-lg-4 col-md-6 my-3">
                             <div class="card border-0 shadow" style="max-width: 350px; margin: auto;"> 
-                                <img src="$room_thumb" class="card-img-top">
+                                <img src="$room_thumb" class="card-img-top img-fluid rounded" style="max-height: 50vh;">
                                 <div class="card-body">
                                     <h5 class="mb-4">$room_data[name]</h5>
                                     <div class="mb-4">
