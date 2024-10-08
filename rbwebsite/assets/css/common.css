@@ -12,7 +12,10 @@
     height: 50px;
     border-radius: 50%;
     overflow: hidden;
-    margin: 10px;
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
+    margin-right: 0.1vw;
+    margin-left: 0.5vw;
 }
 
 .logo-image img {

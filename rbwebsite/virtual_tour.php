@@ -27,24 +27,24 @@
         <div class="row">
             <div class="col-lg-4 col-md-auto mb-5 px-auto">
                 <div class="bg-white rounded shadow p-4 d-flex flex-column align-items-center">
-                    <a href="virtual_tour/Angela1.html" class="text-decoration-none text-dark">
-                        <img src="virtual_tour/images/angela1.jpg" class="img-fluid rounded" style="max-height: 50vh;">
+                    <a href="Angela1.php" class="text-decoration-none text-dark">
+                        <img src="images/angela1.jpg" class="img-fluid rounded" style="max-height: 50vh;">
                         <h5 class="mt-3 fw-bold h-font text-center">Angela 1</h5>
                     </a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-auto mb-5 px-auto">
                 <div class="bg-white rounded shadow p-4 d-flex flex-column align-items-center">
-                    <a href="virtual_tour/Angela2.html" class="text-decoration-none text-dark">
-                        <img src="virtual_tour/images/angela2.jpg" class="img-fluid rounded" style="max-height: 50vh;">
+                    <a href="Angela2.php" class="text-decoration-none text-dark">
+                        <img src="images/angela2.jpg" class="img-fluid rounded" style="max-height: 50vh;">
                         <h5 class="mt-3 fw-bold h-font text-center">Angela 2</h5>
                     </a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-auto mb-5 px-auto">
                 <div class="bg-white rounded shadow p-4 d-flex flex-column align-items-center">
-                    <a href="virtual_tour/Angela3.html" class="text-decoration-none text-dark">
-                        <img src="virtual_tour/images/angela3.jpg" class="img-fluid rounded" style="max-height: 50vh;">
+                    <a href="Angela3.php" class="text-decoration-none text-dark">
+                        <img src="images/angela3.jpg" class="img-fluid rounded" style="max-height: 50vh;">
                         <h5 class="mt-3 fw-bold h-font text-center">Angela 3</h5>
                     </a>
                 </div>
@@ -54,24 +54,24 @@
         <div class="row">
             <div class="col-lg-4 col-md-auto mb-5 px-auto">
                 <div class="bg-white rounded shadow p-4 d-flex flex-column align-items-center">
-                    <a href="virtual_tour/Angela6.html" class="text-decoration-none text-dark">
-                        <img src="virtual_tour/images/angela6.jpg" class="img-fluid rounded" style="max-height: 50vh;">
+                    <a href="Angela6.php" class="text-decoration-none text-dark">
+                        <img src="images/angela6.jpg" class="img-fluid rounded" style="max-height: 50vh;">
                         <h5 class="mt-3 fw-bold h-font text-center">Angela 6</h5>
                     </a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-auto mb-5 px-auto">
                 <div class="bg-white rounded shadow p-4 d-flex flex-column align-items-center">
-                    <a href="virtual_tour/Angela7.html" class="text-decoration-none text-dark">
-                        <img src="virtual_tour/images/angela7.jpg" class="img-fluid rounded" style="max-height: 50vh;">
+                    <a href="Angela7.php" class="text-decoration-none text-dark">
+                        <img src="images/angela7.jpg" class="img-fluid rounded" style="max-height: 50vh;">
                         <h5 class="mt-3 fw-bold h-font text-center">Angela 7</h5>
                     </a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-auto mb-5 px-auto">
                 <div class="bg-white rounded shadow p-4 d-flex flex-column align-items-center">
-                    <a href="virtual_tour/Angela8.html" class="text-decoration-none text-dark">
-                        <img src="virtual_tour/images/angela8.jpg" class="img-fluid rounded" style="max-height: 50vh;">
+                    <a href="Angela8.php" class="text-decoration-none text-dark">
+                        <img src="images/angela8.jpg" class="img-fluid rounded" style="max-height: 50vh;">
                         <h5 class="mt-3 fw-bold h-font text-center">Angela 8</h5>
                     </a>
                 </div>
@@ -81,8 +81,8 @@
         <div class="row justify-content-center">
             <div class="col-lg-4 col-md-auto mb-5 px-auto">
                 <div class="bg-white rounded shadow p-4 d-flex flex-column align-items-center">
-                    <a href="virtual_tour/Angela9.html" class="text-decoration-none text-dark">
-                        <img src="virtual_tour/images/angela7.jpg" class="img-fluid rounded" style="max-height: 50vh;">
+                    <a href="Angela9.php" class="text-decoration-none text-dark">
+                        <img src="images/angela7.jpg" class="img-fluid rounded" style="max-height: 50vh;">
                         <h5 class="mt-3 fw-bold h-font text-center">Angela 9</h5>
                     </a>
                 </div>
