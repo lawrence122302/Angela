@@ -3,6 +3,7 @@
     require('admin/inc/db_config.php');
     require('admin/inc/mpdf/vendor/autoload.php');
 
+    session_name('user_session');
     session_start();
 
     if(!(isset($_SESSION['login']) && $_SESSION['login']==true))
