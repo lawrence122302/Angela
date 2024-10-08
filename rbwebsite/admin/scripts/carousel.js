@@ -59,26 +59,39 @@ function get_carousel()
     xhr.send('get_carousel');
 }
 
-function rem_image(val)
-{
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST","ajax/carousel_crud.php",true);
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+let selectedImageId;
 
-    xhr.onload = function()
-    {
-        if(this.responseText==1)
-        {
-            alert('success','Image removed!');
-            get_carousel();
-        }
-        else
-        {
-            alert('error','Server down!');
-        }
-    }
+function showModal(message, confirmCallback) {
+    let confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+    document.getElementById('confirmModalBody').textContent = message;
+    
+    document.getElementById('confirmActionBtn').onclick = function() {
+        confirmCallback();
+        confirmModal.hide();
+    };
+    
+    confirmModal.show();
+}
 
-    xhr.send('rem_image='+val);
+function rem_image(val) {
+    selectedImageId = val;
+    showModal('Delete this image?', function() {
+        let data = new FormData();
+        data.append('rem_image', selectedImageId);
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/carousel_crud.php", true);
+
+        xhr.onload = function() {
+            if (this.responseText == 1) {
+                alert('success', 'Image removed!');
+                get_carousel();
+            } else {
+                alert('error', 'Server down!');
+            }
+        };
+        xhr.send(data);
+    });
 }
 
 window.onload = function()

@@ -32,31 +32,29 @@ function toggle_status(id,val)
     xhr.send('toggle_status='+id+'&value='+val);
 }
 
-function remove_user(user_id)
-{
-    if(confirm("Are you sure you want to delete this user?"))
-    {
+function remove_user(user_id) {
+    let confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+    confirmModal.show();
+
+    document.getElementById('confirmDeleteBtn').onclick = function() {
         let data = new FormData();
-        data.append('user_id',user_id);
-        data.append('remove_user','');
+        data.append('user_id', user_id);
+        data.append('remove_user', '');
 
         let xhr = new XMLHttpRequest();
-        xhr.open("POST","ajax/users.php",true);
+        xhr.open("POST", "ajax/users.php", true);
 
-        xhr.onload = function()
-        {
-            if(this.responseText == 1)
-            {
-                alert('success','User removed!');
+        xhr.onload = function() {
+            if (this.responseText == 1) {
+                alert('success', 'User removed!');
                 get_users();
+            } else {
+                alert('error', 'User removal failed!');
             }
-            else
-            {
-                alert('error','User removal failed!');
-            }
-        }
+        };
         xhr.send(data);
-    }
+        confirmModal.hide();
+    };
 }
 
 function search_user(username)

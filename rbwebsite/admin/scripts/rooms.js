@@ -301,31 +301,40 @@ function thumb_image(img_id,room_id)
     xhr.send(data);
 }
 
-function remove_room(room_id)
-{
-    if(confirm("Delete this room?"))
-    {
+let selectedRoomId;
+
+function showModal(message, confirmCallback) {
+    let confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+    document.getElementById('confirmModalBody').textContent = message;
+    
+    document.getElementById('confirmActionBtn').onclick = function() {
+        confirmCallback();
+        confirmModal.hide();
+    };
+    
+    confirmModal.show();
+}
+
+function remove_room(room_id) {
+    selectedRoomId = room_id;
+    showModal('Delete this room?', function() {
         let data = new FormData();
-        data.append('room_id',room_id);
-        data.append('remove_room','');
+        data.append('room_id', selectedRoomId);
+        data.append('remove_room', '');
 
         let xhr = new XMLHttpRequest();
-        xhr.open("POST","ajax/rooms.php",true);
+        xhr.open("POST", "ajax/rooms.php", true);
 
-        xhr.onload = function()
-        {
-            if(this.responseText == 1)
-            {
-                alert('success','Room removed!');
+        xhr.onload = function() {
+            if (this.responseText == 1) {
+                alert('success', 'Room removed!');
                 get_all_rooms();
+            } else {
+                alert('error', 'Room removal failed!');
             }
-            else
-            {
-                alert('error','Room removal failed!');
-            }
-        }
+        };
         xhr.send(data);
-    }
+    });
 }
 
 window.onload = function()

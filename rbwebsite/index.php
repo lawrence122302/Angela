@@ -37,8 +37,8 @@
                     {
                         $path = CAROUSEL_IMG_PATH;
                         echo <<<data
-                            <div class="swiper-slide">
-                                <img src="$path$row[image]" class="img-fluid rounded" style="max-height: 80vh;" />
+                            <div class="swiper-slide d-flex justify-content-center align-items-center">
+                                <img src="$path$row[image]" class="img-fluid rounded" style ="max-height: 70vh; min-width: 100vw;" />
                             </div>
                         data;
                     }
@@ -69,7 +69,7 @@
                             </select>
                         </div>
                         <div class="col mb-3">
-                            <label class="form-label" style="font-weight: 500;">Number of PAX</label>
+                            <label class="form-label" style="font-weight: 500;">PAX</label>
                             <select class="form-select shadow-none" name="adult">
                                 <?php
                                     $guests_q = mysqli_query($con,"SELECT MAX(adult) AS max_adult FROM rooms WHERE status='1' AND removed='0'");

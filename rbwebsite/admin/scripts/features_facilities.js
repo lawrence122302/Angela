@@ -50,30 +50,41 @@ function get_features()
     xhr.send('get_features');
 }
 
-function rem_feature(val)
-{
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST","ajax/features_facilities.php",true);
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+let selectedFeatureId;
 
-    xhr.onload = function()
-    {
-        if(this.responseText==1)
-        {
-            alert('success','Feature removed!');
-            get_features();
-        }
-        else if(this.responseText == 'room_added')
-        {
-            alert('error','Feature is added in room!');
-        }
-        else
-        {
-            alert('error','Server down!');
-        }
-    }
+function showModal(message, confirmCallback) {
+    let confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+    document.getElementById('confirmModalBody').textContent = message;
+    
+    document.getElementById('confirmActionBtn').onclick = function() {
+        confirmCallback();
+        confirmModal.hide();
+    };
+    
+    confirmModal.show();
+}
 
-    xhr.send('rem_feature='+val);
+function rem_feature(val) {
+    selectedFeatureId = val;
+    showModal('Delete this feature?', function() {
+        let data = new FormData();
+        data.append('rem_feature', selectedFeatureId);
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/features_facilities.php", true);
+
+        xhr.onload = function() {
+            if (this.responseText == 1) {
+                alert('success', 'Feature removed!');
+                get_features();
+            } else if (this.responseText == 'room_added') {
+                alert('error', 'Feature is added in room!');
+            } else {
+                alert('error', 'Server down!');
+            }
+        };
+        xhr.send(data);
+    });
 }
 
 facility_s_form.addEventListener('submit',function(e)
@@ -135,30 +146,41 @@ function get_facilities()
     xhr.send('get_facilities');
 }
 
-function rem_facility(val)
-{
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST","ajax/features_facilities.php",true);
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+let selectedFacilityId;
 
-    xhr.onload = function()
-    {
-        if(this.responseText==1)
-        {
-            alert('success','Facility removed!');
-            get_facilities();
-        }
-        else if(this.responseText == 'room_added')
-        {
-            alert('error','Facility is added in room!');
-        }
-        else
-        {
-            alert('error','Server down!');
-        }
-    }
+function showModal(message, confirmCallback) {
+    let confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+    document.getElementById('confirmModalBody').textContent = message;
+    
+    document.getElementById('confirmActionBtn').onclick = function() {
+        confirmCallback();
+        confirmModal.hide();
+    };
+    
+    confirmModal.show();
+}
 
-    xhr.send('rem_facility='+val);
+function rem_facility(val) {
+    selectedFacilityId = val;
+    showModal('Delete this facility?', function() {
+        let data = new FormData();
+        data.append('rem_facility', selectedFacilityId);
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/features_facilities.php", true);
+
+        xhr.onload = function() {
+            if (this.responseText == 1) {
+                alert('success', 'Facility removed!');
+                get_facilities();
+            } else if (this.responseText == 'room_added') {
+                alert('error', 'Facility is added in room!');
+            } else {
+                alert('error', 'Server down!');
+            }
+        };
+        xhr.send(data);
+    });
 }
 
 window.onload = function()
