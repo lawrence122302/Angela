@@ -16,7 +16,7 @@
             WHERE ((bo.booking_status='booked' AND bo.arrival=1) 
             OR (bo.booking_status='cancelled' AND bo.refund=1)
             OR (bo.booking_status='payment failed')) 
-            AND (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.booking_status LIKE ? OR bo.trans_id LIKE ?)
+            OR (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.booking_status LIKE ? OR bo.trans_id LIKE ?)
             ORDER BY bo.booking_id DESC";
 
         $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%"],'sssss');
@@ -70,6 +70,8 @@
                 </span>";
             }
 
+            $id = $data['booking_id'];
+
             $table_data.="
                 <tr>
                     <td>$i</td>
@@ -98,7 +100,7 @@
                         $refunded_status<span class='badge $status_bg'>$data[booking_status]</span>
                     </td>
                     <td>
-                        <button type='button' onclick='download($data[booking_id])' class='btn btn-outline-success btn-sm fw-bold shadow-none'>
+                        <button type='button' onclick='download($id)' class='btn btn-outline-success btn-sm fw-bold shadow-none'>
                             <i class='bi bi-file-earmark-arrow-down'></i>
                         </button>
                     </td>

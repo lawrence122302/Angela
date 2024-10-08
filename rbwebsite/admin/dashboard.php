@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="row mb-4">
-                    <div class="col mb-4">
+                    <div class="col-md-3 mb-3">
                         <a href="new_bookings.php" class="text-decoration-none">
                             <div class="card text-center text-warning p-3">
                                 <h6>Confirm Down Payment</h6>
@@ -64,15 +64,23 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col mb-4">
-                        <a href="confirmed_bookings.php" class="text-decoration-none">
+                    <div class="col-md-3 mb-3">
+                        <a href="confirm_full_payment.php" class="text-decoration-none">
                             <div class="card text-center text-success p-3">
                                 <h6>Confirm Full Payment</h6>
                                 <h1 class="mt-2 mb-0"><?php echo $current_bookings['new_bookings'] ?></h1>
                             </div>
                         </a>
                     </div>
-                    <div class="col mb-4">
+                    <div class="col-md-3 mb-3">
+                        <a href="confirmed_bookings.php" class="text-decoration-none">
+                            <div class="card text-center text-success p-3">
+                                <h6>Reserved Bookings</h6>
+                                <h1 class="mt-2 mb-0"><?php echo $current_bookings['new_bookings'] ?></h1>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-3">
                         <a href="refund_bookings.php" class="text-decoration-none">
                             <div class="card text-center text-warning p-3">
                                 <h6>Refund Bookings</h6>
@@ -80,7 +88,10 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col mb-4">
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-3 mb-3">
                         <a href="user_queries.php" class="text-decoration-none">
                             <div class="card text-center text-info p-3">
                                 <h6>User Queries</h6>
@@ -88,7 +99,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col mb-4">
+                    <div class="col-md-3 mb-4">
                         <a href="rate_review.php" class="text-decoration-none">
                             <div class="card text-center text-info p-3">
                                 <h6>Rating & Review</h6>

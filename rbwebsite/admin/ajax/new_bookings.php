@@ -66,7 +66,7 @@
                 }
             }
 
-            $down_payment = $data['total_pay'] * 0.5;
+            $down_payment = $data['trans_amt'];
 
             if((strcasecmp($data['trans_id'], 'walk-in') != 0) && $data['trans_id']!='')
             {
@@ -106,10 +106,8 @@
                         <br>
                         <b>Package Type:</b> $package_type
                         <br>
+                        <br>
                         <b>Total Pay:</b> ₱$data[total_pay]
-                        <br>
-                        <br>
-                        <b>Down Payment:</b> ₱$down_payment
                     </td>
                     <td>
                         <b>Date:</b> $date
@@ -125,11 +123,11 @@
                     </td>
                     <td>
                         <button type='button' onclick='confirm_booking({$data['booking_id']}, {$down_payment})' class='btn text-white btn-sm fw-bold custom-bg shadow-none'>
-                            <i class='bi bi-check'></i> Confirm Booking
+                            <i class='bi bi-check'></i> Confirm Down Payment
                         </button>
                         <br>
                         <button type='button' onclick='cancel_booking($data[booking_id])' class='mt-2 btn btn-outline-danger btn-sm fw-bold shadow-none'>
-                            <i class='bi bi-trash'></i> Cancel Booking
+                            <i class='bi bi-trash'></i> Cancel Reservation
                         </button>
                     </td>
                 </tr>
@@ -146,7 +144,7 @@
         $frm_data = filteration($_POST);
 
         $query = "UPDATE booking_order SET booking_status=?, trans_amt=?, trans_status=? WHERE booking_id=?";
-        $values = ['booked',$frm_data['down_payment'],'booked',$frm_data['booking_id']];
+        $values = ['reserved',$frm_data['down_payment'],'reserved',$frm_data['booking_id']];
         $res = update($query,$values,'sssi');
 
         echo $res;

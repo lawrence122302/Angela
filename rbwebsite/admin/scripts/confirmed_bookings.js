@@ -11,69 +11,54 @@ function get_bookings(search='')
     xhr.send('get_bookings&search='+search);
 }
 
-let assign_room_form = document.getElementById('assign_room_form');
+function confirm_booking(id) {
+    let confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+    confirmModal.show();
 
-function assign_room(id)
-{
-    assign_room_form.elements['booking_id'].value=id;
+    document.getElementById('confirmPaymentBtn').onclick = function() {
+        let data = new FormData();
+        data.append('booking_id', id);
+        data.append('confirm_booking', '');
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/confirmed_bookings.php", true);
+
+        xhr.onload = function() {
+            if (this.responseText >= 1) {
+                alert('success', 'Arrival Confirmed!');
+                get_bookings();
+            } else {
+                alert('error', 'Server Down!');
+            }
+        }
+        xhr.send(data);
+        confirmModal.hide();
+    };
 }
 
-assign_room_form.addEventListener('submit',function(e){
-    e.preventDefault();
+function cancel_booking(id) {
+    let cancelModal = new bootstrap.Modal(document.getElementById('cancelModal'));
+    cancelModal.show();
 
-    let data = new FormData();
-    data.append('room_no',assign_room_form.elements['room_no'].value);
-    data.append('booking_id',assign_room_form.elements['booking_id'].value);
-    data.append('assign_room','');
+    document.getElementById('confirmCancelBtn').onclick = function() {
+        let data = new FormData();
+        data.append('booking_id', id);
+        data.append('cancel_booking', '');
 
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST","ajax/confirmed_bookings.php",true);
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "ajax/confirmed_bookings.php", true);
 
-    xhr.onload = function()
-    {
-        var myModal = document.getElementById('assign-room');
-        var modal = bootstrap.Modal.getInstance(myModal);
-        modal.hide();
-
-        if(this.responseText==1)
-        {
-            alert('success','Room Number Alloted! Booking Finalized!');
-            assign_room_form.reset();
-            get_bookings();
-        }
-        else
-        {
-            alert('error','Server Down!');
-        }
-    }
-    xhr.send(data);
-});
-
-function cancel_booking(id)
-{
-    if(confirm("Are you sure you want to cancel this booking?"))
-        {
-            let data = new FormData();
-            data.append('booking_id',id);
-            data.append('cancel_booking','');
-    
-            let xhr = new XMLHttpRequest();
-            xhr.open("POST","ajax/confirmed_bookings.php",true);
-    
-            xhr.onload = function()
-            {
-                if(this.responseText == 1)
-                {
-                    alert('success','Booking Cancelled!');
-                    get_bookings();
-                }
-                else
-                {
-                    alert('error','Server Down!');
-                }
+        xhr.onload = function() {
+            if (this.responseText == 1) {
+                alert('success', 'Booking Cancelled!');
+                get_bookings();
+            } else {
+                alert('error', 'Server Down!');
             }
-            xhr.send(data);
         }
+        xhr.send(data);
+        cancelModal.hide();
+    };
 }
 
 window.onload = function()

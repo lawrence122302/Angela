@@ -51,6 +51,44 @@
         </div>
     </div>
 
+    <!-- Bootstrap Modal for Confirmation -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Confirm Full Payment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Confirm Full Payment?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="confirmPaymentBtn">Confirm</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Modal for Cancellation -->
+    <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelModalLabel">Cancel Reservation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Cancel Reservation?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="confirmCancelBtn">Yes, Cancel</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
     <?php require('inc/scripts.php'); ?>
 
     <script src="scripts/confirm_full_payment.js"></script>

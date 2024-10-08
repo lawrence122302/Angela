@@ -12,7 +12,7 @@
             WHERE (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.trans_id LIKE ?) 
             AND (bo.booking_status=? AND bo.arrival=?) ORDER BY bo.booking_id ASC";
 
-        $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","booked",0],'ssssss');
+        $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","reserved",0],'ssssss');
         $i=1;
         $table_data = "";
 
@@ -24,17 +24,59 @@
 
         while($data = mysqli_fetch_assoc($res))
         {
-            $date = date("d-m-Y",strtotime($data['datentime']));
-            $checkin = date("d-m-Y",strtotime($data['check_in']));
-            $checkout = date("d-m-Y",strtotime($data['check_out']));
+            $date = date("d-m-Y H:i:s",strtotime($data['datentime']));
+            $checkin = date("d-m-Y H:i:s",strtotime($data['check_in']));
+            $checkout = date("d-m-Y H:i:s",strtotime($data['check_out']));
 
-            if($data['trans_id']!='')
+            $date1 = new DateTime($checkin);
+            $date2 = new DateTime($checkout);
+
+            $package_type = "";
+
+            $get_time = new DateTime($checkin);
+            $hour = $get_time->format('H');
+            $time_of_day = "";
+            $time_of_day = ($hour >= 8 && $hour < 20) ? "Check In Day" : "Check In Night";
+
+            $interval = $date1->diff($date2);
+            $total_hours = ($interval->days * 24) + $interval->h;
+
+            if($total_hours>=22)
+            {
+                if($time_of_day == "Check In Day")
+                {
+                    $package_type = "22 Hours Day Tour";
+                }
+                else if($time_of_day == "Check In Night")
+                {
+                    $package_type = "22 Hours Night Tour";
+                }
+            }
+            else if($total_hours<=12)
+            {
+                if($time_of_day == "Check In Day")
+                {
+                    $package_type = "Day Tour";
+                }
+                else if($time_of_day == "Check In Night")
+                {
+                    $package_type = "Night Tour";
+                }
+            }
+
+            if((strcasecmp($data['trans_id'], 'walk-in') != 0) && $data['trans_id']!='')
             {
                 $gcash = "<span class='badge bg-primary'>
                     GCash: $data[trans_id]
                 </span>";
             }
-            else
+            else if (strcasecmp($data['trans_id'], 'walk-in') == 0)
+            {
+                $gcash = "<span class='badge bg-success'>
+                    Walk-In
+                </span>";
+            }
+            else if($data['trans_id']=='')
             {
                 $gcash = "<span class='badge bg-success'>
                     Walk-In
@@ -56,22 +98,28 @@
                         <b>Phone No:</b> $data[phonenum]
                     </td>
                     <td>
-                        <b>Room:</b> $data[room_name]
+                        <b>Accomodation:</b> $data[room_name]
                         <br>
-                        <b>Price:</b> ₱$data[price]
+                        <b>Package Type:</b> $package_type
+                        <br>
+                        <br>
+                        <b>Total Pay:</b> ₱$data[total_pay]
                     </td>
                     <td>
+                        <b>Date:</b> $date
+                        <br>
                         <b>Check in:</b> $checkin
                         <br>
                         <b>Check in:</b> $checkout
                         <br>
+                        <br>
                         <b>Paid:</b> ₱$data[trans_amt]
                         <br>
-                        <b>Date:</b> $date
+                        <br>
                     </td>
                     <td>
-                        <button type='button' onclick='assign_room($data[booking_id])' class='btn text-white btn-sm fw-bold custom-bg shadow-none' data-bs-toggle='modal' data-bs-target='#assign-room'>
-                            <i class='bi bi-check2-square'></i> Assign Room
+                        <button type='button' onclick='confirm_booking($data[booking_id])' class='btn text-white btn-sm fw-bold custom-bg shadow-none' data-bs-toggle='modal' data-bs-target='#assign-room'>
+                            <i class='bi bi-check2-square'></i> Confirm Arrival
                         </button>
                         <br>
                         <button type='button' onclick='cancel_booking($data[booking_id])' class='mt-2 btn btn-outline-danger btn-sm fw-bold shadow-none'>
@@ -87,20 +135,18 @@
         echo $table_data;
     }
 
-    if(isset($_POST['assign_room']))
+    if(isset($_POST['confirm_booking']))
     {
         $frm_data = filteration($_POST);
 
         $query = "UPDATE booking_order bo INNER JOIN booking_details bd
             ON bo.booking_id = bd.booking_id
-            SET bo.arrival = ?, bo.rate_review = ?, bd.room_no = ?
+            SET bo.arrival = ?, bo.rate_review = ?, bo.booking_status = ?
             WHERE bo.booking_id = ?";
+        $values = [1,0,'booked',$frm_data['booking_id']];
+        $res = update($query,$values,'iisi');
 
-        $values = [1,0,$frm_data['room_no'],$frm_data['booking_id']];
-
-        $res = update($query,$values,'iisi'); // it will update 2 rows so it will return 2
-
-        echo ($res==2) ? 1 : 0;
+        echo $res;
     }
 
     if(isset($_POST['cancel_booking']))

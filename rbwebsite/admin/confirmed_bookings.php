@@ -34,7 +34,7 @@
                                     <tr class="bg-dark text-light">
                                         <th scope="col">#</th>
                                         <th scope="col">User Details</th>
-                                        <th scope="col">Room Details</th>
+                                        <th scope="col">Accomodation Details</th>
                                         <th scope="col">Booking Details</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -51,30 +51,41 @@
         </div>
     </div>
 
-    <!-- Assign Room Number Modal -->
-    <div class="modal fade" id="assign-room" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <!-- Bootstrap Modal for Confirmation -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form id="assign_room_form">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirm Booking</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Room Number</label>
-                            <input type="text" name="room_no" class="form-control shadow-none" required>
-                        </div>
-                        <span class="badge rounded-pill bg-light text-dark mb-3 text-wrap lh-base">
-                            Note: Assign Room Number only when user has arrived!
-                        </span>
-                        <input type="hidden" name="booking_id">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="reset" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn custom-bg text-white shadow-none">Assign</button>
-                    </div>
-                </div>
-            </form>
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Confirm Arrival</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Confirm Arrival?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="confirmPaymentBtn">Confirm</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Modal for Cancellation -->
+    <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelModalLabel">Cancel Booking</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Cancel Booking?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="confirmCancelBtn">Yes, Cancel</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+            </div>
+            </div>
         </div>
     </div>
 

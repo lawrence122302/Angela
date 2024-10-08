@@ -2,6 +2,8 @@
     require('inc/essentials.php');
     require('inc/db_config.php');
     require('inc/mpdf/vendor/autoload.php');
+
+    session_name('admin_session');
     adminLogin();
 
     if(isset($_GET['gen_pdf']) && isset($_GET['id']))
@@ -27,6 +29,7 @@
         }
 
         $data = mysqli_fetch_assoc($res);
+        
         $date = date("h:ia | d-m-Y",strtotime($data['datentime']));
         $checkin = date("d-m-Y",strtotime($data['check_in']));
         $checkout = date("d-m-Y",strtotime($data['check_out']));
