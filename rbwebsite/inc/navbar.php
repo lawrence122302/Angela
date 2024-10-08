@@ -16,7 +16,7 @@
           <a class="nav-link me-auto" href="index.php">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-auto" href="rooms.php">Accomodations</a>
+          <a class="nav-link me-auto" href="rooms.php">Accommodations</a>
         </li>
         <li class="nav-item">
           <a class="nav-link me-auto" href="virtual_tour.php">Virtual Tour</a>

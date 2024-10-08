@@ -298,6 +298,14 @@
         }
     }
 
+    function checkLoginToRate(login) {
+        if (login === 1) {
+            window.location.href = 'bookings.php';
+        } else {
+            alert('error','You need to be logged in to rate us!');
+        }
+    }
+
     function checkLogin(status)
     {
         if(!status)

@@ -301,10 +301,17 @@
             </div>
             <div class="swiper-pagination"></div>
         </div>
-    
     </div>
-    <div class="col-lg-12 text-center mt-5">
-        <a href="about.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">Know More >>></a>
+    <?php
+        $login = 0;
+        if (isset($_SESSION['login']) && $_SESSION['login'] == true) {
+            $login = 1;
+        }
+
+        $rate_us_btn = "<button onclick='checkLoginToRate($login)' class='btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none'>Rate Us >>></button>";
+    ?>
+    <div class="col-lg-12 text-center mt-1">
+        <?php echo $rate_us_btn; ?>
     </div>
 
     <!-- Reach Us -->
@@ -317,17 +324,16 @@
             <div class="col-lg-4 col-md-4">
                 <div class="bg-white p-4 rounded mb-4">
                     <h5>Call Us</h5>
-                    <a href="#tel: +<?php echo $contact_r['pn1'] ?>" class="d-inline-block mb-2 text-decoration-none text-dark">
+                    <span class="d-inline-block mb-2 text-dark">
                         <i class="bi bi-telephone-fill"></i> +<?php echo $contact_r['pn1'] ?>
-                    </a>
+                    </span>
                     <br>
                     <?php
-                        if($contact_r['pn2']!='')
-                        {
-                            echo<<<data
-                            <a href="#tel: +$contact_r[pn2]" class="d-inline-block text-decoration-none text-dark">
+                        if ($contact_r['pn2'] != '') {
+                            echo <<<data
+                            <span class="d-inline-block text-dark">
                                 <i class="bi bi-telephone-fill"></i> +$contact_r[pn2]
-                            </a>
+                            </span>
                             data;
                         }
                     ?>
@@ -363,6 +369,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-lg-12 text-center mt-1 mb-4">
+        <a href="about.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">Know More >>></a>
     </div>
 
     <!-- Password reset modal and code -->
