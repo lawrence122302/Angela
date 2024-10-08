@@ -59,7 +59,7 @@
                                 {
                                     echo"
                                         <div class='carousel-item $active_class'>
-                                            <img src='".ROOMS_IMG_PATH.$img_res['image']."' class='d-block w-100 rounded'>
+                                            <img src='".ROOMS_IMG_PATH.$img_res['image']."' style='min-height: 70vh; max-height: 70vh;'>
                                         </div>
                                     ";
                                     $active_class='';
@@ -69,7 +69,7 @@
                             else
                             {
                                 echo"<div class='carousel-item active'>
-                                    <img src='$room_img' class='img-fluid rounded' style='max-height: 50vh;'>
+                                    <img src='$room_img' class='img-fluid rounded' style='min-height: 70vh; max-height: 70vh;'>
                                 </div>";
                             }
                         ?>

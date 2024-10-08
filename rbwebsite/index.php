@@ -38,7 +38,7 @@
                         $path = CAROUSEL_IMG_PATH;
                         echo <<<data
                             <div class="swiper-slide d-flex justify-content-center align-items-center">
-                                <img src="$path$row[image]" class="img-fluid rounded" style ="max-height: 70vh; min-width: 100vw;" />
+                                <img src="$path$row[image]" class="img-fluid rounded" style ="min-height: 70vh; max-height: 70vh; min-width: 100vw;" />
                             </div>
                         data;
                     }

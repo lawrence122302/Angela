@@ -4,7 +4,7 @@
     <a class="logo-image" href="index.php">
       <img src="images/settings/logo-angela.jpg" alt="Angela's Logo" />
     </a>
-    <a class="navbar-brand me-4 fw-bold fs-4 h-font" href="index.php"><?php echo $settings_r['site_title'] ?></a>
+    <a class="navbar-brand ms-1 me-3 fw-bold fs-6 h-font" href="index.php"><?php echo $settings_r['site_title'] ?></a>
     <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

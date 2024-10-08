@@ -82,11 +82,11 @@ input[type=number] {
 }
 
 .logo-image {
-    width: 60px;
-    height: 50px;
+    width: 5vw; /* Responsive width */
+    height: 8vh; /* Responsive height */
     border-radius: 50%;
     overflow: hidden;
-    margin: 10px;
+    margin: 1vh 0.5vw; /* Responsive margins */
 }
 
 .logo-image img {
@@ -98,7 +98,7 @@ input[type=number] {
 
 @media (max-width: 576px) {
     .logo-image {
-        width: 80px; /* Adjust this size for even smaller screens */
-        height: 80px; /* Adjust this size for even smaller screens */
+        width: 14vw; /* Adjust this size for even smaller screens */
+        height: 7vh; /* Adjust this size for even smaller screens */
     }
 }

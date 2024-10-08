@@ -8,14 +8,11 @@
 }
 
 .logo-image {
-    width: 60px;
-    height: 50px;
+    width: 5vw; /* Responsive width */
+    height: 8vh; /* Responsive height */
     border-radius: 50%;
     overflow: hidden;
-    margin-top: 0.5vh;
-    margin-bottom: 0.5vh;
-    margin-right: 0.1vw;
-    margin-left: 0.5vw;
+    margin: 1vh 0.5vw; /* Responsive margins */
 }
 
 .logo-image img {
@@ -27,8 +24,8 @@
 
 @media (max-width: 576px) {
     .logo-image {
-        width: 80px; /* Adjust this size for even smaller screens */
-        height: 80px; /* Adjust this size for even smaller screens */
+        width: 14vw; /* Adjust this size for even smaller screens */
+        height: 7vh; /* Adjust this size for even smaller screens */
     }
 }
 
@@ -78,4 +75,16 @@ input[type=number] {
     height: 100px; /* Adjust the height as needed */
     width: 100%;
     text-align: center;
+}
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 0.4rem; /* Extremely small for very tiny screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 5rem; /* Slightly larger, but still very small */
+    }
 }
