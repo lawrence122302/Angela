@@ -3,6 +3,7 @@
     require('../admin/inc/essentials.php');
 
     date_default_timezone_set("Asia/Manila");
+    session_name('user_session');
     session_start();
 
     if(!(isset($_SESSION['login']) && $_SESSION['login']==true))
