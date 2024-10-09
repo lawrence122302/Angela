@@ -34,7 +34,7 @@
                                     <tr class="bg-dark text-light">
                                         <th scope="col">#</th>
                                         <th scope="col">User Details</th>
-                                        <th scope="col">Accomodation Details</th>
+                                        <th scope="col">Accommodation Details</th>
                                         <th scope="col">Booking Details</th>
                                         <th scope="col">Action</th>
                                     </tr>

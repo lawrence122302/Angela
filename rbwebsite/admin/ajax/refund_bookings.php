@@ -6,6 +6,7 @@
     if(isset($_POST['get_bookings']))
     {
         $frm_data = filteration($_POST);
+
         $query = "SELECT bo.*, bd.* FROM booking_order bo 
             INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
             WHERE (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.trans_id LIKE ?) 
@@ -23,17 +24,59 @@
 
         while($data = mysqli_fetch_assoc($res))
         {
-            $date = date("d-m-Y",strtotime($data['datentime']));
-            $checkin = date("d-m-Y",strtotime($data['check_in']));
-            $checkout = date("d-m-Y",strtotime($data['check_out']));
+            $date = date("d-m-Y H:i:s",strtotime($data['datentime']));
+            $checkin = date("d-m-Y H:i:s",strtotime($data['check_in']));
+            $checkout = date("d-m-Y H:i:s",strtotime($data['check_out']));
 
-            if($data['trans_id']!='')
+            $date1 = new DateTime($checkin);
+            $date2 = new DateTime($checkout);
+
+            $package_type = "";
+
+            $get_time = new DateTime($checkin);
+            $hour = $get_time->format('H');
+            $time_of_day = "";
+            $time_of_day = ($hour >= 8 && $hour < 20) ? "Check In Day" : "Check In Night";
+
+            $interval = $date1->diff($date2);
+            $total_hours = ($interval->days * 24) + $interval->h;
+
+            if($total_hours>=22)
+            {
+                if($time_of_day == "Check In Day")
+                {
+                    $package_type = "22 Hours Day Tour";
+                }
+                else if($time_of_day == "Check In Night")
+                {
+                    $package_type = "22 Hours Night Tour";
+                }
+            }
+            else if($total_hours<=12)
+            {
+                if($time_of_day == "Check In Day")
+                {
+                    $package_type = "Day Tour";
+                }
+                else if($time_of_day == "Check In Night")
+                {
+                    $package_type = "Night Tour";
+                }
+            }
+
+            if((strcasecmp($data['trans_id'], 'walk-in') != 0) && $data['trans_id']!='')
             {
                 $gcash = "<span class='badge bg-primary'>
                     GCash: $data[trans_id]
                 </span>";
             }
-            else
+            else if (strcasecmp($data['trans_id'], 'walk-in') == 0)
+            {
+                $gcash = "<span class='badge bg-success'>
+                    Walk-In
+                </span>";
+            }
+            else if($data['trans_id']=='')
             {
                 $gcash = "<span class='badge bg-success'>
                     Walk-In
@@ -55,13 +98,16 @@
                         <b>Phone No:</b> $data[phonenum]
                     </td>
                     <td>
-                        <b>Room:</b> $data[room_name]
+                        <b>Accommodation:</b> $data[room_name]
+                        <br>
+                        <b>Package Type:</b> $package_type
+                        <br>
+                        <br>
+                        <b>Date:</b> $date
                         <br>
                         <b>Check in:</b> $checkin
                         <br>
                         <b>Check in:</b> $checkout
-                        <br>
-                        <b>Date:</b> $date
                     </td>
                     <td>
                         <br>

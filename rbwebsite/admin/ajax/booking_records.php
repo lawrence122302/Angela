@@ -43,6 +43,7 @@
             $checkout = date("d-m-Y",strtotime($data['check_out']));
 
             $refunded_status = "";
+
             if($data['booking_status']=='booked')
             {
                 $status_bg = 'bg-success';
@@ -57,13 +58,64 @@
                 $status_bg = 'bg-warning text-dark';
             }
 
-            if($data['trans_id']!='')
+
+
+
+
+
+
+
+            $date1 = new DateTime($checkin);
+            $date2 = new DateTime($checkout);
+
+            $package_type = "";
+
+            $get_time = new DateTime($checkin);
+            $hour = $get_time->format('H');
+            $time_of_day = "";
+            $time_of_day = ($hour >= 8 && $hour < 20) ? "Check In Day" : "Check In Night";
+
+            $interval = $date1->diff($date2);
+            $total_hours = ($interval->days * 24) + $interval->h;
+
+            if($total_hours>=22)
+            {
+                if($time_of_day == "Check In Day")
+                {
+                    $package_type = "22 Hours Day Tour";
+                }
+                else if($time_of_day == "Check In Night")
+                {
+                    $package_type = "22 Hours Night Tour";
+                }
+            }
+            else if($total_hours<=12)
+            {
+                if($time_of_day == "Check In Day")
+                {
+                    $package_type = "Day Tour";
+                }
+                else if($time_of_day == "Check In Night")
+                {
+                    $package_type = "Night Tour";
+                }
+            }
+
+            $full_payment = $data['trans_amt'];
+
+            if((strcasecmp($data['trans_id'], 'walk-in') != 0) && $data['trans_id']!='')
             {
                 $gcash = "<span class='badge bg-primary'>
                     GCash: $data[trans_id]
                 </span>";
             }
-            else
+            else if (strcasecmp($data['trans_id'], 'walk-in') == 0)
+            {
+                $gcash = "<span class='badge bg-success'>
+                    Walk-In
+                </span>";
+            }
+            else if($data['trans_id']=='')
             {
                 $gcash = "<span class='badge bg-success'>
                     Walk-In
@@ -87,14 +139,24 @@
                         <b>Phone No:</b> $data[phonenum]
                     </td>
                     <td>
-                        <b>Room:</b> $data[room_name]
+                        <b>Accommodation:</b> $data[room_name]
                         <br>
-                        <b>Price:</b> ₱$data[price]
+                        <b>Package Type:</b> $package_type
+                        <br>
+                        <br>
+                        <b>Total Pay:</b> ₱$data[total_pay]
                     </td>
                     <td>
-                        <b>Amount:</b> ₱$data[trans_amt]
-                        <br>
                         <b>Date:</b> $date
+                        <br>
+                        <b>Check in:</b> $checkin
+                        <br>
+                        <b>Check out:</b> $checkout
+                        <br>
+                        <br>
+                        <b>Paid:</b> ₱$data[trans_amt]
+                        <br>
+                        <br>
                     </td>
                     <td>
                         $refunded_status<span class='badge $status_bg'>$data[booking_status]</span>

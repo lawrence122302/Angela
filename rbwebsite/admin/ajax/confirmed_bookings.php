@@ -98,7 +98,7 @@
                         <b>Phone No:</b> $data[phonenum]
                     </td>
                     <td>
-                        <b>Accomodation:</b> $data[room_name]
+                        <b>Accommodation:</b> $data[room_name]
                         <br>
                         <b>Package Type:</b> $package_type
                         <br>
