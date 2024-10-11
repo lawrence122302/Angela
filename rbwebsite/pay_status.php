@@ -29,6 +29,7 @@
                         WHERE (uc.email=? AND uc.phonenum=?)
                         AND ((bo.booking_status='booked') 
                         OR (bo.booking_status='pending')
+                        OR (bo.booking_status='reserved')
                         OR (bo.booking_status='cancelled')
                         OR (bo.booking_status='payment failed')) 
                         ORDER BY bo.booking_id DESC
@@ -176,6 +177,19 @@
                                 <p class="fw-bold alert alert-warning">
                                     <i class="bi bi-exclamation-triangle-fill"></i>
                                     Payment pending.
+                                    <br><br>
+                                    <a href='bookings.php'>Go to Bookings<a/>
+                                </p>
+                            </div>
+                        data;
+                    }
+                    else if($booking_fetch['trans_status']=="reserved")
+                    {
+                        echo<<<data
+                            <div class="col-12 px-4">
+                                <p class="fw-bold alert alert-warning">
+                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                    Booking Reserved.
                                     <br><br>
                                     <a href='bookings.php'>Go to Bookings<a/>
                                 </p>
