@@ -37,8 +37,8 @@
                     {
                         $path = CAROUSEL_IMG_PATH;
                         echo <<<data
-                            <div class="swiper-slide d-flex justify-content-center align-items-center">
-                                <img src="$path$row[image]" class="img-fluid rounded" style ="min-height: 70vh; max-height: 70vh; min-width: 100vw;" />
+                            <div class="swiper-slide d-flex justify-content-center align-items-center aspect-ratio-21-9">
+                                <img src="$path$row[image]" class="img-fluid rounded"/>
                             </div>
                         data;
                     }
@@ -178,8 +178,8 @@
                     // print room card
                     echo <<<data
                         <div class="col-lg-4 col-md-6 my-3">
-                            <div class="card border-0 shadow" style="max-width: 350px; margin: auto;"> 
-                                <img src="$room_thumb" class="card-img-top img-fluid rounded" style="max-height: 50vh;">
+                            <div class="card border-0 shadow"> 
+                                <img src="$room_thumb" class="card-img-top img-fluid rounded aspect-ratio-16-9">
                                 <div class="card-body">
                                     <h5 class="mb-4">$room_data[name]</h5>
                                     <div class="mb-4">

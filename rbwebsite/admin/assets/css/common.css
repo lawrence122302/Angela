@@ -81,24 +81,68 @@ input[type=number] {
     }
 }
 
+/* Style for the logo container */
 .logo-image {
-    width: 5vw; /* Responsive width */
-    height: 8vh; /* Responsive height */
-    border-radius: 50%;
+    width: 10vw; /* Default width */
+    height: 10vw; /* Default height */
+    border-radius: 50%; /* Make it a circle */
     overflow: hidden;
-    margin: 1vh 0.5vw; /* Responsive margins */
+    min-width: 40px; /* Minimum width in pixels for small screens */
+    min-height: 40px; /* Minimum height in pixels for small screens */
+    max-width: 50px; /* Maximum width in pixels for large screens */
+    max-height: 50px; /* Maximum height in pixels for large screens */
+    margin: 2vh 0; /* Responsive vertical margin */
 }
 
+/* Style for the image inside the container */
 .logo-image img {
-    width: 100%; /* Makes sure the image fills the circle */
-    height: 100%; /* Makes sure the image fills the circle */
-    object-fit: cover; /* Ensures the image fills the circle without stretching */
-    object-position: center center; /* Centers the image within the circular container */
+    width: 100%; /* Ensure the image fills the container */
+    height: 100%; /* Ensure the image fills the container */
+    object-fit: cover; /* Scale the image to cover the container */
+    object-position: center; /* Center the image within the container */
 }
 
-@media (max-width: 576px) {
+/* Media query for extra-large screens (TVs) */
+@media (min-width: 1200px) {
     .logo-image {
-        width: 14vw; /* Adjust this size for even smaller screens */
-        height: 7vh; /* Adjust this size for even smaller screens */
+        width: 6vw;
+        height: 6vw;
+        margin: 1vh 0; /* Adjusted vertical margin */
+    }
+}
+
+/* Media query for large screens (Desktops, large laptops) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .logo-image {
+        width: 7vw;
+        height: 7vw;
+        margin: 1vh 0; /* Adjusted vertical margin */
+    }
+}
+
+/* Media query for medium screens (Laptops, tablets in landscape) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .logo-image {
+        width: 8vw;
+        height: 8vw;
+        margin: 1vh 0; /* Adjusted vertical margin */
+    }
+}
+
+/* Media query for small screens (Tablets in portrait, large smartphones) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .logo-image {
+        width: 9vw;
+        height: 9vw;
+        margin: 1vh 0; /* Adjusted vertical margin */
+    }
+}
+
+/* Media query for extra-small screens (Small smartphones) */
+@media (max-width: 575px) {
+    .logo-image {
+        width: 10vw;
+        height: 10vw;
+        margin: 1vh 0; /* Adjusted vertical margin */
     }
 }

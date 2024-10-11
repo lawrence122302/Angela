@@ -168,7 +168,7 @@
                 <input name ="phonenum" type="number" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label">Picture</label>
+                <label class="form-label">Government ID</label>
                 <input name="profile" type="file" accept=".jpg, .jpeg, .png, .webp" class="form-control shadow-none" required>
               </div>
               <div class="col-md-12 mb-3">
