@@ -4,6 +4,7 @@
 
     date_default_timezone_set("Asia/Manila");
 
+    session_name('user_session');
     session_start();
 
     unset($_SESSION['room']);

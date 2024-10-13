@@ -55,7 +55,7 @@
                                 <input name="dob" type="date" value="<?php echo $u_fetch['dob'] ?>" class="form-control shadow-none" required>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Pincode</label>
+                                <label class="form-label">Zip Code</label>
                                 <input name="pincode" type="number" value="<?php echo $u_fetch['pincode'] ?>" class="form-control shadow-none" required>
                             </div>
                             <div class="col-md-8 mb-4">
@@ -71,8 +71,8 @@
             <div class="col-md-4 mb-5 px-4">
                 <div class="bg-white p-3 p-md-4 rounded shadow-sm">
                     <form id="profile-form">
-                        <h5 class="mb-3 fw-bold">Picture</h5>
-                        <img src="<?php echo USERS_IMG_PATH.$u_fetch['profile'] ?>" class="rounded-circle img-fluid">
+                        <h5 class="mb-3 fw-bold">ID</h5>
+                        <img src="<?php echo USERS_IMG_PATH.$u_fetch['profile'] ?>" class="img-fluid">
 
                         <label class="form-label">New Picture</label>
                         <input name="profile" type="file" accept=".jpg, .jpeg, .png, .webp" class="mb-4 form-control shadow-none" required>

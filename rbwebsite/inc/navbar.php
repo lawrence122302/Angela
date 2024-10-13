@@ -176,7 +176,7 @@
                 <textarea name="address" class="form-control shadow-none" rows="1" required></textarea>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label">Pincode</label>
+                <label class="form-label">Zip Code</label>
                 <input name="pincode" type="number" class="form-control shadow-none" required>
               </div>
               <div class="col-md-6 mb-3">

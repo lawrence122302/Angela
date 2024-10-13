@@ -7,6 +7,7 @@
     if(isset($_POST['info_form']))
     {
         $frm_data = filteration($_POST);
+        session_name('user_session');
         session_start();
 
         $u_exist = select("SELECT * FROM user_cred WHERE phonenum=? AND id!=? LIMIT 1",
@@ -34,6 +35,7 @@
 
     if(isset($_POST['profile_form']))
     {
+        session_name('user_session');
         session_start();
 
         $img = uploadUserImage($_FILES['profile']);
@@ -72,6 +74,7 @@
     if(isset($_POST['pass_form']))
     {
         $frm_data = filteration($_POST);
+        session_name('user_session');
         session_start();
 
         if($frm_data['new_pass']!=$frm_data['confirm_pass'])
