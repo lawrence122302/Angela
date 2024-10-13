@@ -91,7 +91,16 @@
                                 <div class="d-flex">
                                     <div class="me-3">
                                         <label class="form-label">Pax</label>
-                                        <input type="number" min="1" id="adults" value="<?php echo $adult_default ?>" oninput="guests_filter()" class="form-control shadow-none">
+                                        <select id="adults" class="form-select shadow-none" name="adult" oninput="guests_filter()">
+                                            <?php
+                                                $guests_q = mysqli_query($con,"SELECT MAX(adult) AS max_adult FROM rooms WHERE status='1' AND removed='0'");
+                                                $guests_res = mysqli_fetch_assoc($guests_q);
+                                                for($i=1; $i<=$guests_res['max_adult']; $i++)
+                                                {
+                                                    echo "<option value='$i'>$i</option>";
+                                                }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
