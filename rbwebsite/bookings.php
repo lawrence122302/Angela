@@ -71,11 +71,11 @@
 
                         if($data['arrival']==1)
                         {
-                            $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
+                            $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'><i class='bi bi-download'></i> Download PDF</a>";
 
                             if($data['rate_review']==0)
                             {
-                                $btn.="<button type='button' onclick='review_room($data[booking_id],$data[room_id])' data-bs-toggle='modal' data-bs-target='#reviewModal' class='btn btn-dark btn-sm shadow-none ms-2'>Rate & Review</button>";
+                                $btn.="<button type='button' onclick='review_room($data[booking_id],$data[room_id])' data-bs-toggle='modal' data-bs-target='#reviewModal' class='btn btn-warning btn-sm shadow-none ms-2'><i class='bi bi-star-fill'></i> Rate & Review</button>";
                             }
                         }
                         else
@@ -93,13 +93,13 @@
                         }
                         else
                         {
-                            $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
+                            $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'><i class='bi bi-download'></i> Download PDF</a>";
                         }
                     }
                     else
                     {
                         $status_bg = "bg-warning";
-                        $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
+                        $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'><i class='bi bi-download'></i> Download PDF</a>";
                     }
 
                     echo<<<bookings

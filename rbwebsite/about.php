@@ -69,7 +69,7 @@
             <div class="col-lg-3 col-md-6 mb-4 px-4">
                 <div class="bg-white rounded shadow p-4 border-top border-4 text-center box">
                     <img src="images/about/staff.svg" width="70px">
-                    <h4 class="mt-3">7+ Accomodating Caretakers</h4>
+                    <h4 class="mt-3">7 Accomodating Caretakers</h4>
                 </div>
             </div>
         </div>
