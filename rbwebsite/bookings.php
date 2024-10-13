@@ -48,7 +48,7 @@
                     $checkin = date("d-m-Y",strtotime($data['check_in']));
                     $checkout = date("d-m-Y",strtotime($data['check_out']));
 
-                    if($data['trans_id']!='')
+                    if($data['trans_id']!='walk-in')
                     {
                         $gcash = "<span class='badge bg-primary'>
                             GCash: $data[trans_id]

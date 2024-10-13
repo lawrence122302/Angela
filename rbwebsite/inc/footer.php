@@ -47,6 +47,28 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const radioButtons = document.querySelectorAll('input[name="gcash_ref"]');
+        const customInput = document.getElementById('customValue');
+        const customRadio = document.getElementById('customRadio');
+
+        radioButtons.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this === customRadio) {
+            customInput.disabled = false;
+            customInput.focus();  // Automatically focus the input field
+            } else {
+            customInput.disabled = true;
+            customInput.value = ''; // Clear the input if not custom
+            }
+        });
+        });
+
+        customInput.addEventListener('input', function() {
+        customRadio.value = customInput.value;
+        });
+    });
+
     function alert(type,msg,position='body')
     {
         let bs_class = (type == 'success') ? 'alert-success' : 'alert-danger';

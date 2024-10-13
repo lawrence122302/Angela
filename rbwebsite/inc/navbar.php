@@ -89,8 +89,17 @@
             <input type="text" name="email_mob" required class="form-control shadow-none">
           </div>
           <div class="mb-4">
-            <label class="form-label">GCash Reference</label>
-            <input type="text" name="gcash_ref" required class="form-control shadow-none">
+            <label class="form-label fw-bold">Mode of Payment</label><br>
+            <label>
+              <input type="radio" name="gcash_ref" value="walk-in">
+              Walk-In
+            </label><br>
+            
+            <label>
+              <input type="radio" name="gcash_ref" id="customRadio" value="">
+              GCash
+            </label>
+            <input type="text" id="customValue" name="customValue" class="form-control shadow-none" placeholder="Enter GCash Reference" disabled>
           </div>
           <div class="d-flex align-items-center justify-content-between flex-wrap">
             <div>

@@ -26,7 +26,8 @@
                     $query = "SELECT bo.*,bd.*,uc.* 
                         FROM booking_order bo INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
                         INNER JOIN user_cred uc ON bo.user_id = uc.id
-                        WHERE (uc.email=? AND uc.phonenum=?)
+                        WHERE (uc.email=? OR uc.phonenum=?)
+                        AND bo.trans_id=?
                         AND ((bo.booking_status='booked') 
                         OR (bo.booking_status='pending')
                         OR (bo.booking_status='reserved')
@@ -35,7 +36,7 @@
                         ORDER BY bo.booking_id DESC
                     ";
 
-                    $result = select($query,[$frm_data['email_mob'],$frm_data['gcash_ref']],'ss');
+                    $result = select($query,[$frm_data['email_mob'],$frm_data['email_mob'],$frm_data['gcash_ref']],'sss');
 
                     if(mysqli_num_rows($result) > 0)
                     {
@@ -53,7 +54,7 @@
                                 $login = 1;
                             }
 
-                            if($data['trans_id']!='')
+                            if($data['trans_id']!='walk-in')
                             {
                                 $gcash = "<span class='badge bg-primary'>
                                     GCash: $data[trans_id]

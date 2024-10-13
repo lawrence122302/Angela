@@ -187,8 +187,16 @@
                     </div>
                     <div class="row">
                         <div class="col mb-3">
-                            <label class="form-label fw-bold">GCash Reference (Leave empty for walk-ins)</label>
-                            <input type="text" name="g_reference" class="form-control shadow-none">
+                            <label class="form-label fw-bold">Mode of Payment</label><br>
+                            <label>
+                                <input type="radio" name="g_reference" value="walk-in">
+                                Walk-In
+                            </label><br>
+                            <label>
+                                <input type="radio" name="g_reference" id="customRadio" value="">
+                                GCash
+                            </label>
+                            <input type="text" id="customValue" name="customValue" class="form-control shadow-none" placeholder="Enter GCash Reference" disabled>
                         </div>
                     </div>
 
@@ -204,6 +212,28 @@
 
     <?php require('inc/footer.php'); ?>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const radioButtons = document.querySelectorAll('input[name="g_reference"]');
+            const customInput = document.getElementById('customValue');
+            const customRadio = document.getElementById('customRadio');
+
+            radioButtons.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === '') {
+                customInput.disabled = false;
+                customInput.focus();  // Automatically focus the input field
+                } else {
+                customInput.disabled = true;
+                customInput.value = ''; // Clear the input if not custom
+                }
+            });
+            });
+
+            customInput.addEventListener('input', function() {
+            customRadio.value = customInput.value;
+            });
+        });
+
         let booking_form = document.getElementById('booking_form');
         let pay_now_form = document.getElementById('pay_now_form');
         let info_loader = document.getElementById('info_loader');
