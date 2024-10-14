@@ -85,7 +85,9 @@
 
                     echo<<<data
                         <div class="card p-3 shadow-sm rounded">
-                            <img src="$room_thumb" class="img-fluid rounded mb-3" style='max-height: 50vh;'>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img src="$room_thumb" class="img-fluid rounded mb-3 aspect-ratio-16-9">
+                            </div>
                             <div class="mb-4">
                                 <h6 class="mb-1">Monday - Thursday</h6>
                                 ₱$room_data[price] - Day/Night Swim

@@ -37,8 +37,8 @@
                     {
                         $path = CAROUSEL_IMG_PATH;
                         echo <<<data
-                            <div class="swiper-slide d-flex justify-content-center align-items-center aspect-ratio-21-9">
-                                <img src="$path$row[image]" class="img-fluid rounded"/>
+                            <div class="swiper-slide">
+                                <img src="$path$row[image]" class="img-fluid rounded aspect-ratio-192-59"/>
                             </div>
                         data;
                     }
@@ -92,7 +92,7 @@
         </div>
     </div>
 
-    <!-- Our rooms -->
+    <!-- Our accommodations -->
     <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Our Accomodations</h2>
     <div class="container">
         <div class="row">
@@ -178,9 +178,11 @@
                     // print room card
                     echo <<<data
                         <div class="col-lg-4 col-md-6 my-3">
-                            <div class="card border-0 shadow"> 
-                                <img src="$room_thumb" class="card-img-top img-fluid rounded aspect-ratio-16-9">
-                                <div class="card-body">
+                            <div class="card border-0 shadow">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <img src="$room_thumb" class="card-img-top img-fluid rounded aspect-ratio-16-9">
+                                </div>
+                                <div class="card-body" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 110vh;">
                                     <h5 class="mb-4">$room_data[name]</h5>
                                     <div class="mb-4">
                                         <h6 class="mb-1">Monday - Thursday</h6>
@@ -285,7 +287,7 @@
                             echo<<<slides
                                 <div class="swiper-slide bg-white p-4">
                                     <div class="profile d-flex align-items-center mb-3">
-                                        <i class="bi bi-chat-right-text-fill"></i> <h6 class="m-0 ms-2">$row[uname]</h6>
+                                        <i class="bi bi-person-fill"></i> <h6 class="m-0 ms-2">$row[uname]</h6>
                                     </div>
                                     <p>
                                         $row[review]

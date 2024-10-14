@@ -58,8 +58,8 @@
                                 while($img_res = mysqli_fetch_assoc($img_q))
                                 {
                                     echo"
-                                        <div class='carousel-item $active_class'>
-                                            <img src='".ROOMS_IMG_PATH.$img_res['image']."' style='min-height: 70vh; max-height: 70vh;'>
+                                        <div class='carousel-item $active_class d-flex justify-content-center align-items-center'>
+                                            <img src='".ROOMS_IMG_PATH.$img_res['image']."' class='img-fluid rounded aspect-ratio-16-9'>
                                         </div>
                                     ";
                                     $active_class='';
@@ -68,8 +68,8 @@
                             }
                             else
                             {
-                                echo"<div class='carousel-item active'>
-                                    <img src='$room_img' class='img-fluid rounded' style='min-height: 70vh; max-height: 70vh;'>
+                                echo"<div class='carousel-item active d-flex justify-content-center align-items-center'>
+                                    <img src='$room_img' class='img-fluid rounded aspect-ratio-16-9'>
                                 </div>";
                             }
                         ?>
@@ -226,8 +226,7 @@
                                 echo<<<reviews
                                     <div class="mb-4">
                                         <div class="d-flex align-items-center mb-2">
-                                            <img src="$img_path$row[profile]" class="rounded-circle" loading="lazy" width="30px">
-                                            <h6 class="m-0 ms-2">$row[uname]</h6>
+                                            <h6 class="m-0"><i class="bi bi-person-fill"></i> $row[uname]</h6>
                                         </div>
                                         <p class="mb-1">
                                             $row[review]

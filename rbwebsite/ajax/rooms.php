@@ -143,9 +143,9 @@
             // print room card
             $output.="
                 <div class='card mb-4 border-0 shadow'>
-                    <div class='row g-0 p-3 align-items-center'>
+                    <div class='row g-0 p-3 d-flex justify-content-center align-items-center'>
                         <div class='col-md-4 mb-lg-0 mb-md-0 mb-3'>
-                            <img src='$room_thumb' class='img-fluid rounded' style='max-height: 50vh'>
+                            <img src='$room_thumb' class='img-fluid rounded aspect-ratio-16-9'>
                         </div>
                         <div class='col-md-4 px-lg-3 px-md-3 px-0'>
                             <h5 class='mb-3'>$room_data[name]</h5>

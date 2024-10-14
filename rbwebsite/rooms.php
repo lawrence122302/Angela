@@ -64,7 +64,7 @@
                             <!-- Facilities -->
                             <div class="border bg-light p-3 rounded mb-3">
                                 <h5 class="d-flex align-items-center justfiy-content-between mb-3" style="font-size: 18px;">
-                                    <span>Facilities</span>
+                                    <span>Inclusions</span>
                                     <button id="facilities_btn" onclick="facilities_clear()" class="btn shadow-none btn-sm text-secondary d-none">Reset</button>
                                 </h5>
                                 <?php
