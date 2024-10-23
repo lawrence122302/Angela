@@ -23,8 +23,9 @@
             error_log("Formatted Check-in Date: " . $formatted_checkin);
             error_log("Formatted Check-out Date: " . $formatted_checkout);
 
-            // Debug the value of isWeekend
+            // Debug the value of isWeekend and is_22hrs
             error_log("isWeekend: " . $frm_data['isWeekend']);
+            error_log("is_22hrs: " . $frm_data['is_22hrs']);
 
             // Debug dates
             error_log("Today's Date: " . $today_date->format('Y-m-d H:i:s'));
@@ -81,42 +82,45 @@
                 }
 
                 // Assign correct room price
-                if($frm_data['isWeekend'] == "false")
-                {
-                    if($frm_data['time_of_day'] == "Day Tour" && $frm_data['is_22hrs'] = "false")
-                    {
+                if ($frm_data['isWeekend'] == "false") {
+                    error_log("Weekday Detected");
+                    if ($frm_data['time_of_day'] == "Day Tour" && $frm_data['is_22hrs'] == "false") {
+                        error_log("Day Tour during Weekday, not 22 hours");
                         $package_type = "Weekdays | Monday - Thursday | Day Tour";
                         $payment = $_SESSION['room']['price'];
-                    }
-                    else if($frm_data['time_of_day'] == "Night Tour" && $frm_data['is_22hrs'] = "false")
-                    {
+                    } else if ($frm_data['time_of_day'] == "Night Tour" && $frm_data['is_22hrs'] == "false") {
+                        error_log("Night Tour during Weekday, not 22 hours");
                         $package_type = "Weekdays | Monday - Thursday | Night Tour";
                         $payment = $_SESSION['room']['price'];
-                    }
-                    else if(($frm_data['time_of_day'] == "Day Tour" && $frm_data['is_22hrs'] = "true") || ($frm_data['time_of_day'] == "Night Tour" && $frm_data['is_22hrs'] = "true"))
-                    {
-                        $package_type = "Weekdays | Monday - Thursday | 22 Hours";
+                    } else if (($frm_data['time_of_day'] == "Day Tour" && $frm_data['is_22hrs'] == "true")) {
+                        error_log("Day Tour during Weekday, 22 hours");
+                        $package_type = "Weekdays | Monday - Thursday | 22 Hours Day Tour";
+                        $payment = $_SESSION['room']['price2'];
+                    } else if (($frm_data['time_of_day'] == "Night Tour" && $frm_data['is_22hrs'] == "true")) {
+                        error_log("Night Tour during Weekday, 22 hours");
+                        $package_type = "Weekdays | Monday - Thursday | 22 Hours Night Tour";
                         $payment = $_SESSION['room']['price2'];
                     }
-                }
-                else if($frm_data['isWeekend'] == "true")
-                {
-                    if($frm_data['time_of_day'] == "Day Tour" && $frm_data['is_22hrs'] = "false")
-                    {
+                } else if ($frm_data['isWeekend'] == "true") {
+                    error_log("Weekend Detected");
+                    if ($frm_data['time_of_day'] == "Day Tour" && $frm_data['is_22hrs'] == "false") {
+                        error_log("Day Tour during Weekend, not 22 hours");
                         $package_type = "Weekends | Friday - Sunday | Day Tour";
                         $payment = $_SESSION['room']['price3'];
-                    }
-                    else if($frm_data['time_of_day'] == "Night Tour" && $frm_data['is_22hrs'] = "false")
-                    {
+                    } else if ($frm_data['time_of_day'] == "Night Tour" && $frm_data['is_22hrs'] == "false") {
+                        error_log("Night Tour during Weekend, not 22 hours");
                         $package_type = "Weekends | Friday - Sunday | Night Tour";
                         $payment = $_SESSION['room']['price3'];
-                    }
-                    else if(($frm_data['time_of_day'] == "Day Tour" && $frm_data['is_22hrs'] = "true") || ($frm_data['time_of_day'] == "Night Tour" && $frm_data['is_22hrs'] = "true"))
-                    {
-                        $package_type = "Weekends | Friday - Sunday | 22 Hours";
+                    } else if (($frm_data['time_of_day'] == "Day Tour" && $frm_data['is_22hrs'] == "true")) {
+                        error_log("Day Tour during Weekend, 22 hours");
+                        $package_type = "Weekends | Friday - Sunday | 22 Hours Day Tour";
+                        $payment = $_SESSION['room']['price4'];
+                    } else if (($frm_data['time_of_day'] == "Night Tour" && $frm_data['is_22hrs'] == "true")) {
+                        error_log("Night Tour during Weekend, 22 hours Night Tour");
+                        $package_type = "Weekends | Friday - Sunday | 22 Hours Night Tour";
                         $payment = $_SESSION['room']['price4'];
                     }
-                }
+                }             
 
                 // difference in hours
                 $checkin_date_diff = new DateTime($frm_data['datetimeLocal_checkin'], new DateTimeZone('Asia/Manila'));
@@ -134,8 +138,7 @@
                 $checkout_formatted_time = $checkout_date->format('g:i A');
                 error_log("Formatted Check-out Time: " . $checkout_formatted_time);
 
-                error_log("Room Price: " . $_SESSION['room']['price']);
-                error_log("Payment: " . $payment);
+                error_log("Room Price: " . $payment);
                 error_log("Difference in hours: " . $hours);
 
                 $_SESSION['room']['payment'] = $payment;

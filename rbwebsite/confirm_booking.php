@@ -191,14 +191,14 @@
                         <div class="col mb-3">
                             <label class="form-label fw-bold">Mode of Payment</label><br>
                             <label>
-                                <input type="radio" name="g_reference" value="walk-in">
+                                <input type="radio" name="g_reference" value="walk-in" required>
                                 Walk-In
                             </label><br>
                             <label>
-                                <input type="radio" name="g_reference" id="customRadio" value="">
+                                <input type="radio" name="g_reference" id="customRadio1" value="gcash" required>
                                 GCash
                             </label>
-                            <input type="text" id="customValue" name="customValue" class="form-control shadow-none" placeholder="Enter GCash Reference" disabled>
+                            <input type="text" id="customValue1" name="customValue" class="form-control shadow-none" placeholder="Enter GCash Reference" required disabled>
                         </div>
                     </div>
 
@@ -216,23 +216,30 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const radioButtons = document.querySelectorAll('input[name="g_reference"]');
-            const customInput = document.getElementById('customValue');
-            const customRadio = document.getElementById('customRadio');
+            const customInput = document.getElementById('customValue1');
+            const customRadio = document.getElementById('customRadio1');
 
             radioButtons.forEach(radio => {
-            radio.addEventListener('change', function() {
-                if (this.value === '') {
-                customInput.disabled = false;
-                customInput.focus();  // Automatically focus the input field
-                } else {
-                customInput.disabled = true;
-                customInput.value = ''; // Clear the input if not custom
-                }
-            });
+                radio.addEventListener('change', function() {
+                    console.log(`Radio changed: ${this.value}`);
+                    if (this.value === 'gcash') {
+                        customInput.disabled = false; 
+                        customInput.required = true; 
+                        console.log('Custom input enabled and required');
+                        customInput.focus();
+                    } else {
+                        customInput.disabled = true; 
+                        customInput.required = false; 
+                        customInput.value = '';
+                        console.log('Custom input disabled and required removed');
+                    }
+                    console.log(`customValue disabled: ${customInput.disabled}`);
+                });
             });
 
             customInput.addEventListener('input', function() {
-            customRadio.value = customInput.value;
+                customRadio.value = customInput.value;
+                console.log(`Custom input value: ${customInput.value}`);
             });
         });
 

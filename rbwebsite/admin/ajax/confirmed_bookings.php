@@ -64,6 +64,8 @@
                 }
             }
 
+            $full_payment = $data['total_pay'];
+
             if((strcasecmp($data['trans_id'], 'walk-in') != 0) && $data['trans_id']!='')
             {
                 $gcash = "<span class='badge bg-primary'>
@@ -118,8 +120,8 @@
                         <br>
                     </td>
                     <td>
-                        <button type='button' onclick='confirm_booking($data[booking_id])' class='btn text-white btn-sm fw-bold custom-bg shadow-none' data-bs-toggle='modal' data-bs-target='#assign-room'>
-                            <i class='bi bi-check2-square'></i> Confirm Arrival
+                        <button type='button' onclick='confirm_booking({$data['booking_id']}, {$full_payment})' class='btn text-white btn-sm fw-bold custom-bg shadow-none'>
+                            <i class='bi bi-check'></i> Confirm Arrival
                         </button>
                         <br>
                         <button type='button' onclick='cancel_booking($data[booking_id])' class='mt-2 btn btn-outline-danger btn-sm fw-bold shadow-none'>
@@ -141,10 +143,10 @@
 
         $query = "UPDATE booking_order bo INNER JOIN booking_details bd
             ON bo.booking_id = bd.booking_id
-            SET bo.arrival = ?, bo.rate_review = ?, bo.booking_status = ?
+            SET bo.arrival = ?, bo.rate_review = ?, bo.booking_status = ?, bo.trans_amt = ?
             WHERE bo.booking_id = ?";
-        $values = [1,0,'booked',$frm_data['booking_id']];
-        $res = update($query,$values,'iisi');
+        $values = [1,0,'booked',$frm_data['full_payment'],$frm_data['booking_id']];
+        $res = update($query,$values,'iisii');
 
         echo $res;
     }

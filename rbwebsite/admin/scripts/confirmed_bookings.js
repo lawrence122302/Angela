@@ -11,13 +11,14 @@ function get_bookings(search='')
     xhr.send('get_bookings&search='+search);
 }
 
-function confirm_booking(id) {
+function confirm_booking(id, full_payment) {
     let confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
     confirmModal.show();
 
     document.getElementById('confirmPaymentBtn').onclick = function() {
         let data = new FormData();
         data.append('booking_id', id);
+        data.append('full_payment', full_payment);
         data.append('confirm_booking', '');
 
         let xhr = new XMLHttpRequest();

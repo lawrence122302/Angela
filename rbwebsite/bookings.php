@@ -117,6 +117,9 @@
                                     <b>Date: </b> $date
                                 </p>
                                 <p>
+                                    <b>Paid:</b> ₱$data[trans_amt]
+                                </p>
+                                <p>
                                     $gcash
                                     <span class='badge $status_bg'>$data[booking_status]</span>
                                 </p>

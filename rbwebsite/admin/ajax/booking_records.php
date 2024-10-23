@@ -58,13 +58,6 @@
                 $status_bg = 'bg-warning text-dark';
             }
 
-
-
-
-
-
-
-
             $date1 = new DateTime($checkin);
             $date2 = new DateTime($checkout);
 
