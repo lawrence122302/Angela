@@ -208,6 +208,9 @@ document.getElementById('restoreDatabaseForm').addEventListener('submit', functi
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "restore.php", true);
     xhr.onload = function () {
+        let modal = bootstrap.Modal.getInstance(document.getElementById('restoreModal'));
+        modal.hide();
+        document.getElementById('restoreDatabaseForm').reset();
         if (xhr.responseText == 1) {
             alert('success', 'Database restore successful!');
         } else if (xhr.responseText == 0) {

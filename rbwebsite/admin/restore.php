@@ -15,22 +15,19 @@
         foreach($databases as $database)
         {
             // Drop database
-            $dropCommand = MYSQL_PATH . " --user={$user} --password={$pass} --host={$host} -e 'DROP DATABASE {$database}'";
-            exec($dropCommand, $dropOutput, $dropReturnVar);
-
-            if ($dropReturnVar != 0) {
-                echo 0;
-            }    
+            // $dropCommand = MYSQL_PATH . " --user={$user} --password={$pass} -e 'DROP DATABASE {$database}'";
+            // exec($dropCommand, $dropOutput, $dropReturnVar);
+            // if ($dropReturnVar != 0) {
+            //     echo 0;
+            // }
 
             // Create database
-            $createCommand = "mysql --user={$user} --password={$pass} --host={$host} -e 'CREATE DATABASE {$database}'";
-            exec($createCommand, $createOutput, $createReturnVar);
-
-            if ($createReturnVar != 0) {
-                echo 0;
-            }
-
-            $folder = BACKUP_PATH.$database."/".$filename.".sql";
+            // $createCommand = MYSQL_PATH . " --user={$user} --password={$pass} -e 'CREATE DATABASE {$database}'";
+            // exec($createCommand, $createOutput, $createReturnVar);
+            // if ($createReturnVar != 0) {
+            //     error_log(print_r($createOutput, true));
+            //     echo 0;
+            // }
 
             $restoreCommand = MYSQL_PATH . " --user={$user} --password={$pass} --database={$database} < {$fileTmpPath}";
             exec($restoreCommand, $restoreOutput, $restoreReturnVar);
