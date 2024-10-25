@@ -184,6 +184,39 @@ function upd_contacts()
     xhr.send(data_str);
 }
 
+document.getElementById('backupButton').addEventListener('click', function() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "backup.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onload = function () {
+        if (this.responseText == 1) {
+            alert('success', 'Backup successful!');
+        }
+        else if (this.responseText == 0) {
+            alert('error', 'Backup failed!');
+        }
+    };
+    xhr.send();
+});
+
+document.getElementById('restoreDatabaseForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    let formData = new FormData(this);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "restore.php", true);
+    xhr.onload = function () {
+        if (xhr.responseText == 1) {
+            alert('success', 'Database restore successful!');
+        } else if (xhr.responseText == 0) {
+            alert('error', 'Database restore failed!');
+        }
+    };
+    xhr.send(formData);
+});
+
 window.onload = function()
 {
     get_general();

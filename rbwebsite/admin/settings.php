@@ -24,8 +24,10 @@
                         <h3>Settings</h3>
                     </div>
                     <div>
-                        <button class="btn btn-dark rounded" onclick="backupDatabase()">Backup <i class="bi bi-database-fill-add"></i></button>
-                        <button class="btn btn-dark rounded" onclick="backupDatabase()">Restore <i class="bi bi-database-fill-down"></i></button>
+                        <button id="backupButton" class="btn btn-dark rounded">Backup <i class="bi bi-database-fill-add"></i></button>
+                        <button type="button" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#restoreModal">
+                            Restore <i class="bi bi-database-fill-down"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -240,6 +242,29 @@
                 </div>
 
             </div>
+        </div>
+    </div>
+
+    <!-- Restore database modal -->
+    <div class="modal fade" id="restoreModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="restoreDatabaseForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Restore Database</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">SQL File</label>
+                            <input type="file" name="restore_database" accept=".sql" class="form-control shadow-none" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn custom-bg text-white shadow-none">Submit</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 

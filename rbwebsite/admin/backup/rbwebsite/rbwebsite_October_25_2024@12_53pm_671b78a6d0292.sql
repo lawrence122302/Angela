@@ -61,7 +61,7 @@ CREATE TABLE `booking_details` (
   PRIMARY KEY (`sr_no`),
   KEY `booking_id` (`booking_id`),
   CONSTRAINT `booking_details_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `booking_order` (`booking_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `booking_details` (
 
 LOCK TABLES `booking_details` WRITE;
 /*!40000 ALTER TABLE `booking_details` DISABLE KEYS */;
-INSERT INTO `booking_details` VALUES (64,65,'test',111,111,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(65,66,'test',111,123,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(66,67,'test',111,123,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(67,68,'test',111,111,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(68,69,'test',111,111,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(69,70,'test',111,111,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(70,71,'test',111,111,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(71,72,'test',111,111,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(72,73,'test',111,111,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(73,74,'test',111,111,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(74,75,'test',111,111,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(75,76,'test',111,111,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(76,77,'test',111,111,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(77,78,'test',111,123,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr');
+INSERT INTO `booking_details` VALUES (124,125,'test',333,333,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(125,126,'test',333,333,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(126,127,'test',333,333,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(127,128,'test',333,333,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(128,129,'test',111,111,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(129,130,'test',222,222,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr');
 /*!40000 ALTER TABLE `booking_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,7 +102,7 @@ CREATE TABLE `booking_order` (
   KEY `room_id` (`room_id`),
   CONSTRAINT `booking_order_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_cred` (`id`),
   CONSTRAINT `booking_order_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +111,7 @@ CREATE TABLE `booking_order` (
 
 LOCK TABLES `booking_order` WRITE;
 /*!40000 ALTER TABLE `booking_order` DISABLE KEYS */;
-INSERT INTO `booking_order` VALUES (65,1,9,'2024-10-29 20:00:00','2024-10-30 06:00:00',1,NULL,'booked','ORD_18429571','',56,'reserved',NULL,1,'2024-10-08 18:21:07'),(66,1,9,'2024-11-08 08:00:00','2024-11-08 18:00:00',1,NULL,'booked','ORD_16421836','',62,'reserved',NULL,0,'2024-10-09 15:17:30'),(67,1,9,'2024-11-08 20:00:00','2024-11-09 06:00:00',0,0,'cancelled','ORD_13622267','',123,'reserved',NULL,NULL,'2024-10-09 15:18:05'),(68,1,9,'2024-12-05 08:00:00','2024-12-05 18:00:00',0,NULL,'pending','ORD_17649246','',111,'pending',NULL,NULL,'2024-10-09 15:19:53'),(69,1,9,'2024-11-05 08:00:00','2024-11-05 18:00:00',0,NULL,'pending','ORD_12601423','',56,'pending',NULL,NULL,'2024-10-09 15:42:57'),(70,1,9,'2024-11-05 20:00:00','2024-11-06 06:00:00',0,NULL,'pending','ORD_12252939','',56,'pending',NULL,NULL,'2024-10-09 15:43:07'),(71,1,9,'2024-11-11 20:00:00','2024-11-12 06:00:00',0,NULL,'pending','ORD_19527221','',56,'pending',NULL,NULL,'2024-10-09 15:43:16'),(72,1,9,'2024-11-12 08:00:00','2024-11-12 18:00:00',0,NULL,'pending','ORD_16848458','',111,'pending',NULL,NULL,'2024-10-09 15:43:29'),(73,1,9,'2024-11-12 20:00:00','2024-11-13 06:00:00',0,NULL,'pending','ORD_19358528','',111,'pending',NULL,NULL,'2024-10-09 15:43:39'),(74,1,9,'2024-11-13 20:00:00','2024-11-14 06:00:00',0,NULL,'pending','ORD_17722063','',111,'pending',NULL,NULL,'2024-10-09 15:43:48'),(75,1,9,'2024-10-23 20:00:00','2024-10-24 06:00:00',0,NULL,'pending','ORD_15237649','walk-in',56,'pending',NULL,NULL,'2024-10-13 23:43:54'),(76,1,9,'2024-10-30 20:00:00','2024-10-31 06:00:00',0,NULL,'pending','ORD_1165286','custom',56,'pending',NULL,NULL,'2024-10-13 23:44:10'),(77,1,9,'2024-10-31 20:00:00','2024-11-01 06:00:00',0,NULL,'pending','ORD_1291615','GCASH777777777777777777777',56,'pending',NULL,NULL,'2024-10-13 23:49:15'),(78,1,9,'2024-11-01 20:00:00','2024-11-02 06:00:00',0,NULL,'reserved','ORD_18455750','walk-in',62,'reserved',NULL,NULL,'2024-10-13 23:49:44');
+INSERT INTO `booking_order` VALUES (125,1,9,'2024-11-03 20:00:00','2024-11-04 06:00:00',1,NULL,'booked','ORD_18415077','walk-in',333,'reserved',NULL,0,'2024-10-24 00:40:23'),(126,1,9,'2024-11-03 08:00:00','2024-11-03 18:00:00',1,NULL,'booked','ORD_1660275','walk-in',333,'reserved',NULL,0,'2024-10-24 00:40:30'),(127,1,9,'2024-11-03 20:00:00','2024-11-04 06:00:00',0,NULL,'pending','ORD_16143205','walk-in',333,'pending',NULL,NULL,'2024-10-24 00:41:59'),(128,1,9,'2024-11-03 08:00:00','2024-11-03 18:00:00',0,NULL,'pending','ORD_14699013','walk-in',167,'pending',NULL,NULL,'2024-10-24 00:42:06'),(129,1,9,'2024-11-13 08:00:00','2024-11-13 18:00:00',0,NULL,'pending','ORD_12840411','walk-in',56,'pending',NULL,NULL,'2024-10-24 00:42:12'),(130,1,9,'2024-12-02 08:00:00','2024-12-03 06:00:00',0,NULL,'pending','ORD_12198066','walk-in',111,'pending',NULL,NULL,'2024-10-24 00:42:27');
 /*!40000 ALTER TABLE `booking_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -253,7 +253,6 @@ CREATE TABLE `rating_review` (
 
 LOCK TABLES `rating_review` WRITE;
 /*!40000 ALTER TABLE `rating_review` DISABLE KEYS */;
-INSERT INTO `rating_review` VALUES (9,65,9,1,5,'Vey food!',1,'2024-10-08 18:29:42');
 /*!40000 ALTER TABLE `rating_review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,7 +281,7 @@ CREATE TABLE `room_facilities` (
 
 LOCK TABLES `room_facilities` WRITE;
 /*!40000 ALTER TABLE `room_facilities` DISABLE KEYS */;
-INSERT INTO `room_facilities` VALUES (96,5,17),(97,7,17),(98,7,18),(99,7,19),(100,7,20),(101,7,21),(102,8,16),(103,8,17),(109,9,16);
+INSERT INTO `room_facilities` VALUES (109,9,16);
 /*!40000 ALTER TABLE `room_facilities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -311,7 +310,7 @@ CREATE TABLE `room_features` (
 
 LOCK TABLES `room_features` WRITE;
 /*!40000 ALTER TABLE `room_features` DISABLE KEYS */;
-INSERT INTO `room_features` VALUES (54,5,6),(55,5,7),(56,5,8),(57,7,6),(58,7,7),(59,7,8),(60,8,6),(61,8,7),(77,9,6);
+INSERT INTO `room_features` VALUES (77,9,6);
 /*!40000 ALTER TABLE `room_features` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,7 +338,6 @@ CREATE TABLE `room_images` (
 
 LOCK TABLES `room_images` WRITE;
 /*!40000 ALTER TABLE `room_images` DISABLE KEYS */;
-INSERT INTO `room_images` VALUES (17,5,'IMG_78683.png',1);
 /*!40000 ALTER TABLE `room_images` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -372,7 +370,7 @@ CREATE TABLE `rooms` (
 
 LOCK TABLES `rooms` WRITE;
 /*!40000 ALTER TABLE `rooms` DISABLE KEYS */;
-INSERT INTO `rooms` VALUES (1,'simple room',43,0,0,0,1,43,'This is description.',1,1),(2,'simple room 3',23,0,0,0,1,432,'This is agfdsdssgs.',1,1),(3,'Simple room 1',132,0,0,0,1,42,'Description',1,1),(4,'Simple room 1',111,222,333,444,1,24,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem saepe, perspiciatis soluta sit ullam blanditiis quia! Repellat, similique placeat?',1,1),(5,'Supreme deluxe room',111,222,333,444,1,9,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem saepe, perspiciatis soluta sit ullam blanditiis quia! Repellat, similique placeat? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem sae',1,0),(6,'Supreme deluxe room',111,222,333,444,1,9,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem saepe, perspiciatis soluta sit ullam blanditiis quia! Repellat, similique placeat? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem sae',1,1),(7,'Simple room 2',111,222,333,444,1,46,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem saepe, perspiciatis soluta sit ullam blanditiis quia! Repellat, similique placeat?',1,0),(8,'Simple room 5',111,222,333,444,1,123,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem saepe, perspiciatis soluta sit ullam blanditiis quia! Repellat, similique placeat?',1,0),(9,'test',111,123,123,123,1,123,'test',1,0);
+INSERT INTO `rooms` VALUES (1,'simple room',43,0,0,0,1,43,'This is description.',1,1),(2,'simple room 3',23,0,0,0,1,432,'This is agfdsdssgs.',1,1),(3,'Simple room 1',132,0,0,0,1,42,'Description',1,1),(4,'Simple room 1',111,222,333,444,1,24,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem saepe, perspiciatis soluta sit ullam blanditiis quia! Repellat, similique placeat?',1,1),(5,'Supreme deluxe room',111,222,333,444,1,9,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem saepe, perspiciatis soluta sit ullam blanditiis quia! Repellat, similique placeat? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem sae',1,1),(6,'Supreme deluxe room',111,222,333,444,1,9,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem saepe, perspiciatis soluta sit ullam blanditiis quia! Repellat, similique placeat? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem sae',1,1),(7,'Simple room 2',111,222,333,444,1,46,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem saepe, perspiciatis soluta sit ullam blanditiis quia! Repellat, similique placeat?',1,1),(8,'Simple room 5',111,222,333,444,1,123,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem saepe, perspiciatis soluta sit ullam blanditiis quia! Repellat, similique placeat?',1,1),(9,'test',111,222,333,444,1,123,'test',1,0);
 /*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -476,4 +474,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-23 19:37:26
+-- Dump completed on 2024-10-25 18:53:26
