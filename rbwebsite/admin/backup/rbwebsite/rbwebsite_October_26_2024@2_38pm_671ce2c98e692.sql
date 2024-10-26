@@ -3,7 +3,7 @@
 -- Host: localhost	Database: rbwebsite
 -- ------------------------------------------------------
 -- Server version 	10.4.32-MariaDB
--- Date: Sat, 26 Oct 2024 12:47:07 +0200
+-- Date: Sat, 26 Oct 2024 14:38:33 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -76,12 +76,11 @@ CREATE TABLE `booking_details` (
 LOCK TABLES `booking_details` WRITE;
 /*!40000 ALTER TABLE `booking_details` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `booking_details` VALUES (124,125,'test',333,333,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(125,126,'test',333,333,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(126,127,'test',333,333,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(127,128,'test',333,333,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(128,129,'test',111,111,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(129,130,'test',222,222,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr');
 /*!40000 ALTER TABLE `booking_details` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `booking_details` with 6 row(s)
+-- Dumped table `booking_details` with 0 row(s)
 --
 
 --
@@ -121,12 +120,11 @@ CREATE TABLE `booking_order` (
 LOCK TABLES `booking_order` WRITE;
 /*!40000 ALTER TABLE `booking_order` DISABLE KEYS */;
 SET autocommit=0;
-INSERT INTO `booking_order` VALUES (125,1,9,'2024-11-03 20:00:00','2024-11-04 06:00:00',1,NULL,'booked','ORD_18415077','walk-in',333,'reserved',NULL,0,'2024-10-24 00:40:23'),(126,1,9,'2024-11-03 08:00:00','2024-11-03 18:00:00',1,NULL,'booked','ORD_1660275','walk-in',333,'reserved',NULL,0,'2024-10-24 00:40:30'),(127,1,9,'2024-11-03 20:00:00','2024-11-04 06:00:00',0,NULL,'pending','ORD_16143205','walk-in',333,'pending',NULL,NULL,'2024-10-24 00:41:59'),(128,1,9,'2024-11-03 08:00:00','2024-11-03 18:00:00',0,NULL,'pending','ORD_14699013','walk-in',167,'pending',NULL,NULL,'2024-10-24 00:42:06'),(129,1,9,'2024-11-13 08:00:00','2024-11-13 18:00:00',0,NULL,'pending','ORD_12840411','walk-in',56,'pending',NULL,NULL,'2024-10-24 00:42:12'),(130,1,9,'2024-12-02 08:00:00','2024-12-03 06:00:00',0,NULL,'pending','ORD_12198066','walk-in',111,'pending',NULL,NULL,'2024-10-24 00:42:27');
 /*!40000 ALTER TABLE `booking_order` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
 
--- Dumped table `booking_order` with 6 row(s)
+-- Dumped table `booking_order` with 0 row(s)
 --
 
 --
@@ -537,4 +535,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Sat, 26 Oct 2024 12:47:07 +0200
+-- Dump completed on: Sat, 26 Oct 2024 14:38:33 +0200

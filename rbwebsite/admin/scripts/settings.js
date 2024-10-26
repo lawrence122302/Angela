@@ -93,11 +93,11 @@ function upd_shutdown(val)
         }
         else if(this.responseText == 0 && general_data.shutdown==0)
         {
-            alert('danger','No Super Admin Privileges.');
+            alert('danger','No Super Admin Privileges!');
         }
         else if(this.responseText == 0 && general_data.shutdown==1)
         {
-            alert('danger','No Super Admin Privileges.');
+            alert('danger','No Super Admin Privileges!');
         }
         get_general();
 
@@ -185,55 +185,42 @@ function upd_contacts()
 }
 
 document.getElementById('backupButton').addEventListener('click', function() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "backup.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    if(isSuperAdmin)
+    {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "backup.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-    xhr.onload = function () {
-        let response = JSON.parse(xhr.responseText);
-        if (response.status == 1) {
-            alert('success', 'Backup successful!');
-            
-            // Locally download backup file
-            let link = document.createElement('a');
-            link.download = response.file.split('/').pop();
+        xhr.onload = function () {
+            let response = JSON.parse(xhr.responseText);
+            if (response.status == 1) {
+                alert('success', 'Backup successful!');
+                
+                // Locally download backup file
+                let link = document.createElement('a');
+                link.download = response.file.split('/').pop();
 
-            // Adjust path based on local or remote deployment
-            if (response.file.startsWith("http")) {
-                link.href = response.file;
-            } else {
-                link.href = response.file.replace(/\\/g, '/').replace('C:/xampp/htdocs/', '/');
+                // Adjust path based on local or remote deployment
+                if (response.file.startsWith("http")) {
+                    link.href = response.file;
+                } else {
+                    link.href = response.file.replace(/\\/g, '/').replace('C:/xampp/htdocs/', '/');
+                }
+
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
             }
-
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-        else if (response.status == 0) {
-            alert('error', 'Backup failed!');
-        }
-    };
-    xhr.send();
-});
-
-document.getElementById('restoreDatabaseForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    let formData = new FormData(this);
-
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "restore.php", true);
-    xhr.onload = function () {
-        let modal = bootstrap.Modal.getInstance(document.getElementById('restoreModal'));
-        modal.hide();
-        document.getElementById('restoreDatabaseForm').reset();
-        if (xhr.responseText == 1) {
-            alert('success', 'Database restore successful!');
-        } else if (xhr.responseText == 0) {
-            alert('error', 'Database restore failed!');
-        }
-    };
-    xhr.send(formData);
+            else if (response.status == 0) {
+                alert('error', 'Backup failed!');
+            }
+        };
+        xhr.send();
+    }
+    else
+    {
+        alert('error', 'No Super Admin Privileges!');
+    }
 });
 
 window.onload = function()

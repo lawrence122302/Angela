@@ -14,7 +14,13 @@
 </head>
 <body class="bg-light">
 
-    <?php require('inc/header.php') ?>
+    <?php
+        require('inc/header.php');
+        $query = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
+        $res = mysqli_fetch_assoc($query);
+
+        $is_super_admin = $res['is_super_admin'] == 1 ? 'true' : 'false';
+    ?>
 
     <div class="container-fluid" id="main-content">
         <div class="row">
@@ -23,12 +29,7 @@
                     <div>
                         <h3>Settings</h3>
                     </div>
-                    <div>
-                        <button id="backupButton" class="btn btn-dark rounded">Backup <i class="bi bi-database-fill-add"></i></button>
-                        <button type="button" class="btn btn-dark shadow-none" data-bs-toggle="modal" data-bs-target="#restoreModal">
-                            Restore <i class="bi bi-database-fill-down"></i>
-                        </button>
-                    </div>
+                    <button id="backupButton" class="btn btn-dark rounded">Download Database <i class="bi bi-database-fill-add"></i></button>
                 </div>
 
                 <!-- General Settings -->
@@ -37,9 +38,6 @@
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h5 class="card-title m-0">General Settings</h5>
                             <?php
-                                $query = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
-                                $res = mysqli_fetch_assoc($query);
-
                                 if($res['is_super_admin']==1)
                                 {
                                     echo<<<data
@@ -245,30 +243,10 @@
         </div>
     </div>
 
-    <!-- Restore database modal -->
-    <div class="modal fade" id="restoreModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <form id="restoreDatabaseForm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Restore Database</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">SQL File</label>
-                            <input type="file" name="restore_database" accept=".sql" class="form-control shadow-none" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn custom-bg text-white shadow-none">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <?php require('inc/scripts.php'); ?>    
+    <script>
+        var isSuperAdmin = <?php echo $is_super_admin; ?>;
+    </script>
     <script src="scripts/settings.js"></script>
 
 </body>

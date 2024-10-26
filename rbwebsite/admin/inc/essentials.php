@@ -13,8 +13,6 @@
     // backup and restore database
     // modify back up path when deployed "/admin/backup/"
     define('BACKUP_PATH', $_SERVER['DOCUMENT_ROOT'].'/Angela/rbwebsite/admin/backup/');
-    // modify restored path when deployed "/admin/restored/"
-    define('RESTORED_PATH', $_SERVER['DOCUMENT_ROOT'].'/Angela/rbwebsite/admin/restored/');
 
     // backend upload process needs this data
     // modify upload image path when deployed "/images/"

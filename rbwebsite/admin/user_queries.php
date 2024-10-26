@@ -77,7 +77,17 @@
 </head>
 <body class="bg-light">
 
-    <?php require('inc/header.php') ?>
+    <?php
+        require('inc/header.php');
+        $query = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
+        $res = mysqli_fetch_assoc($query);
+
+        if ($res['is_super_admin'] == 1) {
+            $is_super_admin = 'true';
+        } else {
+            $is_super_admin = 'false';
+        }
+    ?>
 
     <div class="container-fluid" id="main-content">
         <div class="row">
@@ -91,9 +101,16 @@
                             <a href="#" class="btn btn-dark rounded-pill shadow-none btn-sm" onclick="markAllAsRead()">
                                 <i class="bi bi-check-all"></i> Mark all read
                             </a>
-                            <a href="#" class="btn btn-danger rounded-pill shadow-none btn-sm" onclick="deleteAllQueries()">
-                                <i class="bi bi-trash"></i> Delete all
-                            </a>
+                            <?php
+                                if($res['is_super_admin']==1)
+                                {
+                                    echo<<<data
+                                        <a href="#" class="btn btn-danger rounded-pill shadow-none btn-sm" onclick="deleteAllQueries()">
+                                            <i class="bi bi-trash"></i> Delete all
+                                        </a>
+                                    data;
+                                }
+                            ?>
                         </div>
 
                         <div class="table-responsive">
@@ -124,7 +141,10 @@
                                             {
                                                 $seen = "<a href='#' class='btn btn-sm rounded-pill btn-primary' onclick='markAsRead($sr_no)'><i class='bi bi-check'></i> Mark as read</a><br>";
                                             }
-                                            $seen .= "<a href='#' class='btn btn-sm rounded-pill btn-danger mt-2' onclick='deleteQuery($sr_no)'><i class='bi bi-trash'></i> Delete</a>";
+                                            if($res['is_super_admin']==1)
+                                            {
+                                                $seen .= "<a href='#' class='btn btn-sm rounded-pill btn-danger mt-2' onclick='deleteQuery($sr_no)'><i class='bi bi-trash'></i> Delete</a>";
+                                            }
 
                                             echo<<<query
                                                 <tr>
