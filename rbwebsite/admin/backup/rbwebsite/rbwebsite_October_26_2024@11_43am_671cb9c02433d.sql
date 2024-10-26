@@ -1,15 +1,17 @@
--- MariaDB dump 10.19  Distrib 10.4.32-MariaDB, for Win64 (AMD64)
+-- mysqldump-php https://github.com/ifsnop/mysqldump-php
 --
--- Host: localhost    Database: rbwebsite
+-- Host: localhost	Database: rbwebsite
 -- ------------------------------------------------------
--- Server version	10.4.32-MariaDB
+-- Server version 	10.4.32-MariaDB
+-- Date: Sat, 26 Oct 2024 11:43:28 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
+/*!40101 SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
@@ -19,7 +21,6 @@
 -- Table structure for table `admin_cred`
 --
 
-DROP TABLE IF EXISTS `admin_cred`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin_cred` (
@@ -37,15 +38,19 @@ CREATE TABLE `admin_cred` (
 
 LOCK TABLES `admin_cred` WRITE;
 /*!40000 ALTER TABLE `admin_cred` DISABLE KEYS */;
+SET autocommit=0;
 INSERT INTO `admin_cred` VALUES (1,'lawrence','password',0),(2,'superadmin','superpassword',1);
 /*!40000 ALTER TABLE `admin_cred` ENABLE KEYS */;
 UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `admin_cred` with 2 row(s)
+--
 
 --
 -- Table structure for table `booking_details`
 --
 
-DROP TABLE IF EXISTS `booking_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `booking_details` (
@@ -70,15 +75,19 @@ CREATE TABLE `booking_details` (
 
 LOCK TABLES `booking_details` WRITE;
 /*!40000 ALTER TABLE `booking_details` DISABLE KEYS */;
+SET autocommit=0;
 INSERT INTO `booking_details` VALUES (124,125,'test',333,333,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(125,126,'test',333,333,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(126,127,'test',333,333,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(127,128,'test',333,333,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(128,129,'test',111,111,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr'),(129,130,'test',222,222,'test','Lawrence Lasmarias','09165656123','dsfdhhtfr');
 /*!40000 ALTER TABLE `booking_details` ENABLE KEYS */;
 UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `booking_details` with 6 row(s)
+--
 
 --
 -- Table structure for table `booking_order`
 --
 
-DROP TABLE IF EXISTS `booking_order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `booking_order` (
@@ -111,15 +120,19 @@ CREATE TABLE `booking_order` (
 
 LOCK TABLES `booking_order` WRITE;
 /*!40000 ALTER TABLE `booking_order` DISABLE KEYS */;
+SET autocommit=0;
 INSERT INTO `booking_order` VALUES (125,1,9,'2024-11-03 20:00:00','2024-11-04 06:00:00',1,NULL,'booked','ORD_18415077','walk-in',333,'reserved',NULL,0,'2024-10-24 00:40:23'),(126,1,9,'2024-11-03 08:00:00','2024-11-03 18:00:00',1,NULL,'booked','ORD_1660275','walk-in',333,'reserved',NULL,0,'2024-10-24 00:40:30'),(127,1,9,'2024-11-03 20:00:00','2024-11-04 06:00:00',0,NULL,'pending','ORD_16143205','walk-in',333,'pending',NULL,NULL,'2024-10-24 00:41:59'),(128,1,9,'2024-11-03 08:00:00','2024-11-03 18:00:00',0,NULL,'pending','ORD_14699013','walk-in',167,'pending',NULL,NULL,'2024-10-24 00:42:06'),(129,1,9,'2024-11-13 08:00:00','2024-11-13 18:00:00',0,NULL,'pending','ORD_12840411','walk-in',56,'pending',NULL,NULL,'2024-10-24 00:42:12'),(130,1,9,'2024-12-02 08:00:00','2024-12-03 06:00:00',0,NULL,'pending','ORD_12198066','walk-in',111,'pending',NULL,NULL,'2024-10-24 00:42:27');
 /*!40000 ALTER TABLE `booking_order` ENABLE KEYS */;
 UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `booking_order` with 6 row(s)
+--
 
 --
 -- Table structure for table `carousel`
 --
 
-DROP TABLE IF EXISTS `carousel`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `carousel` (
@@ -135,15 +148,19 @@ CREATE TABLE `carousel` (
 
 LOCK TABLES `carousel` WRITE;
 /*!40000 ALTER TABLE `carousel` DISABLE KEYS */;
+SET autocommit=0;
 INSERT INTO `carousel` VALUES (6,'IMG_79045.png'),(28,'IMG_41680.png'),(29,'IMG_94426.jpeg');
 /*!40000 ALTER TABLE `carousel` ENABLE KEYS */;
 UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `carousel` with 3 row(s)
+--
 
 --
 -- Table structure for table `contact_details`
 --
 
-DROP TABLE IF EXISTS `contact_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `contact_details` (
@@ -167,15 +184,19 @@ CREATE TABLE `contact_details` (
 
 LOCK TABLES `contact_details` WRITE;
 /*!40000 ALTER TABLE `contact_details` DISABLE KEYS */;
+SET autocommit=0;
 INSERT INTO `contact_details` VALUES (1,'Angela','https://maps.app.goo.gl/bD5JE7NdBXFnhiR99',26311111111111,632222222222,'angela_example@gm.com','https://www.facebook.com/','https://www.facebook.com/','https://www.facebook.com/','https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7722.039692034821!2d121.16414800000001!3d14.597945!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b916524f4a2d:0xa0f823518f211091!2sAngela\'s Resort 1!5e0!3m2!1sen!2sph!4v1724870148142!5m2!1sen!2sph');
 /*!40000 ALTER TABLE `contact_details` ENABLE KEYS */;
 UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `contact_details` with 1 row(s)
+--
 
 --
 -- Table structure for table `facilities`
 --
 
-DROP TABLE IF EXISTS `facilities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `facilities` (
@@ -193,15 +214,19 @@ CREATE TABLE `facilities` (
 
 LOCK TABLES `facilities` WRITE;
 /*!40000 ALTER TABLE `facilities` DISABLE KEYS */;
+SET autocommit=0;
 INSERT INTO `facilities` VALUES (16,'IMG_32270.svg','Wifi','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere eget tortor sed finibus. Fusce quam enim, faucibus sed vehicula non, tempus vitae dui. Duis ac porttitor sapien.'),(17,'IMG_30941.svg','Air Conditioner','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere eget tortor sed finibus. Fusce quam enim, faucibus sed vehicula non, tempus vitae dui. Duis ac porttitor sapien.'),(18,'IMG_79179.svg','Geyser','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere eget tortor sed finibus. Fusce quam enim, faucibus sed vehicula non, tempus vitae dui. Duis ac porttitor sapien.'),(19,'IMG_16272.svg','Room Heater','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere eget tortor sed finibus. Fusce quam enim, faucibus sed vehicula non, tempus vitae dui. Duis ac porttitor sapien.'),(20,'IMG_84773.svg','Spa','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere eget tortor sed finibus. Fusce quam enim, faucibus sed vehicula non, tempus vitae dui. Duis ac porttitor sapien.'),(21,'IMG_35721.svg','Television','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere eget tortor sed finibus. Fusce quam enim, faucibus sed vehicula non, tempus vitae dui. Duis ac porttitor sapien.');
 /*!40000 ALTER TABLE `facilities` ENABLE KEYS */;
 UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `facilities` with 6 row(s)
+--
 
 --
 -- Table structure for table `features`
 --
 
-DROP TABLE IF EXISTS `features`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `features` (
@@ -217,15 +242,19 @@ CREATE TABLE `features` (
 
 LOCK TABLES `features` WRITE;
 /*!40000 ALTER TABLE `features` DISABLE KEYS */;
+SET autocommit=0;
 INSERT INTO `features` VALUES (6,'bedroom'),(7,'balcony'),(8,'kitchen');
 /*!40000 ALTER TABLE `features` ENABLE KEYS */;
 UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `features` with 3 row(s)
+--
 
 --
 -- Table structure for table `rating_review`
 --
 
-DROP TABLE IF EXISTS `rating_review`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `rating_review` (
@@ -253,99 +282,18 @@ CREATE TABLE `rating_review` (
 
 LOCK TABLES `rating_review` WRITE;
 /*!40000 ALTER TABLE `rating_review` DISABLE KEYS */;
+SET autocommit=0;
 /*!40000 ALTER TABLE `rating_review` ENABLE KEYS */;
 UNLOCK TABLES;
+COMMIT;
 
+-- Dumped table `rating_review` with 0 row(s)
 --
--- Table structure for table `room_facilities`
---
-
-DROP TABLE IF EXISTS `room_facilities`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `room_facilities` (
-  `sr_no` int(11) NOT NULL AUTO_INCREMENT,
-  `room_id` int(11) NOT NULL,
-  `facilities_id` int(11) NOT NULL,
-  PRIMARY KEY (`sr_no`),
-  KEY `facilities id` (`facilities_id`),
-  KEY `room id` (`room_id`),
-  CONSTRAINT `facilities id` FOREIGN KEY (`facilities_id`) REFERENCES `facilities` (`id`) ON UPDATE NO ACTION,
-  CONSTRAINT `room id` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `room_facilities`
---
-
-LOCK TABLES `room_facilities` WRITE;
-/*!40000 ALTER TABLE `room_facilities` DISABLE KEYS */;
-INSERT INTO `room_facilities` VALUES (109,9,16);
-/*!40000 ALTER TABLE `room_facilities` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `room_features`
---
-
-DROP TABLE IF EXISTS `room_features`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `room_features` (
-  `sr_no` int(11) NOT NULL AUTO_INCREMENT,
-  `room_id` int(11) NOT NULL,
-  `features_id` int(11) NOT NULL,
-  PRIMARY KEY (`sr_no`),
-  KEY `features id` (`features_id`),
-  KEY `rm id` (`room_id`),
-  CONSTRAINT `features id` FOREIGN KEY (`features_id`) REFERENCES `features` (`id`) ON UPDATE NO ACTION,
-  CONSTRAINT `rm id` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `room_features`
---
-
-LOCK TABLES `room_features` WRITE;
-/*!40000 ALTER TABLE `room_features` DISABLE KEYS */;
-INSERT INTO `room_features` VALUES (77,9,6);
-/*!40000 ALTER TABLE `room_features` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `room_images`
---
-
-DROP TABLE IF EXISTS `room_images`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `room_images` (
-  `sr_no` int(11) NOT NULL AUTO_INCREMENT,
-  `room_id` int(11) NOT NULL,
-  `image` varchar(150) NOT NULL,
-  `thumb` tinyint(4) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`sr_no`),
-  KEY `room_id` (`room_id`),
-  CONSTRAINT `room_images_ibfk_1` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `room_images`
---
-
-LOCK TABLES `room_images` WRITE;
-/*!40000 ALTER TABLE `room_images` DISABLE KEYS */;
-/*!40000 ALTER TABLE `room_images` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `rooms`
 --
 
-DROP TABLE IF EXISTS `rooms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `rooms` (
@@ -370,15 +318,116 @@ CREATE TABLE `rooms` (
 
 LOCK TABLES `rooms` WRITE;
 /*!40000 ALTER TABLE `rooms` DISABLE KEYS */;
+SET autocommit=0;
 INSERT INTO `rooms` VALUES (1,'simple room',43,0,0,0,1,43,'This is description.',1,1),(2,'simple room 3',23,0,0,0,1,432,'This is agfdsdssgs.',1,1),(3,'Simple room 1',132,0,0,0,1,42,'Description',1,1),(4,'Simple room 1',111,222,333,444,1,24,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem saepe, perspiciatis soluta sit ullam blanditiis quia! Repellat, similique placeat?',1,1),(5,'Supreme deluxe room',111,222,333,444,1,9,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem saepe, perspiciatis soluta sit ullam blanditiis quia! Repellat, similique placeat? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem sae',1,1),(6,'Supreme deluxe room',111,222,333,444,1,9,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem saepe, perspiciatis soluta sit ullam blanditiis quia! Repellat, similique placeat? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem sae',1,1),(7,'Simple room 2',111,222,333,444,1,46,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem saepe, perspiciatis soluta sit ullam blanditiis quia! Repellat, similique placeat?',1,1),(8,'Simple room 5',111,222,333,444,1,123,'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum beatae nulla porro quam pariatur natus magnam dolorem dicta amet rem saepe, perspiciatis soluta sit ullam blanditiis quia! Repellat, similique placeat?',1,1),(9,'test',111,222,333,444,1,123,'test',1,0);
 /*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
 UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `rooms` with 9 row(s)
+--
+
+--
+-- Table structure for table `room_facilities`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `room_facilities` (
+  `sr_no` int(11) NOT NULL AUTO_INCREMENT,
+  `room_id` int(11) NOT NULL,
+  `facilities_id` int(11) NOT NULL,
+  PRIMARY KEY (`sr_no`),
+  KEY `facilities id` (`facilities_id`),
+  KEY `room id` (`room_id`),
+  CONSTRAINT `facilities id` FOREIGN KEY (`facilities_id`) REFERENCES `facilities` (`id`) ON UPDATE NO ACTION,
+  CONSTRAINT `room id` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `room_facilities`
+--
+
+LOCK TABLES `room_facilities` WRITE;
+/*!40000 ALTER TABLE `room_facilities` DISABLE KEYS */;
+SET autocommit=0;
+INSERT INTO `room_facilities` VALUES (109,9,16);
+/*!40000 ALTER TABLE `room_facilities` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `room_facilities` with 1 row(s)
+--
+
+--
+-- Table structure for table `room_features`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `room_features` (
+  `sr_no` int(11) NOT NULL AUTO_INCREMENT,
+  `room_id` int(11) NOT NULL,
+  `features_id` int(11) NOT NULL,
+  PRIMARY KEY (`sr_no`),
+  KEY `features id` (`features_id`),
+  KEY `rm id` (`room_id`),
+  CONSTRAINT `features id` FOREIGN KEY (`features_id`) REFERENCES `features` (`id`) ON UPDATE NO ACTION,
+  CONSTRAINT `rm id` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `room_features`
+--
+
+LOCK TABLES `room_features` WRITE;
+/*!40000 ALTER TABLE `room_features` DISABLE KEYS */;
+SET autocommit=0;
+INSERT INTO `room_features` VALUES (77,9,6);
+/*!40000 ALTER TABLE `room_features` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `room_features` with 1 row(s)
+--
+
+--
+-- Table structure for table `room_images`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `room_images` (
+  `sr_no` int(11) NOT NULL AUTO_INCREMENT,
+  `room_id` int(11) NOT NULL,
+  `image` varchar(150) NOT NULL,
+  `thumb` tinyint(4) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`sr_no`),
+  KEY `room_id` (`room_id`),
+  CONSTRAINT `room_images_ibfk_1` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `room_images`
+--
+
+LOCK TABLES `room_images` WRITE;
+/*!40000 ALTER TABLE `room_images` DISABLE KEYS */;
+SET autocommit=0;
+/*!40000 ALTER TABLE `room_images` ENABLE KEYS */;
+UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `room_images` with 0 row(s)
+--
 
 --
 -- Table structure for table `settings`
 --
 
-DROP TABLE IF EXISTS `settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `settings` (
@@ -396,15 +445,19 @@ CREATE TABLE `settings` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
+SET autocommit=0;
 INSERT INTO `settings` VALUES (1,'Angela\'s Private Pool','Celebrate with your family at Angela’s Resort, where you can enjoy a refreshing dip in our sparkling pool and take in the relaxing, overlooking view of the Metro. Located in the peaceful city of Antipolo, Rizal, we are just a few minutes away from th',0);
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `settings` with 1 row(s)
+--
 
 --
 -- Table structure for table `user_cred`
 --
 
-DROP TABLE IF EXISTS `user_cred`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_cred` (
@@ -432,15 +485,19 @@ CREATE TABLE `user_cred` (
 
 LOCK TABLES `user_cred` WRITE;
 /*!40000 ALTER TABLE `user_cred` DISABLE KEYS */;
+SET autocommit=0;
 INSERT INTO `user_cred` VALUES (1,'Lawrence Lasmarias','lawrencelasmarias1@gmail.com','dsfdhhtfr','09165656123',1920,'2024-09-15','IMG_60411.jpeg','$2y$10$EzY.duYqFWx82Igx/EVyA.aYgYChK1Gueqfdl8sgSsyCdeTfyfAO6',1,NULL,NULL,1,'2024-09-15 21:38:40'),(2,'asd','gdsfdssdgsd@gmail.com','dsfdhhtfr','352342',34,'2024-09-15','IMG_47326.jpeg','$2y$10$rWke.PkTcH0RGmV.Z.qcWODINRTFYaXUd48yFb.t2nmvw7oRz/4Oa',1,'e9227a75d5cf1e29890101bec2dbc652',NULL,0,'2024-09-15 22:11:24'),(4,'Lawrence Lasmarias','lawrencelaias1@gmail.com','sadasdasda','09165656122',1920,'2024-10-03','IMG_87838.jpeg','$2y$10$c.DXtR4xbsCln7lGhRj4.uFhe/ZRnygldXBvIeuv/hk223VZwaZGi',0,'1c1118b1f749b8b0db497fcb9a4b7942',NULL,1,'2024-10-03 03:08:26'),(5,'Lawrence Lasmarias','lawrencelaiaasdasds1@gmail.com','sadasdasda','0916554354353',1920,'2024-10-03','IMG_38863.jpeg','$2y$10$a33HQsasl/8VsXEiB0tqeOm1VW0DzG7xI5S9ivvQW/koZ.U64vi9C',0,'b10fda36e729afcf0e7d554d15a6ffe8',NULL,1,'2024-10-03 03:14:38'),(6,'Lawrence','renzcapricorn1223z7@gmail.com','a','09123456789',1920,'2024-10-04','IMG_67146.jpeg','$2y$10$R5QiTA0vjFZdCN1/IV3u8.55vIPewmcldtqNsWgCd.Ofzw/Tl0doi',1,'183e0b61f21641acc49f84983301392d',NULL,1,'2024-10-04 17:17:48');
 /*!40000 ALTER TABLE `user_cred` ENABLE KEYS */;
 UNLOCK TABLES;
+COMMIT;
+
+-- Dumped table `user_cred` with 5 row(s)
+--
 
 --
 -- Table structure for table `user_queries`
 --
 
-DROP TABLE IF EXISTS `user_queries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_queries` (
@@ -461,11 +518,17 @@ CREATE TABLE `user_queries` (
 
 LOCK TABLES `user_queries` WRITE;
 /*!40000 ALTER TABLE `user_queries` DISABLE KEYS */;
+SET autocommit=0;
 INSERT INTO `user_queries` VALUES (18,'asd@gmail.com','asd@gmail.com','asd@gmail.com','asd@gmail.com','2024-09-02 00:00:00',1),(19,'asd@gmail.com','asd@gmail.com','asd@gmail.com','asd@gmail.com','2024-09-02 00:00:00',1),(20,'gdfdfg@gmail.com','gdfdfg@gmail.com','gdfdfg@gmail.com gdfdfg@gmail.com gdfdfg@gmail.com','gdfdfg@gmail.com gdfdfg@gmail.com gdfdfg@gmail.com gdfdfg@gmail.com gdfdfg@gmail.com gdfdfg@gmail.com','2024-09-04 00:00:00',1),(21,'asd@gmail.com','asd@gmail.com','asd@gmail.com asd@gmail.com asd@gmail.com','asd@gmail.com asd@gmail.com vasd@gmail.com','2024-09-04 00:00:00',1),(22,'as1111111d@gmail.com','as1111111d@gmail.com','as1111111d@gmail.com as1111111d@gmail.com as1111111d@gmail.com','as1111111d@gmail.com as1111111d@gmail.com as1111111d@gmail.com','2024-09-04 00:00:00',1);
 /*!40000 ALTER TABLE `user_queries` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+COMMIT;
 
+-- Dumped table `user_queries` with 5 row(s)
+--
+
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+/*!40101 SET AUTOCOMMIT=@OLD_AUTOCOMMIT */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
@@ -474,4 +537,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-25 23:28:22
+-- Dump completed on: Sat, 26 Oct 2024 11:43:28 +0200

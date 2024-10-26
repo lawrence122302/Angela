@@ -3,6 +3,9 @@
     require('inc/db_config.php');
     adminLogin();
 
+    // mysqldump-php
+    include_once('inc/mysqldump-php-master/src/Ifsnop/Mysqldump/Mysqldump.php');
+
     $databases = [$db];
     $user = $uname;
     $pass = $pass;
@@ -22,14 +25,21 @@
 
         $filename = $database."_".date("F_d_Y")."@".date("g_ia").uniqid("_", false);
         $folder = BACKUP_PATH.$database."/".$filename.".sql";
-
-        $command = MYSQLDUMP_PATH . " --user={$user} --password={$pass} --host={$host} {$database} --result-file={$folder}";
-        exec($command, $output, $return_var);
-        if ($return_var != 0) {
-            echo 0;
-        } else {
-            echo 1;
+        
+        try {
+            $dump = new Ifsnop\Mysqldump\Mysqldump('mysql:host='.$host.';dbname='.$database, $user, $pass);
+            $dump->start($folder);
+        
+            if (file_exists($folder)) {
+                $output = json_encode(["status" => 1, "file" => $folder]);
+                echo $output;
+            } else {
+                $output = json_encode(["status" => 0]);
+                echo $output;
+            }
+        } catch (\Exception $e) {
+            echo json_encode(["status" => 0]);
+            error_log('mysqldump-php error: ' . $e->getMessage());
         }
-    
     }
 ?>

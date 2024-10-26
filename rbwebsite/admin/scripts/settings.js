@@ -190,10 +190,26 @@ document.getElementById('backupButton').addEventListener('click', function() {
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onload = function () {
-        if (this.responseText == 1) {
+        let response = JSON.parse(xhr.responseText);
+        if (response.status == 1) {
             alert('success', 'Backup successful!');
+            
+            // Locally download backup file
+            let link = document.createElement('a');
+            link.download = response.file.split('/').pop();
+
+            // Adjust path based on local or remote deployment
+            if (response.file.startsWith("http")) {
+                link.href = response.file;
+            } else {
+                link.href = response.file.replace(/\\/g, '/').replace('C:/xampp/htdocs/', '/');
+            }
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
-        else if (this.responseText == 0) {
+        else if (response.status == 0) {
             alert('error', 'Backup failed!');
         }
     };
