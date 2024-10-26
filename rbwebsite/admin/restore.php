@@ -3,42 +3,60 @@
     require('inc/db_config.php');
     adminLogin();
 
+    require 'inc/vendor/autoload.php';
+
+    use DatabaseBackupManager\MySQLBackup;
+
     if (isset($_FILES['restore_database']) && $_FILES['restore_database']['error'] == 0)
     {
-        $databases = ['rbwebsite'];
-        $user = 'root';
-        $pass = '';
-        $host = 'localhost';
+        $database = $db;
+        $user = $uname;
+        $pass = $pass;
+        $host = $hname;
 
-        $fileTmpPath = $_FILES['restore_database']['tmp_name'];
-
-        foreach($databases as $database)
+        try
         {
-            // Drop database
-            // $dropCommand = MYSQL_PATH . " --user={$user} --password={$pass} -e 'DROP DATABASE {$database}'";
-            // exec($dropCommand, $dropOutput, $dropReturnVar);
-            // if ($dropReturnVar != 0) {
-            //     echo 0;
-            // }
+            // Initialize PDO connection
+            $db = new PDO('mysql:host='.$host.';dbname='.$database, $user, $pass);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            // Create database
-            // $createCommand = MYSQL_PATH . " --user={$user} --password={$pass} -e 'CREATE DATABASE {$database}'";
-            // exec($createCommand, $createOutput, $createReturnVar);
-            // if ($createReturnVar != 0) {
-            //     error_log(print_r($createOutput, true));
-            //     echo 0;
-            // }
+            // Create an instance of MySQLBackup
+            $mysqlBackup = new MySQLBackup($db);
 
-            $restoreCommand = MYSQL_PATH . " --user={$user} --password={$pass} --database={$database} < {$fileTmpPath}";
-            exec($restoreCommand, $restoreOutput, $restoreReturnVar);
-            if ($restoreReturnVar != 0) {
-                echo 0;
-            } else {
-                echo 1;
+            // Define the path where the file will be temporarily saved
+            $targetDir = RESTORED_PATH; // Ensure this directory is writable
+            $targetFile = $targetDir . basename($_FILES['restore_database']['name']);
+
+            // Move the uploaded file to the target directory
+            if (move_uploaded_file($_FILES['restore_database']['tmp_name'], $targetFile))
+            {
+                // Restore a database
+                $backupFile = $targetFile;
+                // Whether to drop existing tables before restoring data
+                $restore = $mysqlBackup->restore($backupFile, true); // Default is true
+
+                if($restore)
+                {
+                    echo 1;
+                }
+                else
+                {
+                    echo 0;
+                }
             }
+            else
+            {
+                echo "Failed to upload the file.";
+            }
+        }
+        catch (PDOException $e) {
+            echo "Database connection failed: " . $e->getMessage();
+        }
+        catch (Exception $e) {
+            echo "Database restoration failed: " . $e->getMessage();
         }
     }
     else {
-        echo 0;
+        echo "No file uploaded or there was an error uploading the file.";
     }
 ?>

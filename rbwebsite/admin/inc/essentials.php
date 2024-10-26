@@ -10,12 +10,11 @@
     define('ROOMS_IMG_PATH',SITE_URL.'images/rooms/');
     define('USERS_IMG_PATH',SITE_URL.'images/users/');
 
+    // backup and restore database
     // modify back up path when deployed "/admin/backup/"
     define('BACKUP_PATH', $_SERVER['DOCUMENT_ROOT'].'/Angela/rbwebsite/admin/backup/');
-    // modify mysqldump path when deployed "mysqldump"
-    define('MYSQLDUMP_PATH', 'C:/xampp/mysql/bin/mysqldump');
-    // modify mysqldump path when deployed "mysql"
-    define('MYSQL_PATH', 'C:/xampp/mysql/bin/mysql');
+    // modify restored path when deployed "/admin/restored/"
+    define('RESTORED_PATH', $_SERVER['DOCUMENT_ROOT'].'/Angela/rbwebsite/admin/restored/');
 
     // backend upload process needs this data
     // modify upload image path when deployed "/images/"

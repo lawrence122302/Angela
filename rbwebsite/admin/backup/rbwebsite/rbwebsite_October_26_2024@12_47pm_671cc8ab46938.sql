@@ -3,7 +3,7 @@
 -- Host: localhost	Database: rbwebsite
 -- ------------------------------------------------------
 -- Server version 	10.4.32-MariaDB
--- Date: Sat, 26 Oct 2024 11:43:28 +0200
+-- Date: Sat, 26 Oct 2024 12:47:07 +0200
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -537,4 +537,4 @@ COMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on: Sat, 26 Oct 2024 11:43:28 +0200
+-- Dump completed on: Sat, 26 Oct 2024 12:47:07 +0200
