@@ -31,7 +31,8 @@
             $dump->start($folder);
         
             if (file_exists($folder)) {
-                $output = json_encode(["status" => 1, "file" => $folder]);
+                $webPath = str_replace(DOCUMENT_ROOT, '', $folder); // Create the web path from server path
+                $output = json_encode(["status" => 1, "file" => SITE_URL . $webPath]);
                 echo $output;
             } else {
                 $output = json_encode(["status" => 0]);

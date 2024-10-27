@@ -1,8 +1,16 @@
 <?php
 
     // frontend purpose data
-    // modify site url when deployed "https://angelasprivatepool.com/"
-    define('SITE_URL','http://127.0.0.1/Angela/rbwebsite/');
+    // Check if the script is running in a local or production environment
+    if ($_SERVER['HTTP_HOST'] === 'localhost' || strpos($_SERVER['HTTP_HOST'], '127.0.0.1') !== false) {
+        // Local environment
+        define('SITE_URL', 'http://127.0.0.1/Angela/rbwebsite/');
+        define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT'] . '/Angela/rbwebsite');
+    } else {
+        // Production environment
+        define('SITE_URL', 'https://angelasprivatepool.com/');
+        define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT']);
+    }
 
     define('ABOUT_IMG_PATH',SITE_URL.'images/about/');
     define('CAROUSEL_IMG_PATH',SITE_URL.'images/carousel/');
@@ -10,18 +18,16 @@
     define('ROOMS_IMG_PATH',SITE_URL.'images/rooms/');
     define('USERS_IMG_PATH',SITE_URL.'images/users/');
 
-    // backup and restore database
-    // modify back up path when deployed "/admin/backup/"
-    define('BACKUP_PATH', $_SERVER['DOCUMENT_ROOT'].'/Angela/rbwebsite/admin/backup/');
+    // Backup path
+    define('BACKUP_PATH', DOCUMENT_ROOT . '/admin/backup/');
 
-    // backend upload process needs this data
-    // modify upload image path when deployed "/images/"
-    define('UPLOAD_IMAGE_PATH',$_SERVER['DOCUMENT_ROOT'].'/Angela/rbwebsite/images/');
-    define('ABOUT_FOLDER','about/');
-    define('CAROUSEL_FOLDER','carousel/');
-    define('FACILITIES_FOLDER','facilities/');
-    define('ROOMS_FOLDER','rooms/');
-    define('USERS_FOLDER','users/');
+    // Backend upload process needs this data
+    define('UPLOAD_IMAGE_PATH', DOCUMENT_ROOT . '/images/');
+    define('ABOUT_FOLDER', 'about/');
+    define('CAROUSEL_FOLDER', 'carousel/');
+    define('FACILITIES_FOLDER', 'facilities/');
+    define('ROOMS_FOLDER', 'rooms/');
+    define('USERS_FOLDER', 'users/');
 
     // phpmail
     define('MAILHOST','smtp.gmail.com');

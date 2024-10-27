@@ -194,7 +194,7 @@ document.getElementById('backupButton').addEventListener('click', function() {
         xhr.onload = function () {
             let response = JSON.parse(xhr.responseText);
             if (response.status == 1) {
-                alert('success', 'Backup successful!');
+                alert('success', 'Backup stored in server and downloaded!');
                 
                 // Locally download backup file
                 let link = document.createElement('a');
