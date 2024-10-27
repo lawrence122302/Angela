@@ -85,6 +85,28 @@
                 </span>";
             }
 
+            $down_payment_confirmed_by = "";
+            if (!empty($data['down_payment_confirmed_by'])) {
+                $down_payment_confirmed_by = "<br>
+                            {$data['down_payment_confirmed_by']} (Down Payment)";
+            }
+
+            $full_payment_confirmed_by = "";
+            if (!empty($data['full_payment_confirmed_by'])) {
+                $full_payment_confirmed_by = "<br>
+                            {$data['full_payment_confirmed_by']} (Full Payment)";
+            }
+
+            if(!empty($down_payment_confirmed_by)
+                || !empty($full_payment_confirmed_by))
+            {
+                $confirmed_by = "<br>
+                    <br>
+                    <b>Confirmed By</b>";
+            } else {
+                $confirmed_by = "";
+            }
+
             $table_data.="
                 <tr>
                     <td>$i</td>
@@ -98,6 +120,9 @@
                         <b>Name:</b> $data[user_name]
                         <br>
                         <b>Phone No:</b> $data[phonenum]
+                        $confirmed_by
+                        $down_payment_confirmed_by
+                        $full_payment_confirmed_by
                     </td>
                     <td>
                         <b>Accommodation:</b> $data[room_name]
@@ -143,10 +168,10 @@
 
         $query = "UPDATE booking_order bo INNER JOIN booking_details bd
             ON bo.booking_id = bd.booking_id
-            SET bo.arrival = ?, bo.rate_review = ?, bo.booking_status = ?, bo.trans_amt = ?
+            SET bo.arrival = ?, bo.rate_review = ?, bo.booking_status = ?, bo.trans_amt = ?, arrival_confirmed_by=?
             WHERE bo.booking_id = ?";
-        $values = [1,0,'booked',$frm_data['full_payment'],$frm_data['booking_id']];
-        $res = update($query,$values,'iisii');
+        $values = [1,0,'booked',$frm_data['full_payment'],$_SESSION['adminName'],$frm_data['booking_id']];
+        $res = update($query,$values,'iisisi');
 
         echo $res;
     }
@@ -155,9 +180,9 @@
     {
         $frm_data = filteration($_POST);
 
-        $query = "UPDATE booking_order SET booking_status=?, refund=? WHERE booking_id=?";
-        $values = ['cancelled',0,$frm_data['booking_id']];
-        $res = update($query,$values,'sii');
+        $query = "UPDATE booking_order SET booking_status=?, refund=?, arrival_cancelled_by=? WHERE booking_id=?";
+        $values = ['cancelled',0,$_SESSION['adminName'],$frm_data['booking_id']];
+        $res = update($query,$values,'sisi');
 
         echo $res;
     }

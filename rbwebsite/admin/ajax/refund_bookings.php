@@ -83,6 +83,35 @@
                 </span>";
             }
 
+            $down_payment_confirmed_by = "";
+            if (!empty($data['down_payment_confirmed_by'])) {
+                $down_payment_confirmed_by = "<br>
+                            {$data['down_payment_confirmed_by']} (Down Payment)";
+            }
+
+            $full_payment_confirmed_by = "";
+            if (!empty($data['full_payment_confirmed_by'])) {
+                $full_payment_confirmed_by = "<br>
+                            {$data['full_payment_confirmed_by']} (Full Payment)";
+            }
+
+            $arrival_cancelled_by = "";
+            if (!empty($data['arrival_cancelled_by'])) {
+                $arrival_cancelled_by = "<br>
+                            {$data['arrival_cancelled_by']} (Arrival Cancelled)";
+            }
+
+            if(!empty($down_payment_confirmed_by)
+                || !empty($full_payment_confirmed_by)
+                || !empty($arrival_cancelled_by))
+            {
+                $confirmed_by = "<br>
+                    <br>
+                    <b>Confirmed By</b>";
+            } else {
+                $confirmed_by = "";
+            }
+
             $table_data.="
                 <tr>
                     <td>$i</td>
@@ -96,6 +125,10 @@
                         <b>Name:</b> $data[user_name]
                         <br>
                         <b>Phone No:</b> $data[phonenum]
+                        $confirmed_by
+                        $down_payment_confirmed_by
+                        $full_payment_confirmed_by
+                        $arrival_cancelled_by
                     </td>
                     <td>
                         <b>Accommodation:</b> $data[room_name]
@@ -131,9 +164,9 @@
     {
         $frm_data = filteration($_POST);
 
-        $query = "UPDATE booking_order SET refund=? WHERE booking_id=?";
-        $values = [1,$frm_data['booking_id']];
-        $res = update($query,$values,'ii');
+        $query = "UPDATE booking_order SET refund=?, refunded_by=? WHERE booking_id=?";
+        $values = [1,$_SESSION['adminName'],$frm_data['booking_id']];
+        $res = update($query,$values,'isi');
 
         echo $res;
     }

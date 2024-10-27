@@ -13,11 +13,12 @@
         
         $query = "SELECT bo.*, bd.* FROM booking_order bo 
             INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
-            WHERE ((bo.booking_status='booked' AND bo.arrival=1) 
+            WHERE (((bo.booking_status='booked' AND bo.arrival=1) 
             OR (bo.booking_status='cancelled' AND bo.refund=1)
             OR (bo.booking_status='cancelled')
             OR (bo.booking_status='payment failed')) 
-            OR (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.booking_status LIKE ? OR bo.trans_id LIKE ?)
+            OR (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.booking_status LIKE ? OR bo.trans_id LIKE ?)) 
+            AND bo.booking_status!='pending' 
             ORDER BY bo.booking_id DESC";
 
         $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%"],'sssss');
@@ -44,7 +45,6 @@
             $checkout = date("d-m-Y",strtotime($data['check_out']));
 
             $refunded_status = "";
-
             if($data['booking_status']=='booked')
             {
                 $status_bg = 'bg-success';
@@ -52,12 +52,11 @@
             else if($data['booking_status']=='cancelled' && $data['refund']==1)
             {
                 $status_bg = 'bg-danger';
-                $refunded_status = "<span class='badge bg-warning'>refunded</span><br>";
+                $refunded_status = "<span class='badge bg-warning text-dark'>refunded</span><br>";
             }
-            else if($data['booking_status']=='cancelled' && $data['refund']==0)
+            else if($data['booking_status']=='payment_failed')
             {
                 $status_bg = 'bg-danger';
-                $refunded_status = "<span class='badge bg-warning'>no payment</span><br>";
             }
             else
             {
@@ -123,6 +122,56 @@
 
             $id = $data['booking_id'];
 
+            $down_payment_confirmed_by = "";
+            if (!empty($data['down_payment_confirmed_by'])) {
+                $down_payment_confirmed_by = "<br>
+                            {$data['down_payment_confirmed_by']} (Down Payment)";
+            }
+
+            $full_payment_confirmed_by = "";
+            if (!empty($data['full_payment_confirmed_by'])) {
+                $full_payment_confirmed_by = "<br>
+                            {$data['full_payment_confirmed_by']} (Full Payment)";
+            }
+
+            $booking_cancelled_by = "";
+            if (!empty($data['booking_cancelled_by'])) {
+                $booking_cancelled_by = "<br>
+                            {$data['booking_cancelled_by']} (Booking Cancelled)";
+            }
+
+            $arrival_confirmed_by = "";
+            if (!empty($data['arrival_confirmed_by'])) {
+                $arrival_confirmed_by = "<br>
+                            {$data['arrival_confirmed_by']} (Arrival)";
+            }
+
+            $arrival_cancelled_by = "";
+            if (!empty($data['arrival_cancelled_by'])) {
+                $arrival_cancelled_by = "<br>
+                            {$data['arrival_cancelled_by']} (Arrival Cancelled)";
+            }
+
+            $refunded_by = "";
+            if (!empty($data['refunded_by'])) {
+                $refunded_by = "<br>
+                            {$data['refunded_by']} (Refunded)";
+            }
+
+            if(!empty($down_payment_confirmed_by)
+                || !empty($full_payment_confirmed_by)
+                || !empty($booking_cancelled_by)
+                || !empty($arrival_confirmed_by)
+                || !empty($arrival_cancelled_by)
+                || !empty($refunded_by))
+            {
+                $confirmed_by = "<br>
+                    <br>
+                    <b>Confirmed By</b>";
+            } else {
+                $confirmed_by = "";
+            }
+
             $table_data.="
                 <tr>
                     <td>$i</td>
@@ -136,6 +185,13 @@
                         <b>Name:</b> $data[user_name]
                         <br>
                         <b>Phone No:</b> $data[phonenum]
+                        $confirmed_by
+                        $down_payment_confirmed_by
+                        $full_payment_confirmed_by
+                        $booking_cancelled_by
+                        $arrival_confirmed_by
+                        $arrival_cancelled_by
+                        $refunded_by
                     </td>
                     <td>
                         <b>Accommodation:</b> $data[room_name]

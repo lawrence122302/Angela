@@ -143,9 +143,9 @@
     {
         $frm_data = filteration($_POST);
 
-        $query = "UPDATE booking_order SET booking_status=?, trans_amt=?, trans_status=? WHERE booking_id=?";
-        $values = ['reserved',$frm_data['full_payment'],'reserved',$frm_data['booking_id']];
-        $res = update($query,$values,'sssi');
+        $query = "UPDATE booking_order SET booking_status=?, trans_amt=?, trans_status=?, full_payment_confirmed_by=? WHERE booking_id=?";
+        $values = ['reserved',$frm_data['full_payment'],'reserved',$_SESSION['adminName'],$frm_data['booking_id']];
+        $res = update($query,$values,'ssssi');
 
         echo $res;
     }
@@ -154,9 +154,9 @@
     {
         $frm_data = filteration($_POST);
 
-        $query = "UPDATE booking_order SET booking_status=?, refund=? WHERE booking_id=?";
-        $values = ['cancelled',0,$frm_data['booking_id']];
-        $res = update($query,$values,'sii');
+        $query = "UPDATE booking_order SET booking_status=?, refund=?, booking_cancelled_by=? WHERE booking_id=?";
+        $values = ['payment_failed',0,$_SESSION['adminName'],$frm_data['booking_id']];
+        $res = update($query,$values,'sisi');
 
         echo $res;
     }
