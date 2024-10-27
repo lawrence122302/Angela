@@ -15,6 +15,7 @@
             INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
             WHERE ((bo.booking_status='booked' AND bo.arrival=1) 
             OR (bo.booking_status='cancelled' AND bo.refund=1)
+            OR (bo.booking_status='cancelled')
             OR (bo.booking_status='payment failed')) 
             OR (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.booking_status LIKE ? OR bo.trans_id LIKE ?)
             ORDER BY bo.booking_id DESC";
@@ -48,10 +49,15 @@
             {
                 $status_bg = 'bg-success';
             }
-            else if($data['booking_status']=='cancelled')
+            else if($data['booking_status']=='cancelled' && $data['refund']==1)
             {
                 $status_bg = 'bg-danger';
                 $refunded_status = "<span class='badge bg-warning'>refunded</span><br>";
+            }
+            else if($data['booking_status']=='cancelled' && $data['refund']==0)
+            {
+                $status_bg = 'bg-danger';
+                $refunded_status = "<span class='badge bg-warning'>no payment</span><br>";
             }
             else
             {
