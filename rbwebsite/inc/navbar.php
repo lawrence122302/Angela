@@ -1,13 +1,19 @@
 <!-- Navbar -->
 <nav id="nav-bar" class="navbar navbar-expand-lg navbar-light bg-white px-lg-auto py-lg-1 shadow-sm sticky-top">
-  <div class="container-fluid">
-    <a class="logo-image" href="index.php">
-      <img src="images/settings/logo-angela.jpg" alt="Angela's Logo" />
-    </a>
-    <a class="navbar-brand ms-1 me-3 fw-bold fs-6 h-font" href="index.php"><?php echo $settings_r['site_title'] ?></a>
-    <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <div>
+      <a class="logo-image" href="index.php">
+        <img src="images/settings/logo-angela.jpg" class="circular_image mx-1" alt="Angela's Logo" />
+      </a>
+    </div>
+    <div>
+      <a class="navbar-brand ms-1 me-3 fw-bold fs-6 h-font" href="index.php"><?php echo $settings_r['site_title'] ?></a>
+    </div>
+    <div>
+      <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
       <ul class="navbar-nav me-auto mb-auto mb-lg-auto">

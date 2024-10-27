@@ -1,6 +1,6 @@
 <div class="container-fluid bg-dark text-light px-3 d-flex align-items-center justify-content-between sticky-top">
     <a class="logo-image" href="index.php">
-      <img src="../images/settings/logo-angela.jpg" alt="Angela's Logo" />
+      <img src="../images/settings/logo-angela.jpg" class="circular_image my-1" alt="Angela's Logo" />
     </a>
     <div class="d-flex flex-column align-items-center">
         <div><h5 class="mb-0 text-center text-uppercase font-weight-bold">Admin Panel</h5></div>
@@ -12,6 +12,10 @@
 <div class="col-lg-2 bg-dark border-top border-3 border-secondary" id="dashboard-menu">
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid flex-lg-column align-items-stretch">
+            <div>
+                <h5 class="mt-2 text-warning text-uppercase text-center"><?= $_SESSION['adminName'] ?></h5>
+            </div>
+            <div class="h-line bg-white"></div>
             <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#adminDropdown" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -20,6 +24,16 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="dashboard.php">Dashboard</a>
                     </li>
+                    <?php
+                        if($_SESSION['isSuperAdmin']==1)
+                        {
+                            echo<<<data
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" href="admins.php">Admins</a>
+                                </li>
+                            data;
+                        }
+                    ?>
                     <li class="nav-item">
                     <button class="btn text-white px-3 w-100 shadow-none text-start d-flex align-items-center justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#bookingLinks">
                         <span>Bookings</span>

@@ -20,6 +20,13 @@
                 padding: 0 35px;
             }
         }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
     </style>
 </head>
 <body class="bg-light">
@@ -178,11 +185,11 @@
                     // print room card
                     echo <<<data
                         <div class="col-lg-4 col-md-6 my-3">
-                            <div class="card border-0 shadow">
+                            <div class="card border-0 shadow h-100 d-flex flex-column">
                                 <div class="d-flex justify-content-center align-items-center">
                                     <img src="$room_thumb" class="card-img-top img-fluid rounded aspect-ratio-16-9">
                                 </div>
-                                <div class="card-body" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 110vh;">
+                                <div class="card-body d-flex flex-column justify-content-between">
                                     <h5 class="mb-4">$room_data[name]</h5>
                                     <div class="mb-4">
                                         <h6 class="mb-1">Monday - Thursday</h6>
@@ -211,7 +218,7 @@
                                         </span>
                                     </div>
                                     $rating_data
-                                    <div class="d-flex justify-content-evenly mb-2">
+                                    <div class="d-flex justify-content-evenly mt-4">
                                         $book_btn
                                         <a href="room_details.php?id=$room_data[id]" class="btn btn-sm btn-outline-dark shadow-none">More details</a>
                                     </div>

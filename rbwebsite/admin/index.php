@@ -57,11 +57,19 @@
             if($res->num_rows==1)
             {
                 $row = mysqli_fetch_assoc($res);
-                $_SESSION['adminLogin'] = true;
-                $_SESSION['adminId'] = $row['sr_no'];
-                $_SESSION['adminName'] = $row['admin_name'];
-                $_SESSION['isSuperAdmin'] = $row['is_super_admin'];
-                redirect('dashboard.php');
+                if
+                ($row['status'] == 0)
+                {
+                    alert('error', 'Account inactive - Please contact the owner.');
+                }
+                else
+                {
+                    $_SESSION['adminLogin'] = true;
+                    $_SESSION['adminId'] = $row['sr_no'];
+                    $_SESSION['adminName'] = $row['admin_name'];
+                    $_SESSION['isSuperAdmin'] = $row['is_super_admin'];
+                    redirect('dashboard.php');
+                }
             }
             else
             {

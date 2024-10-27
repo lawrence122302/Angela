@@ -7,70 +7,13 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* Style for the logo container */
-.logo-image {
-    width: 10vw; /* Default width */
-    height: 10vw; /* Default height */
-    border-radius: 50%; /* Make it a circle */
-    overflow: hidden;
-    min-width: 40px; /* Minimum width in pixels for small screens */
-    min-height: 40px; /* Minimum height in pixels for small screens */
-    max-width: 50px; /* Maximum width in pixels for large screens */
-    max-height: 50px; /* Maximum height in pixels for large screens */
-    margin: 2vh 0; /* Responsive vertical margin */
-}
-
-/* Style for the image inside the container */
-.logo-image img {
-    width: 100%; /* Ensure the image fills the container */
-    height: 100%; /* Ensure the image fills the container */
-    object-fit: cover; /* Scale the image to cover the container */
-    object-position: center; /* Center the image within the container */
-}
-
-/* Media query for extra-large screens (TVs) */
-@media (min-width: 1200px) {
-    .logo-image {
-        width: 6vw;
-        height: 6vw;
-        margin: 1vh 0; /* Adjusted vertical margin */
-    }
-}
-
-/* Media query for large screens (Desktops, large laptops) */
-@media (min-width: 992px) and (max-width: 1199px) {
-    .logo-image {
-        width: 7vw;
-        height: 7vw;
-        margin: 1vh 0; /* Adjusted vertical margin */
-    }
-}
-
-/* Media query for medium screens (Laptops, tablets in landscape) */
-@media (min-width: 768px) and (max-width: 991px) {
-    .logo-image {
-        width: 8vw;
-        height: 8vw;
-        margin: 1vh 0; /* Adjusted vertical margin */
-    }
-}
-
-/* Media query for small screens (Tablets in portrait, large smartphones) */
-@media (min-width: 576px) and (max-width: 767px) {
-    .logo-image {
-        width: 9vw;
-        height: 9vw;
-        margin: 1vh 0; /* Adjusted vertical margin */
-    }
-}
-
-/* Media query for extra-small screens (Small smartphones) */
-@media (max-width: 575px) {
-    .logo-image {
-        width: 10vw;
-        height: 10vw;
-        margin: 1vh 0; /* Adjusted vertical margin */
-    }
+.circular_image {
+    width: clamp(55px, 8vw, 55px); /* Width ranges from 55px to 55px based on viewport width */
+    height: clamp(55px, 8vw, 55px); /* Height ranges from 55px to 55px based on viewport width */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image fills the circular area */
+    object-position: center; /* Centers the image within the circular area */
+    margin: 0.5vh 0; /* Responsive vertical margin */
 }
 
 .aspect-ratio-192-59 {

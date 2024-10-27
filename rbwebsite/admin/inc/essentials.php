@@ -55,12 +55,11 @@
 
     function superAdminLogin()
     {
-        session_name('admin_session');
-        session_start();
-        if(!(isset($_SESSION['adminLogin']) && $_SESSION['adminLogin']==true))
+        adminLogin();
+        if($_SESSION['isSuperAdmin']!=1)
         {
             echo"<script>
-                window.location.href='index.php';
+                window.location.href='dashboard.php';
             </script>";
             exit;
         }
