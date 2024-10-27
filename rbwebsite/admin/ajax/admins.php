@@ -5,7 +5,7 @@
 
     if(isset($_POST['get_admins']))
     {
-        $res = selectAll('admin_cred');
+        $res = select("SELECT * FROM admin_cred WHERE is_super_admin!=?",[1],'i');
         $i=1;
 
         $data = "";
