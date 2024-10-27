@@ -13,11 +13,8 @@
 
         while($row = mysqli_fetch_assoc($res))
         {
-            $query2 = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
-            $res1 = mysqli_fetch_assoc($query2);
-
             $del_btn = "";
-            if($res1['is_super_admin']==1)
+            if($_SESSION['isSuperAdmin']==1)
             {
                 $del_btn = "<button type='button' onclick='remove_user($row[id])' class='btn btn-danger shadow-none btn-sm'>
                     <i class='bi bi-trash'></i>

@@ -25,10 +25,7 @@
 
     if(isset($_POST['upd_shutdown']))
     {
-        $query2 = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
-        $res2 = mysqli_fetch_assoc($query2);
-
-        if($res2['is_super_admin']==1)
+        if($_SESSION['isSuperAdmin']==1)
         {
             $frm_data = ($_POST['upd_shutdown']==0) ? 1 : 0;
 
@@ -37,7 +34,7 @@
             $res = update($q,$values,'ii');
             echo $res;
         }
-        else if($res2['is_super_admin']==0)
+        else if($_SESSION['isSuperAdmin']==0)
         {
             echo 0;
         }

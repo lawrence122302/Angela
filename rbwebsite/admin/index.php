@@ -60,6 +60,7 @@
                 $_SESSION['adminLogin'] = true;
                 $_SESSION['adminId'] = $row['sr_no'];
                 $_SESSION['adminName'] = $row['admin_name'];
+                $_SESSION['isSuperAdmin'] = $row['is_super_admin'];
                 redirect('dashboard.php');
             }
             else

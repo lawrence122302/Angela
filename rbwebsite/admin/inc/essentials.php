@@ -53,6 +53,19 @@
         }
     }
 
+    function superAdminLogin()
+    {
+        session_name('admin_session');
+        session_start();
+        if(!(isset($_SESSION['adminLogin']) && $_SESSION['adminLogin']==true))
+        {
+            echo"<script>
+                window.location.href='index.php';
+            </script>";
+            exit;
+        }
+    }
+
     function redirect($url)
     {
         echo"<script>

@@ -27,10 +27,7 @@
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h5 class="card-title m-0">Amenities</h5>
                             <?php
-                                $query = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
-                                $res = mysqli_fetch_assoc($query);
-
-                                if($res['is_super_admin']==1)
+                                if($_SESSION['isSuperAdmin']==1)
                                 {
                                     echo<<<data
                                         <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#feature-s">
@@ -64,10 +61,7 @@
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h5 class="card-title m-0">Inclusions</h5>
                             <?php
-                                $query = select("SELECT is_super_admin FROM admin_cred WHERE sr_no=?",[$_SESSION['adminId']],'i');
-                                $res = mysqli_fetch_assoc($query);
-
-                                if($res['is_super_admin']==1)
+                                if($_SESSION['isSuperAdmin']==1)
                                 {
                                     echo<<<data
                                         <button type="button" class="btn btn-dark shadow-none btn-sm" data-bs-toggle="modal" data-bs-target="#facility-s">
