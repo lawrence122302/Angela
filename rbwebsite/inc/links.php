@@ -9,7 +9,6 @@
   session_start();
   date_default_timezone_set("Asia/Manila");
 
-  require('admin/inc/db_config.php');
   require('admin/inc/essentials.php');
 
   $contact_q = "SELECT * FROM contact_details WHERE sr_no=?";

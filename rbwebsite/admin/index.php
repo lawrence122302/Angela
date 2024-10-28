@@ -1,6 +1,5 @@
 <?php
     require('inc/essentials.php');
-    require('inc/db_config.php');
 
     session_name('admin_session');
     session_start();
@@ -67,6 +66,7 @@
                     $_SESSION['adminLogin'] = true;
                     $_SESSION['adminId'] = $row['sr_no'];
                     $_SESSION['adminName'] = $row['admin_name'];
+                    $_SESSION['status'] = $row['status'];
                     $_SESSION['isSuperAdmin'] = $row['is_super_admin'];
                     redirect('dashboard.php');
                 }

@@ -1,6 +1,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <script>
+    setInterval(function() {
+    let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'inc/essentials.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status === 200 && xhr.responseText == 'inactive') {
+                window.location.href = 'logout.php';
+            }
+        };
+        xhr.send('status=check');
+    }, 600000); // Check every 10 minutes
+
     function alert(type,msg,position='body')
     {
         let bs_class = (type == 'success') ? 'alert-success' : 'alert-danger';

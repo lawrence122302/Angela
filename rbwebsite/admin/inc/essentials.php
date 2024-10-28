@@ -1,4 +1,5 @@
 <?php
+    require(__DIR__ . '/db_config.php');
 
     // frontend purpose data
     // Check if the script is running in a local or production environment
@@ -44,12 +45,37 @@
     {
         session_name('admin_session');
         session_start();
+        
         if(!(isset($_SESSION['adminLogin']) && $_SESSION['adminLogin']==true))
         {
             echo"<script>
-                window.location.href='index.php';
+            window.location.href='index.php';
             </script>";
             exit;
+        }
+
+        $query = "SELECT * FROM admin_cred WHERE sr_no=?";
+        $values = [$_SESSION['adminId']];
+        $res = select($query,$values,"i");
+        $row = mysqli_fetch_assoc($res);
+
+        $_SESSION['status'] = $row['status'];
+
+        // Account status check for page loads
+        if (isset($_SESSION['status']) && $_SESSION['status'] == 0) {
+            redirect('logout.php');
+            exit();
+        }
+
+        // Account status check using setInterval 60 seconds
+        if (isset($_POST['status']) && $_POST['status'] === 'check') {
+
+            if (isset($_SESSION['status']) && $_SESSION['status'] == 0) {
+                echo 'inactive';
+            } else {
+                echo 'active';
+            }
+            exit();
         }
     }
 
