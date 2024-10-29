@@ -17,6 +17,7 @@
 <body class="bg-light">
 
     <div class="container">
+
         <div class="left">
             <div class="calendar">
                 <div class="month">
@@ -43,6 +44,38 @@
                 </div>
             </div>
         </div>
+
+        <div class="right">
+            <div class="today-date">
+                <div class="event-day">Wed</div>
+                <div class="event-date">16 November 2022</div>
+            </div>
+            <div class="events"></div>
+            <div class="add-event-wrapper">
+                <div class="add-event-header">
+                    <div class="title">Add Event</div>
+                    <i class="fas fa-times close"></i>
+                </div>
+                <div class="add-event-body">
+                    <div class="add-event-input">
+                        <input type="text" placeholder="Event Name" class="event-name">
+                    </div>
+                    <div class="add-event-input">
+                        <input type="text" placeholder="Event Time From" class="event-time-from">
+                    </div>
+                    <div class="add-event-input">
+                        <input type="text" placeholder="Event Time To" class="event-time-to">
+                    </div>
+                </div>
+                <div class="add-event-footer">
+                    <button class="add-event-btn">add event</button>
+                </div>
+            </div>
+        </div>
+        <button class="add-event">
+            <i class="fas fa-plus"></i>
+        </button>
+
     </div>
 
     <script src="js/calendar.js"></script>
