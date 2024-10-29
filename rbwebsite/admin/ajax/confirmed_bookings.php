@@ -111,7 +111,7 @@
                     <td>$i</td>
                     <td>
                         <span class='badge bg-primary'>
-                            Order ID: $data[order_id]
+                            Booking ID: $data[order_id]
                         </span>
                         <br>
                         $gcash

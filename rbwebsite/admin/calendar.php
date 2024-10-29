@@ -1,0 +1,53 @@
+<?php
+    require('inc/essentials.php');
+    adminLogin();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Calendar</title>
+    <link rel="stylesheet" href="css/calendar.css">
+    <!-- Font Awesome 6.6.0 CSS from cdnjs CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body class="bg-light">
+
+    <div class="container">
+        <div class="left">
+            <div class="calendar">
+                <div class="month">
+                    <i class="fa fa-angle-left prev"></i>
+                    <div class="date"></div>
+                    <i class="fa fa-angle-right next"></i>
+                </div>
+                <div class="weekdays">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+                <div class="days"></div>
+                <div class="goto-today">
+                    <div class="goto">
+                        <input type="text" placeholder="mm/yyyy" class="date-input">
+                        <button class="goto-btn">go</button>
+                    </div>
+                    <button class="today-btn">today</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/calendar.js"></script>
+
+    <!-- <script src="scripts/admins.js"></script> -->
+
+</body>
+</html>

@@ -22,7 +22,7 @@
         $checkin_date = new DateTime($frm_data['datetimeLocal_checkin']);
         $checkout_date = new DateTime($frm_data['datetimeLocal_checkout']);
 
-        $ORDER_ID = 'ORD_'.$_SESSION['uId'].random_int(11111,9999999);
+        $ORDER_ID = 'BK_'.$_SESSION['uId'].random_int(11111,9999999);
         $CUST_ID = $_SESSION['uId'];
 
         // Assign correct room price
