@@ -41,7 +41,7 @@ const months = [
 //     events: [
 //       {
 //         title: "Event 1 lorem ipsun dolar sit genfa tersd dsad ",
-//         time: "10:00 AM",
+//         time: "10:00 AM - 11:00 AM",
 //       },
 //       {
 //         title: "Event 2",
@@ -245,13 +245,19 @@ const addEventBtn = document.querySelector(".add-event"),
     addEventFrom = document.querySelector(".event-time-from"),
     addEventTo = document.querySelector(".event-time-to");
 
+// Open add event input
+
 addEventBtn.addEventListener("click", () => {
     addEventContainer.classList.toggle("active");
 });
 
+// Close add event input
+
 addEventCloseBtn.addEventListener("click", () => {
     addEventContainer.classList.remove("active");
 });
+
+// Close add event input when clicked outside
 
 document.addEventListener("click", (e) => {
 
@@ -268,7 +274,7 @@ addEventTitle.addEventListener("input", (e) => {
     addEventTitle.value = addEventTitle.value.slice(0, 50);
 });
 
-// Time format from time
+// Time format from time (Add event input)
 
 addEventFrom.addEventListener("input", (e) => {
 
@@ -289,7 +295,7 @@ addEventFrom.addEventListener("input", (e) => {
     }
 });
 
-// Time format to time
+// Time format to time (Add event input)
 
 addEventTo.addEventListener("input", (e) => {
 

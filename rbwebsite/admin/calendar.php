@@ -78,7 +78,7 @@
 
     </div>
 
-    <script src="js/calendar.js"></script>
+    <script src="scripts/calendar.js"></script>
 
     <!-- <script src="scripts/admins.js"></script> -->
 

@@ -240,6 +240,8 @@ body {
     border: none;
     border-left: 1px solid var(--primary-clr);
     border-radius: 0;
+    padding: 0px 10px;
+    height: 30px;
 }
 
 .container .right {
