@@ -139,7 +139,7 @@
                         <br>
                         <b>Check in:</b> $checkin
                         <br>
-                        <b>Check in:</b> $checkout
+                        <b>Check out:</b> $checkout
                     </td>
                     <td>
                         <br>

@@ -1,5 +1,15 @@
 :root {
     --primary-clr: #b38add;
+
+    /* Colors for the pseudo-element (underline-like indicator) */
+
+    --red-clr: #ff9999;
+    --yellow-clr: #fff176;
+    --blue-clr: #add8e6;
+
+    --strong-red-clr: #ff4d4d;
+    --strong-yellow-clr: #ffeb3b;
+    --strong-blue-clr: #4682b4;
 }
 
 * {
@@ -166,6 +176,8 @@ body {
     position: relative;
 }
 
+/* Adds a pseudo-element (::after) which acts as the underline-like indicator */
+
 .calendar .days .event::after {
     content: '';
     position: absolute;
@@ -175,20 +187,58 @@ body {
     height: 6px;
     border-radius: 30px;
     transform: translateX(-50%);
-    background-color: var(--primary-clr);
+    background-color: var(--purple-clr);
 }
+
+/* Changes the background color of the pseudo-element to white when hovered over */
 
 .calendar .event:hover::after {
-    background-color: #fff;
+    background-color: var(--white-clr);
 }
 
+/* Adjusts the pseudo-element's background color and position when the .event element also has the .active class */
+
 .calendar .active.event::after {
-    background-color: #fff;
+    background-color: var(--white-clr);
     bottom: 20%;
 }
 
+/* Adds padding to the bottom of .event element when it also has the .active class */
+
 .calendar .active.event {
     padding-bottom: 10px;
+}
+
+/* New classes for different event colors */
+
+.calendar .days .event.event-yellow::after {
+    background-color: var(--strong-yellow-clr);
+}
+.calendar .event.event-yellow:hover::after {
+    background-color: var(--yellow-clr);
+}
+.calendar .active.event.event-yellow::after {
+    background-color: var(--yellow-clr);
+}
+
+.calendar .days .event.event-blue::after {
+    background-color: var(--strong-blue-clr);
+}
+.calendar .event.event-blue:hover::after {
+    background-color: var(--blue-clr);
+}
+.calendar .active.event.event-blue::after {
+    background-color: var(--blue-clr);
+}
+
+.calendar .days .event.event-red::after {
+    background-color: var(--strong-red-clr);
+}
+.calendar .event.event-red:hover::after {
+    background-color: var(--red-clr);
+}
+.calendar .active.event.event-red::after {
+    background-color: var(--red-clr);
 }
 
 .calendar .goto-today {

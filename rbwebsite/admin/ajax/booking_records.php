@@ -39,9 +39,9 @@
 
         while($data = mysqli_fetch_assoc($limit_res))
         {
-            $date = date("d-m-Y",strtotime($data['datentime']));
-            $checkin = date("d-m-Y",strtotime($data['check_in']));
-            $checkout = date("d-m-Y",strtotime($data['check_out']));
+            $date = date("d-m-Y H:i:s",strtotime($data['datentime']));
+            $checkin = date("d-m-Y H:i:s",strtotime($data['check_in']));
+            $checkout = date("d-m-Y H:i:s",strtotime($data['check_out']));
 
             $refunded_status = "";
             if($data['booking_status']=='booked')

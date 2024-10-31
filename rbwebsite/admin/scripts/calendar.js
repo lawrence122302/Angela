@@ -49,6 +49,21 @@ const months = [
 //       },
 //     ],
 //   },
+//   {
+//     day: 11,
+//     month: 11,
+//     year: 2024,
+//     events: [
+//       {
+//         title: "Event 1 lorem ipsun dolar sit genfa tersd dsad ",
+//         time: "10:00 AM - 11:00 AM",
+//       },
+//       {
+//         title: "Event 2",
+//         time: "11:00 AM",
+//       },
+//     ],
+//   },
 // ];
 
 // Set an empty array
@@ -65,13 +80,14 @@ function initCalendar() {
 
     // To get prev month days and current month all days and rem next month days
 
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    const prevLastDay = new Date(year, month, 0);
-    const prevDays =  prevLastDay.getDate();
-    const lastDate = lastDay.getDate();
-    const day = firstDay.getDay();
-    const nextDays = 7 - lastDay.getDay() - 1;
+    const firstDay = new Date(year, month, 1);      // Creates a Date object for the first day of the current month
+    const lastDay = new Date(year, month + 1, 0);   // Creates a Date object for the last day of the current month by setting the date to the 0th of the next month
+    const prevLastDay = new Date(year, month, 0);   // Creates a Date object for the last day of the previous month
+
+    const prevDays =  prevLastDay.getDate();        // Gets the number of days in the previous month
+    const lastDate = lastDay.getDate();             // Gets the number of days in the current month
+    const day = firstDay.getDay();                  // Gets the day of the week for the first day of the month (If October 1, 2024, is a Tuesday, "day" would be 2 (assuming 0 = Sunday))
+    const nextDays = 7 - lastDay.getDay() - 1;      // Calculates the number of days from the next month required to fill the last week of the current month
 
     // Update date at the top of calendar
 
@@ -81,18 +97,36 @@ function initCalendar() {
 
     let days = "";
 
-    // Prev month days
+    // Adds days from the previous month (prev-date class)
 
     for (let x = day; x > 0; x--) {
-        days += `<div class="day prev-date">${prevDays -x + 1}</div>`
+        let event = false;
+        let additionalClass = "";
+        eventsArr.forEach((eventObj) => {
+            if (eventObj.day == (prevDays - x + 1) && eventObj.month == month && eventObj.year == year) {
+                event = true;
+                additionalClass = getBookingClass(eventObj, year, month, (prevDays - x + 1));
+            }
+        });
+        if (event) {
+            days += `<div class="day prev-date event${additionalClass}">${prevDays - x + 1}</div>`;
+        } else {
+            days += `<div class="day prev-date">${prevDays - x + 1}</div>`;
+        }
     }
 
-    //Current month days
+    // Adds days from the current month
+
     for (let i = 1; i <= lastDate; i++) {
 
         // Check if event present on current day
         
         let event = false;
+
+        // Create empty additionalClass class string
+
+        let additionalClass = ""; // Initialize empty class string
+
         eventsArr.forEach((eventObj) => {
             if (
                 eventObj.day == i &&
@@ -102,6 +136,8 @@ function initCalendar() {
                 // If event found
 
                 event = true;
+
+                additionalClass = getBookingClass(eventObj, year, month + 1, i);
             }
         });
 
@@ -120,7 +156,7 @@ function initCalendar() {
             // Add active on today at startup
 
             if (event) {
-                days += `<div class="day today active event">${i}</div>`
+                days += `<div class="day today active event${additionalClass}">${i}</div>`
             } else {
                 days += `<div class="day today active">${i}</div>`
             }
@@ -130,28 +166,43 @@ function initCalendar() {
 
         else {
             if (event) {
-                days += `<div class="day event">${i}</div>`
+                days += `<div class="day event${additionalClass}">${i}</div>`
             } else {
                 days += `<div class="day">${i}</div>`
             }
         }
     }
 
-    // Next month days
+    // // Adds days from the next month (next-date class)
 
-    for (let j = 1;  j <= nextDays; j++) {
-        days += `<div class="day next-date">${j}</div>`
+    // Next Month Days
+    for (let j = 1; j <= nextDays; j++) {
+        let event = false;
+        let additionalClass = "";
+        eventsArr.forEach((eventObj) => {
+            if (eventObj.day == j && eventObj.month == month + 2 && eventObj.year == year) {
+                event = true;
+                additionalClass = getBookingClass(eventObj, year, month + 2, j);
+            }
+        });
+        if (event) {
+            days += `<div class="day next-date event${additionalClass}">${j}</div>`;
+        } else {
+            days += `<div class="day next-date">${j}</div>`;
+        }
     }
 
     daysContainer.innerHTML = days;
 
-    // Add listner after calendar initialized
+    // Attaches click event listeners to each day element in the calendar
+    // Allowing users to click on days to set them as active, and seamlessly navigate between months when clicking on days from previous or next months
+
     addListner();
 }
 
 initCalendar();
 
-// Prev month
+// Move to the previous month
 
 function prevMonth() {
     month--;
@@ -162,7 +213,7 @@ function prevMonth() {
     initCalendar();
 }
 
-// Next month
+// Move to the next month
 
 function nextMonth() {
     month++;
@@ -173,9 +224,12 @@ function nextMonth() {
     initCalendar();
 }
 
-// Add eventlistner on prev and next
+// Add eventlistner on prev month button then prevMonth function is called
 
 prev.addEventListener("click", prevMonth);
+
+// Add eventlistner on next month button then nextMonth function is called
+
 next.addEventListener("click", nextMonth);
 
 // Goto today button functionality
@@ -187,11 +241,14 @@ todayBtn.addEventListener("click", () => {
     initCalendar();
 });
 
+// Go to date input, input format
+
 dateInput.addEventListener("input", (e) => {
 
     // Allow only numbers
 
     dateInput.value = dateInput.value.replace(/[^0-9/]/g, "");
+
     if (dateInput.value.length == 2) {
 
         // Add slash if 2 numbers entered
@@ -215,20 +272,36 @@ dateInput.addEventListener("input", (e) => {
     }
 });
 
+// Add eventlistner on go button
+
 gotoBtn.addEventListener("click", gotoDate);
 
-// Goto entered date functionality
+// Function to go to entered date using mm/yyyy input
 
 function gotoDate() {
     const dateArr = dateInput.value.split("/");
 
-    // Some date validation
+    // Ensures that the input was split into exactly two parts, which means the input format is mm/yyyy
 
     if (dateArr.length == 2) {
+
+        // Checks if the month part (dateArr[0]) is a valid month (1-12).
+        // Ensures the year part (dateArr[1]) is a 4-digit number
+
         if (dateArr[0] > 0 && dateArr[0] < 13 && dateArr[1].length == 4) {
+
+            // Converts the user input month (which is 1-indexed, e.g., January = 1) to 0-indexed (e.g., January = 0) to match JavaScript's Date object format
+
             month = dateArr[0] - 1;
+
+            // Sets the year variable to the user input year
+
             year = dateArr[1];
+
+            // Calls the initCalendar function to refresh the calendar view with the updated month and year
+
             initCalendar();
+            
             return;
         }
     }
@@ -274,7 +347,7 @@ addEventTitle.addEventListener("input", (e) => {
     addEventTitle.value = addEventTitle.value.slice(0, 50);
 });
 
-// Time format from time (Add event input)
+// Time format "from time" (Add event input)
 
 addEventFrom.addEventListener("input", (e) => {
 
@@ -295,7 +368,7 @@ addEventFrom.addEventListener("input", (e) => {
     }
 });
 
-// Time format to time (Add event input)
+// Time format "to time" (Add event input)
 
 addEventTo.addEventListener("input", (e) => {
 
@@ -316,10 +389,18 @@ addEventTo.addEventListener("input", (e) => {
     }
 });
 
-// Function to add listener on days after rendered
+// Attaches click event listeners to each day element in the calendar
+// Allowing users to click on days to set them as active, and seamlessly navigate between months when clicking on days from previous or next months
+// Called in initCalendar()
 
 function addListner() {
+
+    // Selects all elements with the class .day
+
     const days = document.querySelectorAll(".day");
+
+    // Loops through each day element and attaches a click event listener
+    
     days.forEach((day) => {
         day.addEventListener("click", (e) => {
 
@@ -354,6 +435,7 @@ function addListner() {
                     days.forEach((day) => {
                         if (!day.classList.contains("prev-date") && day.innerHTML == e.target.innerHTML) {
                             day.classList.add("active");
+                            updateEvents(Number(day.innerHTML));
                         }
                     });
                 }, 100);
@@ -374,6 +456,7 @@ function addListner() {
                     days.forEach((day) => {
                         if (!day.classList.contains("next-date") && day.innerHTML == e.target.innerHTML) {
                             day.classList.add("active");
+                            updateEvents(Number(day.innerHTML));
                         }
                     });
                 }, 100);
@@ -402,6 +485,7 @@ function updateEvents(date) {
     eventsArr.forEach((event) => {
 
         // Get events of active day only
+
         if (
             date == event.day &&
             month + 1 == event.month &&
@@ -528,6 +612,8 @@ addEventSubmit.addEventListener("click", () => {
     }
 });
 
+// Convert time used for adding events
+
 function convertTime(time) {
     let timeArr = time.split(":");
     let timeHour = timeArr[0];
@@ -579,15 +665,216 @@ eventsContainer.addEventListener("click", (e) => {
     }
 });
 
-// Store events in local storage get from there
+// Store events in local storage
 
 function saveEvents() {
     localStorage.setItem("events", JSON.stringify(eventsArr));
 }
+
+// Get events stored in local storage
 
 function getEvents() {
     if (localStorage.getItem("events" != null)) {
         return;
     }
     eventsArr.push(...JSON.parse(localStorage.getItem("events")));
+}
+
+// Function to format date
+
+function formatDate(dateStr) {
+
+    // Create new Date object using dateStr
+
+    const date = new Date(dateStr);
+
+    // Return an object containing the day, month, and year of dateStr
+
+    return {
+        day: date.getDate(),
+        month: date.getMonth() + 1,
+        year: date.getFullYear()
+    };
+}
+
+// Function to get all dates between two dates
+
+function getDatesInRange(startDate, endDate) {
+    let date = new Date(startDate);
+
+    // Initializes dates array
+
+    const dates = [];
+
+    // Iterates through each day from startDate to endDate
+
+    while (date <= endDate) {
+
+        // Formats each date
+
+        dates.push({
+            day: date.getDate(),
+            month: date.getMonth() + 1, // Months are zero-indexed
+            year: date.getFullYear()
+        });
+
+        date.setDate(date.getDate() + 1);
+        date.setHours(0, 0, 0, 0); // Reset time to the start of the next day
+    }
+    // Returns the array
+
+    return dates;
+}
+
+// Fetches and formats event data from calendars.php, then stores it in eventsArr
+
+fetch('ajax/calendar.php')
+
+    // Initiates a fetch request to calendars.php and parses the JSON response
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        // Creates an empty object to store formatted event data
+
+        const formattedData = {};
+
+        // Loops through each event in the fetched event data from calendars.php
+
+        data.forEach(event => {
+            const checkInDate = new Date(event.check_in);
+            const checkOutDate = new Date(event.check_out);
+
+            // Get all dates between check-in and check-out
+
+            const datesInRange = getDatesInRange(checkInDate, checkOutDate);
+
+            // Add event to each date in the range
+            datesInRange.forEach(({ day, month, year }) => {
+                
+                // For each date, creates a unique key
+
+                const key = `${day}-${month}-${year}`;
+
+                // Ensures no date duplicates inserted in formattedData object
+
+                if (!formattedData[key]) {
+
+                    // Creates a new entry in formattedData for that specific date
+
+                    formattedData[key] = {
+                        day: day,
+                        month: month,
+                        year: year,
+                        events: []
+                    };
+                }
+
+                // Adds event details to the events array in formattedData object for each corresponding date
+
+                const eventTime = `${new Date(event.check_in).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })} - ${new Date(event.check_out).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`;
+                formattedData[key].events.push({ title: event.order_id, time: eventTime });
+            });
+        });
+
+        // Converts formattedData to an array and assigns it to eventsArr
+
+        eventsArr = Object.values(formattedData);console.log(eventsArr);
+    })
+    .catch(error => {
+        console.error('Error fetching events:', error);
+    });
+
+// Function to convert a time string like "08:00 AM" to an object with hours and minutes as 24-hour format integers
+
+function parseTime(timeString) {
+
+    // Breaks the input "08:00 AM" into "08:00" and "AM"
+
+    const [time, modifier] = timeString.split(' ');
+    
+    // Further splits "08:00" into hours and minutes
+
+    let [hours, minutes] = time.split(':');
+
+    // Converts "12" to "00" if it's "AM"
+
+    if (hours === '12') {
+        hours = '00';
+    }
+
+    // Adds 12 to hours if it's "PM"
+
+    if (modifier.toUpperCase() === 'PM') {
+        hours = parseInt(hours, 10) + 12;
+    }
+
+    // Returns an object with { hours: 8, minutes: 0 } for "08:00 AM"
+
+    return { hours: parseInt(hours, 10), minutes: parseInt(minutes, 10) };
+}
+
+// Function to determine the class based on the booking times for a given day
+
+function getBookingClass(eventObj, year, month, day) {
+
+    // additionalClass, hasDayBooking, hasNightBooking, hasFullDayBooking are all set to their default values
+
+    let additionalClass = "";
+    let hasDayBooking = false;
+    let hasNightBooking = false;
+    let hasFullDayBooking = false;
+
+    // For each booking in eventObj.events
+
+    eventObj.events.forEach((booking) => {
+
+        // Use parseTime to get startTime and endTime
+
+        const [startTime, endTime] = booking.time.split(' - ').map(parseTime);
+
+        // Set Flags Based on Booking Type
+
+        // Apply Classes Based on Flags
+
+        if (startTime.hours === 8 && endTime.hours === 18) {
+            hasDayBooking = true; // Day Booking
+        } else if (startTime.hours === 20 && endTime.hours === 6) {
+            hasNightBooking = true; // Night Booking
+        } else if (startTime.hours === 8 && endTime.hours === 6) {
+            hasFullDayBooking = true; // 22 Hours Day Booking
+            additionalClass = " event-red";
+        } else if (startTime.hours === 20 && endTime.hours === 18) {
+            hasNightBooking = true; // 22 Hours Night Booking
+            const nextDay = new Date(year, month, day + 1);
+            eventsArr.forEach((nextEventObj) => {
+                if (nextEventObj.day == nextDay.getDate() && nextEventObj.month == nextDay.getMonth() + 1 && nextEventObj.year == nextDay.getFullYear()) {
+                    nextEventObj.events.forEach((nextBooking) => {
+                        const nextStartTime = parseTime(nextBooking.time.split(' - ')[0]);
+                        if (nextStartTime.hours === 20) {
+                            hasFullDayBooking = true;
+                            additionalClass = " event-red";
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+    // If there’s no full-day booking
+
+    if (!hasFullDayBooking) {
+        if (hasDayBooking && hasNightBooking) {
+            additionalClass = " event-red";
+        } else if (hasDayBooking) {
+            additionalClass = " event-blue";
+        } else if (hasNightBooking) {
+            additionalClass = " event-yellow";
+        }
+    }
+
+    // Returns the additionalClass used in initCalendar()
+
+    return additionalClass;
 }
