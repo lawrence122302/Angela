@@ -2,7 +2,7 @@
 require('../inc/essentials.php');
 adminLogin();
 
-$res = selectAll('booking_order ORDER BY check_in ASC');
+$res = selectAll('booking_order WHERE booking_status="reserved" OR booking_status="booked" ORDER BY check_in ASC');
 $events = array();
 
 if ($res->num_rows > 0) {
