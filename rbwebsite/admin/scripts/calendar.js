@@ -72,7 +72,7 @@ let eventsArr = [];
 
 // Then call get
 
-getEvents();
+// getEvents();
 
 // Function to add days
 
@@ -320,74 +320,74 @@ const addEventBtn = document.querySelector(".add-event"),
 
 // Open add event input
 
-addEventBtn.addEventListener("click", () => {
-    addEventContainer.classList.toggle("active");
-});
+// addEventBtn.addEventListener("click", () => {
+//     addEventContainer.classList.toggle("active");
+// });
 
 // Close add event input
 
-addEventCloseBtn.addEventListener("click", () => {
-    addEventContainer.classList.remove("active");
-});
+// addEventCloseBtn.addEventListener("click", () => {
+//     addEventContainer.classList.remove("active");
+// });
 
 // Close add event input when clicked outside
 
-document.addEventListener("click", (e) => {
+// document.addEventListener("click", (e) => {
 
-    // If click outside
+//     // If click outside
 
-    if (e.target != addEventBtn && !addEventContainer.contains(e.target)) {
-        addEventContainer.classList.remove("active");
-    }
-});
+//     if (e.target != addEventBtn && !addEventContainer.contains(e.target)) {
+//         addEventContainer.classList.remove("active");
+//     }
+// });
 
 // Allow only 50 characters in title
 
-addEventTitle.addEventListener("input", (e) => {
-    addEventTitle.value = addEventTitle.value.slice(0, 50);
-});
+// addEventTitle.addEventListener("input", (e) => {
+//     addEventTitle.value = addEventTitle.value.slice(0, 50);
+// });
 
 // Time format "from time" (Add event input)
 
-addEventFrom.addEventListener("input", (e) => {
+// addEventFrom.addEventListener("input", (e) => {
 
-    // Remove anything else but numbers
+//     // Remove anything else but numbers
 
-    addEventFrom.value = addEventFrom.value.replace(/[^0-9:]/g , "");
+//     addEventFrom.value = addEventFrom.value.replace(/[^0-9:]/g , "");
 
-    // If 2 numbers entered auto add :
+//     // If 2 numbers entered auto add :
 
-    if (addEventFrom.value.length == 2) {
-        addEventFrom.value += ":";
-    }
+//     if (addEventFrom.value.length == 2) {
+//         addEventFrom.value += ":";
+//     }
 
-    // Don't let users enter more than 5 characters
+//     // Don't let users enter more than 5 characters
 
-    if (addEventFrom.value.length > 5) {
-        addEventFrom.value = addEventFrom.value.slice(0, 5);
-    }
-});
+//     if (addEventFrom.value.length > 5) {
+//         addEventFrom.value = addEventFrom.value.slice(0, 5);
+//     }
+// });
 
 // Time format "to time" (Add event input)
 
-addEventTo.addEventListener("input", (e) => {
+// addEventTo.addEventListener("input", (e) => {
 
-    // Remove anything else but numbers
+//     // Remove anything else but numbers
 
-    addEventTo.value = addEventTo.value.replace(/[^0-9:]/g , "");
+//     addEventTo.value = addEventTo.value.replace(/[^0-9:]/g , "");
 
-    // If 2 numbers entered auto add :
+//     // If 2 numbers entered auto add :
     
-    if (addEventTo.value.length == 2) {
-        addEventTo.value += ":";
-    }
+//     if (addEventTo.value.length == 2) {
+//         addEventTo.value += ":";
+//     }
 
-    // Don't let users enter more than 5 characters
+//     // Don't let users enter more than 5 characters
 
-    if (addEventTo.value.length > 5) {
-        addEventTo.value = addEventTo.value.slice(0, 5);
-    }
-});
+//     if (addEventTo.value.length > 5) {
+//         addEventTo.value = addEventTo.value.slice(0, 5);
+//     }
+// });
 
 // Attaches click event listeners to each day element in the calendar
 // Allowing users to click on days to set them as active, and seamlessly navigate between months when clicking on days from previous or next months
@@ -519,166 +519,166 @@ function updateEvents(date) {
     
     // Save events when updated event called
 
-    saveEvents();
+    // saveEvents();
 }
 
 // Function to add events
 
-addEventSubmit.addEventListener("click", () => {
-    const eventTitle = addEventTitle.value;
-    const eventTimeFrom = addEventFrom.value;
-    const eventTimeTo = addEventTo.value;
+// addEventSubmit.addEventListener("click", () => {
+//     const eventTitle = addEventTitle.value;
+//     const eventTimeFrom = addEventFrom.value;
+//     const eventTimeTo = addEventTo.value;
 
-    // Some validations
+//     // Some validations
 
-    if (eventTitle == "" || eventTimeFrom == "" || eventTimeTo == "") {
-        alert("Please fill all the fields");
-        return;
-    }
+//     if (eventTitle == "" || eventTimeFrom == "" || eventTimeTo == "") {
+//         alert("Please fill all the fields");
+//         return;
+//     }
 
-    const timeFromArr = eventTimeFrom.split(":");
-    const timeToArr = eventTimeFrom.split(":");
+//     const timeFromArr = eventTimeFrom.split(":");
+//     const timeToArr = eventTimeFrom.split(":");
 
-    if (
-        timeFromArr.length != 2 ||
-        timeToArr.length != 2 ||
-        timeFromArr[0] > 23 ||
-        timeFromArr[1] > 59 ||
-        timeToArr[0] > 23 ||
-        timeToArr[1] > 59
-    ) {
-        alert("Invalid Time Format");
-    }
+//     if (
+//         timeFromArr.length != 2 ||
+//         timeToArr.length != 2 ||
+//         timeFromArr[0] > 23 ||
+//         timeFromArr[1] > 59 ||
+//         timeToArr[0] > 23 ||
+//         timeToArr[1] > 59
+//     ) {
+//         alert("Invalid Time Format");
+//     }
 
-    const timeFrom = convertTime(eventTimeFrom);
-    const timeTo = convertTime(eventTimeTo);
+//     const timeFrom = convertTime(eventTimeFrom);
+//     const timeTo = convertTime(eventTimeTo);
 
-    const newEvent = {
-        title: eventTitle,
-        time: timeFrom + " - " + timeTo,
-    };
+//     const newEvent = {
+//         title: eventTitle,
+//         time: timeFrom + " - " + timeTo,
+//     };
 
-    let eventAdded = false;
+//     let eventAdded = false;
 
-    // Check if eventsarr is not empty
+//     // Check if eventsarr is not empty
 
-    if (eventsArr.length > 0) {
+//     if (eventsArr.length > 0) {
 
-        // Check if current day has already any event then add to that
+//         // Check if current day has already any event then add to that
 
-        eventsArr.forEach((item) => {
-            if (
-                item.day == activeDay &&
-                item.month == month + 1 &&
-                item.year == year
-            ) {
-                item.events.push(newEvent);
-                eventAdded = true;
-            }
-        });
-    }
+//         eventsArr.forEach((item) => {
+//             if (
+//                 item.day == activeDay &&
+//                 item.month == month + 1 &&
+//                 item.year == year
+//             ) {
+//                 item.events.push(newEvent);
+//                 eventAdded = true;
+//             }
+//         });
+//     }
 
-    // If event array is empty or current day has no event create new
+//     // If event array is empty or current day has no event create new
 
-    if (!eventAdded) {
-        eventsArr.push({
-            day : activeDay,
-            month : month + 1,
-            year : year,
-            events : [newEvent],
-        });
-    }
+//     if (!eventAdded) {
+//         eventsArr.push({
+//             day : activeDay,
+//             month : month + 1,
+//             year : year,
+//             events : [newEvent],
+//         });
+//     }
 
-    // Remove active from add event form
+//     // Remove active from add event form
 
-    addEventContainer.classList.remove("active");
+//     addEventContainer.classList.remove("active");
 
-    // Clear the fields
+//     // Clear the fields
 
-    addEventTitle.value = "";
-    addEventFrom.value = "";
-    addEventTo.value = "";
+//     addEventTitle.value = "";
+//     addEventFrom.value = "";
+//     addEventTo.value = "";
 
-    // Show current added event
+//     // Show current added event
 
-    updateEvents(activeDay);
+//     updateEvents(activeDay);
 
-    // Add event class to newly added day if not already
+//     // Add event class to newly added day if not already
 
-    const activeDayElem = document.querySelector(".day.active");
+//     const activeDayElem = document.querySelector(".day.active");
     
-    if(!activeDayElem.classList.contains("event")) {
-        activeDayElem.classList.add("event")
-    }
-});
+//     if(!activeDayElem.classList.contains("event")) {
+//         activeDayElem.classList.add("event")
+//     }
+// });
 
 // Convert time used for adding events
 
-function convertTime(time) {
-    let timeArr = time.split(":");
-    let timeHour = timeArr[0];
-    let timeMin = timeArr[1];
-    let timeFormat = timeHour >= 12 ? "PM" : "AM";
-    timeHour = timeHour % 12 || 12;
-    time = timeHour + ":" + timeMin + " " + timeFormat;
-    return time;
-}
+// function convertTime(time) {
+//     let timeArr = time.split(":");
+//     let timeHour = timeArr[0];
+//     let timeMin = timeArr[1];
+//     let timeFormat = timeHour >= 12 ? "PM" : "AM";
+//     timeHour = timeHour % 12 || 12;
+//     time = timeHour + ":" + timeMin + " " + timeFormat;
+//     return time;
+// }
 
 // Function to remove events on click
 
-eventsContainer.addEventListener("click", (e) => {
-    if (e.target.classList.contains("event")) {
-        const eventTitle = e.target.children[0].children[1].innerHTML;
+// eventsContainer.addEventListener("click", (e) => {
+//     if (e.target.classList.contains("event")) {
+//         const eventTitle = e.target.children[0].children[1].innerHTML;
 
-        // Get the title of event than search in array by title and delete
-        eventsArr.forEach((event) => {
-            if (
-                event.day == activeDay &&
-                event.month == month + 1 &&
-                event.year == year
-            ) {
-                event.events.forEach((item, index) => {
-                    if (item.title == eventTitle) {
-                        event.events.splice(index, 1)
-                    }
-                });
+//         // Get the title of event than search in array by title and delete
+//         eventsArr.forEach((event) => {
+//             if (
+//                 event.day == activeDay &&
+//                 event.month == month + 1 &&
+//                 event.year == year
+//             ) {
+//                 event.events.forEach((item, index) => {
+//                     if (item.title == eventTitle) {
+//                         event.events.splice(index, 1)
+//                     }
+//                 });
 
-                // If no event remaining on that date remove complete day
+//                 // If no event remaining on that date remove complete day
 
-                if (event.events.length == 0) {
-                    eventsArr.splice(eventsArr.indexOf(event), 1);
+//                 if (event.events.length == 0) {
+//                     eventsArr.splice(eventsArr.indexOf(event), 1);
 
-                    // After removing complete day also remove active class of that day
+//                     // After removing complete day also remove active class of that day
 
-                    const activeDayElem = document.querySelector(".day.active");
+//                     const activeDayElem = document.querySelector(".day.active");
 
-                    if (activeDayElem.classList.contains("event")) {
-                        activeDayElem.classList.remove("event");
-                    }
-                }
-            }
-        });
+//                     if (activeDayElem.classList.contains("event")) {
+//                         activeDayElem.classList.remove("event");
+//                     }
+//                 }
+//             }
+//         });
 
-        // After removing from array update event
+//         // After removing from array update event
 
-        updateEvents(activeDay);
-    }
-});
+//         updateEvents(activeDay);
+//     }
+// });
 
 // Store events in local storage
 
-function saveEvents() {
-    localStorage.setItem("events", JSON.stringify(eventsArr));
-}
+// function saveEvents() {
+//     localStorage.setItem("events", JSON.stringify(eventsArr));
+// }
 
 // Get events stored in local storage
 
-function getEvents() {
-    if (localStorage.getItem("events" != null)) {
-        return;
-    }
-    eventsArr.push(...JSON.parse(localStorage.getItem("events")));
-}
+// function getEvents() {
+//     if (localStorage.getItem("events" != null)) {
+//         return;
+//     }
+//     eventsArr.push(...JSON.parse(localStorage.getItem("events")));
+// }
 
 // Function to format date
 
@@ -728,7 +728,7 @@ function getDatesInRange(startDate, endDate) {
 
 // Fetches and formats event data from calendars.php, then stores it in eventsArr
 
-function filteraccommodation(value) {
+function filterAccommodation(value) {
     fetch('ajax/calendar.php', {
         method: 'POST',
         headers: {
@@ -871,6 +871,6 @@ function getBookingClass(eventObj, year, month, day) {
 document.addEventListener('DOMContentLoaded', (event) => {
     const dropdown = document.getElementById('accommodationDropdown');
     if (dropdown.value) {
-        filterAccomodation(dropdown.value);
+        filterAccommodation(dropdown.value);
     }
 });

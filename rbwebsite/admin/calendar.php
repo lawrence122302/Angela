@@ -110,9 +110,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="add-event">
+                        <!-- <button class="add-event">
                             <i class="fas fa-plus"></i>
-                        </button>
+                        </button> -->
 
                     </div>
 
