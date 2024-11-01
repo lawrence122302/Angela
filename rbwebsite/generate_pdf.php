@@ -43,7 +43,7 @@
         <h2>Booking Receipt</h2>
         <table border='1'>
             <tr>
-                <td>Order ID: $data[order_id]</td>
+                <td>Booking ID: $data[order_id]</td>
                 <td>Booking Date: $date</td>
             </tr>
             <tr>

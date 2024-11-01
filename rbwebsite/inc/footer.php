@@ -75,7 +75,7 @@
         let element = document.createElement('div');
         element.innerHTML = `
             <div class="alert ${bs_class} alert-dismissible fade show" role="alert">
-                <strong class="me-3">${msg}</strong>.
+                <strong class="me-3">${msg}</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         `;
@@ -126,53 +126,76 @@
         data.append('phonenum',register_form.elements['phonenum'].value);
         data.append('address',register_form.elements['address'].value);
         data.append('pincode',register_form.elements['pincode'].value);
-        data.append('dob',register_form.elements['dob'].value);
         data.append('pass',register_form.elements['pass'].value);
         data.append('cpass',register_form.elements['cpass'].value);
         data.append('profile',register_form.elements['profile'].files[0]);
         data.append('register','');
 
-        var myModal = document.getElementById('registerModal');
-        var modal = bootstrap.Modal.getInstance(myModal);
-        modal.hide();
+        // Date of birth validation
+
+        let dob = new Date(register_form.elements['dob'].value);
+        let today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        let month = today.getMonth() - dob.getMonth();
+        if (month < 0 || (month === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+        
+        if (age < 18) {
+            alert('error', "You must be at least 18 years old to register.");
+            return;
+        }
 
         let xhr = new XMLHttpRequest();
         xhr.open("POST","ajax/login_register.php",true);
 
         xhr.onload = function()
         {
-            if(this.responseText == 'pass_mismatch')
+            if (this.responseText == 'pass_mismatch')
             {
                 alert('error',"Password Mismatch!")
             }
-            else if(this.responseText == 'email_already')
+            else if (this.responseText == 'email_already')
             {
                 alert('error',"Email is already registered!");
             }
-            else if(this.responseText == 'phone_already')
+            else if (this.responseText == 'phone_already')
             {
                 alert('error',"Phone number is already registered!");
             }
-            else if(this.responseText == 'inv_img')
+            else if (this.responseText == 'inv_img')
             {
                 alert('error',"Only JPG, WEBP, & PNG images are allowed!");
             }
-            else if(this.responseText == 'upd_failed')
+            else if (this.responseText == 'upd_failed')
             {
                 alert('error',"Image upload failed!");
             }
-            else if(this.responseText == 'mail_failed')
+            else if (this.responseText == 'mail_failed')
             {
                 alert('error',"Cannot send confirmation email! Server down!");
             }
-            else if(this.responseText == 'ins_failed')
+            else if (this.responseText == 'ins_failed')
             {
                 alert('error',"Registration failed! Server down!");
             }
-            else
-            {
-                alert('success',"Registration successful. Confirmation link sent to email!");
+            else if (this.responseText == 'short_pass') {
+                alert('error', "Password must be at least 12 characters long.");
+            } else if (this.responseText == 'no_upper') {
+                alert('error', "Password must include an uppercase letter.");
+            } else if (this.responseText == 'no_lower') {
+                alert('error', "Password must include a lowercase letter.");
+            } else if (this.responseText == 'no_number') {
+                alert('error', "Password must include a number.");
+            } else if (this.responseText == 'no_symbol') {
+                alert('error', "Password must include a symbol.");
+            }
+            else {
+                alert('success',"Registration successful. Verification link sent to email!");
                 register_form.reset();
+                var myModal = document.getElementById('registerModal');
+                var modal = bootstrap.Modal.getInstance(myModal);
+                modal.hide();
             }
         }
         xhr.send(data);

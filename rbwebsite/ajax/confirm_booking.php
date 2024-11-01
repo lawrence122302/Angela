@@ -49,7 +49,8 @@
 
             header('Content-Type: application/json');
 
-            // check booking availability if status is blank else return the error
+            // Check booking availability if status is blank else return the error
+
             if($status!='')
             {
                 header('Content-Type: application/json');

@@ -172,15 +172,15 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label class="form-label">Name</label>
-                <input name="name" type="text" class="form-control shadow-none" required>
+                <input name="name" type="text" class="form-control shadow-none" required placeholder="Enter your full name">
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Email address</label>
-                <input name="email" type="email" class="form-control shadow-none" required>
+                <input name="email" type="email" class="form-control shadow-none" required placeholder="example@gmail.com">
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Phone number</label>
-                <input name ="phonenum" type="number" class="form-control shadow-none" required>
+                <input name="phonenum" type="number" class="form-control shadow-none" required oninput="this.value = this.value.slice(0, 11);" placeholder="09123456789">
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Government ID</label>
@@ -188,11 +188,11 @@
               </div>
               <div class="col-md-12 mb-3">
                 <label class="form-label">Address</label>
-                <textarea name="address" class="form-control shadow-none" rows="1" required></textarea>
+                <textarea name="address" class="form-control shadow-none" rows="1" required placeholder="Enter your address"></textarea>
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Zip Code</label>
-                <input name="pincode" type="number" class="form-control shadow-none" required>
+                <input name="pincode" type="number" class="form-control shadow-none" required placeholder="1920">
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Date of birth</label>
@@ -207,6 +207,11 @@
                 <input name="cpass" type="password" class="form-control shadow-none" required>
               </div>
             </div>
+          </div>
+          <div class="text-center mb-3">
+            <small style="font-size: 0.75rem;">
+              By registering, you consent to the use of your information for our services.
+            </small>
           </div>
           <div class="text-center my-1">
             <button type="submit" class="btn btn-dark shadow-none">Register</button>

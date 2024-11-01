@@ -88,14 +88,35 @@
     {
         $data = filteration($_POST);
 
-        // match password and confirm password
+        // Match password and confirm password
+
         if($data['pass'] != $data['cpass'])
         {
             echo 'pass_mismatch';
             exit;
         }
 
-        // check user exists or not
+        // Validate password strength
+        
+        if (strlen($data['pass']) < 12) {
+            echo 'short_pass';
+            exit;
+        } else if (!preg_match('/[A-Z]/', $data['pass'])) {
+            echo 'no_upper';
+            exit;
+        } else if (!preg_match('/[a-z]/', $data['pass'])) {
+            echo 'no_lower';
+            exit;
+        } else if (!preg_match('/\d/', $data['pass'])) {
+            echo 'no_number';
+            exit;
+        } else if (!preg_match('/[\W_]/', $data['pass'])) {
+            echo 'no_symbol';
+            exit;
+        }        
+
+        // Check user exists or not
+        
         $u_exist = select("SELECT * FROM user_cred WHERE email=? OR phonenum=? LIMIT 1",
             [$data['email'],$data['phonenum']],"ss");
 
@@ -106,7 +127,8 @@
             exit;
         }
 
-        // upload user image to server
+        // Upload user image to server
+
         $img = uploadUserImage($_FILES['profile']);
 
         if($img == 'inv_img')

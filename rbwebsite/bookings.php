@@ -102,18 +102,29 @@
                         $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'><i class='bi bi-download'></i> Download PDF</a>";
                     }
 
+                    $pending_notice = "";
+                    if ($data['booking_status']=='pending') {
+                        $pending_notice = "
+                            <p>
+                                <b>Notice:</b>
+                                <br>
+                                <span class='badge bg-warning'>Make sure Gcash Reference is correct.</span>
+                            </p>";
+                    }
+
                     echo<<<bookings
                         <div class='col-md-4 px-4 mb-4'>
                             <div class='bg-white p-3 rounded shadow-sm'>
                                 <h5 class='fw-bold'>$data[room_name]</h5>
-                                <p>₱$data[price] per night</p>
+                                <p>
+                                    <b>Booking ID: </b> $data[order_id] <br>
+                                </p
                                 <p>
                                     <b>Check in: </b> $checkin <br>
                                     <b>Check out: </b> $checkout
                                 </p>
                                 <p>
                                     <b>Amount: </b> ₱$data[price] <br>
-                                    <b>Order ID: </b> $data[order_id] <br>
                                     <b>Date: </b> $date
                                 </p>
                                 <p>
@@ -123,6 +134,7 @@
                                     $gcash
                                     <span class='badge $status_bg'>$data[booking_status]</span>
                                 </p>
+                                $pending_notice
                                 $btn
                             </div>
                         </div>
