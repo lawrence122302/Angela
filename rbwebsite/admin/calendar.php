@@ -24,7 +24,7 @@
                 <h3>Calendar</h3>
                 <div>
                     <h5>Accommodation Name:</h5>
-                    <select class="form-select shadow-none bg-light w-100" id="accommodationDropdown" onchange="filteraccommodation(this.value)">
+                    <select class="form-select shadow-none bg-light w-100" id="accommodationDropdown" onchange="filterAccommodation(this.value)">
                         <?php
                         $res = selectAll('rooms WHERE removed!=1 ORDER BY id ASC');
                         $first = true;
