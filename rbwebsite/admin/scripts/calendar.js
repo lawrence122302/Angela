@@ -728,41 +728,31 @@ function getDatesInRange(startDate, endDate) {
 
 // Fetches and formats event data from calendars.php, then stores it in eventsArr
 
-fetch('ajax/calendar.php')
-
-    // Initiates a fetch request to calendars.php and parses the JSON response
-
-    .then(response => response.json())
-
+function filteraccommodation(value) {
+    fetch('ajax/calendar.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'filter_bookings&accommodation=' + encodeURIComponent(value)
+    })
+    .then(response => response.text()) // Change to .text() temporarily
     .then(data => {
-
-        // Creates an empty object to store formatted event data
-
+        console.log('Raw response:', data); // Log raw response
+        return JSON.parse(data); // Then parse it
+    })
+    .then(data => {
+        // Clear the existing eventsArr
+        eventsArr = [];
+        
         const formattedData = {};
-
-        // Loops through each event in the fetched event data from calendars.php
-
         data.forEach(event => {
             const checkInDate = new Date(event.check_in);
             const checkOutDate = new Date(event.check_out);
-
-            // Get all dates between check-in and check-out
-
             const datesInRange = getDatesInRange(checkInDate, checkOutDate);
-
-            // Add event to each date in the range
             datesInRange.forEach(({ day, month, year }) => {
-                
-                // For each date, creates a unique key
-
                 const key = `${day}-${month}-${year}`;
-
-                // Ensures no date duplicates inserted in formattedData object
-
                 if (!formattedData[key]) {
-
-                    // Creates a new entry in formattedData for that specific date
-
                     formattedData[key] = {
                         day: day,
                         month: month,
@@ -770,21 +760,18 @@ fetch('ajax/calendar.php')
                         events: []
                     };
                 }
-
-                // Adds event details to the events array in formattedData object for each corresponding date
-
                 const eventTime = `${new Date(event.check_in).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })} - ${new Date(event.check_out).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`;
                 formattedData[key].events.push({ title: event.order_id, time: eventTime });
             });
         });
-
-        // Converts formattedData to an array and assigns it to eventsArr
-
-        eventsArr = Object.values(formattedData);console.log(eventsArr);
+        eventsArr = Object.values(formattedData);
+        console.log(eventsArr);
+        initCalendar(); // Call initCalendar to refresh the calendar values
     })
     .catch(error => {
         console.error('Error fetching events:', error);
     });
+}
 
 // Function to convert a time string like "08:00 AM" to an object with hours and minutes as 24-hour format integers
 
@@ -878,3 +865,12 @@ function getBookingClass(eventObj, year, month, day) {
 
     return additionalClass;
 }
+
+// Automatically trigger filterAccomodation for the first option
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const dropdown = document.getElementById('accommodationDropdown');
+    if (dropdown.value) {
+        filterAccomodation(dropdown.value);
+    }
+});

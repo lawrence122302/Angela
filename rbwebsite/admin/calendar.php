@@ -10,9 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - Calendar</title>
     <?php require('inc/links.php'); ?>
-    <link rel="stylesheet" href="css/calendar.css">
-    <!-- Font Awesome 6.6.0 CSS from cdnjs CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 <body class="bg-light">
@@ -21,7 +18,26 @@
 
     <div class="container-fluid" id="main-content">
         <div class="row">
-            <div class="col-lg-10 ms-auto p-1 overflow-hidden">
+            <div class="col-lg-10 ms-auto p-4 overflow-hidden">
+
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h3>Calendar</h3>
+                <div>
+                    <h5>Accommodation Name:</h5>
+                    <select class="form-select shadow-none bg-light w-100" id="accommodationDropdown" onchange="filteraccommodation(this.value)">
+                        <?php
+                        $res = selectAll('rooms WHERE removed!=1 ORDER BY id ASC');
+                        $first = true;
+                        while($row = mysqli_fetch_assoc($res)) {
+                            $selected = $first ? 'selected' : ''; // Select the first item by default
+                            echo '<option value="'.$row['id'].'" '.$selected.'>'.$row['name'].'</option>';
+                            $first = false;
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+
                 <div class="d-flex align-items-center justify-content-between mb-1">
 
                     <div class="container">

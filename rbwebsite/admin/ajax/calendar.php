@@ -1,17 +1,19 @@
 <?php
-require('../inc/essentials.php');
-adminLogin();
+    require('../inc/essentials.php');
+    adminLogin();
 
-$res = selectAll('booking_order WHERE booking_status="reserved" OR booking_status="booked" ORDER BY check_in ASC');
-$events = array();
+    $accommodation = isset($_POST['accommodation']) ? $_POST['accommodation'] : '';
+    $condition = "WHERE room_id='$accommodation' AND booking_status IN ('reserved', 'booked') ORDER BY check_in ASC";
 
-if ($res->num_rows > 0) {
-    while($row = $res->fetch_assoc()) {
-        $events[] = $row;
+    $res = selectAll("booking_order $condition");
+    $events = array();
+    if ($res->num_rows > 0) {
+        while($row = $res->fetch_assoc()) {
+            $events[] = $row;
+        }
+    } else {
+        error_log("No rows fetched.");
     }
-} else {
-    error_log("No rows fetched.");
-}
-
-echo json_encode($events);
+    header('Content-Type: application/json');
+    echo json_encode($events);
 ?>
