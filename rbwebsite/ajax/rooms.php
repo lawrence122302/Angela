@@ -72,8 +72,41 @@
                 $values = ['booked','reserved','pending',$room_data['id'],$chk_avail['checkin'],$chk_avail['checkout']];
                 $tb_fetch = mysqli_fetch_assoc(select($tb_query,$values,'sssiss'));
 
-                if(($room_data['quantity']-$tb_fetch['total_bookings'])<=0)
-                {
+                // Check for blocked dates
+                $checkin_date_only = explode("T", $chk_avail['checkin'])[0]; // Extract the date part (YYYY-MM-DD)
+                $checkout_date_only = explode("T", $chk_avail['checkout'])[0]; // Extract the date part (YYYY-MM-DD)
+
+                // Error log the values
+                error_log("Check-in Date Only: " . $checkin_date_only);
+                error_log("Original Check-in Value: " . $chk_avail['checkin']);
+                error_log("Checkout Date Only: " . $checkout_date_only);
+                error_log("Original Checkout Value: " . $chk_avail['checkout']);
+                error_log("Time of Day: " . $chk_avail['time_of_day']); // Log time_of_day
+
+                // Always check if check-in date is in blocked dates
+                $blocked_checkin_query = "SELECT COUNT(*) AS blocked_count FROM blocked_dates
+                                        WHERE date=? AND room_id=? AND status=1";
+                $blocked_checkin_values = [$checkin_date_only, $room_data['id']];
+                $blocked_checkin_fetch = mysqli_fetch_assoc(select($blocked_checkin_query, $blocked_checkin_values, 'si'));
+
+                if ($blocked_checkin_fetch['blocked_count'] > 0) {
+                    continue;
+                }
+
+                // Only check blocked dates for check-out if it's a Night Tour
+                if ($chk_avail['time_of_day'] == "Night Tour") {
+                    $blocked_checkout_query = "SELECT COUNT(*) AS blocked_count FROM blocked_dates
+                                            WHERE date=? AND room_id=? AND status=1";
+                    $blocked_checkout_values = [$checkout_date_only, $room_data['id']];
+                    $blocked_checkout_fetch = mysqli_fetch_assoc(select($blocked_checkout_query, $blocked_checkout_values, 'si'));
+
+                    if ($blocked_checkout_fetch['blocked_count'] > 0) {
+                        continue;
+                    }
+                }
+
+                // Check room availability based on quantity and bookings
+                if (($room_data['quantity'] - $tb_fetch['total_bookings']) <= 0) {
                     continue;
                 }
             }

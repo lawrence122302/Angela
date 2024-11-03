@@ -134,6 +134,7 @@
         {
             let datetimeLocal_checkin = "";
             let datetimeLocal_checkout = "";
+            let time_of_day = "";
 
             if(checkin.value!='' && checkout.value!='')
             {
@@ -166,7 +167,6 @@
 
                 // Create new check-in value
                 // Check if day or night
-                let time_of_day = "";
                 let new_checkin_val;
                 if ((checkout_val % 2) == 0) {
                     time_of_day = "Night Tour";
@@ -228,7 +228,8 @@
 
             let chk_avail = JSON.stringify({
                 checkin: datetimeLocal_checkin,
-                checkout: datetimeLocal_checkout
+                checkout: datetimeLocal_checkout,
+                time_of_day: time_of_day
             });
 
             let guests = JSON.stringify({

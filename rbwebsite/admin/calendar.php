@@ -25,12 +25,12 @@
                 <div>
                     <h5>Accommodation Name:</h5>
                     <select class="form-select shadow-none bg-light w-100" id="accommodationDropdown" onchange="filterAccommodation(this.value)">
-                        <?php
+                    <?php
                         $res = selectAll('rooms WHERE removed!=1 ORDER BY id ASC');
                         $first = true;
                         while($row = mysqli_fetch_assoc($res)) {
-                            $selected = $first ? 'selected' : ''; // Select the first item by default
-                            echo '<option value="'.$row['id'].'" '.$selected.'>'.$row['name'].'</option>';
+                            $selected = $first ? 'selected' : '';
+                            echo '<option value="'.$row['id'].'" data-id="'.$row['id'].'" '.$selected.'>'.$row['name'].'</option>';
                             $first = false;
                         }
                         ?>
@@ -91,10 +91,10 @@
                             <div class="events"></div>
                             <div class="add-event-wrapper">
                                 <div class="add-event-header">
-                                    <div class="title">Add Event</div>
+                                    <div class="title">Add Date to Blocked Dates</div>
                                     <i class="fas fa-times close"></i>
                                 </div>
-                                <div class="add-event-body">
+                                <!-- <div class="add-event-body">
                                     <div class="add-event-input">
                                         <input type="text" placeholder="Event Name" class="event-name">
                                     </div>
@@ -104,16 +104,25 @@
                                     <div class="add-event-input">
                                         <input type="text" placeholder="Event Time To" class="event-time-to">
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="add-event-footer">
-                                    <button class="add-event-btn">add event</button>
+                                    <button class="add-event-btn">add date</button>
                                 </div>
                             </div>
                         </div>
-                        <!-- <button class="add-event">
-                            <i class="fas fa-plus"></i>
-                        </button> -->
-
+                        <?php
+                            if($_SESSION['isSuperAdmin']==1)
+                            {
+                                echo<<<data
+                                    <div>
+                                        <button class="add-event">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                        <span class="add-event-label">Add Blocked Date</span>
+                                    </div>
+                                data;
+                            }
+                        ?>
                     </div>
 
                 </div>

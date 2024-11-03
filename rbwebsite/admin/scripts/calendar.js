@@ -320,26 +320,31 @@ const addEventBtn = document.querySelector(".add-event"),
 
 // Open add event input
 
-// addEventBtn.addEventListener("click", () => {
-//     addEventContainer.classList.toggle("active");
-// });
+document.addEventListener('DOMContentLoaded', () => {
+    let addEventBtn = document.querySelector('.add-event');
+    if (addEventBtn) {
+        addEventBtn.addEventListener("click", () => {
+            addEventContainer.classList.toggle("active");
+        });
+    }
+});
 
 // Close add event input
 
-// addEventCloseBtn.addEventListener("click", () => {
-//     addEventContainer.classList.remove("active");
-// });
+addEventCloseBtn.addEventListener("click", () => {
+    addEventContainer.classList.remove("active");
+});
 
 // Close add event input when clicked outside
 
-// document.addEventListener("click", (e) => {
+document.addEventListener("click", (e) => {
 
-//     // If click outside
+    // If click outside
 
-//     if (e.target != addEventBtn && !addEventContainer.contains(e.target)) {
-//         addEventContainer.classList.remove("active");
-//     }
-// });
+    if (e.target != addEventBtn && !addEventContainer.contains(e.target)) {
+        addEventContainer.classList.remove("active");
+    }
+});
 
 // Allow only 50 characters in title
 
@@ -485,14 +490,12 @@ function updateEvents(date) {
     eventsArr.forEach((event) => {
 
         // Get events of active day only
-
         if (
             date == event.day &&
             month + 1 == event.month &&
             year == event.year
         ) {
             // Show event on document
-
             event.events.forEach((event) => {
                 events += `<div class="event">
                     <div class="title">
@@ -507,110 +510,155 @@ function updateEvents(date) {
         }
     });
 
-    // If nothing found
+    // If no events found
+    let addEventButton = document.querySelector('.add-event');
 
-    if (events == "") {
-        events = `<div class="no-event">
-            <h3>No Events</h3>
-        </div>`;
+    if (addEventButton) {
+        addEventButton.style.display = 'none';
+
+        if (events == "") {
+            events = `<div class="no-event">
+                <h3>No Events</h3>
+            </div>`;
+            
+            // Show add blocked date button
+            addEventButton.style.display = 'flex';
+        }
     }
 
     eventsContainer.innerHTML = events;
-    
-    // Save events when updated event called
 
+    // Save events when updated event called
     // saveEvents();
 }
 
 // Function to add events
 
-// addEventSubmit.addEventListener("click", () => {
-//     const eventTitle = addEventTitle.value;
-//     const eventTimeFrom = addEventFrom.value;
-//     const eventTimeTo = addEventTo.value;
+addEventSubmit.addEventListener("click", () => {
+    let selectedDate = new Date(year, month, activeDay);
 
-//     // Some validations
+    let selectedOption = document.querySelector('#accommodationDropdown').selectedOptions[0];
+    let accommodationId = selectedOption.getAttribute('data-id');
 
-//     if (eventTitle == "" || eventTimeFrom == "" || eventTimeTo == "") {
-//         alert("Please fill all the fields");
-//         return;
-//     }
+    // Manually format the date string to avoid timezone issues
+    let dateString = selectedDate.getFullYear() + '-' + 
+        String(selectedDate.getMonth() + 1).padStart(2, '0') + '-' +
+        String(selectedDate.getDate()).padStart(2, '0');
 
-//     const timeFromArr = eventTimeFrom.split(":");
-//     const timeToArr = eventTimeFrom.split(":");
+    fetch('ajax/calendar.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            action: 'block_date',
+            date: dateString,
+            accommodationId: accommodationId
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('success', 'Date blocked successfully!');
 
-//     if (
-//         timeFromArr.length != 2 ||
-//         timeToArr.length != 2 ||
-//         timeFromArr[0] > 23 ||
-//         timeFromArr[1] > 59 ||
-//         timeToArr[0] > 23 ||
-//         timeToArr[1] > 59
-//     ) {
-//         alert("Invalid Time Format");
-//     }
+            // Refresh the events
+                    
+            updateEvents(activeDay);
 
-//     const timeFrom = convertTime(eventTimeFrom);
-//     const timeTo = convertTime(eventTimeTo);
+            // Call filterAccommodation with the selected accommodationId
+            filterAccommodation(accommodationId);
+        } else {
+            alert('error', data.message || 'Failed to block date.');
+        }
+    })
+    .catch(error => console.error('Error:', error));
 
-//     const newEvent = {
-//         title: eventTitle,
-//         time: timeFrom + " - " + timeTo,
-//     };
+    // const eventTitle = addEventTitle.value;
+    // const eventTimeFrom = addEventFrom.value;
+    // const eventTimeTo = addEventTo.value;
 
-//     let eventAdded = false;
+    // // Some validations
 
-//     // Check if eventsarr is not empty
+    // if (eventTitle == "" || eventTimeFrom == "" || eventTimeTo == "") {
+    //     alert("Please fill all the fields");
+    //     return;
+    // }
 
-//     if (eventsArr.length > 0) {
+    // const timeFromArr = eventTimeFrom.split(":");
+    // const timeToArr = eventTimeFrom.split(":");
 
-//         // Check if current day has already any event then add to that
+    // if (
+    //     timeFromArr.length != 2 ||
+    //     timeToArr.length != 2 ||
+    //     timeFromArr[0] > 23 ||
+    //     timeFromArr[1] > 59 ||
+    //     timeToArr[0] > 23 ||
+    //     timeToArr[1] > 59
+    // ) {
+    //     alert("Invalid Time Format");
+    // }
 
-//         eventsArr.forEach((item) => {
-//             if (
-//                 item.day == activeDay &&
-//                 item.month == month + 1 &&
-//                 item.year == year
-//             ) {
-//                 item.events.push(newEvent);
-//                 eventAdded = true;
-//             }
-//         });
-//     }
+    // const timeFrom = convertTime(eventTimeFrom);
+    // const timeTo = convertTime(eventTimeTo);
 
-//     // If event array is empty or current day has no event create new
+    // const newEvent = {
+    //     title: eventTitle,
+    //     time: timeFrom + " - " + timeTo,
+    // };
 
-//     if (!eventAdded) {
-//         eventsArr.push({
-//             day : activeDay,
-//             month : month + 1,
-//             year : year,
-//             events : [newEvent],
-//         });
-//     }
+    // let eventAdded = false;
 
-//     // Remove active from add event form
+    // // Check if eventsarr is not empty
 
-//     addEventContainer.classList.remove("active");
+    // if (eventsArr.length > 0) {
 
-//     // Clear the fields
+    //     // Check if current day has already any event then add to that
 
-//     addEventTitle.value = "";
-//     addEventFrom.value = "";
-//     addEventTo.value = "";
+    //     eventsArr.forEach((item) => {
+    //         if (
+    //             item.day == activeDay &&
+    //             item.month == month + 1 &&
+    //             item.year == year
+    //         ) {
+    //             item.events.push(newEvent);
+    //             eventAdded = true;
+    //         }
+    //     });
+    // }
 
-//     // Show current added event
+    // // If event array is empty or current day has no event create new
 
-//     updateEvents(activeDay);
+    // if (!eventAdded) {
+    //     eventsArr.push({
+    //         day : activeDay,
+    //         month : month + 1,
+    //         year : year,
+    //         events : [newEvent],
+    //     });
+    // }
 
-//     // Add event class to newly added day if not already
+    // // Remove active from add event form
 
-//     const activeDayElem = document.querySelector(".day.active");
+    // addEventContainer.classList.remove("active");
+
+    // // Clear the fields
+
+    // addEventTitle.value = "";
+    // addEventFrom.value = "";
+    // addEventTo.value = "";
+
+    // // Show current added event
+
+    // updateEvents(activeDay);
+
+    // // Add event class to newly added day if not already
+
+    // const activeDayElem = document.querySelector(".day.active");
     
-//     if(!activeDayElem.classList.contains("event")) {
-//         activeDayElem.classList.add("event")
-//     }
-// });
+    // if(!activeDayElem.classList.contains("event")) {
+    //     activeDayElem.classList.add("event")
+    // }
+});
 
 // Convert time used for adding events
 
@@ -626,44 +674,113 @@ function updateEvents(date) {
 
 // Function to remove events on click
 
-// eventsContainer.addEventListener("click", (e) => {
-//     if (e.target.classList.contains("event")) {
-//         const eventTitle = e.target.children[0].children[1].innerHTML;
+eventsContainer.addEventListener("click", (e) => {
 
-//         // Get the title of event than search in array by title and delete
-//         eventsArr.forEach((event) => {
-//             if (
-//                 event.day == activeDay &&
-//                 event.month == month + 1 &&
-//                 event.year == year
-//             ) {
-//                 event.events.forEach((item, index) => {
-//                     if (item.title == eventTitle) {
-//                         event.events.splice(index, 1)
-//                     }
-//                 });
+    // Check if the clicked element has the class "event"
 
-//                 // If no event remaining on that date remove complete day
+    if (e.target.classList.contains("event")) {
 
-//                 if (event.events.length == 0) {
-//                     eventsArr.splice(eventsArr.indexOf(event), 1);
+        // Get the title of the clicked event
 
-//                     // After removing complete day also remove active class of that day
+        const eventTitle = e.target.children[0].children[1].innerHTML;
 
-//                     const activeDayElem = document.querySelector(".day.active");
+        // Check if the event title is "Blocked Date"
+        if (eventTitle === "Blocked Date") {
+            const date = `${year}-${String(month + 1).padStart(2, '0')}-${String(activeDay).padStart(2, '0')}`;
+            let selectedOption = document.querySelector('#accommodationDropdown').selectedOptions[0];
+            let accommodationId = selectedOption.getAttribute('data-id');
 
-//                     if (activeDayElem.classList.contains("event")) {
-//                         activeDayElem.classList.remove("event");
-//                     }
-//                 }
-//             }
-//         });
+            // Send a request to update the blocked_dates table
+            fetch('ajax/calendar.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    action: 'unblock_date',
+                    date: date,
+                    accommodationId: accommodationId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('success', 'Date unblocked successfully!');
+                    
+                    // Optionally remove the event from eventsArr and update the display
+                    eventsArr.forEach((event) => {
+                        if (
+                            event.day == activeDay &&
+                            event.month == month + 1 &&
+                            event.year == year
+                        ) {
+                            event.events = event.events.filter(item => item.title !== "Blocked Date");
+                            
+                            if (event.events.length == 0) {
+                                eventsArr.splice(eventsArr.indexOf(event), 1);
+                                const activeDayElem = document.querySelector(".day.active");
+                                if (activeDayElem.classList.contains("event")) {
+                                    activeDayElem.classList.remove("event");
+                                }
+                            }
+                        }
+                    });
 
-//         // After removing from array update event
+                    // Refresh the events
 
-//         updateEvents(activeDay);
-//     }
-// });
+                    updateEvents(activeDay);
+                } else {
+                    alert('error', data.message || 'Failed to unblock date.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('error', 'An error occurred while unblocking the date.');
+            });
+        }
+
+        // // Iterate through the eventsArr array to find the matching event by title and delete it
+        
+        // eventsArr.forEach((event) => {
+
+        //     // Check if the event matches the active day, month, and year
+
+        //     if (
+        //         event.day == activeDay &&
+        //         event.month == month + 1 &&
+        //         event.year == year
+        //     ) {
+        //         // Iterate through the events of the matched day
+
+        //         event.events.forEach((item, index) => {
+
+        //             // If the event title matches, remove the event from the array
+
+        //             if (item.title == eventTitle) {
+        //                 event.events.splice(index, 1);
+        //             }
+        //         });
+
+        //         // If no events remain for that day, remove the entire day from eventsArr
+
+        //         if (event.events.length == 0) {
+        //             eventsArr.splice(eventsArr.indexOf(event), 1);
+
+        //             // Also remove the "event" class from the active day element in the calendar
+
+        //             const activeDayElem = document.querySelector(".day.active");
+        //             if (activeDayElem.classList.contains("event")) {
+        //                 activeDayElem.classList.remove("event");
+        //             }
+        //         }
+        //     }
+        // });
+
+        // // After updating the eventsArr, refresh the display of events
+
+        // updateEvents(activeDay);
+    }
+});
 
 // Store events in local storage
 
@@ -726,50 +843,77 @@ function getDatesInRange(startDate, endDate) {
     return dates;
 }
 
-// Fetches and formats event data from calendars.php, then stores it in eventsArr
+// Function to filter accommodation bookings and blocked dates
 
 function filterAccommodation(value) {
-    fetch('ajax/calendar.php', {
+    fetchBookings(value).then(() => fetchBlockedDates(value)).then(() => {
+        initCalendar(); // Call initCalendar to refresh the calendar view with the new events
+    }).catch(error => console.error('Error:', error));
+}
+
+// Function to fetch bookings
+
+function fetchBookings(value) {
+    return fetch('ajax/calendar.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: 'filter_bookings&accommodation=' + encodeURIComponent(value)
+        body: 'action=filter_bookings&accommodation=' + encodeURIComponent(value)
     })
-    .then(response => response.text()) // Change to .text() temporarily
+    .then(response => response.text())
+    .then(data => JSON.parse(data))
     .then(data => {
-        console.log('Raw response:', data); // Log raw response
-        return JSON.parse(data); // Then parse it
-    })
-    .then(data => {
-        // Clear the existing eventsArr
         eventsArr = [];
-        
         const formattedData = {};
+
         data.forEach(event => {
             const checkInDate = new Date(event.check_in);
             const checkOutDate = new Date(event.check_out);
             const datesInRange = getDatesInRange(checkInDate, checkOutDate);
+
             datesInRange.forEach(({ day, month, year }) => {
                 const key = `${day}-${month}-${year}`;
                 if (!formattedData[key]) {
-                    formattedData[key] = {
-                        day: day,
-                        month: month,
-                        year: year,
-                        events: []
-                    };
+                    formattedData[key] = { day, month, year, events: [] };
                 }
                 const eventTime = `${new Date(event.check_in).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })} - ${new Date(event.check_out).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`;
                 formattedData[key].events.push({ title: event.order_id, time: eventTime });
             });
         });
+
         eventsArr = Object.values(formattedData);
-        console.log(eventsArr);
-        initCalendar(); // Call initCalendar to refresh the calendar values
+
+        updateEvents(activeDay);
+    });
+}
+
+// Function to fetch blocked dates
+
+function fetchBlockedDates(value) {
+    return fetch('ajax/calendar.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'action=filter_blocked_dates&accommodation=' + encodeURIComponent(value)
     })
-    .catch(error => {
-        console.error('Error fetching events:', error);
+    .then(response => response.text())
+    .then(data => JSON.parse(data))
+    .then(data => {
+        const formattedData = {};
+
+        data.forEach(blockedDate => {
+            const date = new Date(blockedDate.date);
+            const key = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+            if (!formattedData[key]) {
+                formattedData[key] = { day: date.getDate(), month: date.getMonth() + 1, year: date.getFullYear(), events: [] };
+            }
+            formattedData[key].events.push({ title: 'Blocked Date', time: 'All Day' });
+        });
+
+        // Merge blocked dates into eventsArr
+        eventsArr = [...eventsArr, ...Object.values(formattedData)];
     });
 }
 
@@ -805,26 +949,18 @@ function parseTime(timeString) {
 // Function to determine the class based on the booking times for a given day
 
 function getBookingClass(eventObj, year, month, day) {
-
     // additionalClass, hasDayBooking, hasNightBooking, hasFullDayBooking are all set to their default values
-
     let additionalClass = "";
     let hasDayBooking = false;
     let hasNightBooking = false;
     let hasFullDayBooking = false;
 
     // For each booking in eventObj.events
-
     eventObj.events.forEach((booking) => {
-
         // Use parseTime to get startTime and endTime
-
         const [startTime, endTime] = booking.time.split(' - ').map(parseTime);
 
         // Set Flags Based on Booking Type
-
-        // Apply Classes Based on Flags
-
         if (startTime.hours === 8 && endTime.hours === 18) {
             hasDayBooking = true; // Day Booking
         } else if (startTime.hours === 20 && endTime.hours === 6) {
@@ -847,10 +983,14 @@ function getBookingClass(eventObj, year, month, day) {
                 }
             });
         }
+
+        // Additional condition for Blocked Date
+        if (booking.title === "Blocked Date") {
+            additionalClass = " event-red";
+        }
     });
 
     // If there’s no full-day booking
-
     if (!hasFullDayBooking) {
         if (hasDayBooking && hasNightBooking) {
             additionalClass = " event-red";

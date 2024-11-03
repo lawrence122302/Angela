@@ -73,10 +73,48 @@
                 $rq_result = select("SELECT quantity FROM rooms WHERE id=?",[$_SESSION['room']['id']],'i');
                 $rq_fetch = mysqli_fetch_assoc($rq_result);
 
-                if(($rq_fetch['quantity']-$tb_fetch['total_bookings'])<=0)
-                {
+                // Check for blocked dates
+                $checkin_date_only = explode(" ", $formatted_checkin)[0]; // Extract the date part (YYYY-MM-DD)
+                $checkout_date_only = explode(" ", $formatted_checkout)[0]; // Extract the date part (YYYY-MM-DD)
+
+                // Error log the values
+                error_log("Check-in Date Only: " . $checkin_date_only);
+                error_log("Original Check-in Value: " . $formatted_checkin);
+                error_log("Checkout Date Only: " . $checkout_date_only);
+                error_log("Original Checkout Value: " . $formatted_checkout);
+
+                // Always check if check-in date is in blocked dates
+                $blocked_checkin_query = "SELECT COUNT(*) AS blocked_count FROM blocked_dates
+                                        WHERE date=? AND room_id=? AND status=1";
+                $blocked_checkin_values = [$checkin_date_only, $_SESSION['room']['id']];
+                $blocked_checkin_fetch = mysqli_fetch_assoc(select($blocked_checkin_query, $blocked_checkin_values, 'si'));
+
+                if ($blocked_checkin_fetch['blocked_count'] > 0) {
                     $status = 'unavailable';
-                    $result = json_encode(['status'=>$status]);
+                    $result = json_encode(['status' => $status]);
+                    echo $result;
+                    exit;
+                }
+
+                // Only check blocked dates for check-out if it's a Night Tour
+                if ($frm_data['time_of_day'] == "Night Tour") {
+                    $blocked_checkout_query = "SELECT COUNT(*) AS blocked_count FROM blocked_dates
+                        WHERE date=? AND room_id=? AND status=1";
+                    $blocked_checkout_values = [$checkout_date_only, $_SESSION['room']['id']];
+                    $blocked_checkout_fetch = mysqli_fetch_assoc(select($blocked_checkout_query, $blocked_checkout_values, 'si'));
+
+                    if ($blocked_checkout_fetch['blocked_count'] > 0) {
+                        $status = 'unavailable';
+                        $result = json_encode(['status' => $status]);
+                        echo $result;
+                        exit;
+                    }
+                }
+
+                // Check room availability based on quantity and bookings
+                if (($rq_fetch['quantity'] - $tb_fetch['total_bookings']) <= 0) {
+                    $status = 'unavailable';
+                    $result = json_encode(['status' => $status]);
                     echo $result;
                     exit;
                 }
@@ -144,7 +182,7 @@
                 $_SESSION['room']['payment'] = $payment;
                 $_SESSION['room']['available'] = true;
 
-                $result = json_encode(["status"=>'available', "package_type"=>$package_type, "hour1"=>$checkin_formatted_time, "hour2"=>$checkin_formatted_time, "payment"=>$payment]);
+                $result = json_encode(["status"=>'available', "package_type"=>$package_type, "hour1"=>$checkin_formatted_time, "hour2"=>$checkout_formatted_time, "payment"=>$payment]);
                 echo $result;
             }
         }
