@@ -3,10 +3,18 @@
 
     session_name('admin_session');
     session_start();
+
+    // Checks for existing admin login session
+
     if((isset($_SESSION['adminLogin']) && $_SESSION['adminLogin']==true))
     {
         redirect('dashboard.php');
     }
+
+    // Shows alert
+
+    // Check and Show Alerts
+    $alert = isset($_GET['alert']) ? $_GET['alert'] : false;
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +76,17 @@
                     $_SESSION['adminName'] = $row['admin_name'];
                     $_SESSION['status'] = $row['status'];
                     $_SESSION['isSuperAdmin'] = $row['is_super_admin'];
+
+                    // Admin login session validation
+
+                    $session_token = bin2hex(random_bytes(16)); // Generate a unique token
+                    $_SESSION['session_token'] = $session_token;
+
+                    $query = "UPDATE admin_cred SET session_token=? WHERE sr_no=?";
+                    $values = [$session_token, $row['sr_no']];
+                    update($query, $values, 'si');
+
+
                     redirect('dashboard.php');
                 }
             }
@@ -77,6 +96,18 @@
             }
         }
 
+        // Check and Show Alerts
+
+        if ($alert) {
+            switch ($alert) {
+                case 'another_login':
+                    alert('error', 'Another login detected!');
+                    break;
+                default:
+                    alert('error', 'An unknown error occurred.');
+                    break;
+            }
+        }
     ?>
 
 

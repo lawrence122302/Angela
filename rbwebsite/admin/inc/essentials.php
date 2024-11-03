@@ -48,9 +48,7 @@
         
         if(!(isset($_SESSION['adminLogin']) && $_SESSION['adminLogin']==true))
         {
-            echo"<script>
-            window.location.href='index.php';
-            </script>";
+            redirect('index.php');
             exit;
         }
 
@@ -61,13 +59,23 @@
 
         $_SESSION['status'] = $row['status'];
 
+        // Check session token
+        
+        if ($row['session_token'] !== $_SESSION['session_token']) {
+            session_destroy();
+            redirect('index.php?alert=another_login');
+            exit;
+        }
+
         // Account status check for page loads
+
         if (isset($_SESSION['status']) && $_SESSION['status'] == 0) {
             redirect('logout.php');
             exit();
         }
 
         // Account status check using setInterval 60 seconds
+
         if (isset($_POST['status']) && $_POST['status'] === 'check') {
 
             if (isset($_SESSION['status']) && $_SESSION['status'] == 0) {
