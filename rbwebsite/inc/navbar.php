@@ -208,10 +208,13 @@
               </div>
             </div>
           </div>
-          <div class="text-center mb-3">
-            <small style="font-size: 0.75rem;">
-              By registering, you consent to the use of your information for our services.
-            </small>
+          <div class="form-check form-check-custom text-center mb-3">
+            <input class="form-check-input form-check-input-custom" type="checkbox" id="consentCheck" required>
+            <label class="form-check-label" for="consentCheck">
+                <small style="font-size: 0.75rem;">
+                    By registering, you consent to the use of your information for our services.
+                </small>
+            </label>
           </div>
           <div class="text-center my-1">
             <button type="submit" class="btn btn-dark shadow-none">Register</button>

@@ -72,9 +72,9 @@
                 <div class="bg-white p-3 p-md-4 rounded shadow-sm">
                     <form id="profile-form">
                         <h5 class="mb-3 fw-bold">ID</h5>
-                        <img src="<?php echo USERS_IMG_PATH.$u_fetch['profile'] ?>" class="img-fluid">
+                        <img src="<?php echo USERS_IMG_PATH.$u_fetch['profile'] ?>" class="img-fluid mb-2">
 
-                        <label class="form-label">New Picture</label>
+                        <label class="form-label">New ID</label>
                         <input name="profile" type="file" accept=".jpg, .jpeg, .png, .webp" class="mb-4 form-control shadow-none" required>
 
                         <button type="submit" class="btn text-white custom-bg shadow-none">Save Changes</button>

@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php require('inc/links.php'); ?>
     <title><?php echo $settings_r['site_title'] ?> - Confirm Booking</title>
+    <style>
+        .form-check-custom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+
+        .form-check-input-custom {
+            margin-right: 10px; /* Adjust the spacing as needed */
+        }
+    </style>
 </head>
 <body class="bg-light">
 
@@ -66,6 +77,8 @@
                     <a href="rooms.php" class="text-secondary text-decoration-none">Rooms</a>
                     <span class="text-secondary"> > </span>
                     <a href="#" class="text-secondary text-decoration-none">Confirm</a>
+                    <span class="text-secondary"> > </span>
+                    <a href="#" class="text-secondary text-decoration-none"><?php echo $room_data['name'] ?></a>
                 </div>
             </div>
 
@@ -169,7 +182,7 @@
 
                     <div class="row">
                         <div class="col text-center mb-3">
-                            <img src="images/settings/gcash.jpeg" class="img-fluid mb-2" style="max-height: 80vh;">
+                            <img src="images/settings/gcash_qr.jpg" class="img-fluid mb-2" style="max-height: 80vh;">
                         </div>
                     </div>
                     <div class="row">
@@ -187,6 +200,7 @@
                             </select>
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col mb-3">
                             <label class="form-label fw-bold">Mode of Payment</label><br>
@@ -200,6 +214,19 @@
                             </label>
                             <input type="text" id="customValue1" name="customValue" class="form-control shadow-none" placeholder="Enter GCash Reference" required disabled>
                         </div>
+                    </div>
+
+                    <?php
+                        $booking_contract = SETTINGS_FILE_PATH."booking_contract.pdf";
+                    ?>
+                    <div class="form-check form-check-custom text-center mb-1">
+                        <input class="form-check-input form-check-input-custom" type="checkbox" id="consentCheck" required>
+                        <label class="form-check-label" for="consentCheck">
+                            <small style="font-size: 0.75rem;">
+                                I agree to the 
+                                <a href="<?= $booking_contract ?>" target="_blank">booking contract terms and conditions</a>.
+                            </small>
+                        </label>
                     </div>
 
                     </div>

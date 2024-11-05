@@ -18,6 +18,8 @@
     define('FACILITIES_IMG_PATH',SITE_URL.'images/facilities/');
     define('ROOMS_IMG_PATH',SITE_URL.'images/rooms/');
     define('USERS_IMG_PATH',SITE_URL.'images/users/');
+    
+    define('SETTINGS_FILE_PATH',SITE_URL.'files/settings/');
 
     // Backup path
     define('BACKUP_PATH', DOCUMENT_ROOT . '/admin/backup/');

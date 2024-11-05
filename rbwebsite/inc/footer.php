@@ -339,7 +339,7 @@
         }
         else
         {
-            alert('error','Please login to book room!');
+            alert('error','Please login to book.');
         }
     }
 

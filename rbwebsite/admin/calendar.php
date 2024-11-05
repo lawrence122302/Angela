@@ -21,21 +21,22 @@
             <div class="col-lg-10 ms-auto p-4 overflow-hidden">
 
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h3>Calendar</h3>
-                <div>
-                    <h5>Accommodation Name:</h5>
-                    <select class="form-select shadow-none bg-light w-100" id="accommodationDropdown" onchange="filterAccommodation(this.value)">
-                    <?php
-                        $res = selectAll('rooms WHERE removed!=1 ORDER BY id ASC');
-                        $first = true;
-                        while($row = mysqli_fetch_assoc($res)) {
-                            $selected = $first ? 'selected' : '';
-                            echo '<option value="'.$row['id'].'" data-id="'.$row['id'].'" '.$selected.'>'.$row['name'].'</option>';
-                            $first = false;
-                        }
-                        ?>
-                    </select>
-                </div>
+                <h3>Calendar (Reserved Bookings & Blocked Dates)</h3>
+            </div>
+            
+            <div class="d-flex flex-column align-items-start">
+                <h6>Accommodation Name:</h6>
+                <select class="form-select shadow-none bg-light mb-4" id="accommodationDropdown" style="width: auto;" onchange="filterAccommodation(this.value)">
+                <?php
+                    $res = selectAll('rooms WHERE removed!=1 ORDER BY id ASC');
+                    $first = true;
+                    while($row = mysqli_fetch_assoc($res)) {
+                        $selected = $first ? 'selected' : '';
+                        echo '<option value="'.$row['id'].'" data-id="'.$row['id'].'" '.$selected.'>'.$row['name'].'</option>';
+                        $first = false;
+                    }
+                    ?>
+                </select>
             </div>
 
                 <div class="d-flex align-items-center justify-content-between mb-1">

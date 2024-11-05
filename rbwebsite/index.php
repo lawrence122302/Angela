@@ -27,6 +27,16 @@
             justify-content: space-between;
             height: 100%;
         }
+
+        .form-check-custom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+
+        .form-check-input-custom {
+            margin-right: 10px; /* Adjust the spacing as needed */
+        }
     </style>
 </head>
 <body class="bg-light">

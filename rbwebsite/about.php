@@ -50,7 +50,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-6 mb-4 px-4">
                 <div class="bg-white rounded shadow p-4 border-top border-4 text-center box h-100 d-flex flex-column justify-content-center align-items-center">
-                    <img src="images/about/hotel.svg" width="70px">
+                    <img src="images/about/swimming-pool.png" width="70px">
                     <h4 class="mt-3">7 Angelas</h4>
                 </div>
             </div>
@@ -68,7 +68,7 @@
             </div>
             <div class="col-lg-3 col-md-6 mb-4 px-4">
                 <div class="bg-white rounded shadow p-4 border-top border-4 text-center box h-100 d-flex flex-column justify-content-center align-items-center">
-                    <img src="images/about/staff.svg" width="70px">
+                    <img src="images/about/caretaker.png" width="70px">
                     <h4 class="mt-3">7 Caretakers</h4>
                 </div>
             </div>

@@ -82,7 +82,7 @@
             <div class="col-lg-4 col-md-auto mb-5 px-auto">
                 <div class="bg-white rounded shadow p-4 d-flex flex-column align-items-center">
                     <a href="Angela9.php" class="text-decoration-none text-dark">
-                        <img src="images/angela7.jpg" class="img-fluid rounded" style="max-height: 50vh;">
+                        <img src="images/angela9.jpg" class="img-fluid rounded" style="max-height: 50vh;">
                         <h5 class="mt-3 fw-bold h-font text-center">Angela 9</h5>
                     </a>
                 </div>
