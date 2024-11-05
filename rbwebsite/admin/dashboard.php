@@ -16,20 +16,45 @@
     <?php
         require('inc/header.php');
 
+        // Query to check if the system is set to shutdown mode
         $is_shutdown = mysqli_fetch_assoc(mysqli_query($con,"SELECT shutdown FROM settings"));
 
-        $current_bookings = mysqli_fetch_assoc(mysqli_query($con,"SELECT 
-            COUNT(CASE WHEN booking_status='pending' AND arrival=0 THEN 1 END) AS confirm_down_payment,
-            COUNT(CASE WHEN booking_status='booked' AND arrival=0 THEN 1 END) AS new_bookings,
-            COUNT(CASE WHEN booking_status='cancelled' AND refund=0 THEN 1 END) AS refund_bookings
-            FROM booking_order"));
-            
+        // Query to count different booking statuses: pending down payments, new bookings, and cancelled bookings needing refunds
+        $current_bookings = mysqli_fetch_assoc(mysqli_query($con, "SELECT 
+            COUNT(CASE 
+                WHEN bo.booking_status = 'pending' 
+                    AND bo.arrival = 0 
+                    AND bo.trans_amt < bd.total_pay 
+                THEN 1 
+            END) AS confirm_down_payment,
+            COUNT(CASE 
+                WHEN bo.booking_status = 'pending' 
+                    AND bo.arrival = 0 
+                THEN 1 
+            END) AS new_bookings,
+            COUNT(CASE 
+                WHEN bo.booking_status = 'cancelled' 
+                    AND bo.refund = 0 
+                THEN 1 
+            END) AS refund_bookings,
+            COUNT(CASE 
+                WHEN bo.booking_status = 'pending' 
+                    AND bo.arrival = 0 
+                    AND bo.trans_amt >= bd.total_pay 
+                THEN 1 
+            END) AS confirm_full_payment
+        FROM booking_order bo 
+        INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id"));
+
+        // Query to count the number of unread user queries
         $unread_queries = mysqli_fetch_assoc(mysqli_query($con,"SELECT COUNT(sr_no) AS count 
             FROM user_queries WHERE seen=0"));
 
+        // Query to count the number of unread user reviews
         $unread_reviews = mysqli_fetch_assoc(mysqli_query($con,"SELECT COUNT(sr_no) AS count 
             FROM rating_review WHERE seen=0"));
 
+        // Query to count the total number of users, and categorize them into active, inactive, and unverified users
         $current_users = mysqli_fetch_assoc(mysqli_query($con,"SELECT 
             COUNT(id) AS total,
             COUNT(CASE WHEN status=1 THEN 1 END) AS active,
@@ -67,14 +92,14 @@
                         <a href="confirm_full_payment.php" class="text-decoration-none">
                             <div class="card text-center text-success p-3">
                                 <h6>Confirm Full Payment</h6>
-                                <h1 class="mt-2 mb-0"><?php echo $current_bookings['new_bookings'] ?></h1>
+                                <h1 class="mt-2 mb-0"><?php echo $current_bookings['confirm_full_payment'] ?></h1>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-3 mb-3">
                         <a href="confirmed_bookings.php" class="text-decoration-none">
                             <div class="card text-center text-success p-3">
-                                <h6>Reserved Bookings</h6>
+                                <h6>Confirm Arrival</h6>
                                 <h1 class="mt-2 mb-0"><?php echo $current_bookings['new_bookings'] ?></h1>
                             </div>
                         </a>
@@ -84,25 +109,6 @@
                             <div class="card text-center text-warning p-3">
                                 <h6>Refund Bookings</h6>
                                 <h1 class="mt-2 mb-0"><?php echo $current_bookings['refund_bookings'] ?></h1>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-3 mb-3">
-                        <a href="user_queries.php" class="text-decoration-none">
-                            <div class="card text-center text-info p-3">
-                                <h6>User Queries</h6>
-                                <h1 class="mt-2 mb-0"><?php echo $unread_queries['count'] ?></h1>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 mb-4">
-                        <a href="rate_review.php" class="text-decoration-none">
-                            <div class="card text-center text-info p-3">
-                                <h6>Rating & Review</h6>
-                                <h1 class="mt-2 mb-0"><?php echo $unread_reviews['count'] ?></h1>
                             </div>
                         </a>
                     </div>
@@ -135,7 +141,7 @@
                     </div>
                     <div class="col-md-3 mb-4">
                         <div class="card text-center text-danger p-3">
-                            <h6>Cancelled Bookings</h6>
+                            <h6>Refunded Bookings</h6>
                             <h1 class="mt-2 mb-0" id="cancelled_bookings">0</h1>
                             <h4 class="mt-2 mb-0" id="cancelled_amt">₱0</h4>
                         </div>
