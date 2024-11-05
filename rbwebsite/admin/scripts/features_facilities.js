@@ -112,7 +112,7 @@ function add_facility()
 
         if(this.responseText == 'inv_img')
         {
-            alert('error','Only SVG images are allowed!');
+            alert('error','Invalid image format!');
         }
         else if(this.responseText == 'inv_size')
         {

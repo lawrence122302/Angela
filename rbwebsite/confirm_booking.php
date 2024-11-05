@@ -187,7 +187,7 @@
                     </div>
                     <div class="row">
                         <div class="col text-center mb-3">
-                            <span class="badge rounded-pill bg-dark text-white text-wrap">Gcash: 123456778</span>
+                            <span class="badge rounded-pill bg-dark text-white text-wrap">Gcash: 09178520213</span>
                         </div>
                     </div>
                     <div class="row">

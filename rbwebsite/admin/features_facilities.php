@@ -132,7 +132,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Icon</label>
-                            <input type="file" name="facility_icon" id="member_picture_inp" accept=".svg" class="form-control shadow-none" required>
+                            <input type="file" name="facility_icon" id="member_picture_inp" accept=".svg, .jpg, .jpeg, .png" class="form-control shadow-none" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Description</label>

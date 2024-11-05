@@ -66,7 +66,7 @@
     {
         $frm_data = filteration($_POST);
 
-        $img_r = uploadSVGImage($_FILES['icon'],FACILITIES_FOLDER);
+        $img_r = uploadImage($_FILES['icon'],FACILITIES_FOLDER);
 
         if($img_r == 'inv_img')
         {

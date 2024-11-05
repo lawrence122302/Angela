@@ -122,7 +122,7 @@
 
     function uploadImage($image,$folder)
     {
-        $valid_mime = ['image/jpeg','image/png','image/webp'];
+        $valid_mime = ['image/jpeg','image/png','image/webp','image/svg+xml'];
         $img_mime = $image['type'];
 
         if(!in_array($img_mime,$valid_mime))
@@ -169,7 +169,7 @@
 
         if(!in_array($img_mime,$valid_mime))
         {
-            return 'inv_size'; // invalid image mime or format
+            return 'inv_img'; // invalid image mime or format
         }
         else if(($image['size']/(1024*1024))>1)
         {
