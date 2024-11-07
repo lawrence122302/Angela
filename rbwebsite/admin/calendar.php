@@ -20,27 +20,34 @@
         <div class="row">
             <div class="col-lg-10 ms-auto p-4 overflow-hidden">
 
-            <div class="d-flex align-items-center justify-content-between mb-4">
-                <h3>Calendar (Reserved Bookings & Blocked Dates)</h3>
-            </div>
-            
-            <div class="d-flex flex-column align-items-start">
-                <h6>Accommodation Name:</h6>
-                <select class="form-select shadow-none bg-light mb-4" id="accommodationDropdown" style="width: auto;" onchange="filterAccommodation(this.value)">
-                <?php
-                    $res = selectAll('rooms WHERE removed!=1 ORDER BY id ASC');
-                    $first = true;
-                    while($row = mysqli_fetch_assoc($res)) {
-                        $selected = $first ? 'selected' : '';
-                        echo '<option value="'.$row['id'].'" data-id="'.$row['id'].'" '.$selected.'>'.$row['name'].'</option>';
-                        $first = false;
-                    }
-                    ?>
-                </select>
-            </div>
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h3>Calendar (Reserved Bookings & Blocked Dates)</h3>
+                </div>
+                
+                <div class="d-flex flex-column align-items-start">
+                    <h6>Accommodation Name:</h6>
+                    <select class="form-select shadow-none bg-light mb-4" id="accommodationDropdown" style="width: auto;" onchange="filterAccommodation(this.value)">
+                        <?php
+                        // Modified query to order by 'removed' first
+                        $res = selectAll('rooms ORDER BY removed ASC, id ASC');
+                        $first = true;
+                        while ($row = mysqli_fetch_assoc($res)) {
+                            $selected = $first ? 'selected' : '';
+                            $name = $row['name'];
+
+                            // Append "(Removed)" if 'removed' is 1
+                            if ($row['removed'] == 1) {
+                                $name .= " (Removed)";
+                            }
+
+                            echo '<option value="' . $row['id'] . '" data-id="' . $row['id'] . '" ' . $selected . '>' . $name . '</option>';
+                            $first = false;
+                        }
+                        ?>
+                    </select>
+                </div>
 
                 <div class="d-flex align-items-center justify-content-between mb-1">
-
                     <div class="container">
 
                         <div class="left">
@@ -124,9 +131,10 @@
                                 data;
                             }
                         ?>
-                    </div>
 
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
