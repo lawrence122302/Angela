@@ -41,7 +41,7 @@ input[type=number] {
 
 .custom-alert {
     position: fixed;
-    z-index: 99;
+    z-index: 1111;
     top: 80px;
     right: 25px;
 }

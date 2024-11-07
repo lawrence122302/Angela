@@ -6,20 +6,69 @@
     {
         $frm_data = filteration($_POST);
 
-        $query = "SELECT bo.*, bd.* FROM booking_order bo 
-            INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
-            WHERE (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.trans_id LIKE ?) 
-            AND (bo.booking_status=? AND bo.refund=?) ORDER BY bo.booking_id ASC";
+        $limit = 10;
+        $page = $frm_data['page'];
+        $start = ($page-1) * $limit;
 
-        $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","cancelled",0],'ssssss');
-        $i=1;
-        $table_data = "";
+        $query = "SELECT bo.*, bd.* 
+          FROM booking_order bo 
+          INNER JOIN booking_details bd 
+          ON bo.booking_id = bd.booking_id
 
-        if(mysqli_num_rows($res)==0)
+          WHERE (
+            bo.booking_status = 'cancelled' 
+            AND bo.refund = 0
+          ) 
+          AND (
+            bo.order_id LIKE ? 
+            OR bo.trans_id LIKE ?
+            OR bd.user_name LIKE ? 
+            OR bd.phonenum LIKE ? 
+            OR bd.room_name LIKE ? 
+            OR bo.package_type LIKE ? 
+          ) 
+
+          ORDER BY bo.booking_id ASC";
+
+        $res = select(
+            $query,
+            [
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%"
+            ],
+            'ssssss'
+        );
+
+        $limit_query = $query . " LIMIT $start, $limit";
+
+        $limit_res = select(
+            $limit_query,
+            [
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%"
+            ],
+            'ssssss'
+        );
+
+        $total_rows = mysqli_num_rows($res);
+        
+        if($total_rows==0)
         {
-            echo"<b>No Data Found!</b>";
+            $output = json_encode(['table_data'=>"<b>No Data Found!</b>", "pagination"=>'']);
+            echo $output;
             exit;
         }
+
+        $i=1;
+        $table_data = "";
 
         while($data = mysqli_fetch_assoc($res))
         {
@@ -156,7 +205,48 @@
             $i++;
         }
 
-        echo $table_data;
+        $pagination = "";
+
+        if($total_rows>$limit)
+        {
+            $total_pages = ceil($total_rows/$limit);
+
+            if($page!=1)
+            {
+                $disabled = ($page==$total_pages) ? "disabled" : "";
+                $pagination .="<li class='page-item'>
+                    <button onclick='change_page(1)' class='page-link shadow-none'>First</button>
+                </li>";
+            }
+
+            $disabled = ($page==1) ? "disabled" : "";
+            $prev = $page-1;
+            $pagination .="<li class='page-item $disabled'>
+                <button onclick='change_page($prev)' class='page-link shadow-none'>Prev</button>
+            </li>";
+
+            $disabled = ($page==$total_pages) ? "disabled" : "";
+            $next = $page+1;
+            $pagination .="<li class='page-item $disabled'>
+                <button onclick='change_page($next)' class='page-link shadow-none'>Next</button>
+            </li>";
+
+            if($page!=$total_pages)
+            {
+                $disabled = ($page==$total_pages) ? "disabled" : "";
+                $pagination .="<li class='page-item'>
+                    <button onclick='change_page($total_pages)' class='page-link shadow-none'>Last</button>
+                </li>";
+            }
+        }
+
+        $output = json_encode(["table_data" => $table_data, "pagination" => $pagination]);
+
+// Log the JSON-encoded output
+error_log("Output: " . $output);
+
+echo $output;
+
     }
 
     if(isset($_POST['refund_booking']))

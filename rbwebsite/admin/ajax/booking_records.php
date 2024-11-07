@@ -10,20 +10,59 @@
         $page = $frm_data['page'];
         $start = ($page-1) * $limit;
         
-        $query = "SELECT bo.*, bd.* FROM booking_order bo 
-            INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
-            WHERE (((bo.booking_status='booked' AND bo.arrival=1) 
-            OR (bo.booking_status='cancelled' AND bo.refund=1)
-            OR (bo.booking_status='cancelled')
-            OR (bo.booking_status='payment failed')) 
-            OR (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.booking_status LIKE ? OR bo.trans_id LIKE ?)) 
-            AND bo.booking_status!='pending' 
+        $query = "SELECT bo.*, bd.* 
+            FROM booking_order bo 
+            INNER JOIN booking_details bd 
+            ON bo.booking_id = bd.booking_id
+
+            WHERE (
+                (bo.booking_status='booked') 
+                OR (bo.booking_status='reserved')
+                OR (bo.booking_status='cancelled')
+                OR (bo.booking_status='payment_failed')
+            )
+            AND (
+                bo.order_id LIKE ? 
+                OR bo.trans_id LIKE ?
+                OR bd.user_name LIKE ? 
+                OR bd.phonenum LIKE ? 
+                OR bo.booking_status LIKE ? 
+                OR bd.room_name LIKE ? 
+                OR bo.package_type LIKE ? 
+            ) 
+            AND bo.booking_status!='pending'
+
             ORDER BY bo.booking_id DESC";
 
-        $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%"],'sssss');
+        $res = select(
+            $query,
+            [
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%"
+            ],
+            'sssssss'
+        );
 
-        $limit_query = $query ." LIMIT $start,$limit";
-        $limit_res = select($limit_query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%"],'sssss');
+        $limit_query = $query . " LIMIT $start, $limit";
+
+        $limit_res = select(
+            $limit_query,
+            [
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%"
+            ],
+            'sssssss'
+        );
 
         $total_rows = mysqli_num_rows($res);
         
@@ -124,37 +163,37 @@
             $down_payment_confirmed_by = "";
             if (!empty($data['down_payment_confirmed_by'])) {
                 $down_payment_confirmed_by = "<br>
-                            {$data['down_payment_confirmed_by']} (Down Payment)";
+                {$data['down_payment_confirmed_by']} (Down Payment)";
             }
 
             $full_payment_confirmed_by = "";
             if (!empty($data['full_payment_confirmed_by'])) {
                 $full_payment_confirmed_by = "<br>
-                            {$data['full_payment_confirmed_by']} (Full Payment)";
+                {$data['full_payment_confirmed_by']} (Full Payment)";
             }
 
             $booking_cancelled_by = "";
             if (!empty($data['booking_cancelled_by'])) {
                 $booking_cancelled_by = "<br>
-                            {$data['booking_cancelled_by']} (Booking Cancelled)";
+                {$data['booking_cancelled_by']} (Booking Cancelled)";
             }
 
             $arrival_confirmed_by = "";
             if (!empty($data['arrival_confirmed_by'])) {
                 $arrival_confirmed_by = "<br>
-                            {$data['arrival_confirmed_by']} (Arrival)";
+                {$data['arrival_confirmed_by']} (Arrival)";
             }
 
             $arrival_cancelled_by = "";
             if (!empty($data['arrival_cancelled_by'])) {
                 $arrival_cancelled_by = "<br>
-                            {$data['arrival_cancelled_by']} (Arrival Cancelled)";
+                {$data['arrival_cancelled_by']} (Arrival Cancelled)";
             }
 
             $refunded_by = "";
             if (!empty($data['refunded_by'])) {
                 $refunded_by = "<br>
-                            {$data['refunded_by']} (Refunded)";
+                {$data['refunded_by']} (Refunded)";
             }
 
             if(!empty($down_payment_confirmed_by)
@@ -192,10 +231,10 @@
                         $arrival_cancelled_by
                         $refunded_by
                     </td>
-                    <td>
+                    <td style='max-width: 300px;'>
                         <b>Accommodation:</b> $data[room_name]
                         <br>
-                        <b>Package Type:</b> $package_type
+                        <b>Package Type:</b> $data[package_type]
                         <br>
                         <br>
                         <b>Total Pay:</b> ₱$data[total_pay]

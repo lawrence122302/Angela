@@ -81,21 +81,59 @@
         $checkout_date_str = $checkout_date->format('Y-m-d H:i:s');
 
         // Insert payment into database
-        $query1 = "INSERT INTO booking_order(user_id,room_id,check_in,check_out,order_id,trans_id,trans_amt) 
-            VALUES(?,?,?,?,?,?,?)";
+        $query1 = "INSERT INTO booking_order (
+            user_id,
+            room_id,
+            check_in,
+            check_out,
+            package_type,
+            order_id,
+            trans_id,
+            trans_amt
+        )
+         VALUES (
+            ?, ?, ?, ?, ?, ?, ?, ?
+        )";
 
-        $query1_params = [$CUST_ID, $_SESSION['room']['id'], $checkin_date_str, 
-        $checkout_date_str, $ORDER_ID, $frm_data['g_reference'], $paid_amount];
+        $query1_params = [
+            $CUST_ID,
+            $_SESSION['room']['id'],
+            $checkin_date_str,
+            $checkout_date_str,
+            $package_type,
+            $ORDER_ID,
+            $frm_data['g_reference'],
+            $paid_amount
+        ];
         
-        insert($query1, $query1_params, 'iisssss');
+        insert($query1, $query1_params, 'iissssss');
 
         $booking_id = mysqli_insert_id($con);
 
-        $query2 = "INSERT INTO booking_details(booking_id, room_name, price, total_pay, room_no,
-            user_name, phonenum, address) VALUES(?,?,?,?,?,?,?,?)";
+        $query2 = "INSERT INTO booking_details (
+            booking_id,
+            room_name,
+            price,
+            total_pay,
+            room_no,
+            user_name,
+            phonenum,
+            address
+        ) 
+        VALUES (
+            ?, ?, ?, ?, ?, ?, ?, ?
+        )";
         
-        $query2_params = [$booking_id, $_SESSION['room']['name'], $payment, $payment, 
-        $_SESSION['room']['name'], $frm_data['name'], $frm_data['phonenum'], $frm_data['address']];
+        $query2_params = [
+            $booking_id,
+            $_SESSION['room']['name'],
+            $payment,
+            $payment,
+            $_SESSION['room']['name'],
+            $frm_data['name'],
+            $frm_data['phonenum'],
+            $frm_data['address']
+        ];        
 
         // Ensure parameters are correctly passed
         insert($query2, $query2_params, 'isssssss');

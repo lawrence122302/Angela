@@ -6,13 +6,43 @@
     {
         $frm_data = filteration($_POST);
         
-        $query = "SELECT bo.*, bd.* FROM booking_order bo 
-            INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
-            WHERE (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.trans_id LIKE ?) 
-            AND (bo.trans_amt >= bd.total_pay)
-            AND (bo.booking_status=? AND bo.arrival=?) ORDER BY bo.booking_id ASC";
+        $query = "SELECT bo.*, bd.* 
+          FROM booking_order bo 
+          INNER JOIN booking_details bd 
+          ON bo.booking_id = bd.booking_id
 
-        $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","pending",0],'ssssss');
+          WHERE (
+            bo.order_id LIKE ? 
+            OR bo.trans_id LIKE ?
+            OR bd.user_name LIKE ? 
+            OR bd.phonenum LIKE ? 
+            OR bd.room_name LIKE ? 
+            OR bo.package_type LIKE ? 
+          ) 
+
+          AND (
+            bo.trans_amt >= bd.total_pay
+          )
+          AND (
+            bo.booking_status = 'pending' 
+            AND bo.arrival = 0
+          ) 
+
+          ORDER BY bo.booking_id ASC";
+
+        $res = select(
+            $query,
+            [
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%"
+            ],
+            'ssssss'
+        );
+
         $i=1;
         $table_data = "";
         $full_payment = "";

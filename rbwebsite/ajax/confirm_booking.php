@@ -63,9 +63,15 @@
                 session_start();
 
                 // run query to check room is available or not
-                $tb_query = "SELECT COUNT(*) AS total_bookings FROM booking_order
-                    WHERE (booking_status=? OR booking_status=? OR booking_status=?) AND room_id=?
-                    AND check_out > ? AND check_in < ?";
+                $tb_query = "SELECT COUNT(*) AS total_bookings 
+                    FROM booking_order
+
+                    WHERE 
+                    (
+                    booking_status=? OR booking_status=? OR booking_status=?
+                    ) 
+
+                    AND room_id=? AND check_out > ? AND check_in < ?";
 
                 $values = ['pending','reserved','pending',$_SESSION['room']['id'],$formatted_checkin,$formatted_checkout];
                 $tb_fetch = mysqli_fetch_assoc(select($tb_query,$values,'sssiss'));

@@ -24,7 +24,7 @@
                     <div class="card-body">
 
                         <div class="text-end mb-4">
-                            <input type="text" oninput="get_bookings(this.value)" class="form-control shadow-none w-25 ms-auto" placeholder="Type to search...">
+                            <input type="text" id="search_input" oninput="get_bookings(this.value)" class="form-control shadow-none w-25 ms-auto" placeholder="Type to search...">
                         </div>
 
                         <div class="table-responsive">
@@ -42,6 +42,10 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <nav>
+                            <ul class="pagination mt-3" id="table-pagination"></ul>
+                        </nav>
 
                     </div>
                 </div>
