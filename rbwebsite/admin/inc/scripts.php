@@ -3,16 +3,20 @@
 
 <script>
     setInterval(function() {
-    let xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.open('POST', 'inc/essentials.php', true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function() {
             if (xhr.status === 200 && xhr.responseText == 'inactive') {
-                window.location.href = 'logout.php';
+                // Handle session destruction on the server side
+                fetch('logout.php') // Assuming logout.php handles session destruction
+                .then(() => {
+                    window.location.href = 'index.php?alert=account_deactivated';
+                });
             }
         };
         xhr.send('status=check');
-    }, 600000); // Check every 10 minutes
+    }, 180000); // Check every 3 minutes
 
     function alert(type,msg,position='body')
     {

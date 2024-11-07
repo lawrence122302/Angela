@@ -344,14 +344,14 @@
                 <div class="bg-white p-4 rounded mb-4">
                     <h5>Call Us</h5>
                     <span class="d-inline-block mb-2 text-dark">
-                        <i class="bi bi-telephone-fill"></i> +<?php echo $contact_r['pn1'] ?>
+                        <i class="bi bi-telephone-fill"></i> <?php echo $contact_r['pn1'] ?>
                     </span>
                     <br>
                     <?php
                         if ($contact_r['pn2'] != '') {
                             echo <<<data
                             <span class="d-inline-block text-dark">
-                                <i class="bi bi-telephone-fill"></i> +$contact_r[pn2]
+                                <i class="bi bi-telephone-fill"></i> $contact_r[pn2]
                             </span>
                             data;
                         }

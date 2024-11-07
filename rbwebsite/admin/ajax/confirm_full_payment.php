@@ -6,10 +6,10 @@
     {
         $frm_data = filteration($_POST);
         
-        $query = "SELECT bo.*, bd.* 
+        $query = "SELECT bo.*, bd.*, uc.profile 
           FROM booking_order bo 
-          INNER JOIN booking_details bd 
-          ON bo.booking_id = bd.booking_id
+          INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
+          INNER JOIN user_cred uc ON bo.user_id = uc.id
 
           WHERE (
             bo.order_id LIKE ? 
@@ -28,7 +28,7 @@
             AND bo.arrival = 0
           ) 
 
-          ORDER BY bo.booking_id ASC";
+          ORDER BY bo.check_in ASC";
 
         $res = select(
             $query,
@@ -125,6 +125,11 @@
                         </span>
                         <br>
                         $gcash
+                        <br>
+                        <br>
+                        <a href='".USERS_IMG_PATH."{$data['profile']}' target='_blank' class='text-decoration-none text-body'>
+                            <b>ID: </b> <i class='fa-solid fa-id-card'></i>
+                        </a>
                         <br>
                         <b>Name:</b> $data[user_name]
                         <br>

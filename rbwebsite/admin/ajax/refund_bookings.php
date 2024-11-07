@@ -11,24 +11,24 @@
         $start = ($page-1) * $limit;
 
         $query = "SELECT bo.*, bd.* 
-          FROM booking_order bo 
-          INNER JOIN booking_details bd 
-          ON bo.booking_id = bd.booking_id
+            FROM booking_order bo 
+            INNER JOIN booking_details bd 
+            ON bo.booking_id = bd.booking_id
 
-          WHERE (
+            WHERE (
             bo.booking_status = 'cancelled' 
             AND bo.refund = 0
-          ) 
-          AND (
+            ) 
+            AND (
             bo.order_id LIKE ? 
             OR bo.trans_id LIKE ?
             OR bd.user_name LIKE ? 
             OR bd.phonenum LIKE ? 
             OR bd.room_name LIKE ? 
             OR bo.package_type LIKE ? 
-          ) 
+            ) 
 
-          ORDER BY bo.booking_id ASC";
+            ORDER BY bo.check_in ASC";
 
         $res = select(
             $query,

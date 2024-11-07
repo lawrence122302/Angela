@@ -41,7 +41,26 @@
     define('REPLY_TO','angelasprivatepool@gmail.com');
     define('REPLY_TO_NAME',"Angela's Private Pool");
 
-    // possible "booking status" values in db = pending, booked, payment failed, cancelled
+    // Account status check using setInterval
+
+    if (isset($_POST['status']) && $_POST['status'] === 'check') {
+        session_name('admin_session');
+        session_start();
+        
+        $query = "SELECT * FROM admin_cred WHERE sr_no=?";
+        $values = [$_SESSION['adminId']];
+        $res = select($query,$values,"i");
+        $row = mysqli_fetch_assoc($res);
+
+        $_SESSION['status'] = $row['status'];
+
+        if (isset($_SESSION['status']) && $_SESSION['status'] == 0) {
+            echo 'inactive';
+        } else {
+            echo 'active';
+        }
+        exit();
+    }
 
     function adminLogin()
     {
@@ -72,19 +91,8 @@
         // Account status check for page loads
 
         if (isset($_SESSION['status']) && $_SESSION['status'] == 0) {
-            redirect('logout.php');
-            exit();
-        }
-
-        // Account status check using setInterval 60 seconds
-
-        if (isset($_POST['status']) && $_POST['status'] === 'check') {
-
-            if (isset($_SESSION['status']) && $_SESSION['status'] == 0) {
-                echo 'inactive';
-            } else {
-                echo 'active';
-            }
+            session_destroy();
+            redirect('index.php?alert=account_deactivated');
             exit();
         }
     }
@@ -114,7 +122,7 @@
         $bs_class = ($type == "success") ? "alert-success" : "alert-danger";
         echo <<<alert
             <div class="alert $bs_class alert-dismissible fade show custom-alert" role="alert">
-                <strong class="me-3">$msg</strong>.
+                <strong class="me-3">$msg</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         alert;

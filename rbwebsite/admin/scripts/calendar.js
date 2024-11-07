@@ -873,11 +873,20 @@ function fetchBookings(value) {
             const datesInRange = getDatesInRange(checkInDate, checkOutDate);
 
             datesInRange.forEach(({ day, month, year }) => {
+                const currentDate = new Date(year, month - 1, day);
                 const key = `${day}-${month}-${year}`;
+                
+                let eventTime = `${checkInDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })} - ${checkOutDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`;
+                
+                // Check if the current date is tomorrow in the range and prepend "YESTERDAY"
+                if (currentDate > checkInDate) {
+                    eventTime = `${eventTime} (YESTERDAY)`;
+                }
+
                 if (!formattedData[key]) {
                     formattedData[key] = { day, month, year, events: [] };
                 }
-                const eventTime = `${new Date(event.check_in).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })} - ${new Date(event.check_out).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`;
+
                 formattedData[key].events.push({ title: event.order_id, time: eventTime });
             });
         });

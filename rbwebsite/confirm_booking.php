@@ -74,7 +74,7 @@
                 <div style="font-size: 14px;">
                     <a href="index.php" class="text-secondary text-decoration-none">Home</a>
                     <span class="text-secondary"> > </span>
-                    <a href="rooms.php" class="text-secondary text-decoration-none">Rooms</a>
+                    <a href="rooms.php" class="text-secondary text-decoration-none">Accommodations</a>
                     <span class="text-secondary"> > </span>
                     <a href="#" class="text-secondary text-decoration-none">Confirm</a>
                     <span class="text-secondary"> > </span>
@@ -212,7 +212,7 @@
                                 <input type="radio" name="g_reference" id="customRadio1" value="gcash" required>
                                 GCash
                             </label>
-                            <input type="text" id="customValue1" name="customValue" class="form-control shadow-none" placeholder="Enter GCash Reference" required disabled>
+                            <input type="number" id="customValue1" name="customValue" class="form-control shadow-none" placeholder="Enter GCash Reference" oninput="this.value = this.value.slice(0, 13);" required disabled>
                         </div>
                     </div>
 

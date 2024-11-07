@@ -9,39 +9,46 @@
     {
         $frm_data = filteration($_GET);
 
-// Log the filtered GET data
-error_log("Filtered GET data: " . print_r($frm_data, true));
+        // Log the filtered GET data
+        error_log("Filtered GET data: " . print_r($frm_data, true));
 
-$query = "SELECT bo.*, bd.*, uc.email FROM booking_order bo 
-    INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
-    INNER JOIN user_cred uc ON bo.user_id = uc.id
-    WHERE ((bo.booking_status='booked' AND bo.arrival=1) 
-    OR (bo.booking_status='cancelled' AND bo.refund=1)
-    OR (bo.booking_status='payment failed'))
-    AND bo.booking_id  = '$frm_data[id]'";
+        $query = "SELECT bo.*, bd.*, uc.email 
+          FROM booking_order bo 
 
-// Log the query before execution
-error_log("Query: " . $query);
+          INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
+          INNER JOIN user_cred uc ON bo.user_id = uc.id
 
-$res = mysqli_query($con, $query);
+        WHERE (
+            (bo.booking_status='booked') 
+            OR (bo.booking_status='reserved')
+            OR (bo.booking_status='cancelled')
+            OR (bo.booking_status='payment_failed')
+        )
 
-// Log query result
-if (!$res) {
-    error_log("Query Error: " . mysqli_error($con));
-} else {
-    $total_rows = mysqli_num_rows($res);
-    error_log("Total rows: " . $total_rows);
-}
+          AND bo.booking_id = '$frm_data[id]'";
 
-if ($total_rows == 0) {
-    error_log("Redirecting to dashboard due to zero rows returned");
-    header('location: dashboard.php');
-    exit;
-}
+        // Log the query before execution
+        error_log("Query: " . $query);
 
-// Proceed with fetching and using $data
-$data = mysqli_fetch_assoc($res);
-error_log("Data fetched: " . print_r($data, true));
+        $res = mysqli_query($con, $query);
+
+        // Log query result
+        if (!$res) {
+            error_log("Query Error: " . mysqli_error($con));
+        } else {
+            $total_rows = mysqli_num_rows($res);
+            error_log("Total rows: " . $total_rows);
+        }
+
+        if ($total_rows == 0) {
+            error_log("Redirecting to dashboard due to zero rows returned");
+            header('location: dashboard.php');
+            exit;
+        }
+
+        // Proceed with fetching and using $data
+        $data = mysqli_fetch_assoc($res);
+        error_log("Data fetched: " . print_r($data, true));
 
         
         $date = date("h:ia | d-m-Y",strtotime($data['datentime']));

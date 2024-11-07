@@ -72,7 +72,7 @@
                         <a class="nav-link text-white" href="rate_review.php">Ratings & Review</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="rooms.php">Accomodations</a>
+                        <a class="nav-link text-white" href="rooms.php">Accommodations</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="features_facilities.php">Amenities & Inclusions</a>

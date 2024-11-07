@@ -6,12 +6,33 @@
     {
         $frm_data = filteration($_POST);
         
-        $query = "SELECT bo.*, bd.* FROM booking_order bo 
-            INNER JOIN booking_details bd ON bo.booking_id = bd.booking_id
-            WHERE (bo.order_id LIKE ? OR bd.phonenum LIKE ? OR bd.user_name LIKE ? OR bo.trans_id LIKE ?) 
-            AND (bo.booking_status=? AND bo.arrival=?) ORDER BY bo.booking_id ASC";
+        $query = "SELECT bo.*, bd.* 
+            FROM booking_order bo 
+            INNER JOIN booking_details bd 
+            ON bo.booking_id = bd.booking_id
+            WHERE (
+                bo.booking_status = 'reserved' 
+                AND bo.arrival = 0
+            ) 
+            AND (
+                bo.order_id LIKE ? 
+                OR bd.phonenum LIKE ? 
+                OR bd.user_name LIKE ? 
+                OR bo.trans_id LIKE ?
+            ) 
+            ORDER BY bo.check_in ASC";
 
-        $res = select($query,["%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","%$frm_data[search]%","reserved",0],'ssssss');
+        $res = select(
+            $query,
+            [
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%"
+            ],
+            'ssss'
+        );
+
         $i=1;
         $table_data = "";
 

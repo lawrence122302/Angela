@@ -68,7 +68,7 @@
                                     </div>
                                     <div class="legend-item">
                                         <span class="legend-color" style="background-color: var(--red-clr);"></span>
-                                        <span class="legend-label">Fully Booked</span>
+                                        <span class="legend-label">Not Available</span>
                                     </div>
                                 </div>
                                 <div class="weekdays">

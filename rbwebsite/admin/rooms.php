@@ -67,7 +67,7 @@
             <form id="add_room_form" autocomplete="off">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Add Room</h5>
+                        <h5 class="modal-title">Add Accommodation</h5>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -164,7 +164,7 @@
             <form id="edit_room_form" autocomplete="off">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Edit Accomodation</h5>
+                        <h5 class="modal-title">Edit Accommodation</h5>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -261,7 +261,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Accomodation Name</h5>
+                    <h5 class="modal-title">Accommodation Name</h5>
                     <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

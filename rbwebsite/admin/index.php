@@ -67,7 +67,7 @@
                 if
                 ($row['status'] == 0)
                 {
-                    alert('error', 'Account inactive - Please contact the owner.');
+                    alert('error', 'Account inactive - Please contact the owner!');
                 }
                 else
                 {
@@ -92,7 +92,7 @@
             }
             else
             {
-                alert('error','Login failed - Invalid username or password');
+                alert('error','Login failed - Invalid username or password!');
             }
         }
 
@@ -103,8 +103,11 @@
                 case 'another_login':
                     alert('error', 'Another login detected!');
                     break;
+                case 'account_deactivated':
+                    alert('error', 'Account deactivated!');
+                    break;
                 default:
-                    alert('error', 'An unknown error occurred.');
+                    alert('error', 'An unknown error occurred!');
                     break;
             }
         }
