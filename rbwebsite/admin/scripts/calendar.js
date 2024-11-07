@@ -173,7 +173,7 @@ function initCalendar() {
         }
     }
 
-    // // Adds days from the next month (next-date class)
+    // Adds days from the next month (next-date class)
 
     // Next Month Days
     for (let j = 1; j <= nextDays; j++) {
@@ -877,17 +877,18 @@ function fetchBookings(value) {
                 const key = `${day}-${month}-${year}`;
                 
                 let eventTime = `${checkInDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })} - ${checkOutDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}`;
-                
-                // Check if the current date is tomorrow in the range and prepend "YESTERDAY"
+                let title = event.order_id;
+
+                // Check if the current date is tomorrow in the range and prepend "(YESTERDAY)" to the title
                 if (currentDate > checkInDate) {
-                    eventTime = `${eventTime} (YESTERDAY)`;
+                    title += " (YESTERDAY)";
                 }
 
                 if (!formattedData[key]) {
                     formattedData[key] = { day, month, year, events: [] };
                 }
 
-                formattedData[key].events.push({ title: event.order_id, time: eventTime });
+                formattedData[key].events.push({ title: title, time: eventTime });
             });
         });
 
@@ -958,59 +959,105 @@ function parseTime(timeString) {
 // Function to determine the class based on the booking times for a given day
 
 function getBookingClass(eventObj, year, month, day) {
-    // additionalClass, hasDayBooking, hasNightBooking, hasFullDayBooking are all set to their default values
     let additionalClass = "";
     let hasDayBooking = false;
     let hasNightBooking = false;
     let hasFullDayBooking = false;
 
-    // For each booking in eventObj.events
-    eventObj.events.forEach((booking) => {
-        // Use parseTime to get startTime and endTime
-        const [startTime, endTime] = booking.time.split(' - ').map(parseTime);
+    const currentDate = new Date(year, month, day);
 
-        // Set Flags Based on Booking Type
-        if (startTime.hours === 8 && endTime.hours === 18) {
-            hasDayBooking = true; // Day Booking
-        } else if (startTime.hours === 20 && endTime.hours === 6) {
-            hasNightBooking = true; // Night Booking
-        } else if (startTime.hours === 8 && endTime.hours === 6) {
-            hasFullDayBooking = true; // 22 Hours Day Booking
+    function convertTo24Hour(time) {
+        const [timeStr, modifier] = time.split(' ');
+        let [hours, minutes] = timeStr.split(':');
+        hours = parseInt(hours, 10);
+
+        if (hours === 12) {
+            hours = 0;
+        }
+        if (modifier === 'PM') {
+            hours += 12;
+        }
+
+        return `${hours.toString().padStart(2, '0')}:${minutes}`;
+    }
+
+    eventObj.events.forEach((booking, index) => {
+        const date = `${eventObj.year}-${String(eventObj.month).padStart(2, '0')}-${String(eventObj.day).padStart(2, '0')}`;
+        booking.date = date;
+
+        if (!booking.time || booking.time === 'All Day') {
+            if (booking.title === "Blocked Date") {
+                additionalClass = " event-red";
+            } else {
+                additionalClass = " event-green";
+            }
+            return;
+        }
+
+        let timeStr = booking.time.replace(' (YESTERDAY)', '');
+        const [startTimeStr, endTimeStr] = timeStr.split(' - ');
+
+        const start24Hour = convertTo24Hour(startTimeStr);
+        const end24Hour = convertTo24Hour(endTimeStr);
+
+        const startDateTimeStr = `${booking.date}T${start24Hour}:00`;
+        const endDateTimeStr = `${booking.date}T${end24Hour}:00`;
+
+        const startDateTime = new Date(startDateTimeStr);
+        let endDateTime = new Date(endDateTimeStr);
+        
+        if (endDateTime <= startDateTime) {
+            endDateTime.setDate(endDateTime.getDate() + 1);
+        }
+
+        if (booking.title.includes("(YESTERDAY)")) {
+            if (startDateTime.getHours() === 20 && endDateTime.getHours() === 18) {
+                hasDayBooking = true;
+                additionalClass = " event-yellow";
+            }
+            return;
+        }
+
+        if (startDateTime.getHours() === 8 && endDateTime.getHours() === 18 && startDateTime.getDate() === currentDate.getDate()) {
+            hasDayBooking = true;
+        } else if (startDateTime.getHours() === 20 && endDateTime.getHours() === 6 && startDateTime.getDate() === currentDate.getDate()) {
+            hasNightBooking = true;
+            additionalClass = " event-blue";
+        } else if (startDateTime.getHours() === 8 && endDateTime.getHours() === 6 && startDateTime.getDate() === currentDate.getDate()) {
+            hasFullDayBooking = true;
             additionalClass = " event-red";
-        } else if (startTime.hours === 20 && endTime.hours === 18) {
-            hasNightBooking = true; // 22 Hours Night Booking
+        } else if (startDateTime.getHours() === 20 && endDateTime.getHours() === 18 && startDateTime.getDate() === currentDate.getDate()) {
+            hasNightBooking = true;
+            additionalClass = " event-blue";
+            
             const nextDay = new Date(year, month, day + 1);
-            eventsArr.forEach((nextEventObj) => {
-                if (nextEventObj.day == nextDay.getDate() && nextEventObj.month == nextDay.getMonth() + 1 && nextEventObj.year == nextDay.getFullYear()) {
-                    nextEventObj.events.forEach((nextBooking) => {
-                        const nextStartTime = parseTime(nextBooking.time.split(' - ')[0]);
-                        if (nextStartTime.hours === 20) {
-                            hasFullDayBooking = true;
-                            additionalClass = " event-red";
-                        }
-                    });
+
+            eventObj.events.forEach((nextBooking, nextIndex) => {
+                if (!nextBooking.time) {
+                    return;
+                }
+
+                const nextStartDateTime = new Date(`${nextBooking.date}T${convertTo24Hour(nextBooking.time.split(' - ')[0])}:00`);
+                if (nextStartDateTime.getHours() === 8 && nextStartDateTime.getDate() === nextDay.getDate()) {
+                    additionalClass = " event-yellow";
                 }
             });
         }
 
-        // Additional condition for Blocked Date
         if (booking.title === "Blocked Date") {
             additionalClass = " event-red";
         }
     });
 
-    // If there’s no full-day booking
     if (!hasFullDayBooking) {
         if (hasDayBooking && hasNightBooking) {
             additionalClass = " event-red";
         } else if (hasDayBooking) {
-            additionalClass = " event-blue";
-        } else if (hasNightBooking) {
             additionalClass = " event-yellow";
+        } else if (hasNightBooking) {
+            additionalClass = " event-blue";
         }
     }
-
-    // Returns the additionalClass used in initCalendar()
 
     return additionalClass;
 }
