@@ -54,8 +54,8 @@
                     {
                         $path = CAROUSEL_IMG_PATH;
                         echo <<<data
-                            <div class="swiper-slide">
-                                <img src="$path$row[image]" class="img-fluid rounded aspect-ratio-192-59"/>
+                            <div class="swiper-slide aspect-ratio-192-59">
+                                <img src="$path$row[image]" class="img-fluid rounded"/>
                             </div>
                         data;
                     }
@@ -196,8 +196,8 @@
                     echo <<<data
                         <div class="col-lg-4 col-md-6 my-3">
                             <div class="card border-0 shadow h-100 d-flex flex-column">
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <img src="$room_thumb" class="card-img-top img-fluid rounded aspect-ratio-16-9">
+                                <div class="d-flex justify-content-center align-items-center aspect-ratio-16-9">
+                                    <img src="$room_thumb" class="card-img-top img-fluid rounded">
                                 </div>
                                 <div class="card-body d-flex flex-column justify-content-between">
                                     <h5 class="mb-4">$room_data[name]</h5>

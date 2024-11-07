@@ -98,8 +98,8 @@
 
                     echo<<<data
                         <div class="card p-3 shadow-sm rounded">
-                            <div class="d-flex justify-content-center align-items-center">
-                                <img src="$room_thumb" class="img-fluid rounded mb-3 aspect-ratio-16-9">
+                            <div class="d-flex justify-content-center align-items-center mb-3 aspect-ratio-16-9">
+                                <img src="$room_thumb" class="img-fluid rounded">
                             </div>
                             <div class="mb-4">
                                 <h6 class="mb-1">Monday - Thursday</h6>
