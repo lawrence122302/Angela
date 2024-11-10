@@ -16,9 +16,7 @@
             ON bo.booking_id = bd.booking_id
 
             WHERE (
-                (bo.booking_status='booked') 
-                OR (bo.booking_status='reserved')
-                OR (bo.booking_status='cancelled')
+                (bo.booking_status='payment_failed') 
             )
             AND (
                 bo.order_id LIKE ? 
