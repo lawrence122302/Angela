@@ -29,7 +29,7 @@
             ) 
             AND bo.booking_status!='pending'
 
-            ORDER BY bo.booking_id DESC";
+            ORDER BY bd.user_name, bo.booking_id DESC";
 
         $res = select(
             $query,
