@@ -94,7 +94,7 @@
                         </div>
                         <div class="mt-3">
                             <label class="form-label" style="font-weight: 500;">Message</label>
-                            <textarea name="message" required class="form-control shadow-none" rows="5" style="resize: none;"></textarea>
+                            <textarea name="message" maxlength="200" required class="form-control shadow-none" rows="5" style="resize: none;"></textarea>
                         </div>
                         <button type="submit" name="send" class="btn text-white custom-bg mt-3">Send</button>
                     </form>

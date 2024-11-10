@@ -26,6 +26,9 @@
             OR bd.phonenum LIKE ? 
             OR bd.room_name LIKE ? 
             OR bo.package_type LIKE ? 
+            OR bo.datentime LIKE ? 
+            OR bo.check_in LIKE ? 
+            OR bo.check_out LIKE ? 
             ) 
 
             ORDER BY bo.check_in ASC";
@@ -38,9 +41,12 @@
                 "%$frm_data[search]%",
                 "%$frm_data[search]%",
                 "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
                 "%$frm_data[search]%"
             ],
-            'ssssss'
+            'sssssssss'
         );
 
         $limit_query = $query . " LIMIT $start, $limit";
@@ -53,9 +59,12 @@
                 "%$frm_data[search]%",
                 "%$frm_data[search]%",
                 "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
                 "%$frm_data[search]%"
             ],
-            'ssssss'
+            'sssssssss'
         );
 
         $total_rows = mysqli_num_rows($res);
@@ -72,9 +81,9 @@
 
         while($data = mysqli_fetch_assoc($res))
         {
-            $date = date("d-m-Y H:i:s",strtotime($data['datentime']));
-            $checkin = date("d-m-Y H:i:s",strtotime($data['check_in']));
-            $checkout = date("d-m-Y H:i:s",strtotime($data['check_out']));
+            $date = date("Y-m-d H:i:s",strtotime($data['datentime']));
+            $checkin = date("Y-m-d H:i:s",strtotime($data['check_in']));
+            $checkout = date("Y-m-d H:i:s",strtotime($data['check_out']));
 
             $date1 = new DateTime($checkin);
             $date2 = new DateTime($checkout);

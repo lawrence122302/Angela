@@ -28,6 +28,9 @@
                 OR bo.booking_status LIKE ? 
                 OR bd.room_name LIKE ? 
                 OR bo.package_type LIKE ? 
+                OR bo.datentime LIKE ? 
+                OR bo.check_in LIKE ? 
+                OR bo.check_out LIKE ? 
             ) 
             AND bo.booking_status!='pending'
 
@@ -42,9 +45,12 @@
                 "%$frm_data[search]%",
                 "%$frm_data[search]%",
                 "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
                 "%$frm_data[search]%"
             ],
-            'sssssss'
+            'ssssssssss'
         );
 
         $limit_query = $query . " LIMIT $start, $limit";
@@ -58,9 +64,12 @@
                 "%$frm_data[search]%",
                 "%$frm_data[search]%",
                 "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
+                "%$frm_data[search]%",
                 "%$frm_data[search]%"
             ],
-            'sssssss'
+            'ssssssssss'
         );
 
         $total_rows = mysqli_num_rows($res);
@@ -77,9 +86,9 @@
 
         while($data = mysqli_fetch_assoc($limit_res))
         {
-            $date = date("d-m-Y H:i:s",strtotime($data['datentime']));
-            $checkin = date("d-m-Y H:i:s",strtotime($data['check_in']));
-            $checkout = date("d-m-Y H:i:s",strtotime($data['check_out']));
+            $date = date("Y-m-d H:i:s",strtotime($data['datentime']));
+            $checkin = date("Y-m-d H:i:s",strtotime($data['check_in']));
+            $checkout = date("Y-m-d H:i:s",strtotime($data['check_out']));
 
             $refunded_status = "";
             if($data['booking_status']=='booked')
