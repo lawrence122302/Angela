@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php require('inc/links.php'); ?>
     <title><?php echo $settings_r['site_title'] ?> - Rooms</title>
+    <style>
+    @media (min-width: 768px) {
+        #filters-section {
+            position: sticky;
+            top: 105px;
+        }
+    }
+    </style>
 </head>
 <body class="bg-light">
 
@@ -34,7 +42,7 @@
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-lg-3 col-md-12 mb-lg-0 mb-4 ps-4">
+            <div class="col-lg-3 col-md-12 mb-lg-0 mb-4 ps-4" id="filters-section" style="height: fit-content;">
                 <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow">
                     <div class="container-fluid flex-lg-column align-items-stretch">
                         <h4 class="mt-2">Filters</h4>
