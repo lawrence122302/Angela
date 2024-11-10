@@ -96,11 +96,21 @@
                             $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'><i class='bi bi-download'></i> Download PDF</a>";
                         }
                     }
-                    else
+                    else if($data['booking_status']=='reserved')
                     {
                         $status_bg = "bg-warning";
-                        $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'><i class='bi bi-download'></i> Download PDF</a>";
+                        $btn="<span class='badge bg-dark'>Waiting Arrival!</span>";
                     }
+                    else if($data['booking_status']=='pending')
+                    {
+                        $status_bg = "bg-warning";
+                        $btn="<span class='badge bg-primary'>Booking in process!</span>";
+                    }
+                    // else
+                    // {
+                    //     $status_bg = "bg-warning";
+                    //     $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'><i class='bi bi-download'></i> Download PDF</a>";
+                    // }
 
                     $pending_notice = "";
                     if ($data['booking_status']=='pending' && $data['trans_id']!='walk-in') {

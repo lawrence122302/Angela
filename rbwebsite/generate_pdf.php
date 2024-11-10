@@ -59,11 +59,23 @@
             </tr>
             <tr>
                 <td>Room Name:</b> $data[room_name]</td>
-                <td>Cost: ₱$data[price] per night</td>
+                <td>Cost: ₱$data[price]</td>
             </tr>
             <tr>
                 <td>Check-in:</b> $checkin]</td>
                 <td>Check-out: $checkout</td>
+            </tr>
+            <tr>
+                <td>Down Payment Confirmed By:</b> $data[down_payment_confirmed_by]</td>
+                <td>Full Payment Confirmed By: $data[full_payment_confirmed_by]</td>
+            </tr>
+            <tr>
+                <td>Booking Cancelled By:</b> $data[booking_cancelled_by]</td>
+                <td>Full Arrival Confirmed By: $data[arrival_confirmed_by]</td>
+            </tr>
+            <tr>
+                <td>Arrival Cancelled By:</b> $data[arrival_cancelled_by]</td>
+                <td>Refunded By: $data[refunded_by]</td>
             </tr>
         ";
 
