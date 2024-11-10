@@ -65,18 +65,6 @@
                 <td>Check-in:</b> $checkin]</td>
                 <td>Check-out: $checkout</td>
             </tr>
-            <tr>
-                <td>Down Payment Confirmed By:</b> $data[down_payment_confirmed_by]</td>
-                <td>Full Payment Confirmed By: $data[full_payment_confirmed_by]</td>
-            </tr>
-            <tr>
-                <td>Booking Cancelled By:</b> $data[booking_cancelled_by]</td>
-                <td>Full Arrival Confirmed By: $data[arrival_confirmed_by]</td>
-            </tr>
-            <tr>
-                <td>Arrival Cancelled By:</b> $data[arrival_cancelled_by]</td>
-                <td>Refunded By: $data[refunded_by]</td>
-            </tr>
         ";
 
         if($data['booking_status']=='cancelled')
@@ -101,6 +89,48 @@
                 <td>Room Number: $data[room_no]</td>
                 <td>Amount Paid: ₱$data[trans_amt]</td>
             </tr>";
+        }
+
+        if (!empty($data['down_payment_confirmed_by'])) {
+            $table_data .= '
+            <tr>
+                <td>Down Payment Confirmed By: ' . htmlspecialchars($data['down_payment_confirmed_by']) . '</td>
+            </tr>';
+        }
+        
+        if (!empty($data['full_payment_confirmed_by'])) {
+            $table_data .= '
+            <tr>
+                <td>Full Payment Confirmed By: ' . htmlspecialchars($data['full_payment_confirmed_by']) . '</td>
+            </tr>';
+        }
+        
+        if (!empty($data['booking_cancelled_by'])) {
+            $table_data .= '
+            <tr>
+                <td>Booking Cancelled By: ' . htmlspecialchars($data['booking_cancelled_by']) . '</td>
+            </tr>';
+        }
+        
+        if (!empty($data['arrival_confirmed_by'])) {
+            $table_data .= '
+            <tr>
+                <td>Full Arrival Confirmed By: ' . htmlspecialchars($data['arrival_confirmed_by']) . '</td>
+            </tr>';
+        }
+        
+        if (!empty($data['arrival_cancelled_by'])) {
+            $table_data .= '
+            <tr>
+                <td>Arrival Cancelled By: ' . htmlspecialchars($data['arrival_cancelled_by']) . '</td>
+            </tr>';
+        }
+        
+        if (!empty($data['refunded_by'])) {
+            $table_data .= '
+            <tr>
+                <td>Refunded By: ' . htmlspecialchars($data['refunded_by']) . '</td>
+            </tr>';
         }
         
         $table_data.="</table>";

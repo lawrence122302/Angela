@@ -75,7 +75,7 @@
             </tr>
             <tr>
                 <td>Room Name:</b> $data[room_name]</td>
-                <td>Cost: ₱$data[price] per night</td>
+                <td>Cost: ₱$data[price]</td>
             </tr>
             <tr>
                 <td>Check-in:</b> $checkin]</td>
@@ -105,6 +105,48 @@
                 <td>Room Number: $data[room_no]</td>
                 <td>Amount Paid: ₱$data[trans_amt]</td>
             </tr>";
+        }
+
+        if (!empty($data['down_payment_confirmed_by'])) {
+            $table_data .= '
+            <tr>
+                <td>Down Payment Confirmed By: ' . htmlspecialchars($data['down_payment_confirmed_by']) . '</td>
+            </tr>';
+        }
+        
+        if (!empty($data['full_payment_confirmed_by'])) {
+            $table_data .= '
+            <tr>
+                <td>Full Payment Confirmed By: ' . htmlspecialchars($data['full_payment_confirmed_by']) . '</td>
+            </tr>';
+        }
+        
+        if (!empty($data['booking_cancelled_by'])) {
+            $table_data .= '
+            <tr>
+                <td>Booking Cancelled By: ' . htmlspecialchars($data['booking_cancelled_by']) . '</td>
+            </tr>';
+        }
+        
+        if (!empty($data['arrival_confirmed_by'])) {
+            $table_data .= '
+            <tr>
+                <td>Full Arrival Confirmed By: ' . htmlspecialchars($data['arrival_confirmed_by']) . '</td>
+            </tr>';
+        }
+        
+        if (!empty($data['arrival_cancelled_by'])) {
+            $table_data .= '
+            <tr>
+                <td>Arrival Cancelled By: ' . htmlspecialchars($data['arrival_cancelled_by']) . '</td>
+            </tr>';
+        }
+        
+        if (!empty($data['refunded_by'])) {
+            $table_data .= '
+            <tr>
+                <td>Refunded By: ' . htmlspecialchars($data['refunded_by']) . '</td>
+            </tr>';
         }
         
         $table_data.="</table>";
