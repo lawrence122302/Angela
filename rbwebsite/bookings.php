@@ -103,7 +103,7 @@
                     }
 
                     $pending_notice = "";
-                    if ($data['booking_status']=='pending') {
+                    if ($data['booking_status']=='pending' && $data['trans_id']!='walk-in') {
                         $pending_notice = "
                             <p>
                                 <b>Notice:</b>
