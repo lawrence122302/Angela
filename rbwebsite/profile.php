@@ -163,6 +163,10 @@
                 {
                     alert('error',"Image upload failed!");
                 }
+                else if(this.responseText == 'already_verified')
+                {
+                    alert('error',"Update Failed! ID Already Verified!");
+                }
                 else if(this.responseText == 0)
                 {
                     alert('error','Update Failed!');

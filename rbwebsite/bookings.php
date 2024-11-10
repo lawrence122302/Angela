@@ -108,7 +108,7 @@
                             <p>
                                 <b>Notice:</b>
                                 <br>
-                                <span class='badge bg-dark'>Make sure Gcash Reference is correct.</span>
+                                <span class='badge bg-dark'>Make sure Gcash Reference and ID is correct.</span>
                             </p>";
                     }
 

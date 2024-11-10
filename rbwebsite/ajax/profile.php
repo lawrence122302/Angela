@@ -37,6 +37,22 @@
         session_name('user_session');
         session_start();
 
+        $query_str = "SELECT * FROM booking_order WHERE user_id=" . $_SESSION['uId'] . " AND (trans_status = 'reserved' OR trans_status = 'refunded' OR trans_status = 'booked')";
+
+        // Execute the query
+        $query = mysqli_query($con, $query_str);
+
+        if ($query) {
+            $num_rows = mysqli_num_rows($query);
+        } else {
+            error_log("Query execution failed: " . mysqli_error($con));
+        }
+
+        if ($num_rows >= 0) {
+            echo 'already_verified';
+            exit;
+        }
+
         $img = uploadUserImage($_FILES['profile']);
 
         if($img == 'inv_img')
