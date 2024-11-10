@@ -39,7 +39,7 @@
                 <div style="font-size: 14px;">
                     <a href="index.php" class="text-secondary text-decoration-none">Home</a>
                     <span class="text-secondary"> > </span>
-                    <a href="rooms.php" class="text-secondary text-decoration-none">Accommodations</a>
+                    <a href="rooms.php" class="text-secondary text-decoration-none">Accomodations</a>
                 </div>
             </div>
 
@@ -58,7 +58,7 @@
                                 while($img_res = mysqli_fetch_assoc($img_q))
                                 {
                                     echo"
-                                        <div class='carousel-item $active_class d-flex justify-content-center align-items-center aspect-ratio-16-9'>
+                                        <div class='carousel-item $active_class aspect-ratio-16-9'>
                                             <img src='".ROOMS_IMG_PATH.$img_res['image']."' class='img-fluid rounded'>
                                         </div>
                                     ";
@@ -68,7 +68,7 @@
                             }
                             else
                             {
-                                echo"<div class='carousel-item active d-flex justify-content-center align-items-center aspect-ratio-16-9'>
+                                echo"<div class='carousel-item active aspect-ratio-16-9'>
                                     <img src='$room_img' class='img-fluid rounded'>
                                 </div>";
                             }
