@@ -126,6 +126,7 @@
         data.append('phonenum',register_form.elements['phonenum'].value);
         data.append('address',register_form.elements['address'].value);
         data.append('pincode',register_form.elements['pincode'].value);
+        data.append('dob',register_form.elements['dob'].value);
         data.append('pass',register_form.elements['pass'].value);
         data.append('cpass',register_form.elements['cpass'].value);
         data.append('profile',register_form.elements['profile'].files[0]);
@@ -191,11 +192,11 @@
                 alert('error', "Password must include a symbol.");
             }
             else {
-                alert('success',"Registration successful. Verification link sent to email!");
                 register_form.reset();
                 var myModal = document.getElementById('registerModal');
                 var modal = bootstrap.Modal.getInstance(myModal);
                 modal.hide();
+                alert('success',"Registration successful. Verification link sent to email!");
             }
         }
         xhr.send(data);

@@ -200,11 +200,11 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Password</label>
-                <input name="pass" type="password" class="form-control shadow-none" required>
+                <input name="pass" type="password" class="form-control shadow-none" required placeholder="12 uppercase, lowercase, number, symbol">
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Confirm password</label>
-                <input name="cpass" type="password" class="form-control shadow-none" required>
+                <input name="cpass" type="password" class="form-control shadow-none" required placeholder="12 uppercase, lowercase, number, symbol">
               </div>
             </div>
           </div>

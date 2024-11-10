@@ -211,20 +211,22 @@
         }
         else
         {
+            $image_info = getimagesize($image['tmp_name']);
+
             $ext = pathinfo($image['name'],PATHINFO_EXTENSION);
             $rname = 'IMG_'.random_int(11111,99999).".jpeg";
 
             $img_path = UPLOAD_IMAGE_PATH.USERS_FOLDER.$rname;
 
-            if($ext == 'png' || $ext == 'PNG')
+            if($image_info[2] == IMAGETYPE_PNG)
             {
                 $img = imagecreatefrompng($image['tmp_name']);
             }
-            else if($ext == 'webp' || $ext == 'WEBP')
+            else if($image_info[2] == IMAGETYPE_WEBP)
             {
                 $img = imagecreatefromwebp($image['tmp_name']);
             }
-            else
+            else if($image_info[2] == IMAGETYPE_JPEG)
             {
                 $img = imagecreatefromjpeg($image['tmp_name']);
             }
