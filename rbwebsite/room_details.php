@@ -39,7 +39,7 @@
                 <div style="font-size: 14px;">
                     <a href="index.php" class="text-secondary text-decoration-none">Home</a>
                     <span class="text-secondary"> > </span>
-                    <a href="rooms.php" class="text-secondary text-decoration-none">Accomodations</a>
+                    <a href="rooms.php" class="text-secondary text-decoration-none">Accommodations</a>
                 </div>
             </div>
 

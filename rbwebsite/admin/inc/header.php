@@ -45,6 +45,9 @@
                     <div class="collapse px-3 small mb-1" id="bookingLinks">
                         <ul class="nav nav-pills flex-column rounded border border-secondary">
                             <li class="nav-item">
+                                <a class="nav-link text-white" href="add_bookings.php">Add New Booking</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link text-white" href="new_bookings.php">Confirm Down Payment</a>
                             </li>
                             <li class="nav-item">
