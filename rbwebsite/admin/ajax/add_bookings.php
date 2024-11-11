@@ -33,6 +33,31 @@
         error_log("Check-in Date: " . $checkin_date->format('Y-m-d H:i:s'));
         error_log("Check-out Date: " . $checkout_date->format('Y-m-d H:i:s'));
 
+        header('Content-Type: application/json');
+
+        if ($frm_data['userId'] == '') {
+            $status = 'user_id_not_found';
+            $result = json_encode(["status"=>$status]);
+        }
+
+        if($status!='')
+        {
+            header('Content-Type: application/json');
+            echo $result;
+            exit;
+        }
+
+        if ($frm_data['accommodationId'] == '') {
+            $status = 'accommodation_id_not_found';
+            $result = json_encode(["status"=>$status]);
+        }
+
+        if($status!='')
+        {
+            echo $result;
+            exit;
+        }
+
         if($checkin_date == $checkout_date)
         {
             $status = 'check_in_out_equal';
@@ -49,13 +74,10 @@
             $result = json_encode(["status"=>$status]);
         }
 
-        header('Content-Type: application/json');
-
         // Check booking availability if status is blank else return the error
 
         if($status!='')
         {
-            header('Content-Type: application/json');
             echo $result;
             exit;
         }

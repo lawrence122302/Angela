@@ -142,6 +142,16 @@ function check_availability()
                 pay_info.classList.replace('alert-success','alert-warning');
                 pay_info.innerHTML = "<strong>Notice:</strong> Room unavailable for this date.";
             }
+            else if(data.status == 'user_id_not_found')
+            {
+                pay_info.classList.replace('alert-success','alert-warning');
+                pay_info.innerHTML = "<strong>Notice:</strong> Please select an account.";
+            }
+            else if(data.status == 'accommodation_id_not_found')
+            {
+                pay_info.classList.replace('alert-success','alert-warning');
+                pay_info.innerHTML = "<strong>Notice:</strong> Please select an accommodation.";
+            }
             else
             {
                 pay_info.innerHTML = "Package Type:<br><strong>"+data.package_type+"</strong><br><br>Hours:<br><strong>"+data.hour1+" - "+data.hour2+"</strong><br><br>Total Amount to Pay:<br><strong>₱"+data.payment+"</strong>";
