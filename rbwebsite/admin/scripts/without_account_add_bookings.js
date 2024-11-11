@@ -5,8 +5,7 @@ let pay_info = document.getElementById('pay_info');
 
 function check_availability()
 {
-    let userAccount = document.getElementById('userAccountDropdown').value;
-    let accommodation = document.getElementById('accommodationDropdown').value;
+    let accommodation = booking_form.elements['accommodationId'].value;
 
     let checkin_val = booking_form.elements['checkin'].value;
     let checkout_val = booking_form.elements['checkout'].value;
@@ -105,16 +104,17 @@ function check_availability()
         let data = new FormData();
 
         data.append('check_availability','');
-        data.append('userId', userAccount);
         data.append('accommodationId', accommodation);
+
         data.append('datetimeLocal_checkin',datetimeLocal_checkin);
         data.append('datetimeLocal_checkout',datetimeLocal_checkout);
+
         data.append('isWeekend',isWeekend);
         data.append('time_of_day',time_of_day);
         data.append('is_22hrs',is_22hrs);
 
         let xhr = new XMLHttpRequest();
-        xhr.open("POST","ajax/add_bookings.php",true);
+        xhr.open("POST","ajax/without_account_add_bookings.php",true);
 
         xhr.onload = function()
         {
@@ -203,10 +203,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+booking_form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+
+    openModal();
+});
+
 function openModal()
 {
-    let userAccount = document.getElementById('userAccountDropdown').value;
-    let accommodation = document.getElementById('accommodationDropdown').value;
+    let accommodation = booking_form.elements['accommodationId'].value;
     
     let checkin_val = booking_form.elements['checkin'].value;
     let checkout_val = booking_form.elements['checkout'].value;
@@ -300,8 +305,7 @@ function openModal()
         let g_reference_val = pay_now_form.elements['g_reference'].value;
 
         let data = new FormData();
-        data.append('pay_now','');
-        data.append('userId', userAccount);
+        data.append('without_account_pay_now','');
         data.append('accommodationId', accommodation);
         data.append('datetimeLocal_checkin',datetimeLocal_checkin);
         data.append('datetimeLocal_checkout',datetimeLocal_checkout);
@@ -311,27 +315,61 @@ function openModal()
         data.append('paidamount',paidamount_val);
         data.append('g_reference',g_reference_val);
 
+        data.append('name',booking_form.elements['customerName'].value);
+        data.append('email',booking_form.elements['email'].value);
+        data.append('phonenum',booking_form.elements['phonenum'].value);
+        data.append('address',booking_form.elements['address'].value);
+        data.append('pincode',booking_form.elements['pincode'].value);
+        data.append('dob',booking_form.elements['dob'].value);
+        data.append('profile',booking_form.elements['profile'].files[0]);
+
+        // Date of birth validation
+
+        let dob = new Date(booking_form.elements['dob'].value);
+        let today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        let month = today.getMonth() - dob.getMonth();
+        if (month < 0 || (month === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+        
+        if (age < 18) {
+            alert('error', "You must be at least 18 years old to register.");
+            return;
+        }
+
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "ajax/pay_now.php", true);
 
-        xhr.onload = function()
-        {
+        xhr.onload = function() {
             console.log("XHR onload triggered");
             console.log("Raw Response Text:", this.responseText);
-
-            try {
-                let data = JSON.parse(this.responseText);
-                console.log("Response data:", data);
-
-                if (data.orderid != '') {
-                    
-                    alert('success', 'New Booking Added!');
-                }
-            } catch (e) {
-                console.error("Error parsing JSON:", e);
-                console.log("Response Text:", this.responseText); // Log entire response
+            
+            switch (this.responseText) {
+                case 'email_already':
+                    alert('error', "Email is already registered!");
+                    break;
+                case 'phone_already':
+                    alert('error', "Phone number is already registered!");
+                    break;
+                case 'inv_img':
+                    alert('error', "Only JPG, WEBP, & PNG images are allowed!");
+                    break;
+                case 'upd_failed':
+                    alert('error', "Image upload failed!");
+                    break;
+                case 'mail_failed':
+                    alert('error', "Cannot send confirmation email! Server down!");
+                    break;
+                case 'ins_failed':
+                    alert('error', "Booking failed! Server down!");
+                    break;
+                default:
+                    booking_form.reset();
+                    alert('success', "Booking successful! Account creation sent to customer email!");
+                    break;
             }
-        };
+        };        
         
         console.log("Sending request...");
         xhr.send(data);

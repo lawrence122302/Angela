@@ -143,6 +143,7 @@
         }
 
         // send confirmation link to user's email
+        
         $token = bin2hex(random_bytes(16));
 
         if(!send_mail($data['email'],$token,"email_confirmation"))

@@ -49,7 +49,9 @@
     function setActive()
     {
         let navbar = document.getElementById('dashboard-menu');
-        bookingLinks = document.getElementById('bookingLinks');
+        let bookingLinks = document.getElementById('bookingLinks');
+        let bookingRecordLinks = document.getElementById('bookingRecordLinks');
+        let addBookingLinks = document.getElementById('addBookingLinks');
         let a_tags = navbar.getElementsByTagName('a');
 
         for(i=0;i<a_tags.length;i++)
@@ -63,6 +65,14 @@
                 if (bookingLinks.contains(a_tags[i]))
                 {
                     bookingLinks.classList.add('show');
+                }
+                if (bookingRecordLinks.contains(a_tags[i]))
+                {
+                    bookingRecordLinks.classList.add('show');
+                }
+                if (addBookingLinks.contains(a_tags[i]))
+                {
+                    addBookingLinks.classList.add('show');
                 }
             }
         }

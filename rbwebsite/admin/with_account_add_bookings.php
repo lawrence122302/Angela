@@ -70,7 +70,7 @@
                                     </div>
 
                                     <div id="pay_info" class='alert alert-warning text-center' role='alert'>
-                                        <strong>Notice:</strong> Provide check-in & check-out date to proceed.
+                                        <strong>Notice:</strong> Provide necessary information to proceed.
                                     </div>
 
                                     <button type="button" name="pay_now" class="btn w-100 text-white custom-bg shadow-none mb-1" onclick="openModal()" disabled>Pay Now</button>

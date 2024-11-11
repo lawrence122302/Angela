@@ -35,11 +35,6 @@
 
         header('Content-Type: application/json');
 
-        if ($frm_data['userId'] == '') {
-            $status = 'user_id_not_found';
-            $result = json_encode(["status"=>$status]);
-        }
-
         if($status!='')
         {
             header('Content-Type: application/json');
