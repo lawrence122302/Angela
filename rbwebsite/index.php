@@ -451,6 +451,33 @@
                 alert("error","Invalid or Expired Link!");
             }
         }
+
+        if(isset($_GET['account_change_password']))
+        {
+            $data = filteration($_GET);
+
+            $query = select("SELECT * FROM user_cred WHERE email=? AND token=? LIMIT 1",
+                [$data['email'],$data['token']],'ss');
+
+            if(mysqli_num_rows($query)==1)
+            {
+                echo<<<showModal
+                    <script>
+                        var myModal = document.getElementById('recoveryModal');
+
+                        myModal.querySelector("input[name='email']").value = '$data[email]';
+                        myModal.querySelector("input[name='token']").value = '$data[token]';
+
+                        var modal = bootstrap.Modal.getOrCreateInstance(myModal);
+                        modal.show();
+                    </script>
+                showModal;
+            }
+            else
+            {
+                alert("error","Invalid or Expired Link!");
+            }
+        }
     ?>
 
     <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
