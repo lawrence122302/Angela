@@ -35,13 +35,6 @@
 
         header('Content-Type: application/json');
 
-        if($status!='')
-        {
-            header('Content-Type: application/json');
-            echo $result;
-            exit;
-        }
-
         if ($frm_data['accommodationId'] == '') {
             $status = 'accommodation_id_not_found';
             $result = json_encode(["status"=>$status]);

@@ -162,6 +162,18 @@
 
         error_log(print_r($frm_data, true));
 
+        // Check user exists or not
+        
+        $u_exist = select("SELECT * FROM user_cred WHERE email=? LIMIT 1",
+            [$frm_data['email']],"s");
+
+        if(mysqli_num_rows($u_exist)!=0)
+        {
+            $u_exist_fetch  = mysqli_fetch_assoc($u_exist);
+            echo ($u_exist_fetch['email'] == $frm_data['email']) ? 'email_already' : 'phone_already';
+            exit;
+        }
+
         $img = uploadUserImage($_FILES['profile']);
 
         if($img == 'inv_img')

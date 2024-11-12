@@ -23,75 +23,79 @@
             <div class="col-lg-10 ms-auto p-4 overflow-hidden">
                 <h3 class="mb-4">Add New Bookings</h3>
 
-                <form id="booking_form">
-                    <h4 class="mb-3">Booking Details</h4>
-                    <div class="row">
-                        <div class="col-md-12 mb-2">
-                            <h6>Accommodation Name:</h6>
-                            <select class="form-select shadow-none bg-light mb-4" id="accommodationDropdown" name="accommodationId" onchange="check_availability()">
-                                <option value="" selected disabled>Select an accommodation</option>
-                                <?php
-                                    while ($row = mysqli_fetch_assoc($accommodationRes)) {
-                                        echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <label class="form-label">Check-in</label>
-                            <input id="checkin" name="checkin" onchange="check_availability()" type="date" class="form-control shadow-none mb-2" required>
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <label class="form-label">Check-out</label>
-                            <select id="checkout" name="checkout" onchange="check_availability()" class="form-select shadow-none">
-                                <option value="">Select Package Type</option>
-                                <option value="1">Day Tour (08:00am - 06:00pm)</option>
-                                <option value="2">Night Tour (08:00pm - 06:00am)</option>
-                                <option value="3">22 Hours Day Tour (08:00am - 06:00am)</option>
-                                <option value="4">22 Hours Night Tour (08:00pm - 06:00pm)</option>
-                            </select>
-                        </div>
-                        <div class="col-12">
-                            <div class="spinner-border text-info mb-3 d-none" id="info_loader" role="status">
-                                <span class="visually-hidden">Loading...</span>
+                <div class="card mb-4 border-0 shadow-sm rounded-3">
+                    <div class="card-body">
+                        <form id="booking_form">
+                            <h4 class="mb-3">Booking Details</h4>
+                            <div class="row">
+                                <div class="col-md-12 mb-2">
+                                    <h6>Accommodation Name:</h6>
+                                    <select class="form-select shadow-none bg-light mb-4" id="accommodationDropdown" name="accommodationId" onchange="check_availability()">
+                                        <option value="" selected disabled>Select an accommodation</option>
+                                        <?php
+                                            while ($row = mysqli_fetch_assoc($accommodationRes)) {
+                                                echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <label class="form-label">Check-in</label>
+                                    <input id="checkin" name="checkin" onchange="check_availability()" type="date" class="form-control shadow-none mb-2" required>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label">Check-out</label>
+                                    <select id="checkout" name="checkout" onchange="check_availability()" class="form-select shadow-none">
+                                        <option value="">Select Package Type</option>
+                                        <option value="1">Day Tour (08:00am - 06:00pm)</option>
+                                        <option value="2">Night Tour (08:00pm - 06:00am)</option>
+                                        <option value="3">22 Hours Day Tour (08:00am - 06:00am)</option>
+                                        <option value="4">22 Hours Night Tour (08:00pm - 06:00pm)</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <div class="spinner-border text-info mb-3 d-none" id="info_loader" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div id="pay_info" class='alert alert-warning text-center' role='alert'>
+                                        <strong>Notice:</strong> Provide necessary information to proceed.
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Name</label>
+                                    <input id="customerName" name="customerName" type="text" class="form-control shadow-none" required placeholder="Enter your full name">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Email address</label>
+                                    <input id="name" name="email" type="email" class="form-control shadow-none" required placeholder="example@gmail.com">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Phone number</label>
+                                    <input id="phonenum" name="phonenum" type="number" class="form-control shadow-none" required oninput="this.value = this.value.slice(0, 11);" placeholder="09123456789">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Government ID</label>
+                                    <input id="profile" name="profile" type="file" accept=".jpg, .jpeg, .png, .webp" class="form-control shadow-none" required>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label">Address</label>
+                                    <textarea id="address" name="address" class="form-control shadow-none" rows="1" required placeholder="Enter your address"></textarea>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Zip Code</label>
+                                    <input id="pincode" name="pincode" type="number" class="form-control shadow-none" required placeholder="1920">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Date of birth</label>
+                                    <input id="dob" name="dob" type="date" class="form-control shadow-none" required>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" name="pay_now" class="btn w-100 text-white custom-bg shadow-none mb-1" disabled>Pay Now</button>
+                                </div>
                             </div>
-                            <div id="pay_info" class='alert alert-warning text-center' role='alert'>
-                                <strong>Notice:</strong> Provide necessary information to proceed.
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Name</label>
-                            <input id="customerName" name="customerName" type="text" class="form-control shadow-none" required placeholder="Enter your full name">
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Email address</label>
-                            <input id="name" name="email" type="email" class="form-control shadow-none" required placeholder="example@gmail.com">
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Phone number</label>
-                            <input id="phonenum" name="phonenum" type="number" class="form-control shadow-none" required oninput="this.value = this.value.slice(0, 11);" placeholder="09123456789">
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Government ID</label>
-                            <input id="profile" name="profile" type="file" accept=".jpg, .jpeg, .png, .webp" class="form-control shadow-none" required>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Address</label>
-                            <textarea id="address" name="address" class="form-control shadow-none" rows="1" required placeholder="Enter your address"></textarea>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Zip Code</label>
-                            <input id="pincode" name="pincode" type="number" class="form-control shadow-none" required placeholder="1920">
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Date of birth</label>
-                            <input id="dob" name="dob" type="date" class="form-control shadow-none" required>
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" name="pay_now" class="btn w-100 text-white custom-bg shadow-none mb-1" disabled>Pay Now</button>
-                        </div>
+                        </form>
                     </div>
-                </form>
+                </div>
 
             </div>
         </div>
