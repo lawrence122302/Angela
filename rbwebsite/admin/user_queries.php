@@ -137,9 +137,9 @@
                                             if ($row['removed']!=1) {
                                                 $seen .= "<a href='#' class='btn btn-sm rounded-pill btn-danger mt-2' onclick='deleteQuery($sr_no)'><i class='bi bi-trash'></i> Remove</a>";
                                             } else if ($row['removed']==1) {
-                                                $status = "'<span class='badge bg-danger'>
+                                                $status = "<span class='badge bg-danger'>
                                                     Removed
-                                                </span>'";
+                                                </span>";
                                             }
 
                                             echo<<<query

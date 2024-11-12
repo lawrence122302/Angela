@@ -13,7 +13,7 @@
         while($row = mysqli_fetch_assoc($res))
         {
             $del_btn = "";
-            if($_SESSION['isSuperAdmin']==1)
+            if($_SESSION['isSuperAdmin']==1 && $row['removed']!=1)
             {
                 $del_btn = "<button type='button' onclick='remove_user($row[id])' class='btn btn-danger shadow-none btn-sm'>
                     <i class='bi bi-trash'></i>
@@ -35,6 +35,16 @@
                 $status = "<button onclick='toggle_status($row[id],1)' class='btn btn-danger btn-sm shadow-none'>inactive</button>";
             }
 
+            $removed_status = "";
+
+            if($row['removed']==1)
+            {
+                $removed_status = "<span class='badge bg-danger'>
+                    Removed
+                </span>";
+            }
+
+
             $date = date("d-m-Y",strtotime($row['datentime']));
 
             $data.="
@@ -54,7 +64,7 @@
                     <td>$verified</td>
                     <td>$status</td>
                     <td>$date</td>
-                    <td>$del_btn</td>
+                    <td>$del_btn$removed_status</td>
                 </tr>
             ";
             $i++;
@@ -84,7 +94,7 @@
     {
         $frm_data = filteration($_POST);
 
-        $res = delete("DELETE FROM user_cred WHERE id=? AND is_verified=?",[$frm_data['user_id'],0],'ii');
+        $res = delete("UPDATE user_cred SET removed=1 WHERE id=? AND is_verified=?",[$frm_data['user_id'],0],'ii');
 
         if($res)
         {
