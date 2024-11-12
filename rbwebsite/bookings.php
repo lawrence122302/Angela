@@ -44,9 +44,9 @@
 
                 while($data = mysqli_fetch_assoc($result))
                 {
-                    $date = date("d-m-Y",strtotime($data['datentime']));
-                    $checkin = date("d-m-Y",strtotime($data['check_in']));
-                    $checkout = date("d-m-Y",strtotime($data['check_out']));
+                    $date = date("d-m-Y H:i:s",strtotime($data['datentime']));
+                    $checkin = date("d-m-Y H:i:s",strtotime($data['check_in']));
+                    $checkout = date("d-m-Y H:i:s",strtotime($data['check_out']));
 
                     if($data['trans_id']!='walk-in')
                     {
@@ -56,7 +56,7 @@
                     }
                     else
                     {
-                        $gcash = "<span class='badge bg-success'>
+                        $gcash = "<span class='badge bg-primary'>
                             Walk-In
                         </span>";
                     }
@@ -103,8 +103,7 @@
                     }
                     else if($data['booking_status']=='pending')
                     {
-                        $status_bg = "bg-warning";
-                        $btn="<span class='badge bg-primary'>Booking in process!</span>";
+                        $status_bg = "bg-warning text-dark";
                     }
                     // else
                     // {
@@ -115,13 +114,13 @@
                     $pending_notice = "";
                     if ($data['booking_status']=='pending' && $data['trans_id']!='walk-in') {
                         $pending_notice = "
-                            <p>
+                            <p class='mt-4'>
                                 <b>Notice:</b>
                                 <br>
-                                <span class='badge bg-dark mb-2'>Make sure Gcash Reference and ID is correct.</span>
+                                <span class='badge bg-light text-dark mb-2'><small>Check Gcash Reference and Gov. ID is correct.</small></span>
                                 <br>
-                                <button type='button' onclick='openEditModal($data[booking_id])' class='btn btn-primary shadow-none btn-sm' data-bs-toggle='modal' data-bs-target='#editGcashModal'>
-                                    <i class='bi bi-pencil-square'></i> <small>GCash Refence</small>
+                                <button type='button' onclick='openEditModal($data[booking_id])' class='btn btn-dark shadow-none btn-sm' data-bs-toggle='modal' data-bs-target='#editGcashModal'>
+                                    <i class='bi bi-pencil-square'></i> <small>Edit GCash Refence</small>
                                 </button>
                             </p>";
                     }
@@ -134,12 +133,15 @@
                                     <b>Booking ID: </b> $data[order_id] <br>
                                 </p
                                 <p>
+                                    <b>Date: </b> $date <br>
                                     <b>Check in: </b> $checkin <br>
                                     <b>Check out: </b> $checkout
                                 </p>
                                 <p>
-                                    <b>Amount: </b> ₱$data[price] <br>
-                                    <b>Date: </b> $date
+                                    <b>Package Type: </b> $data[package_type]
+                                </p>
+                                <p>
+                                    <b>Amount: </b> ₱$data[price]
                                 </p>
                                 <p>
                                     <b>Paid:</b> ₱$data[trans_amt]
@@ -148,8 +150,8 @@
                                     $gcash
                                     <span class='badge $status_bg'>$data[booking_status]</span>
                                 </p>
-                                $pending_notice
                                 $btn
+                                $pending_notice
                             </div>
                         </div>
                     bookings;
