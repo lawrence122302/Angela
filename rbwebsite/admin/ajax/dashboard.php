@@ -8,17 +8,20 @@
 
         $condition = "";
 
-        if($frm_data['period']==1)
-        {
+        if ($frm_data['period'] == 1) {
             $condition = "WHERE datentime BETWEEN NOW() - INTERVAL 30 DAY AND NOW()";
-        }
-        else if($frm_data['period']==2)
-        {
+        } else if ($frm_data['period'] == 2) {
             $condition = "WHERE datentime BETWEEN NOW() - INTERVAL 90 DAY AND NOW()";
-        }
-        else if($frm_data['period']==3)
-        {
+        } else if ($frm_data['period'] == 3) {
             $condition = "WHERE datentime BETWEEN NOW() - INTERVAL 1 YEAR AND NOW()";
+        }
+        
+        if ($frm_data['accommodation'] != "all") {
+            if ($condition == "") {
+                $condition = "WHERE room_id = '{$frm_data['accommodation']}'";
+            } else {
+                $condition .= " AND room_id = '{$frm_data['accommodation']}'";
+            }
         }
 
         $result = mysqli_fetch_assoc(mysqli_query($con,"SELECT 

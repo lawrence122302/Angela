@@ -116,13 +116,35 @@
 
                 <div class="d-flex align-items-center justify-content-between mb-3">
                     <h5>Booking Analytics</h5>
-                    <select class="form-select shadow-none bg-light w-auto" onchange="booking_analytics(this.value)">
-                        <option value="1">Past 30 Days</option>
-                        <option value="2">Past 90 Days</option>
-                        <option value="3">Past 1 Year</option>
-                        <option value="4">All Time</option>
-                    </select>
+                    <div class="d-flex flex-row justify-content-end">
+                        <select id="accommodationSelect" class="form-select shadow-none bg-light w-auto mx-2" onchange="booking_analytics()">
+                            <option value="all">All Accommodations</option>
+                            <?php
+                                // Modified query to order by 'removed' first
+                                $res = selectAll('rooms ORDER BY removed ASC, id ASC');
+                                
+                                // Loop through the fetched data and generate the options
+                                while ($row = mysqli_fetch_assoc($res)) {
+                                    $name = $row['name'];
+
+                                    // Append "(Removed)" if 'removed' is 1
+                                    if ($row['removed'] == 1) {
+                                        $name .= " (Removed)";
+                                    }
+
+                                    echo '<option value="' . $row['id'] . '">' . $name . '</option>';
+                                }
+                            ?>
+                        </select>
+                        <select id="periodSelect" class="form-select shadow-none bg-light w-auto ml-2" onchange="booking_analytics()">
+                            <option value="1">Past 30 Days</option>
+                            <option value="2">Past 90 Days</option>
+                            <option value="3">Past 1 Year</option>
+                            <option value="4">All Time</option>
+                        </select>
+                    </div>
                 </div>
+
 
                 <div class="row mb-3">
                     <div class="col-md-3 mb-4">

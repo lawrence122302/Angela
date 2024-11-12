@@ -28,21 +28,21 @@
                     <h6>Accommodation Name:</h6>
                     <select class="form-select shadow-none bg-light mb-4" id="accommodationDropdown" style="width: auto;" onchange="filterAccommodation(this.value)">
                         <?php
-                        // Modified query to order by 'removed' first
-                        $res = selectAll('rooms ORDER BY removed ASC, id ASC');
-                        $first = true;
-                        while ($row = mysqli_fetch_assoc($res)) {
-                            $selected = $first ? 'selected' : '';
-                            $name = $row['name'];
+                            // Modified query to order by 'removed' first
+                            $res = selectAll('rooms ORDER BY removed ASC, id ASC');
+                            $first = true;
+                            while ($row = mysqli_fetch_assoc($res)) {
+                                $selected = $first ? 'selected' : '';
+                                $name = $row['name'];
 
-                            // Append "(Removed)" if 'removed' is 1
-                            if ($row['removed'] == 1) {
-                                $name .= " (Removed)";
+                                // Append "(Removed)" if 'removed' is 1
+                                if ($row['removed'] == 1) {
+                                    $name .= " (Removed)";
+                                }
+
+                                echo '<option value="' . $row['id'] . '" data-id="' . $row['id'] . '" ' . $selected . '>' . $name . '</option>';
+                                $first = false;
                             }
-
-                            echo '<option value="' . $row['id'] . '" data-id="' . $row['id'] . '" ' . $selected . '>' . $name . '</option>';
-                            $first = false;
-                        }
                         ?>
                     </select>
                 </div>
