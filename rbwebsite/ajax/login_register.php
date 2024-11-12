@@ -284,4 +284,27 @@
         }
     }
 
+    if (isset($_POST['recover_admin'])) {
+        $data = filteration($_POST);
+    
+        // Log filtered data
+        error_log("Filtered data: " . print_r($data, true));
+    
+        $query = "UPDATE admin_cred SET admin_pass=?, token=?, t_expire=? 
+            WHERE admin_name=? AND token=?";
+        $values = [$data['pass'], null, null, $data['admin_name'], $data['token']];
+    
+        // Log query and values
+        error_log("Query: " . $query);
+        error_log("Values: " . print_r($values, true));
+    
+        if (update($query, $values, 'sssss')) {
+            error_log("Password recovery successful for admin_name: " . $data['admin_name']);
+            echo 1;
+        } else {
+            error_log("Password recovery failed for admin_name: " . $data['admin_name']);
+            echo 'failed';
+        }
+    }    
+
 ?>

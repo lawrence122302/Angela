@@ -46,9 +46,45 @@
                 <div class="mb-4">
                     <input name="admin_pass" required type="password" class="form-control shadow-none text-center" placeholder="Password">
                 </div>
-                <button name="login" type="submit" class="btn text-white custom-bg shadow-none">Login</button>
+                <div class="mb-2">
+                    <button name="login" type="submit" class="btn text-white custom-bg shadow-none">Login</button>
+                </div>
+                <div>
+                    <button type="button" class="btn text-secondary text-decoration-none shadow-none p-0" data-bs-toggle="modal" data-bs-target="#forgotModal" data-bs-dismiss="modal">
+                        Forgot Password?
+                    </button>
+                </div>
             </div>
         </form>
+    </div>
+
+    <div class="modal fade" id="forgotModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="forgot-form">
+                    <div class="modal-header">
+                    <h5 class="modal-title d-flex align-items-center">
+                        <i class="bi bi-person-circle fs-3 me-2"></i> Forgot Password
+                    </h5>
+                    </div>
+                    <div class="modal-body">
+                    <span class="badge rounded-pill bg-light text-dark mb-3 text-wrap lh-base">
+                        Note: A link will be sent to your email to reset your password!
+                    </span>
+                    <div class="mb-4">
+                        <label class="form-label">Admin Name</label>
+                        <input type="text" name="admin_name_account" required class="form-control shadow-none">
+                    </div>
+                    <div class="mb-2 text-end">
+                        <button type="button" class="btn shadow-none p-0 me-2" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">
+                        Cancel
+                        </button>
+                        <button type="submit" class="btn btn-dark shadow-none">Send Link</button>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <?php
@@ -115,5 +151,8 @@
 
 
     <?php require('inc/scripts.php'); ?>
+
+    <script src="scripts/admin_forgot_password.js"></script>
+
 </body>
 </html>
