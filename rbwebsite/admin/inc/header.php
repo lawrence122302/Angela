@@ -39,6 +39,9 @@
                                     <div class="collapse px-3 small mb-1" id="superAdminLinks">
                                         <ul class="nav nav-pills flex-column rounded border border-secondary">
                                             <li class="nav-item">
+                                                <a class="nav-link text-white" href="super_admin_profile.php">Super Admin Profile</a>
+                                            </li>
+                                            <li class="nav-item">
                                                 <a class="nav-link text-white" href="admins.php">Admins</a>
                                             </li>
                                             <li class="nav-item">

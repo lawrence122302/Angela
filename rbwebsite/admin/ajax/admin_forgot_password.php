@@ -44,8 +44,10 @@
     
                 // Log the generated token
                 error_log("Generated token: " . $token);
+
+                $u_fetch_email = mysqli_fetch_assoc(select("SELECT * FROM contact_details WHERE sr_no=?", [1], "i"));
     
-                $email = "renzcapricorn1223z7@gmail.com";
+                $email = $u_fetch_email['email'];
                 $admin_name = $data['admin_name_account'];
     
                 // Log email sending attempt
