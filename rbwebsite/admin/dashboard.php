@@ -28,7 +28,7 @@
                 THEN 1 
             END) AS confirm_down_payment,
             COUNT(CASE 
-                WHEN bo.booking_status = 'pending' 
+                WHEN bo.booking_status = 'reserved' 
                     AND bo.arrival = 0 
                 THEN 1 
             END) AS new_bookings,

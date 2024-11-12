@@ -249,7 +249,7 @@
             radioButtons.forEach(radio => {
                 radio.addEventListener('change', function() {
                     console.log(`Radio changed: ${this.value}`);
-                    if (this.value === 'gcash') {
+                    if (this.value !== 'walk-in') {
                         customInput.disabled = false; 
                         customInput.required = true; 
                         console.log('Custom input enabled and required');
