@@ -2,7 +2,7 @@
     require('inc/essentials.php');
     adminLogin();
 
-    $userRes = selectAll('user_cred WHERE is_verified=1 AND status=1');
+    $userRes = selectAll('user_cred WHERE is_verified=1 AND status=1 ORDER BY email ASC');
     $accommodationRes = selectAll('rooms WHERE removed=0');
 ?>
 

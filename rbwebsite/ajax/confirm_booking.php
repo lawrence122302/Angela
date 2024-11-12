@@ -91,12 +91,25 @@
 
                 // Always check if check-in date is in blocked dates
                 $blocked_checkin_query = "SELECT COUNT(*) AS blocked_count FROM blocked_dates
-                                        WHERE date=? AND room_id=? AND status=1";
+                    WHERE date=? AND room_id=? AND status=1";
                 $blocked_checkin_values = [$checkin_date_only, $_SESSION['room']['id']];
                 $blocked_checkin_fetch = mysqli_fetch_assoc(select($blocked_checkin_query, $blocked_checkin_values, 'si'));
 
                 if ($blocked_checkin_fetch['blocked_count'] > 0) {
                     $status = 'unavailable';
+                    $result = json_encode(['status' => $status]);
+                    echo $result;
+                    exit;
+                }
+
+                // Check number of pending bookings (Only allow 3)
+
+                $number_of_pending_bookings_query = "SELECT COUNT(*) AS number_of_pending_bookings FROM booking_order WHERE user_id=? AND booking_status='pending'";
+                $number_of_pending_bookings_values = [$_SESSION['uId']];
+                $number_of_pending_bookings_values = mysqli_fetch_assoc(select($number_of_pending_bookings_query, $number_of_pending_bookings_values, 'i'));
+
+                if ($number_of_pending_bookings_values['number_of_pending_bookings'] >= 3) {
+                    $status = 'unavailable_pending';
                     $result = json_encode(['status' => $status]);
                     echo $result;
                     exit;

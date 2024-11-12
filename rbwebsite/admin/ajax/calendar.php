@@ -21,7 +21,7 @@
         adminLogin();
 
         $accommodation = isset($data['accommodation']) ? $data['accommodation'] : '';
-        $condition = "WHERE room_id='$accommodation' AND booking_status IN ('reserved', 'booked') ORDER BY check_in ASC";
+        $condition = "WHERE room_id='$accommodation' AND booking_status IN ('pending', 'reserved', 'booked') ORDER BY check_in ASC";
 
         $res = selectAll("booking_order $condition");
         $events = array();

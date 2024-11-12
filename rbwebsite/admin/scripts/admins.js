@@ -43,6 +43,7 @@ addAdminForm.addEventListener('submit', function(e) {
 });
 
 const editAdminForm = document.getElementById('editAdminForm');
+
 editAdminForm.addEventListener('submit', function(e) {
     e.preventDefault();
     submitEditAdmin();

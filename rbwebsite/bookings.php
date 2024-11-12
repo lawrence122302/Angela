@@ -118,7 +118,11 @@
                             <p>
                                 <b>Notice:</b>
                                 <br>
-                                <span class='badge bg-dark'>Make sure Gcash Reference and ID is correct.</span>
+                                <span class='badge bg-dark mb-2'>Make sure Gcash Reference and ID is correct.</span>
+                                <br>
+                                <button type='button' onclick='openEditModal($data[booking_id])' class='btn btn-primary shadow-none btn-sm' data-bs-toggle='modal' data-bs-target='#editGcashModal'>
+                                    <i class='bi bi-pencil-square'></i> <small>GCash Refence</small>
+                                </button>
                             </p>";
                     }
 
@@ -191,6 +195,32 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+
+    <!-- Edit gcash modal -->
+    <div class="modal fade" id="editGcashModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <form id="editGcashForm" autocomplete="off">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit GCash Reference</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label fw-bold">GCash Reference</label>
+                                <input type="number" name="gcash" class="form-control shadow-none" oninput="this.value = this.value.slice(0, 13);" required>
+                            </div>
+                            <input type="hidden" name="edit_gcash_booking_id">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="reset" class="btn text-secondary shadow-none" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn custom-bg text-white shadow-none">Submit</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -271,6 +301,52 @@
 
             xhr.send(data);
         });
+
+        const editGcashForm = document.getElementById('editGcashForm');
+
+        editGcashForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitEditGcash();
+        });
+
+        function openEditModal(id) {
+            document.querySelector('input[name="edit_gcash_booking_id"]').value = id;
+        }
+
+        function submitEditGcash() {
+            const data = new FormData(editGcashForm);
+
+            data.append('edit_gcash', '');
+            data.append('edit_gcash_booking_id', editGcashForm.elements['edit_gcash_booking_id'].value);
+            data.append('gcash', editGcashForm.elements['gcash'].value);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "ajax/edit_gcash_reference.php", true);
+
+            xhr.onload = function() {
+                const myModal = document.getElementById('editGcashModal');
+                const modal = bootstrap.Modal.getInstance(myModal);
+                modal.hide();
+
+                if (xhr.status === 200 && xhr.responseText == 1) {
+                    alert('success', 'Gcash reference changed!');
+                    editGcashForm.reset();
+
+                    // Wait for 0.5 seconds before changing the page
+                    setTimeout(function() {
+                        window.location.href = 'bookings.php';
+                    }, 500);
+                } else {
+                    alert('error', 'Server Down!');
+                }
+            };
+
+            xhr.onerror = function() {
+                alert('error', 'Request error!');
+            };
+
+            xhr.send(data);
+        }
     </script>
 </body>
 </html>

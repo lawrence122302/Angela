@@ -21,7 +21,7 @@
             <div class="col-lg-10 ms-auto p-4 overflow-hidden">
 
                 <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h3>Calendar (Reserved Bookings & Blocked Dates)</h3>
+                    <h3>Calendar (Pending and Reserved Bookings & Blocked Dates)</h3>
                 </div>
                 
                 <div class="d-flex flex-column align-items-start">
@@ -125,8 +125,8 @@
                                     <div>
                                         <button class="add-event">
                                             <i class="fas fa-plus"></i>
+                                            <span class="add-event-label">Block Current Date</span>
                                         </button>
-                                        <span class="add-event-label">Add Blocked Date</span>
                                     </div>
                                 data;
                             }
