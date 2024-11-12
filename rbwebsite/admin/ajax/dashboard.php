@@ -31,8 +31,8 @@
             COUNT(CASE WHEN booking_status='booked' AND arrival=1 THEN 1 END) AS active_bookings,
             SUM(CASE WHEN booking_status='booked' AND arrival=1 THEN trans_amt END) AS active_amt,
 
-            COUNT(CASE WHEN booking_status='cancelled' AND refund=0 THEN 1 END) AS cancelled_bookings,
-            SUM(CASE WHEN booking_status='cancelled' AND refund=0 THEN trans_amt END) AS cancelled_amt
+            COUNT(CASE WHEN booking_status='cancelled' AND refund=1 THEN 1 END) AS cancelled_bookings,
+            SUM(CASE WHEN booking_status='cancelled' AND refund=1 THEN trans_amt END) AS cancelled_amt
 
             FROM booking_order $condition"));
 
