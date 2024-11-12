@@ -278,7 +278,7 @@
                     $review_q = "SELECT rr.*,uc.name AS uname, uc.profile, r.name AS rname FROM rating_review rr 
                         INNER JOIN user_cred uc ON rr.user_id = uc.id
                         INNER JOIN rooms r ON rr.room_id = r.id
-                        WHERE rr.seen = 1
+                        WHERE rr.seen = 1 AND rr.removed != 1
                         ORDER BY sr_no DESC LIMIT 6";
 
                     $review_res = mysqli_query($con,$review_q);

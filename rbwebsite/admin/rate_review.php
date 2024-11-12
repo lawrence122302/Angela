@@ -40,10 +40,10 @@
 
         if($frm_data['del']=='all')
         {
-            $q = "DELETE FROM rating_review";
+            $q = "UPDATE rating_review SET removed=1";
             if(mysqli_query($con,$q))
             {
-                alert('success','All data deleted!');
+                alert('success','All reviews hidden!');
             }
             else
             {
@@ -52,11 +52,11 @@
         }
         else
         {
-            $q = "DELETE FROM rating_review WHERE sr_no=?";
+            $q = "UPDATE rating_review SET removed=1 WHERE sr_no=?";
             $values = [$frm_data['del']];
             if(delete($q,$values,'i'))
             {
-                alert('success','Data deleted!');
+                alert('success','reviews hidden!');
             }
             else
             {
@@ -91,7 +91,7 @@
                             <i class="bi bi-check-all"></i> Mark all read
                         </a>
                         <a href="#" class="btn btn-danger rounded-pill shadow-none btn-sm" onclick="deleteAllQueries()">
-                            <i class="bi bi-trash"></i> Delete all
+                            <i class="bi bi-trash"></i> Hide all
                         </a>
                     </div>
 
@@ -122,12 +122,20 @@
                                     {
                                         $date = date('d-m-Y', strtotime($row['datentime']));
                                         $seen='';
+                                        $status='';
                                         $sr_no = $row['sr_no'];
-                                        if($row['seen']!=1)
+                                        if($row['seen']!=1 && $row['removed']!=1)
                                         {
                                             $seen = "<a href='#' class='btn btn-sm rounded-pill btn-primary mb-2' onclick='markAsRead($sr_no)'><i class='bi bi-check'></i> Mark as read</a><br>";
                                         }
-                                        $seen .= "<a href='#' class='btn btn-sm rounded-pill btn-danger' onclick='deleteQuery($sr_no)'><i class='bi bi-trash'></i> Delete</a>";
+
+                                        if ($row['removed']!=1) {
+                                            $seen .= "<a href='#' class='btn btn-sm rounded-pill btn-danger' onclick='deleteQuery($sr_no)'><i class='bi bi-trash'></i> Hide</a>";
+                                        } else if ($row['removed']==1) {
+                                            $status = "'<span class='badge bg-danger'>
+                                                Hidden
+                                            </span>'";
+                                        }
 
                                         echo<<<query
                                             <tr>
@@ -137,7 +145,7 @@
                                                 <td>$row[rating]</td>
                                                 <td>$row[review]</td>
                                                 <td>$date</td>
-                                                <td>$seen</td>
+                                                <td>$seen$status</td>
                                             </tr>
                                         query;
                                         $i++;
@@ -194,7 +202,7 @@
         }
 
         function deleteQuery(sr_no) {
-            showModal('Are you sure you want to delete this?', function() {
+            showModal('Are you sure you want to hide this?', function() {
                 window.location.href = '?del=' + sr_no;
             });
         }
@@ -206,7 +214,7 @@
         }
 
         function deleteAllQueries() {
-            showModal('Are you sure you want to delete all?', function() {
+            showModal('Are you sure you want to hide all?', function() {
                 window.location.href = '?del=all';
             });
         }

@@ -40,10 +40,10 @@
 
         if($frm_data['del']=='all')
         {
-            $q = "DELETE FROM user_queries";
+            $q = "UPDATE user_queries SET removed=1";
             if(mysqli_query($con,$q))
             {
-                alert('success','All data deleted!');
+                alert('success','All queries removed!');
             }
             else
             {
@@ -52,11 +52,11 @@
         }
         else
         {
-            $q = "DELETE FROM user_queries WHERE sr_no=?";
+            $q = "UPDATE user_queries SET removed=1 WHERE sr_no=?";
             $values = [$frm_data['del']];
             if(delete($q,$values,'i'))
             {
-                alert('success','Data deleted!');
+                alert('success','Queries removed!');
             }
             else
             {
@@ -97,7 +97,7 @@
                                 {
                                     echo<<<data
                                         <a href="#" class="btn btn-danger rounded-pill shadow-none btn-sm" onclick="deleteAllQueries()">
-                                            <i class="bi bi-trash"></i> Delete all
+                                            <i class="bi bi-trash"></i> Remove all
                                         </a>
                                     data;
                                 }
@@ -127,14 +127,19 @@
                                         {
                                             $date = date('d-m-Y',strtotime($row['datentime']));
                                             $seen='';
+                                            $status='';
                                             $sr_no = $row['sr_no'];
-                                            if($row['seen']!=1)
+                                            if($row['seen']!=1 && $row['removed']!=1)
                                             {
                                                 $seen = "<a href='#' class='btn btn-sm rounded-pill btn-primary' onclick='markAsRead($sr_no)'><i class='bi bi-check'></i> Mark as read</a><br>";
                                             }
-                                            if($_SESSION['isSuperAdmin']==1)
-                                            {
-                                                $seen .= "<a href='#' class='btn btn-sm rounded-pill btn-danger mt-2' onclick='deleteQuery($sr_no)'><i class='bi bi-trash'></i> Delete</a>";
+
+                                            if ($row['removed']!=1) {
+                                                $seen .= "<a href='#' class='btn btn-sm rounded-pill btn-danger mt-2' onclick='deleteQuery($sr_no)'><i class='bi bi-trash'></i> Remove</a>";
+                                            } else if ($row['removed']==1) {
+                                                $status = "'<span class='badge bg-danger'>
+                                                    Removed
+                                                </span>'";
                                             }
 
                                             echo<<<query
@@ -145,7 +150,7 @@
                                                     <td>$row[subject]</td>
                                                     <td>$row[message]</td>
                                                     <td>$date</td>
-                                                    <td>$seen</td>
+                                                    <td>$seen$status</td>
                                                 </tr>
                                             query;
                                             $i++;
@@ -203,7 +208,7 @@
         }
 
         function deleteQuery(sr_no) {
-            showModal('Are you sure you want to delete this?', function() {
+            showModal('Are you sure you want to remove this?', function() {
                 window.location.href = '?del=' + sr_no;
             });
         }
@@ -215,7 +220,7 @@
         }
 
         function deleteAllQueries() {
-            showModal('Are you sure you want to delete all?', function() {
+            showModal('Are you sure you want to remove all?', function() {
                 window.location.href = '?del=all';
             });
         }
