@@ -32,7 +32,20 @@
                         {
                             echo<<<data
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" href="admins.php">Admins</a>
+                                    <button class="btn text-white px-3 w-100 shadow-none text-start d-flex align-items-center justify-content-between" type="button" data-bs-toggle="collapse" data-bs-target="#superAdminLinks">
+                                        <span>Super Admin</span>
+                                        <span><i class="bi bi-caret-down-fill"></i></span>
+                                    </button>
+                                    <div class="collapse px-3 small mb-1" id="superAdminLinks">
+                                        <ul class="nav nav-pills flex-column rounded border border-secondary">
+                                            <li class="nav-item">
+                                                <a class="nav-link text-white" href="admins.php">Admins</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link text-white" href="settings.php">Settings</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
                             data;
                         }
@@ -108,9 +121,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="carousel.php">Carousel</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="settings.php">Settings</a>
                     </li>
                 </ul>
             </div>

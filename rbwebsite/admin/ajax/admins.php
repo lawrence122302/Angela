@@ -1,6 +1,6 @@
 <?php
     require('../inc/essentials.php');
-    adminLogin();
+    superAdminLogin();
 
     if(isset($_POST['get_admins']))
     {

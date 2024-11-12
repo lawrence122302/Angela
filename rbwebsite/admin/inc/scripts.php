@@ -52,6 +52,7 @@
         let bookingLinks = document.getElementById('bookingLinks');
         let bookingRecordLinks = document.getElementById('bookingRecordLinks');
         let addBookingLinks = document.getElementById('addBookingLinks');
+        let superAdminLinks = document.getElementById('superAdminLinks');
         let a_tags = navbar.getElementsByTagName('a');
 
         for(i=0;i<a_tags.length;i++)
@@ -73,6 +74,10 @@
                 if (addBookingLinks.contains(a_tags[i]))
                 {
                     addBookingLinks.classList.add('show');
+                }
+                if (superAdminLinks.contains(a_tags[i]))
+                {
+                    superAdminLinks.classList.add('show');
                 }
             }
         }

@@ -1,6 +1,6 @@
 <?php
     require('inc/essentials.php');
-    adminLogin();
+    superAdminLogin();
 ?>
 
 <!DOCTYPE html>
