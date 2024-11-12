@@ -42,10 +42,16 @@
     {
         $frm_data = filteration($_POST);
 
-        $q = "INSERT INTO admin_cred(admin_name, admin_pass) VALUES (?,?)";
-        $values = [$frm_data['adminName'],$frm_data['password']];
-        $res = insert($q,$values,'ss');
-        echo $res;
+        $u_exist = select("SELECT * FROM admin_cred WHERE admin_name=? LIMIT 1",[$frm_data['adminName']],'s');
+
+        if (mysqli_num_rows($u_exist)>=1) {
+            echo 'admin_exists';
+        } else {
+            $q = "INSERT INTO admin_cred(admin_name, admin_pass) VALUES (?,?)";
+            $values = [$frm_data['adminName'],$frm_data['password']];
+            $res = insert($q,$values,'ss');
+            echo $res;
+        }
     }
 
     if(isset($_POST['edit_admin']))

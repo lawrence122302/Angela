@@ -12,6 +12,7 @@ function get_admins()
 }
 
 let addAdminForm = document.getElementById('addAdminForm');
+
 addAdminForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -30,6 +31,8 @@ addAdminForm.addEventListener('submit', function(e) {
             alert('success', 'New admin added!');
             addAdminForm.reset();
             get_admins();
+        } else if (xhr.responseText == 'admin_exists') {
+            alert('error', 'Admin name already exists!');
         } else {
             alert('error', 'Server Down!');
         }

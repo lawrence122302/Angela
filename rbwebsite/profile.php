@@ -22,6 +22,7 @@
         {
             redirect('index.php');
         }
+        
         $u_fetch = mysqli_fetch_assoc($u_exist);
     ?>
 
