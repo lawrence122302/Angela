@@ -44,9 +44,9 @@
 
                 while($data = mysqli_fetch_assoc($result))
                 {
-                    $date = date("d-m-Y H:i:s",strtotime($data['datentime']));
-                    $checkin = date("d-m-Y H:i:s",strtotime($data['check_in']));
-                    $checkout = date("d-m-Y H:i:s",strtotime($data['check_out']));
+                    $date = date("d-m-Y | h:ia",strtotime($data['datentime']));
+                    $checkin = date("d-m-Y | h:ia",strtotime($data['check_in']));
+                    $checkout = date("d-m-Y | h:ia",strtotime($data['check_out']));
 
                     if($data['trans_id']!='walk-in')
                     {
