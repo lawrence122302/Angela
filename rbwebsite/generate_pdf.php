@@ -52,7 +52,7 @@
 
             <!-- Booking Info -->
             <div style='text-align: center; padding: 6px 0; font-size: 14px; color: #2a5465;'>
-                <strong>Room Name:</strong> $data[room_name] &nbsp; | &nbsp; <strong>Room Number:</strong> $data[room_no] &nbsp; | &nbsp; <strong>Order ID:</strong> $data[order_id]
+                <strong>Accommodation Name:</strong> $data[room_name] &nbsp; | &nbsp; <strong>Booking ID:</strong> $data[order_id]
             </div>
 
             <!-- Status -->
